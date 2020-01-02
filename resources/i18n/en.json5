@@ -1508,6 +1508,9 @@
 
   "search.view-switch.show-list": "Show as list",
 
+  "search.comcol.head": "Search",
+
+  "collection.page.search.link": "Search this collection",
 
 
   "sorting.dc.title.ASC": "Title Ascending",
