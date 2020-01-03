@@ -26,9 +26,6 @@
         <ds-comcol-page-browse-by [id]="communityPayload.id" [contentType]="communityPayload.type">
         </ds-comcol-page-browse-by>
 
-        <ds-community-page-sub-community-list [community]="communityPayload"></ds-community-page-sub-community-list>
-        <ds-community-page-sub-collection-list [community]="communityPayload"></ds-community-page-sub-collection-list>
-
         <h2 class="comcol-browse-label h5">{{'search.comcol.head' | translate}}</h2>
         <div class="list-group list-group-horizontal">
           <a class="list-group-item"
@@ -36,6 +33,9 @@
              [queryParams]="{scope: communityPayload.id}"
              routerLinkActive="active">{{ 'community.page.search.link' | translate }}</a>
         </div>
+
+        <ds-community-page-sub-community-list [community]="communityPayload"></ds-community-page-sub-community-list>
+        <ds-community-page-sub-collection-list [community]="communityPayload"></ds-community-page-sub-collection-list>
 
       </section>
       <footer  *ngIf="communityPayload.copyrightText"  class="border-top my-5 pt-4">
