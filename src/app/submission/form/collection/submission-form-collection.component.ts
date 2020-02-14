@@ -206,11 +206,11 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
       );
 
       const findOptions: FindListOptions = {
-        elementsPerPage: 1000
+        elementsPerPage: 1
       };
 
       // Retrieve collection list only when is the first change
-      if (changes.currentCollectionId.isFirstChange()) {
+      if (false) {
         // @TODO replace with search/top browse endpoint
         // @TODO implement community/subcommunity hierarchy
         const communities$ = this.communityDataService.findAll(findOptions).pipe(
