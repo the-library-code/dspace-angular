@@ -16,6 +16,8 @@ import { hasNoValue, hasValue, isEmpty, isNotEmpty } from '../../../shared/empty
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { from } from 'rxjs/internal/observable/from';
 import {Relationship} from '../../shared/item-relationships/relationship.model';
+import {Item} from '../../shared/item.model';
+import {RelationshipType} from '../../shared/item-relationships/relationship-type.model';
 
 /**
  * Path where discarded objects are saved
@@ -74,11 +76,18 @@ export interface VirtualMetadataSource {
   [uuid: string]: boolean,
 }
 
+export interface RelationshipIdentifiable extends Identifiable {
+  nameVariant?: string,
+  relatedItem: Item;
+  relationship: Relationship;
+  type: RelationshipType;
+}
+
 /**
  * A fieldupdate interface which represents a relationship selected to be deleted,
  * along with a selection of the virtual metadata to keep
  */
-export interface DeleteRelationship extends Relationship {
+export interface DeleteRelationship extends RelationshipIdentifiable {
   keepLeftVirtualMetadata: boolean,
   keepRightVirtualMetadata: boolean,
 }
@@ -239,7 +248,7 @@ function addFieldUpdate(state: any, action: AddFieldUpdateAction) {
   const url: string = action.payload.url;
   const field: Identifiable = action.payload.field;
   const changeType: FieldChangeType = action.payload.changeType;
-  const pageState: ObjectUpdatesEntry = state[url] || {};
+  const pageState: ObjectUpdatesEntry = state[url] || {fieldUpdates: {}};
 
   let states = pageState.fieldStates;
   if (changeType === FieldChangeType.ADD) {
