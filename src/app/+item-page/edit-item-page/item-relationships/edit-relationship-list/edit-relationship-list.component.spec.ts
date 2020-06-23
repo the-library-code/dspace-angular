@@ -16,6 +16,7 @@ import { Relationship } from '../../../../core/shared/item-relationships/relatio
 import { Item } from '../../../../core/shared/item.model';
 import { PageInfo } from '../../../../core/shared/page-info.model';
 import { SelectableListService } from '../../../../shared/object-list/selectable-list/selectable-list.service';
+import { getMockLinkService } from '../../../../shared/mocks/link-service.mock';
 import { SharedModule } from '../../../../shared/shared.module';
 import { EditRelationshipListComponent } from './edit-relationship-list.component';
 

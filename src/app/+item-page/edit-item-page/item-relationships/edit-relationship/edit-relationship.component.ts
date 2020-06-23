@@ -51,8 +51,8 @@ export class EditRelationshipComponent implements OnChanges {
     return this.update.nameVariant;
   }
 
-  private leftItem$: Observable<Item>;
-  private rightItem$: Observable<Item>;
+  public leftItem$: Observable<Item>;
+  public rightItem$: Observable<Item>;
 
   /**
    * The related item of this relationship

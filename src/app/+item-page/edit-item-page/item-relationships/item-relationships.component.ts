@@ -1,34 +1,32 @@
-import {ChangeDetectorRef, Component, Inject, OnDestroy} from '@angular/core';
-import {Item} from '../../../core/shared/item.model';
+import { ChangeDetectorRef, Component, Inject, OnDestroy } from '@angular/core';
+import { Item } from '../../../core/shared/item.model';
 import {
   DeleteRelationship,
   FieldUpdate,
   FieldUpdates,
-  RelationshipIdentifiable
+  RelationshipIdentifiable,
 } from '../../../core/data/object-updates/object-updates.reducer';
-import {Observable} from 'rxjs/internal/Observable';
-import {filter, map, startWith, switchMap, take} from 'rxjs/operators';
-import {combineLatest as observableCombineLatest, zip as observableZip} from 'rxjs';
-import {followLink} from '../../../shared/utils/follow-link-config.model';
-import {AbstractItemUpdateComponent} from '../abstract-item-update/abstract-item-update.component';
-import {ItemDataService} from '../../../core/data/item-data.service';
-import {ObjectUpdatesService} from '../../../core/data/object-updates/object-updates.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NotificationsService} from '../../../shared/notifications/notifications.service';
-import {TranslateService} from '@ngx-translate/core';
-import {GLOBAL_CONFIG, GlobalConfig} from '../../../../config';
-import {RelationshipService} from '../../../core/data/relationship.service';
-import {ErrorResponse, RestResponse} from '../../../core/cache/response.models';
-import {RemoteData} from '../../../core/data/remote-data';
-import {ObjectCacheService} from '../../../core/cache/object-cache.service';
-import {getRemoteDataPayload, getSucceededRemoteData} from '../../../core/shared/operators';
-import {RequestService} from '../../../core/data/request.service';
-import {Subscription} from 'rxjs/internal/Subscription';
-import {RelationshipType} from '../../../core/shared/item-relationships/relationship-type.model';
-import {ItemType} from '../../../core/shared/item-relationships/item-type.model';
-import {EntityTypeService} from '../../../core/data/entity-type.service';
-import {FieldChangeType} from '../../../core/data/object-updates/object-updates.actions';
-import {Relationship} from '../../../core/shared/item-relationships/relationship.model';
+import { Observable } from 'rxjs/internal/Observable';
+import { filter, map, startWith, switchMap, take } from 'rxjs/operators';
+import { combineLatest as observableCombineLatest, zip as observableZip } from 'rxjs';
+import { followLink } from '../../../shared/utils/follow-link-config.model';
+import { AbstractItemUpdateComponent } from '../abstract-item-update/abstract-item-update.component';
+import { ItemDataService } from '../../../core/data/item-data.service';
+import { ObjectUpdatesService } from '../../../core/data/object-updates/object-updates.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { TranslateService } from '@ngx-translate/core';
+import { RelationshipService } from '../../../core/data/relationship.service';
+import { ErrorResponse, RestResponse } from '../../../core/cache/response.models';
+import { RemoteData } from '../../../core/data/remote-data';
+import { ObjectCacheService } from '../../../core/cache/object-cache.service';
+import { getRemoteDataPayload, getSucceededRemoteData } from '../../../core/shared/operators';
+import { RequestService } from '../../../core/data/request.service';
+import { RelationshipType } from '../../../core/shared/item-relationships/relationship-type.model';
+import { ItemType } from '../../../core/shared/item-relationships/item-type.model';
+import { EntityTypeService } from '../../../core/data/entity-type.service';
+import { FieldChangeType } from '../../../core/data/object-updates/object-updates.actions';
+import { Relationship } from '../../../core/shared/item-relationships/relationship.model';
 
 @Component({
   selector: 'ds-item-relationships',
@@ -58,7 +56,6 @@ export class ItemRelationshipsComponent extends AbstractItemUpdateComponent {
     public router: Router,
     public notificationsService: NotificationsService,
     public translateService: TranslateService,
-    @Inject(GLOBAL_CONFIG) public EnvConfig: GlobalConfig,
     public route: ActivatedRoute,
     public relationshipService: RelationshipService,
     public objectCache: ObjectCacheService,
@@ -66,7 +63,7 @@ export class ItemRelationshipsComponent extends AbstractItemUpdateComponent {
     public entityTypeService: EntityTypeService,
     public cdr: ChangeDetectorRef,
   ) {
-    super(itemService, objectUpdatesService, router, notificationsService, translateService, EnvConfig, route);
+    super(itemService, objectUpdatesService, router, notificationsService, translateService, route);
   }
 
   /**

@@ -1,6 +1,6 @@
 @import '../../../../../styles/variables.scss';
 
-.relationship-row:not(.alert) {
+.relationship-row:not(.alert-danger) {
   padding: $alert-padding-y 0;
 }
 
