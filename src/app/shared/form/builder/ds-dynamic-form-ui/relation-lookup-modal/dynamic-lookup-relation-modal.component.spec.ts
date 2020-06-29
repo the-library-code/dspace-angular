@@ -16,7 +16,8 @@ import { AddRelationshipAction, RemoveRelationshipAction } from './relationship.
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
 import { PaginatedSearchOptions } from '../../../../search/paginated-search-options.model';
 import { ExternalSource } from '../../../../../core/shared/external-source.model';
-import { createPaginatedList, createSuccessfulRemoteDataObject$ } from '../../../../testing/utils';
+import { createSuccessfulRemoteDataObject$ } from '../../../../remote-data.utils';
+import { createPaginatedList } from '../../../../testing/utils.test';
 import { ExternalSourceService } from '../../../../../core/data/external-source.service';
 import { LookupRelationService } from '../../../../../core/data/lookup-relation.service';
 
@@ -79,7 +80,7 @@ describe('DsDynamicLookupRelationModalComponent', () => {
     init();
     TestBed.configureTestingModule({
       declarations: [DsDynamicLookupRelationModalComponent],
-      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), NgbModule.forRoot()],
+      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), NgbModule],
       providers: [
         {
           provide: SearchConfigurationService, useValue: {

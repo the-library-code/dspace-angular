@@ -3,22 +3,22 @@ import { distinctUntilChanged, filter, map, mergeMap, tap } from 'rxjs/operators
 import { Inject, Injectable } from '@angular/core';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { RequestService } from '../data/request.service';
-import { GLOBAL_CONFIG } from '../../../config';
 import { GlobalConfig } from '../../../config/global-config.interface';
 import { isNotEmpty } from '../../shared/empty.util';
 import { AuthGetRequest, AuthPostRequest, GetRequest, PostRequest, RestRequest } from '../data/request.models';
 import { AuthStatusResponse, ErrorResponse } from '../cache/response.models';
 import { HttpOptions } from '../dspace-rest-v2/dspace-rest-v2.service';
 import { getResponseFromEntry } from '../shared/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthRequestService {
   protected linkName = 'authn';
   protected browseEndpoint = '';
 
-  constructor(@Inject(GLOBAL_CONFIG) protected EnvConfig: GlobalConfig,
-              protected halService: HALEndpointService,
-              protected requestService: RequestService) {
+  constructor(protected halService: HALEndpointService,
+              protected requestService: RequestService,
+              private http: HttpClient) {
   }
 
   protected fetchRequest(request: RestRequest): Observable<any> {
@@ -38,7 +38,7 @@ export class AuthRequestService {
     return isNotEmpty(method) ? `${endpoint}/${method}` : `${endpoint}`;
   }
 
-  public postToEndpoint(method: string, body: any, options?: HttpOptions): Observable<any> {
+  public postToEndpoint(method: string, body?: any, options?: HttpOptions): Observable<any> {
     return this.halService.getEndpoint(this.linkName).pipe(
       filter((href: string) => isNotEmpty(href)),
       map((endpointURL) => this.getEndpointByMethod(endpointURL, method)),

@@ -7,14 +7,14 @@ import { of as observableOf } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { NotificationsServiceStub } from '../../shared/testing/notifications-service-stub';
+import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
 import { SubmissionService } from '../submission.service';
-import { SubmissionServiceStub } from '../../shared/testing/submission-service-stub';
-import { getMockTranslateService } from '../../shared/mocks/mock-translate.service';
-import { RouterStub } from '../../shared/testing/router-stub';
-import { mockSubmissionObject } from '../../shared/mocks/mock-submission';
+import { SubmissionServiceStub } from '../../shared/testing/submission-service.stub';
+import { getMockTranslateService } from '../../shared/mocks/translate.service.mock';
+import { RouterStub } from '../../shared/testing/router.stub';
+import { mockSubmissionObject } from '../../shared/mocks/submission.mock';
 import { SubmissionSubmitComponent } from './submission-submit.component';
-import { ActivatedRouteStub } from '../../shared/testing/active-router-stub';
+import { ActivatedRouteStub } from '../../shared/testing/active-router.stub';
 
 describe('SubmissionSubmitComponent Component', () => {
 
@@ -68,7 +68,7 @@ describe('SubmissionSubmitComponent Component', () => {
 
     expect(comp.submissionId.toString()).toEqual(submissionId);
     expect(comp.collectionId).toBe(submissionObject.collection.id);
-    expect(comp.selfUrl).toBe(submissionObject.self);
+    expect(comp.selfUrl).toBe(submissionObject._links.self.href);
     expect(comp.submissionDefinition).toBe(submissionObject.submissionDefinition);
 
   }));

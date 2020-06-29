@@ -4,13 +4,13 @@ import { DeleteRelationship, FieldUpdate, FieldUpdates } from '../../../core/dat
 import { Observable } from 'rxjs/internal/Observable';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { zip as observableZip } from 'rxjs';
+import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { AbstractItemUpdateComponent } from '../abstract-item-update/abstract-item-update.component';
 import { ItemDataService } from '../../../core/data/item-data.service';
 import { ObjectUpdatesService } from '../../../core/data/object-updates/object-updates.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { TranslateService } from '@ngx-translate/core';
-import { GLOBAL_CONFIG, GlobalConfig } from '../../../../config';
 import { RelationshipService } from '../../../core/data/relationship.service';
 import { ErrorResponse, RestResponse } from '../../../core/cache/response.models';
 import { RemoteData } from '../../../core/data/remote-data';
@@ -48,20 +48,19 @@ export class ItemRelationshipsComponent extends AbstractItemUpdateComponent impl
   entityType$: Observable<ItemType>;
 
   constructor(
-    protected itemService: ItemDataService,
-    protected objectUpdatesService: ObjectUpdatesService,
-    protected router: Router,
-    protected notificationsService: NotificationsService,
-    protected translateService: TranslateService,
-    @Inject(GLOBAL_CONFIG) protected EnvConfig: GlobalConfig,
-    protected route: ActivatedRoute,
-    protected relationshipService: RelationshipService,
-    protected objectCache: ObjectCacheService,
-    protected requestService: RequestService,
-    protected entityTypeService: EntityTypeService,
-    protected cdr: ChangeDetectorRef,
+    public itemService: ItemDataService,
+    public objectUpdatesService: ObjectUpdatesService,
+    public router: Router,
+    public notificationsService: NotificationsService,
+    public translateService: TranslateService,
+    public route: ActivatedRoute,
+    public relationshipService: RelationshipService,
+    public objectCache: ObjectCacheService,
+    public requestService: RequestService,
+    public entityTypeService: EntityTypeService,
+    public cdr: ChangeDetectorRef,
   ) {
-    super(itemService, objectUpdatesService, router, notificationsService, translateService, EnvConfig, route);
+    super(itemService, objectUpdatesService, router, notificationsService, translateService, route);
   }
 
   /**
@@ -71,7 +70,10 @@ export class ItemRelationshipsComponent extends AbstractItemUpdateComponent impl
     super.ngOnInit();
     this.itemUpdateSubscription = this.requestService.hasByHrefObservable(this.item.self).pipe(
       filter((exists: boolean) => !exists),
-      switchMap(() => this.itemService.findById(this.item.uuid)),
+      switchMap(() => this.itemService.findById(this.item.uuid,
+        followLink('owningCollection'),
+        followLink('bundles'),
+        followLink('relationships'))),
       getSucceededRemoteData(),
     ).subscribe((itemRD: RemoteData<Item>) => {
       this.item = itemRD.payload;
@@ -94,7 +96,11 @@ export class ItemRelationshipsComponent extends AbstractItemUpdateComponent impl
 
     this.relationshipTypes$ = this.entityType$.pipe(
       switchMap((entityType) =>
-        this.entityTypeService.getEntityTypeRelationships(entityType.id).pipe(
+        this.entityTypeService.getEntityTypeRelationships(
+          entityType.id,
+          followLink('leftType'),
+          followLink('rightType'))
+        .pipe(
           getSucceededRemoteData(),
           getRemoteDataPayload(),
           map((relationshipTypes) => relationshipTypes.page),

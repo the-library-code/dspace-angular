@@ -8,25 +8,36 @@ import { of as observableOf } from 'rxjs';
 
 import { authReducer, AuthState } from './auth.reducer';
 import { NativeWindowRef, NativeWindowService } from '../services/window.service';
-import { AuthService } from './auth.service';
-import { RouterStub } from '../../shared/testing/router-stub';
-import { ActivatedRouteStub } from '../../shared/testing/active-router-stub';
+import { AuthService, IMPERSONATING_COOKIE } from './auth.service';
+import { RouterStub } from '../../shared/testing/router.stub';
+import { ActivatedRouteStub } from '../../shared/testing/active-router.stub';
 
 import { CookieService } from '../services/cookie.service';
-import { AuthRequestServiceStub } from '../../shared/testing/auth-request-service-stub';
+import { AuthRequestServiceStub } from '../../shared/testing/auth-request-service.stub';
 import { AuthRequestService } from './auth-request.service';
 import { AuthStatus } from './models/auth-status.model';
 import { AuthTokenInfo } from './models/auth-token-info.model';
 import { EPerson } from '../eperson/models/eperson.model';
-import { EPersonMock } from '../../shared/testing/eperson-mock';
+import { EPersonMock } from '../../shared/testing/eperson.mock';
 import { AppState } from '../../app.reducer';
 import { ClientCookieService } from '../services/client-cookie.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
-import { getMockRemoteDataBuildService } from '../../shared/mocks/mock-remote-data-build.service';
-import { routeServiceStub } from '../../shared/testing/route-service-stub';
+import { routeServiceStub } from '../../shared/testing/route-service.stub';
 import { RouteService } from '../services/route.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { RemoteData } from '../data/remote-data';
+import { EPersonDataService } from '../eperson/eperson-data.service';
+import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { authMethodsMock } from '../../shared/testing/auth-service.stub';
+import { AuthMethod } from './models/auth.method';
 
 describe('AuthService test', () => {
+
+  const mockEpersonDataService: any = {
+    findByHref(href: string): Observable<RemoteData<EPerson>> {
+      return createSuccessfulRemoteDataObject$(EPersonMock);
+    }
+  };
 
   let mockStore: Store<AuthState>;
   let authService: AuthService;
@@ -38,7 +49,7 @@ describe('AuthService test', () => {
   let storage: CookieService;
   let token: AuthTokenInfo;
   let authenticatedState;
-  let rdbService;
+  let linkService;
 
   function init() {
     mockStore = jasmine.createSpyObj('store', {
@@ -58,8 +69,10 @@ describe('AuthService test', () => {
     };
     authRequest = new AuthRequestServiceStub();
     routeStub = new ActivatedRouteStub();
-    rdbService = getMockRemoteDataBuildService();
-    spyOn(rdbService, 'build').and.returnValue({authenticated: true, eperson: observableOf({payload: {}})});
+    linkService = {
+      resolveLinks: {}
+    };
+    spyOn(linkService, 'resolveLinks').and.returnValue({ authenticated: true, eperson: observableOf({ payload: {} }) });
 
   }
 
@@ -69,7 +82,12 @@ describe('AuthService test', () => {
       TestBed.configureTestingModule({
         imports: [
           CommonModule,
-          StoreModule.forRoot({ authReducer }),
+          StoreModule.forRoot({ authReducer }, {
+            runtimeChecks: {
+              strictStateImmutability: false,
+              strictActionImmutability: false
+            }
+          }),
         ],
         declarations: [],
         providers: [
@@ -80,7 +98,7 @@ describe('AuthService test', () => {
           { provide: RouteService, useValue: routeServiceStub },
           { provide: ActivatedRoute, useValue: routeStub },
           { provide: Store, useValue: mockStore },
-          { provide: RemoteDataBuildService, useValue: rdbService },
+          { provide: EPersonDataService, useValue: mockEpersonDataService },
           CookieService,
           AuthService
         ],
@@ -98,8 +116,14 @@ describe('AuthService test', () => {
       expect(authService.authenticate.bind(null, 'user', 'passwordwrong')).toThrow();
     });
 
-    it('should return the authenticated user object when user token is valid', () => {
-      authService.authenticatedUser(new AuthTokenInfo('test_token')).subscribe((user: EPerson) => {
+    it('should return the authenticated user href when user token is valid', () => {
+      authService.authenticatedUser(new AuthTokenInfo('test_token')).subscribe((userHref: string) => {
+        expect(userHref).toBeDefined();
+      });
+    });
+
+    it('should return the authenticated user', () => {
+      authService.retrieveAuthenticatedUserByHref(EPersonMock._links.self.href).subscribe((user: EPerson) => {
         expect(user).toBeDefined();
       });
     });
@@ -128,6 +152,26 @@ describe('AuthService test', () => {
       expect(authService.logout.bind(null)).toThrow();
     });
 
+    it('should return the authentication status object to check an Authentication Cookie', () => {
+      authService.checkAuthenticationCookie().subscribe((status: AuthStatus) => {
+        expect(status).toBeDefined();
+      });
+    });
+
+    it('should return the authentication methods available', () => {
+      const authStatus = new AuthStatus();
+
+      authService.retrieveAuthMethodsFromAuthStatus(authStatus).subscribe((authMethods: AuthMethod[]) => {
+        expect(authMethods).toBeDefined();
+        expect(authMethods.length).toBe(0);
+      });
+
+      authStatus.authMethods = authMethodsMock;
+      authService.retrieveAuthMethodsFromAuthStatus(authStatus).subscribe((authMethods: AuthMethod[]) => {
+        expect(authMethods).toBeDefined();
+        expect(authMethods.length).toBe(2);
+      });
+    });
   });
 
   describe('', () => {
@@ -136,14 +180,19 @@ describe('AuthService test', () => {
       init();
       TestBed.configureTestingModule({
         imports: [
-          StoreModule.forRoot({ authReducer })
+          StoreModule.forRoot({ authReducer }, {
+            runtimeChecks: {
+              strictStateImmutability: false,
+              strictActionImmutability: false
+            }
+          })
         ],
         providers: [
           { provide: AuthRequestService, useValue: authRequest },
           { provide: REQUEST, useValue: {} },
           { provide: Router, useValue: routerStub },
           { provide: RouteService, useValue: routeServiceStub },
-          { provide: RemoteDataBuildService, useValue: rdbService },
+          { provide: RemoteDataBuildService, useValue: linkService },
           CookieService,
           AuthService
         ]
@@ -156,7 +205,7 @@ describe('AuthService test', () => {
           (state as any).core = Object.create({});
           (state as any).core.auth = authenticatedState;
         });
-      authService = new AuthService({}, window, undefined, authReqService, router, routeService, cookieService, store, rdbService);
+      authService = new AuthService({}, window, undefined, authReqService, mockEpersonDataService, router, routeService, cookieService, store);
     }));
 
     it('should return true when user is logged in', () => {
@@ -188,14 +237,19 @@ describe('AuthService test', () => {
       init();
       TestBed.configureTestingModule({
         imports: [
-          StoreModule.forRoot({ authReducer })
+          StoreModule.forRoot({ authReducer }, {
+            runtimeChecks: {
+              strictStateImmutability: false,
+              strictActionImmutability: false
+            }
+          })
         ],
         providers: [
           { provide: AuthRequestService, useValue: authRequest },
           { provide: REQUEST, useValue: {} },
           { provide: Router, useValue: routerStub },
           { provide: RouteService, useValue: routeServiceStub },
-          { provide: RemoteDataBuildService, useValue: rdbService },
+          { provide: RemoteDataBuildService, useValue: linkService },
           ClientCookieService,
           CookieService,
           AuthService
@@ -218,7 +272,7 @@ describe('AuthService test', () => {
           (state as any).core = Object.create({});
           (state as any).core.auth = authenticatedState;
         });
-      authService = new AuthService({}, window, undefined, authReqService, router, routeService, cookieService, store, rdbService);
+      authService = new AuthService({}, window, undefined, authReqService, mockEpersonDataService, router, routeService, cookieService, store);
       storage = (authService as any).storage;
       routeServiceMock = TestBed.get(RouteService);
       routerStub = TestBed.get(Router);
@@ -247,7 +301,7 @@ describe('AuthService test', () => {
       expect(storage.remove).toHaveBeenCalled();
     });
 
-    it ('should set redirect url to previous page', () => {
+    it('should set redirect url to previous page', () => {
       spyOn(routeServiceMock, 'getHistory').and.callThrough();
       spyOn(routerStub, 'navigateByUrl');
       authService.redirectAfterLoginSuccess(true);
@@ -255,7 +309,7 @@ describe('AuthService test', () => {
       expect(routerStub.navigateByUrl).toHaveBeenCalledWith('/collection/123');
     });
 
-    it ('should set redirect url to current page', () => {
+    it('should set redirect url to current page', () => {
       spyOn(routeServiceMock, 'getHistory').and.callThrough();
       spyOn(routerStub, 'navigateByUrl');
       authService.redirectAfterLoginSuccess(false);
@@ -263,7 +317,7 @@ describe('AuthService test', () => {
       expect(routerStub.navigateByUrl).toHaveBeenCalledWith('/home');
     });
 
-    it ('should redirect to / and not to /login', () => {
+    it('should redirect to / and not to /login', () => {
       spyOn(routeServiceMock, 'getHistory').and.returnValue(observableOf(['/login', '/login']));
       spyOn(routerStub, 'navigateByUrl');
       authService.redirectAfterLoginSuccess(true);
@@ -271,12 +325,127 @@ describe('AuthService test', () => {
       expect(routerStub.navigateByUrl).toHaveBeenCalledWith('/');
     });
 
-    it ('should redirect to / when no redirect url is found', () => {
+    it('should redirect to / when no redirect url is found', () => {
       spyOn(routeServiceMock, 'getHistory').and.returnValue(observableOf(['']));
       spyOn(routerStub, 'navigateByUrl');
       authService.redirectAfterLoginSuccess(true);
       expect(routeServiceMock.getHistory).toHaveBeenCalled();
       expect(routerStub.navigateByUrl).toHaveBeenCalledWith('/');
+    });
+
+    describe('impersonate', () => {
+      const userId = 'testUserId';
+
+      beforeEach(() => {
+        spyOn(authService, 'refreshAfterLogout');
+        authService.impersonate(userId);
+      });
+
+      it('should impersonate user', () => {
+        expect(storage.set).toHaveBeenCalledWith(IMPERSONATING_COOKIE, userId);
+      });
+
+      it('should call refreshAfterLogout', () => {
+        expect(authService.refreshAfterLogout).toHaveBeenCalled();
+      });
+    });
+
+    describe('stopImpersonating', () => {
+      beforeEach(() => {
+        authService.stopImpersonating();
+      });
+
+      it('should impersonate user', () => {
+        expect(storage.remove).toHaveBeenCalledWith(IMPERSONATING_COOKIE);
+      });
+    });
+
+    describe('stopImpersonatingAndRefresh', () => {
+      beforeEach(() => {
+        spyOn(authService, 'refreshAfterLogout');
+        authService.stopImpersonatingAndRefresh();
+      });
+
+      it('should impersonate user', () => {
+        expect(storage.remove).toHaveBeenCalledWith(IMPERSONATING_COOKIE);
+      });
+
+      it('should call refreshAfterLogout', () => {
+        expect(authService.refreshAfterLogout).toHaveBeenCalled();
+      });
+    });
+
+    describe('getImpersonateID', () => {
+      beforeEach(() => {
+        authService.getImpersonateID();
+      });
+
+      it('should impersonate user', () => {
+        expect(storage.get).toHaveBeenCalledWith(IMPERSONATING_COOKIE);
+      });
+    });
+
+    describe('isImpersonating', () => {
+      const userId = 'testUserId';
+      let result: boolean;
+
+      describe('when the cookie doesn\'t contain a value', () => {
+        beforeEach(() => {
+          result = authService.isImpersonating();
+        });
+
+        it('should return false', () => {
+          expect(result).toBe(false);
+        });
+      });
+
+      describe('when the cookie contains a value', () => {
+        beforeEach(() => {
+          storage.get = jasmine.createSpy().and.returnValue(userId);
+          result = authService.isImpersonating();
+        });
+
+        it('should return true', () => {
+          expect(result).toBe(true);
+        });
+      });
+    });
+
+    describe('isImpersonatingUser', () => {
+      const userId = 'testUserId';
+      let result: boolean;
+
+      describe('when the cookie doesn\'t contain a value', () => {
+        beforeEach(() => {
+          result = authService.isImpersonatingUser(userId);
+        });
+
+        it('should return false', () => {
+          expect(result).toBe(false);
+        });
+      });
+
+      describe('when the cookie contains the right value', () => {
+        beforeEach(() => {
+          storage.get = jasmine.createSpy().and.returnValue(userId);
+          result = authService.isImpersonatingUser(userId);
+        });
+
+        it('should return true', () => {
+          expect(result).toBe(true);
+        });
+      });
+
+      describe('when the cookie contains the wrong value', () => {
+        beforeEach(() => {
+          storage.get = jasmine.createSpy().and.returnValue('wrongValue');
+          result = authService.isImpersonatingUser(userId);
+        });
+
+        it('should return false', () => {
+          expect(result).toBe(false);
+        });
+      });
     });
   });
 });

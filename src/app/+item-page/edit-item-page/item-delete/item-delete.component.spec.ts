@@ -1,31 +1,31 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ItemType } from '../../../core/shared/item-relationships/item-type.model';
 import { Relationship } from '../../../core/shared/item-relationships/relationship.model';
-import {Item} from '../../../core/shared/item.model';
-import {RouterStub} from '../../../shared/testing/router-stub';
-import {of as observableOf} from 'rxjs';
-import {NotificationsServiceStub} from '../../../shared/testing/notifications-service-stub';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {RouterTestingModule} from '@angular/router/testing';
-import {TranslateModule} from '@ngx-translate/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ItemDataService} from '../../../core/data/item-data.service';
-import {NotificationsService} from '../../../shared/notifications/notifications.service';
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {By} from '@angular/platform-browser';
-import {ItemDeleteComponent} from './item-delete.component';
-import {getItemEditPath} from '../../item-page-routing.module';
-import {createSuccessfulRemoteDataObject} from '../../../shared/testing/utils';
-import {VarDirective} from '../../../shared/utils/var.directive';
-import {ObjectUpdatesService} from '../../../core/data/object-updates/object-updates.service';
-import {RelationshipService} from '../../../core/data/relationship.service';
-import {RelationshipType} from '../../../core/shared/item-relationships/relationship-type.model';
-import {RemoteData} from '../../../core/data/remote-data';
-import {PaginatedList} from '../../../core/data/paginated-list';
-import {PageInfo} from '../../../core/shared/page-info.model';
-import {EntityTypeService} from '../../../core/data/entity-type.service';
+import { Item } from '../../../core/shared/item.model';
+import { RouterStub } from '../../../shared/testing/router.stub';
+import { of as observableOf } from 'rxjs';
+import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ItemDataService } from '../../../core/data/item-data.service';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { ItemDeleteComponent } from './item-delete.component';
+import { getItemEditPath } from '../../item-page-routing.module';
+import { createSuccessfulRemoteDataObject } from '../../../shared/remote-data.utils';
+import { VarDirective } from '../../../shared/utils/var.directive';
+import { ObjectUpdatesService } from '../../../core/data/object-updates/object-updates.service';
+import { RelationshipService } from '../../../core/data/relationship.service';
+import { RelationshipType } from '../../../core/shared/item-relationships/relationship-type.model';
+import { RemoteData } from '../../../core/data/remote-data';
+import { PaginatedList } from '../../../core/data/paginated-list';
+import { PageInfo } from '../../../core/shared/page-info.model';
+import { EntityTypeService } from '../../../core/data/entity-type.service';
 
 let comp: ItemDeleteComponent;
 let fixture: ComponentFixture<ItemDeleteComponent>;
@@ -182,7 +182,7 @@ describe('ItemDeleteComponent', () => {
     notificationsServiceStub = new NotificationsServiceStub();
 
     TestBed.configureTestingModule({
-      imports: [CommonModule, FormsModule, RouterTestingModule.withRoutes([]), TranslateModule.forRoot(), NgbModule.forRoot()],
+      imports: [CommonModule, FormsModule, RouterTestingModule.withRoutes([]), TranslateModule.forRoot(), NgbModule],
       declarations: [ItemDeleteComponent, VarDirective],
       providers: [
         { provide: ActivatedRoute, useValue: routeStub },
@@ -220,7 +220,7 @@ describe('ItemDeleteComponent', () => {
       spyOn(comp, 'notify');
       comp.performAction();
       expect(mockItemDataService.delete)
-        .toHaveBeenCalledWith(mockItem, types.filter((type) => typesSelection[type]).map((type) => type.id));
+        .toHaveBeenCalledWith(mockItem.id, types.filter((type) => typesSelection[type]).map((type) => type.id));
       expect(comp.notify).toHaveBeenCalled();
     });
   });

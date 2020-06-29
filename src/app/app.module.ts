@@ -3,18 +3,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { META_REDUCERS, MetaReducer, StoreModule } from '@ngrx/store';
+import { MetaReducer, StoreModule, USER_PROVIDED_META_REDUCERS } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
+import { DYNAMIC_MATCHER_PROVIDERS } from '@ng-dynamic-forms/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
-import { storeFreeze } from 'ngrx-store-freeze';
-
-import { ENV_CONFIG, GLOBAL_CONFIG, GlobalConfig } from '../config';
 import { AdminSidebarSectionComponent } from './+admin/admin-sidebar/admin-sidebar-section/admin-sidebar-section.component';
 import { AdminSidebarComponent } from './+admin/admin-sidebar/admin-sidebar.component';
 import { ExpandableAdminSidebarSectionComponent } from './+admin/admin-sidebar/expandable-admin-sidebar-section/expandable-admin-sidebar-section.component';
@@ -24,7 +20,7 @@ import { AppComponent } from './app.component';
 
 import { appEffects } from './app.effects';
 import { appMetaReducers, debugMetaReducers } from './app.metareducers';
-import { appReducers, AppState } from './app.reducer';
+import { appReducers, AppState, storeModuleConfig } from './app.reducer';
 
 import { CoreModule } from './core/core.module';
 import { ClientCookieService } from './core/services/client-cookie.service';
@@ -41,18 +37,16 @@ import { DSpaceRouterStateSerializer } from './shared/ngrx/dspace-router-state-s
 import { NotificationComponent } from './shared/notifications/notification/notification.component';
 import { NotificationsBoardComponent } from './shared/notifications/notifications-board/notifications-board.component';
 import { SharedModule } from './shared/shared.module';
-
-export function getConfig() {
-  return ENV_CONFIG;
-}
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { environment } from '../environments/environment';
+import { BrowserModule } from '@angular/platform-browser';
 
 export function getBase() {
-  return ENV_CONFIG.ui.nameSpace;
+  return environment.ui.nameSpace;
 }
 
-export function getMetaReducers(config: GlobalConfig): Array<MetaReducer<AppState>> {
-  const metaReducers: Array<MetaReducer<AppState>> = config.production ? appMetaReducers : [...appMetaReducers, storeFreeze];
-  return config.debug ? [...metaReducers, ...debugMetaReducers] : metaReducers;
+export function getMetaReducers(): Array<MetaReducer<AppState>> {
+  return environment.debug ? [...appMetaReducers, ...debugMetaReducers] : appMetaReducers;
 }
 
 const IMPORTS = [
@@ -63,11 +57,11 @@ const IMPORTS = [
   AppRoutingModule,
   CoreModule.forRoot(),
   ScrollToModule.forRoot(),
-  NgbModule.forRoot(),
+  NgbModule,
   TranslateModule.forRoot(),
   EffectsModule.forRoot(appEffects),
-  StoreModule.forRoot(appReducers),
-  StoreRouterConnectingModule,
+  StoreModule.forRoot(appReducers, storeModuleConfig),
+  StoreRouterConnectingModule.forRoot(),
 ];
 
 const ENTITY_IMPORTS = [
@@ -78,29 +72,25 @@ const ENTITY_IMPORTS = [
 IMPORTS.push(
   StoreDevtoolsModule.instrument({
     maxAge: 1000,
-    logOnly: ENV_CONFIG.production,
+    logOnly: environment.production,
   })
 );
 
 const PROVIDERS = [
   {
-    provide: GLOBAL_CONFIG,
-    useFactory: (getConfig)
-  },
-  {
     provide: APP_BASE_HREF,
     useFactory: (getBase)
   },
   {
-    provide: META_REDUCERS,
+    provide: USER_PROVIDED_META_REDUCERS,
     useFactory: getMetaReducers,
-    deps: [GLOBAL_CONFIG]
   },
   {
     provide: RouterStateSerializer,
     useClass: DSpaceRouterStateSerializer
   },
-  ClientCookieService
+  ClientCookieService,
+  ...DYNAMIC_MATCHER_PROVIDERS,
 ];
 
 const DECLARATIONS = [
@@ -123,6 +113,7 @@ const EXPORTS = [
 
 @NgModule({
   imports: [
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     ...IMPORTS,
     ...ENTITY_IMPORTS
   ],
@@ -131,6 +122,7 @@ const EXPORTS = [
   ],
   declarations: [
     ...DECLARATIONS,
+    BreadcrumbsComponent,
   ],
   exports: [
     ...EXPORTS

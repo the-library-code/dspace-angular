@@ -9,10 +9,9 @@ import { SearchConfigurationService } from '../../../../../../core/shared/search
 import { of as observableOf } from 'rxjs/internal/observable/of';
 import {
   createFailedRemoteDataObject$,
-  createPaginatedList,
   createPendingRemoteDataObject$,
   createSuccessfulRemoteDataObject$
-} from '../../../../../testing/utils';
+} from '../../../../../remote-data.utils';
 import { ExternalSourceService } from '../../../../../../core/data/external-source.service';
 import { ExternalSource } from '../../../../../../core/shared/external-source.model';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +23,7 @@ import { Item } from '../../../../../../core/shared/item.model';
 import { Collection } from '../../../../../../core/shared/collection.model';
 import { RelationshipOptions } from '../../../models/relationship-options.model';
 import { ExternalSourceEntryImportModalComponent } from './external-source-entry-import-modal/external-source-entry-import-modal.component';
+import { createPaginatedList } from '../../../../../testing/utils.test';
 
 describe('DsDynamicLookupRelationExternalSourceTabComponent', () => {
   let component: DsDynamicLookupRelationExternalSourceTabComponent;
@@ -95,7 +95,7 @@ describe('DsDynamicLookupRelationExternalSourceTabComponent', () => {
     init();
     TestBed.configureTestingModule({
       declarations: [DsDynamicLookupRelationExternalSourceTabComponent, VarDirective],
-      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), NgbModule.forRoot(), BrowserAnimationsModule],
+      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), NgbModule, BrowserAnimationsModule],
       providers: [
         {
           provide: SearchConfigurationService, useValue: {
