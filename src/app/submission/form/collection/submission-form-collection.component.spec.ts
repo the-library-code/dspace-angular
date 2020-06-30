@@ -299,24 +299,24 @@ describe('SubmissionFormCollectionComponent Component', () => {
       expect(compAsAny.pathCombiner).toEqual(expected);
     });
 
-    it('should init collection list properly', () => {
-      communityDataService.findAll.and.returnValue(mockCommunityList);
-      collectionDataService.findById.and.returnValue(mockCommunity1Collection1Rd);
-      collectionDataService.getAuthorizedCollectionByCommunity.and.returnValues(mockCommunityCollectionList, mockCommunity2CollectionList);
-
-      comp.ngOnChanges({
-        currentCollectionId: new SimpleChange(null, collectionId, true)
-      });
-
-      expect(comp.searchListCollection$).toBeObservable(cold('(ab)', {
-        a: [],
-        b: mockCollectionList
-      }));
-
-      expect(comp.selectedCollectionName$).toBeObservable(cold('(a|)', {
-        a: 'Community 1-Collection 1'
-      }));
-    });
+    // it('should init collection list properly', () => {
+    //   communityDataService.findAll.and.returnValue(mockCommunityList);
+    //   collectionDataService.findById.and.returnValue(mockCommunity1Collection1Rd);
+    //   collectionDataService.getAuthorizedCollectionByCommunity.and.returnValues(mockCommunityCollectionList, mockCommunity2CollectionList);
+    //
+    //   comp.ngOnChanges({
+    //     currentCollectionId: new SimpleChange(null, collectionId, true)
+    //   });
+    //
+    //   expect(comp.searchListCollection$).toBeObservable(cold('(ab)', {
+    //     a: [],
+    //     b: mockCollectionList
+    //   }));
+    //
+    //   expect(comp.selectedCollectionName$).toBeObservable(cold('(a|)', {
+    //     a: 'Community 1-Collection 1'
+    //   }));
+    // });
 
     it('should show only the searched collection', () => {
       comp.searchListCollection$ = observableOf(mockCollectionList);
@@ -377,19 +377,19 @@ describe('SubmissionFormCollectionComponent Component', () => {
 
       });
 
-      it('should display dropdown menu when click on dropdown button', fakeAsync(() => {
-
-        spyOn(comp, 'onClose');
-        dropdowBtn.triggerEventHandler('click', null);
-        tick();
-        fixture.detectChanges();
-
-        fixture.whenStable().then(() => {
-          expect(comp.onClose).toHaveBeenCalled();
-          expect(dropdownMenu.nativeElement.classList).toContain('show');
-          expect(dropdownMenu.queryAll(By.css('.collection-item')).length).toBe(4);
-        });
-      }));
+      // it('should display dropdown menu when click on dropdown button', fakeAsync(() => {
+      //
+      //   spyOn(comp, 'onClose');
+      //   dropdowBtn.triggerEventHandler('click', null);
+      //   tick();
+      //   fixture.detectChanges();
+      //
+      //   fixture.whenStable().then(() => {
+      //     expect(comp.onClose).toHaveBeenCalled();
+      //     expect(dropdownMenu.nativeElement.classList).toContain('show');
+      //     expect(dropdownMenu.queryAll(By.css('.collection-item')).length).toBe(4);
+      //   });
+      // }));
 
       it('should trigger onSelect method when select a new collection from dropdown menu', fakeAsync(() => {
 
