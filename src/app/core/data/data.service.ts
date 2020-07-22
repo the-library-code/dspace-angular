@@ -2,18 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Operation } from 'fast-json-patch';
 import { Observable } from 'rxjs';
-import {
-  distinctUntilChanged,
-  filter,
-  find,
-  first,
-  map,
-  mergeMap,
-  skipWhile,
-  switchMap,
-  take,
-  tap
-} from 'rxjs/operators';
+import { distinctUntilChanged, filter, find, first, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { hasValue, isNotEmpty, isNotEmptyOperator } from '../../shared/empty.util';
 import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
@@ -28,30 +17,19 @@ import { CoreState } from '../core.reducers';
 import { DSpaceSerializer } from '../dspace-rest-v2/dspace.serializer';
 import { DSpaceObject } from '../shared/dspace-object.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
-import {
-  configureRequest,
-  getRemoteDataPayload,
-  getResponseFromEntry,
-  getSucceededRemoteData
-} from '../shared/operators';
+import { configureRequest, getRemoteDataPayload, getResponseFromEntry, getSucceededRemoteData } from '../shared/operators';
 import { URLCombiner } from '../url-combiner/url-combiner';
 import { ChangeAnalyzer } from './change-analyzer';
 import { PaginatedList } from './paginated-list';
 import { RemoteData } from './remote-data';
-import {
-  CreateRequest,
-  DeleteByIDRequest,
-  FindByIDRequest,
-  FindListOptions,
-  FindListRequest,
-  GetRequest, PatchRequest, PutRequest
-} from './request.models';
+import { CreateRequest, DeleteByIDRequest, FindByIDRequest, FindListOptions, FindListRequest, GetRequest, PatchRequest, PutRequest } from './request.models';
 import { RequestEntry } from './request.reducer';
 import { RequestService } from './request.service';
 import { RestRequestMethod } from './rest-request-method';
+import { UpdateDataService } from './update-data.service';
 import { GenericConstructor } from '../shared/generic-constructor';
 
-export abstract class DataService<T extends CacheableObject> {
+export abstract class DataService<T extends CacheableObject> implements UpdateDataService<T> {
   protected abstract requestService: RequestService;
   protected abstract rdbService: RemoteDataBuildService;
   protected abstract store: Store<CoreState>;
@@ -74,6 +52,13 @@ export abstract class DataService<T extends CacheableObject> {
    * @returns {Observable<string>}
    */
   getBrowseEndpoint(options: FindListOptions = {}, linkPath?: string): Observable<string> {
+    return this.getEndpoint();
+  }
+
+  /**
+   * Get the base endpoint for all requests
+   */
+  protected getEndpoint(): Observable<string> {
     return this.halService.getEndpoint(this.linkPath);
   }
 
@@ -259,14 +244,23 @@ export abstract class DataService<T extends CacheableObject> {
   }
 
   /**
+   * Create an observable for the HREF of a specific object based on its identifier
+   * @param resourceID The identifier for the object
+   * @param linksToFollow   List of {@link FollowLinkConfig} that indicate which {@link HALLink}s should be automatically resolved
+   */
+  getIDHrefObs(resourceID: string, ...linksToFollow: Array<FollowLinkConfig<T>>): Observable<string> {
+    return this.getEndpoint().pipe(
+      map((endpoint: string) => this.getIDHref(endpoint, resourceID, ...linksToFollow)));
+  }
+
+  /**
    * Returns an observable of {@link RemoteData} of an object, based on its ID, with a list of {@link FollowLinkConfig},
    * to automatically resolve {@link HALLink}s of the object
    * @param id              ID of object we want to retrieve
    * @param linksToFollow   List of {@link FollowLinkConfig} that indicate which {@link HALLink}s should be automatically resolved
    */
   findById(id: string, ...linksToFollow: Array<FollowLinkConfig<T>>): Observable<RemoteData<T>> {
-    const hrefObs = this.halService.getEndpoint(this.linkPath).pipe(
-      map((endpoint: string) => this.getIDHref(endpoint, encodeURIComponent(id), ...linksToFollow)));
+    const hrefObs = this.getIDHrefObs(encodeURIComponent(id), ...linksToFollow);
 
     hrefObs.pipe(
       find((href: string) => hasValue(href)))
@@ -437,7 +431,7 @@ export abstract class DataService<T extends CacheableObject> {
    */
   create(dso: T, ...params: RequestParam[]): Observable<RemoteData<T>> {
     const requestId = this.requestService.generateRequestId();
-    const endpoint$ = this.halService.getEndpoint(this.linkPath).pipe(
+    const endpoint$ = this.getEndpoint().pipe(
       isNotEmptyOperator(),
       distinctUntilChanged(),
       map((endpoint: string) => this.buildHrefWithParams(endpoint, params))
@@ -542,8 +536,7 @@ export abstract class DataService<T extends CacheableObject> {
   delete(dsoID: string, copyVirtualMetadata?: string[]): Observable<RestResponse> {
     const requestId = this.requestService.generateRequestId();
 
-    const hrefObs = this.halService.getEndpoint(this.linkPath).pipe(
-      map((endpoint: string) => this.getIDHref(endpoint, dsoID)));
+    const hrefObs = this.getIDHrefObs(dsoID);
 
     hrefObs.pipe(
       find((href: string) => hasValue(href)),

@@ -8,7 +8,7 @@ import {
 } from '../../../core/data/object-updates/object-updates.reducer';
 import { Observable } from 'rxjs/internal/Observable';
 import { filter, map, startWith, switchMap, take } from 'rxjs/operators';
-import { combineLatest as observableCombineLatest, zip as observableZip } from 'rxjs';
+import { combineLatest as observableCombineLatest, of as observableOf, zip as observableZip} from 'rxjs';
 import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { AbstractItemUpdateComponent } from '../abstract-item-update/abstract-item-update.component';
 import { ItemDataService } from '../../../core/data/item-data.service';
@@ -104,26 +104,30 @@ export class ItemRelationshipsComponent extends AbstractItemUpdateComponent {
    */
   public initializeUpdates(): void {
 
-    this.entityType$ = this.entityTypeService.getEntityTypeByLabel(
-      this.item.firstMetadataValue('relationship.type')
-    ).pipe(
-      getSucceededRemoteData(),
-      getRemoteDataPayload(),
-    );
+    const label = this.item.firstMetadataValue('relationship.type');
+    if (label !== undefined) {
 
-    this.relationshipTypes$ = this.entityType$.pipe(
-      switchMap((entityType) =>
-        this.entityTypeService.getEntityTypeRelationships(
-          entityType.id,
-          followLink('leftType'),
-          followLink('rightType'))
-        .pipe(
-          getSucceededRemoteData(),
-          getRemoteDataPayload(),
-          map((relationshipTypes) => relationshipTypes.page),
-        )
-      ),
-    );
+      this.entityType$ = this.entityTypeService.getEntityTypeByLabel(label).pipe(
+        getSucceededRemoteData(),
+        getRemoteDataPayload(),
+      );
+
+      this.relationshipTypes$ = this.entityType$.pipe(
+        switchMap((entityType) =>
+          this.entityTypeService.getEntityTypeRelationships(
+            entityType.id,
+            followLink('leftType'),
+            followLink('rightType'))
+            .pipe(
+              getSucceededRemoteData(),
+              getRemoteDataPayload(),
+              map((relationshipTypes) => relationshipTypes.page),
+            )
+        ),
+      );
+    } else {
+      this.entityType$ = observableOf(undefined);
+    }
   }
 
   /**

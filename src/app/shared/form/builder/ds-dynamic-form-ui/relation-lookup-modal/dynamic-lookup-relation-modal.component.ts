@@ -2,7 +2,7 @@ import { Component, EventEmitter, NgZone, OnDestroy, OnInit, Output } from '@ang
 import { combineLatest, Observable, Subscription, zip as observableZip } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { hasValue } from '../../../../empty.util';
-import { map, skip, switchMap, take, tap, filter } from 'rxjs/operators';
+import { map, skip, switchMap, take } from 'rxjs/operators';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../+my-dspace-page/my-dspace-page.component';
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
 import { SelectableListService } from '../../../../object-list/selectable-list/selectable-list.service';
@@ -88,15 +88,7 @@ export class DsDynamicLookupRelationModalComponent implements OnInit, OnDestroy 
    */
   metadataFields: string;
 
-  _query: string;
-  set query(q: string) {
-    console.log('set query', q);
-    this._query = q;
-  };
-
-  get query(): string {
-    return this._query;
-  }
+  query: string;
 
   /**
    * A map of subscriptions within this component
