@@ -1,9 +1,5 @@
 @import '../../../../../styles/variables.scss';
 
-.relationship-row:not(.alert-danger) {
-  padding: $alert-padding-y 0;
-}
-
 .relationship-row.alert {
   margin-left: -$alert-padding-x;
   margin-right: -$alert-padding-x;
