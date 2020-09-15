@@ -14,7 +14,7 @@ import { By } from '@angular/platform-browser';
 import { RemoteData } from '../../../../../../core/data/remote-data';
 import { PaginatedList } from '../../../../../../core/data/paginated-list';
 import { ListableObject } from '../../../../../object-collection/shared/listable-object.model';
-import { createSuccessfulRemoteDataObject$ } from '../../../../../testing/utils';
+import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
 
 describe('DsDynamicLookupRelationSelectionTabComponent', () => {
   let component: DsDynamicLookupRelationSelectionTabComponent;
@@ -71,11 +71,6 @@ describe('DsDynamicLookupRelationSelectionTabComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should call navigate on the router when is called resetRoute', () => {
-    component.resetRoute();
-    expect(router.navigate).toHaveBeenCalled();
   });
 
   it('should call navigate on the router when is called resetRoute', () => {

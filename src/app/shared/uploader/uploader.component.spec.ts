@@ -9,7 +9,7 @@ import { UploaderOptions } from './uploader-options.model';
 import { UploaderComponent } from './uploader.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TranslateModule } from '@ngx-translate/core';
-import { createTestComponent } from '../testing/utils';
+import { createTestComponent } from '../testing/utils.test';
 
 describe('Chips component', () => {
 
@@ -64,12 +64,12 @@ describe('Chips component', () => {
   template: ``
 })
 class TestComponent {
-  public uploadFilesOptions: UploaderOptions = {
+  public uploadFilesOptions: UploaderOptions = Object.assign(new UploaderOptions(), {
     url: 'http://test',
     authToken: null,
     disableMultipart: false,
     itemAlias: null
-  };
+  });
 
   /* tslint:disable:no-empty */
   public onBeforeUpload = () => {

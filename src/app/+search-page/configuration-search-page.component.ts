@@ -1,3 +1,4 @@
+import { switchMap } from 'rxjs/operators';
 import { HostWindowService } from '../shared/host-window.service';
 import { SidebarService } from '../shared/sidebar/sidebar.service';
 import { SearchComponent } from './search.component';
@@ -5,10 +6,10 @@ import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angu
 import { pushInOut } from '../shared/animations/push';
 import { SEARCH_CONFIG_SERVICE } from '../+my-dspace-page/my-dspace-page.component';
 import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
-import { Router } from '@angular/router';
 import { hasValue } from '../shared/empty.util';
 import { RouteService } from '../core/services/route.service';
 import { SearchService } from '../core/shared/search/search.service';
+import { Router } from '@angular/router';
 
 /**
  * This component renders a search page using a configuration as input.
@@ -60,6 +61,9 @@ export class ConfigurationSearchPageComponent extends SearchComponent implements
     super.ngOnInit();
     if (hasValue(this.configuration)) {
       this.routeService.setParameter('configuration', this.configuration);
+    }
+    if (hasValue(this.fixedFilterQuery)) {
+      this.routeService.setParameter('fixedFilterQuery', this.fixedFilterQuery);
     }
   }
 }

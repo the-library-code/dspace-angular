@@ -24,6 +24,7 @@ import { getSucceededRemoteData } from '../../../../../core/shared/operators';
 import { InputSuggestion } from '../../../../input-suggestions/input-suggestions.model';
 import { SearchOptions } from '../../../search-options.model';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../+my-dspace-page/my-dspace-page.component';
+import { currentPath } from '../../../../utils/route.utils';
 
 @Component({
   selector: 'ds-search-facet-filter',
@@ -185,7 +186,7 @@ export class SearchFacetFilterComponent implements OnInit, OnDestroy {
    */
   public getSearchLink(): string {
     if (this.inPlaceSearch) {
-      return '';
+      return currentPath(this.router);
     }
     return this.searchService.getSearchLink();
   }
@@ -319,7 +320,7 @@ export class SearchFacetFilterComponent implements OnInit, OnDestroy {
    * Prevent unnecessary rerendering
    */
   trackUpdate(index, value: FacetValue) {
-    return value ? value.search : undefined;
+    return value ? value._links.search.href : undefined;
   }
 }
 

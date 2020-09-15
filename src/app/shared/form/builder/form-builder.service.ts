@@ -10,10 +10,8 @@ import {
   DynamicFormArrayModel,
   DynamicFormControlModel,
   DynamicFormGroupModel,
-  DynamicFormService,
-  DynamicFormValidationService,
-  DynamicPathable,
-  JSONUtils,
+  DynamicFormService, DynamicFormValidationService,
+  DynamicPathable, parseReviver,
 } from '@ng-dynamic-forms/core';
 import { isObject, isString, mergeWith } from 'lodash';
 
@@ -112,12 +110,12 @@ export class FormBuilderService extends DynamicFormService {
       if (isString(controlValue)) {
         return new FormFieldMetadataValueObject(controlValue, controlLanguage, null, null, controlModelIndex);
       } else if (isObject(controlValue)) {
-        const authority = controlValue.authority || controlValue.id || null;
-        const place = controlModelIndex || controlValue.place;
+        const authority = (controlValue as any).authority || (controlValue as any).id || null;
+        const place = controlModelIndex || (controlValue as any).place;
         if (isNgbDateStruct(controlValue)) {
-          return new FormFieldMetadataValueObject(controlValue, controlLanguage, authority, controlValue, place);
+          return new FormFieldMetadataValueObject(controlValue, controlLanguage, authority, controlValue as any, place);
         } else {
-          return new FormFieldMetadataValueObject(controlValue.value, controlLanguage, authority, controlValue.display, place, controlValue.confidence);
+          return new FormFieldMetadataValueObject((controlValue as any).value, controlLanguage, authority, (controlValue as any).display, place, (controlValue as any).confidence);
         }
       }
     };
@@ -177,13 +175,13 @@ export class FormBuilderService extends DynamicFormService {
                   }
                 }
               });
-          })
+          });
         } else if (isNotUndefined((controlModel as any).value) && isNotEmpty((controlModel as any).value)) {
           const controlArrayValue = [];
           // Normalize control value as an array of FormFieldMetadataValueObject
           const values = Array.isArray((controlModel as any).value) ? (controlModel as any).value : [(controlModel as any).value];
           values.forEach((controlValue) => {
-            controlArrayValue.push(normalizeValue(controlModel, controlValue, controlModelIndex))
+            controlArrayValue.push(normalizeValue(controlModel, controlValue, controlModelIndex));
           });
 
           if (controlId && iterateResult.hasOwnProperty(controlId) && isNotNull(iterateResult[controlId])) {
@@ -205,7 +203,7 @@ export class FormBuilderService extends DynamicFormService {
 
   modelFromConfiguration(submissionId: string, json: string | SubmissionFormsModel, scopeUUID: string, sectionData: any = {}, submissionScope?: string, readOnly = false): DynamicFormControlModel[] | never {
     let rows: DynamicFormControlModel[] = [];
-    const rawData = typeof json === 'string' ? JSON.parse(json, JSONUtils.parseReviver) : json;
+    const rawData = typeof json === 'string' ? JSON.parse(json, parseReviver) : json;
 
     if (rawData.rows && !isEmpty(rawData.rows)) {
       rawData.rows.forEach((currentRow) => {

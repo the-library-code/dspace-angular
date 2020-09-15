@@ -70,7 +70,7 @@ import { SubmissionObjectDataService } from '../../../../core/submission/submiss
 import { Item } from '../../../../core/shared/item.model';
 import { WorkspaceItem } from '../../../../core/submission/models/workspaceitem.model';
 import { of as observableOf } from 'rxjs';
-import { createSuccessfulRemoteDataObject } from '../../../testing/utils';
+import { createSuccessfulRemoteDataObject } from '../../../remote-data.utils';
 
 describe('DsDynamicFormControlContainerComponent test suite', () => {
 
@@ -160,7 +160,7 @@ describe('DsDynamicFormControlContainerComponent test suite', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        NgbModule.forRoot(),
+        NgbModule,
         DynamicFormsCoreModule.forRoot(),
         SharedModule,
         TranslateModule.forRoot(),

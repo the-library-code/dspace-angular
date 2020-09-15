@@ -7,8 +7,9 @@ import { CollectionPageComponent } from './collection-page.component';
 import { CollectionPageRoutingModule } from './collection-page-routing.module';
 import { CreateCollectionPageComponent } from './create-collection-page/create-collection-page.component';
 import { CollectionFormComponent } from './collection-form/collection-form.component';
-import { EditCollectionPageComponent } from './edit-collection-page/edit-collection-page.component';
 import { DeleteCollectionPageComponent } from './delete-collection-page/delete-collection-page.component';
+import { EditItemTemplatePageComponent } from './edit-item-template-page/edit-item-template-page.component';
+import { EditItemPageModule } from '../+item-page/edit-item-page/edit-item-page.module';
 import { CollectionItemMapperComponent } from './collection-item-mapper/collection-item-mapper.component';
 import { SearchService } from '../core/shared/search/search.service';
 import { StatisticsModule } from '../statistics/statistics.module';
@@ -18,15 +19,19 @@ import { StatisticsModule } from '../statistics/statistics.module';
     CommonModule,
     SharedModule,
     CollectionPageRoutingModule,
-    StatisticsModule.forRoot()
+    StatisticsModule.forRoot(),
+    EditItemPageModule
   ],
   declarations: [
     CollectionPageComponent,
     CreateCollectionPageComponent,
-    EditCollectionPageComponent,
     DeleteCollectionPageComponent,
     CollectionFormComponent,
+    EditItemTemplatePageComponent,
     CollectionItemMapperComponent
+  ],
+  exports: [
+    CollectionFormComponent
   ],
   providers: [
     SearchService,

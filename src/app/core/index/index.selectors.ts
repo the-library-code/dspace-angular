@@ -1,9 +1,41 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import { AppState } from '../../app.reducer';
-import { hasValue } from '../../shared/empty.util';
+import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { CoreState } from '../core.reducers';
 import { coreSelector } from '../core.selectors';
+import { URLCombiner } from '../url-combiner/url-combiner';
 import { IndexName, IndexState, MetaIndexState } from './index.reducer';
+import * as parse from 'url-parse';
+
+/**
+ * Return the given url without `embed` params.
+ *
+ * E.g. https://rest.api/resource?size=5&embed=subresource&rpp=3
+ * becomes https://rest.api/resource?size=5&rpp=3
+ *
+ * When you index a request url you don't want to include
+ * embed params because embedded data isn't relevant when
+ * you want to know
+ *
+ * @param url The url to use
+ */
+export const getUrlWithoutEmbedParams = (url: string): string => {
+  if (isNotEmpty(url)) {
+    const parsed = parse(url);
+    if (isNotEmpty(parsed.query)) {
+      const parts = parsed.query.split(/[?|&]/)
+        .filter((part: string) => isNotEmpty(part))
+        .filter((part: string) => !part.startsWith('embed='));
+      let args = '';
+      if (isNotEmpty(parts)) {
+        args = `?${parts.join('&')}`;
+      }
+      url = new URLCombiner(parsed.origin, parsed.pathname, args).toString();
+      return url;
+    }
+  }
+
+  return url;
+};
 
 /**
  * Return the MetaIndexState based on the CoreSate
@@ -11,7 +43,7 @@ import { IndexName, IndexState, MetaIndexState } from './index.reducer';
  * @returns
  *    a MemoizedSelector to select the MetaIndexState
  */
-export const metaIndexSelector: MemoizedSelector<AppState, MetaIndexState> = createSelector(
+export const metaIndexSelector: MemoizedSelector<CoreState, MetaIndexState> = createSelector(
   coreSelector,
   (state: CoreState) => state.index
 );
@@ -23,7 +55,7 @@ export const metaIndexSelector: MemoizedSelector<AppState, MetaIndexState> = cre
  * @returns
  *    a MemoizedSelector to select the object index
  */
-export const objectIndexSelector: MemoizedSelector<AppState, IndexState> = createSelector(
+export const objectIndexSelector: MemoizedSelector<CoreState, IndexState> = createSelector(
   metaIndexSelector,
   (state: MetaIndexState) => state[IndexName.OBJECT]
 );
@@ -34,7 +66,7 @@ export const objectIndexSelector: MemoizedSelector<AppState, IndexState> = creat
  * @returns
  *    a MemoizedSelector to select the request index
  */
-export const requestIndexSelector: MemoizedSelector<AppState, IndexState> = createSelector(
+export const requestIndexSelector: MemoizedSelector<CoreState, IndexState> = createSelector(
   metaIndexSelector,
   (state: MetaIndexState) => state[IndexName.REQUEST]
 );
@@ -45,7 +77,7 @@ export const requestIndexSelector: MemoizedSelector<AppState, IndexState> = crea
  * @returns
  *    a MemoizedSelector to select the request UUID mapping
  */
-export const requestUUIDIndexSelector: MemoizedSelector<AppState, IndexState> = createSelector(
+export const requestUUIDIndexSelector: MemoizedSelector<CoreState, IndexState> = createSelector(
   metaIndexSelector,
   (state: MetaIndexState) => state[IndexName.UUID_MAPPING]
 );
@@ -53,14 +85,13 @@ export const requestUUIDIndexSelector: MemoizedSelector<AppState, IndexState> = 
 /**
  * Return the self link of an object in the object-cache based on its UUID
  *
- * @param id
+ * @param uuid
  *    the UUID for which you want to find the matching self link
- * @param identifierType the type of index, used to select index from state
  * @returns
  *    a MemoizedSelector to select the self link
  */
 export const selfLinkFromUuidSelector =
-  (uuid: string): MemoizedSelector<AppState, string> => createSelector(
+  (uuid: string): MemoizedSelector<CoreState, string> => createSelector(
     objectIndexSelector,
     (state: IndexState) => hasValue(state) ? state[uuid] : undefined
   );
@@ -74,9 +105,9 @@ export const selfLinkFromUuidSelector =
  *    a MemoizedSelector to select the UUID
  */
 export const uuidFromHrefSelector =
-  (href: string): MemoizedSelector<AppState, string> => createSelector(
+  (href: string): MemoizedSelector<CoreState, string> => createSelector(
     requestIndexSelector,
-    (state: IndexState) => hasValue(state) ? state[href] : undefined
+    (state: IndexState) => hasValue(state) ? state[getUrlWithoutEmbedParams(href)] : undefined
   );
 
 /**
@@ -89,7 +120,7 @@ export const uuidFromHrefSelector =
  *    a MemoizedSelector to select the UUID of the cached request
  */
 export const originalRequestUUIDFromRequestUUIDSelector =
-  (uuid: string): MemoizedSelector<AppState, string> => createSelector(
+  (uuid: string): MemoizedSelector<CoreState, string> => createSelector(
     requestUUIDIndexSelector,
     (state: IndexState) => hasValue(state) ? state[uuid] : undefined
   );

@@ -11,12 +11,13 @@ import { hasValue, isNotEmpty } from '../shared/empty.util';
 import { getSucceededRemoteData } from '../core/shared/operators';
 import { RouteService } from '../core/services/route.service';
 import { SEARCH_CONFIG_SERVICE } from '../+my-dspace-page/my-dspace-page.component';
-import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
-import { SearchResult } from '../shared/search/search-result.model';
 import { PaginatedSearchOptions } from '../shared/search/paginated-search-options.model';
+import { SearchResult } from '../shared/search/search-result.model';
+import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
 import { SearchService } from '../core/shared/search/search.service';
 import { currentPath } from '../shared/utils/route.utils';
 import { Router } from '@angular/router';
+import { Context } from '../core/shared/context.model';
 
 @Component({
   selector: 'ds-search',
@@ -83,6 +84,12 @@ export class SearchComponent implements OnInit {
    */
   @Input()
   configuration$: Observable<string>;
+
+  /**
+   * The current context
+   */
+  @Input()
+  context: Context;
 
   /**
    * Link to the search page

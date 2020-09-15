@@ -15,8 +15,9 @@ import { uniqueId } from 'lodash';
 import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 
 import { UploaderOptions } from './uploader-options.model';
-import { isNotEmpty, isUndefined } from '../empty.util';
+import { hasValue, isNotEmpty, isUndefined } from '../empty.util';
 import { UploaderService } from './uploader.service';
+import { UploaderProperties } from './uploader-properties.model';
 
 @Component({
   selector: 'ds-uploader',
@@ -52,6 +53,11 @@ export class UploaderComponent {
    * Configuration for the ng2-file-upload component.
    */
   @Input() uploadFilesOptions: UploaderOptions;
+
+  /**
+   * Extra properties to be passed with the form-data of the upload
+   */
+  @Input() uploadProperties: UploaderProperties;
 
   /**
    * The function to call when upload is completed
@@ -95,7 +101,8 @@ export class UploaderComponent {
       disableMultipart: this.uploadFilesOptions.disableMultipart,
       itemAlias: this.uploadFilesOptions.itemAlias,
       removeAfterUpload: true,
-      autoUpload: true
+      autoUpload: this.uploadFilesOptions.autoUpload,
+      method: this.uploadFilesOptions.method
     });
 
     if (isUndefined(this.enableDragOverDocument)) {
@@ -117,7 +124,10 @@ export class UploaderComponent {
     if (isUndefined(this.onBeforeUpload)) {
       this.onBeforeUpload = () => {return};
     }
-    this.uploader.onBeforeUploadItem = () => {
+    this.uploader.onBeforeUploadItem = (item) => {
+      if (item.url !== this.uploader.options.url) {
+        item.url = this.uploader.options.url;
+      }
       this.onBeforeUpload();
       this.isOverDocumentDropZone = observableOf(false);
 
@@ -127,6 +137,11 @@ export class UploaderComponent {
       };
       this.scrollToService.scrollTo(config);
     };
+    if (hasValue(this.uploadProperties)) {
+      this.uploader.onBuildItemForm = (item, form) => {
+        form.append('properties', JSON.stringify(this.uploadProperties))
+      };
+    }
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       if (isNotEmpty(response)) {
         const responsePath = JSON.parse(response);

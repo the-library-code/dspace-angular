@@ -8,8 +8,8 @@ import { Params, Router } from '@angular/router';
 import { SearchLabelComponent } from './search-label.component';
 import { ObjectKeysPipe } from '../../../utils/object-keys-pipe';
 import { SEARCH_CONFIG_SERVICE } from '../../../../+my-dspace-page/my-dspace-page.component';
-import { SearchServiceStub } from '../../../testing/search-service-stub';
-import { SearchConfigurationServiceStub } from '../../../testing/search-configuration-service-stub';
+import { SearchServiceStub } from '../../../testing/search-service.stub';
+import { SearchConfigurationServiceStub } from '../../../testing/search-configuration-service.stub';
 import { SearchService } from '../../../../core/shared/search/search.service';
 
 describe('SearchLabelComponent', () => {
@@ -40,7 +40,7 @@ describe('SearchLabelComponent', () => {
       providers: [
         { provide: SearchService, useValue: new SearchServiceStub(searchLink) },
         { provide: SEARCH_CONFIG_SERVICE, useValue: new SearchConfigurationServiceStub() },
-        { provide: Router, useValue: {} }
+        { provide: Router, useValue: {}}
         // { provide: SearchConfigurationService, useValue: {getCurrentFrontendFilters : () =>  observableOf({})} }
       ],
       schemas: [NO_ERRORS_SCHEMA]

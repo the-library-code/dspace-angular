@@ -11,10 +11,12 @@ import { VarDirective } from '../../../../../utils/var.directive';
 import { RelationshipOptions } from '../../../models/relationship-options.model';
 import { of as observableOf } from 'rxjs';
 import { PaginatedSearchOptions } from '../../../../../search/paginated-search-options.model';
-import { createSuccessfulRemoteDataObject$ } from '../../../../../testing/utils';
+import { createSuccessfulRemoteDataObject$ } from '../../../../../remote-data.utils';
 import { PaginatedList } from '../../../../../../core/data/paginated-list';
 import { ItemSearchResult } from '../../../../../object-collection/shared/item-search-result.model';
 import { Item } from '../../../../../../core/shared/item.model';
+import { ActivatedRoute } from '@angular/router';
+import { LookupRelationService } from '../../../../../../core/data/lookup-relation.service';
 
 describe('DsDynamicLookupRelationSearchTabComponent', () => {
   let component: DsDynamicLookupRelationSearchTabComponent;
@@ -34,6 +36,7 @@ describe('DsDynamicLookupRelationSearchTabComponent', () => {
 
   let results;
   let selectableListService;
+  let lookupRelationService;
 
   function init() {
     relationship = { filter: 'filter', relationshipType: 'isAuthorOfPublication', nameVariants: true } as RelationshipOptions;
@@ -51,6 +54,10 @@ describe('DsDynamicLookupRelationSearchTabComponent', () => {
 
     results = new PaginatedList(undefined, [searchResult1, searchResult2, searchResult3]);
     selectableListService = jasmine.createSpyObj('selectableListService', ['deselect', 'select', 'deselectAll']);
+    lookupRelationService = jasmine.createSpyObj('lookupRelationService', {
+      getLocalResults: createSuccessfulRemoteDataObject$(results)
+    });
+    lookupRelationService.searchConfig = {};
   }
 
   beforeEach(async(() => {
@@ -75,6 +82,8 @@ describe('DsDynamicLookupRelationSearchTabComponent', () => {
             }
           }
         },
+        { provide: ActivatedRoute, useValue: { snapshot: { queryParams: {} } } },
+        { provide: LookupRelationService, useValue: lookupRelationService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -113,7 +122,7 @@ describe('DsDynamicLookupRelationSearchTabComponent', () => {
     });
 
     it('should emit the page filtered from not yet selected objects and call select on the service for all objects', () => {
-      expect(component.deselectObject.emit).toHaveBeenCalledWith(searchResult1, searchResult2);
+      expect((component.deselectObject as any).emit).toHaveBeenCalledWith(searchResult1, searchResult2);
       expect(selectableListService.deselect).toHaveBeenCalledWith(listID, [searchResult1, searchResult2, searchResult3]);
     });
   });
@@ -137,7 +146,7 @@ describe('DsDynamicLookupRelationSearchTabComponent', () => {
     });
 
     it('should emit the page filtered from not yet selected objects and call select on the service for all objects', () => {
-      expect(component.deselectObject.emit).toHaveBeenCalledWith(searchResult1, searchResult2);
+      expect((component.deselectObject as any).emit).toHaveBeenCalledWith(searchResult1, searchResult2);
       expect(selectableListService.deselectAll).toHaveBeenCalledWith(listID);
     });
   });

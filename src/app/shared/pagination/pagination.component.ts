@@ -100,6 +100,13 @@ export class PaginationComponent implements OnDestroy, OnInit {
   @Input() public hidePagerWhenSinglePage = true;
 
   /**
+   * Option for disabling updating and reading route parameters on pagination changes
+   * In other words, changing pagination won't add or update the url parameters on the current page, and the url
+   * parameters won't affect the pagination of this component
+   */
+  @Input() public disableRouteParameterUpdate = false;
+
+  /**
    * Current page.
    */
   public currentPage;
@@ -143,7 +150,7 @@ export class PaginationComponent implements OnDestroy, OnInit {
   /**
    * A number array that represents options for a context pagination limit.
    */
-  private pageSizeOptions: number[];
+  public pageSizeOptions: number[];
 
   /**
    * Direction in which to sort: ascending or descending
@@ -173,20 +180,35 @@ export class PaginationComponent implements OnDestroy, OnInit {
     this.checkConfig(this.paginationOptions);
     this.initializeConfig();
     // Listen to changes
-    this.subs.push(this.route.queryParams
-      .subscribe((queryParams) => {
-        if (this.isEmptyPaginationParams(queryParams)) {
-          this.initializeConfig(queryParams);
+    if (!this.disableRouteParameterUpdate) {
+      this.subs.push(this.route.queryParams
+        .subscribe((queryParams) => {
+          this.initializeParams(queryParams);
+        }));
+    }
+  }
+
+  /**
+   * Initialize the route and current parameters
+   * This method will fix any invalid or missing parameters
+   * @param params
+   */
+  private initializeParams(params) {
+    if (this.isEmptyPaginationParams(params)) {
+      this.initializeConfig(params);
+    } else {
+      this.currentQueryParams = params;
+      const fixedProperties = this.validateParams(params);
+      if (isNotEmpty(fixedProperties)) {
+        if (!this.disableRouteParameterUpdate) {
+          this.fixRoute(fixedProperties);
         } else {
-          this.currentQueryParams = queryParams;
-          const fixedProperties = this.validateParams(queryParams);
-          if (isNotEmpty(fixedProperties)) {
-            this.fixRoute(fixedProperties);
-          } else {
-            this.setFields();
-          }
+          this.initializeParams(fixedProperties);
         }
-      }));
+      } else {
+        this.setFields();
+      }
+    }
   }
 
   private fixRoute(fixedProperties) {
@@ -225,10 +247,14 @@ export class PaginationComponent implements OnDestroy, OnInit {
   }
 
   /**
+   * @param cdRef
+   *    ChangeDetectorRef is a singleton service provided by Angular.
    * @param route
    *    Route is a singleton service provided by Angular.
    * @param router
    *    Router is a singleton service provided by Angular.
+   * @param hostWindowService
+   *    the HostWindowService singleton.
    */
   constructor(private cdRef: ChangeDetectorRef,
               private route: ActivatedRoute,
@@ -243,7 +269,7 @@ export class PaginationComponent implements OnDestroy, OnInit {
    *    The page being navigated to.
    */
   public doPageChange(page: number) {
-    this.updateRoute({ page: page.toString() });
+    this.updateParams(Object.assign({}, this.currentQueryParams, { pageId: this.id, page: page.toString() }));
   }
 
   /**
@@ -253,7 +279,7 @@ export class PaginationComponent implements OnDestroy, OnInit {
    *    The page size being navigated to.
    */
   public doPageSizeChange(pageSize: number) {
-    this.updateRoute({ page: 1, pageSize: pageSize });
+    this.updateParams(Object.assign({}, this.currentQueryParams,{ pageId: this.id, page: 1, pageSize: pageSize }));
   }
 
   /**
@@ -263,7 +289,7 @@ export class PaginationComponent implements OnDestroy, OnInit {
    *    The sort direction being navigated to.
    */
   public doSortDirectionChange(sortDirection: SortDirection) {
-    this.updateRoute({ page: 1, sortDirection: sortDirection });
+    this.updateParams(Object.assign({}, this.currentQueryParams,{ pageId: this.id, page: 1, sortDirection: sortDirection }));
   }
 
   /**
@@ -273,7 +299,7 @@ export class PaginationComponent implements OnDestroy, OnInit {
    *    The sort field being navigated to.
    */
   public doSortFieldChange(field: string) {
-    this.updateRoute({ page: 1, sortField: field });
+    this.updateParams(Object.assign(this.currentQueryParams,{ pageId: this.id, page: 1, sortField: field }));
   }
 
   /**
@@ -341,6 +367,20 @@ export class PaginationComponent implements OnDestroy, OnInit {
           new SortOptions(this.sortField, this.sortDirection)
         )
       })
+  }
+
+  /**
+   * Update the current query params and optionally update the route
+   * @param params
+   */
+  private updateParams(params: {}) {
+    if (isNotEmpty(difference(params, this.currentQueryParams))) {
+      if (!this.disableRouteParameterUpdate) {
+        this.updateRoute(params);
+      } else {
+        this.initializeParams(params);
+      }
+    }
   }
 
   /**
@@ -413,27 +453,30 @@ export class PaginationComponent implements OnDestroy, OnInit {
    * Method to update all pagination variables to the current query parameters
    */
   private setFields() {
-    // (+) converts string to a number
-    const page = this.currentQueryParams.page;
-    if (this.currentPage !== +page) {
-      this.setPage(+page);
-    }
+    // set fields only when page id is the one configured for this pagination instance
+    if (this.currentQueryParams.pageId === this.id) {
+      // (+) converts string to a number
+      const page = this.currentQueryParams.page;
+      if (this.currentPage !== +page) {
+        this.setPage(+page);
+      }
 
-    const pageSize = this.currentQueryParams.pageSize;
-    if (this.pageSize !== +pageSize) {
-      this.setPageSize(+pageSize);
-    }
+      const pageSize = this.currentQueryParams.pageSize;
+      if (this.pageSize !== +pageSize) {
+        this.setPageSize(+pageSize);
+      }
 
-    const sortDirection = this.currentQueryParams.sortDirection;
-    if (this.sortDirection !== sortDirection) {
-      this.setSortDirection(sortDirection);
-    }
+      const sortDirection = this.currentQueryParams.sortDirection;
+      if (this.sortDirection !== sortDirection) {
+        this.setSortDirection(sortDirection);
+      }
 
-    const sortField = this.currentQueryParams.sortField;
-    if (this.sortField !== sortField) {
-      this.setSortField(sortField);
+      const sortField = this.currentQueryParams.sortField;
+      if (this.sortField !== sortField) {
+        this.setSortField(sortField);
+      }
+      this.cdRef.detectChanges();
     }
-    this.cdRef.detectChanges();
   }
 
   /**

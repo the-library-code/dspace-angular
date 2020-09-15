@@ -18,10 +18,8 @@ import { DSpaceTransferState } from '../transfer-state/dspace-transfer-state.ser
 import { ClientCookieService } from '../../app/core/services/client-cookie.service';
 import { CookieService } from '../../app/core/services/cookie.service';
 import { AuthService } from '../../app/core/auth/auth.service';
-import { Angulartics2Module } from 'angulartics2';
-import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { SubmissionService } from '../../app/submission/submission.service';
-import { Angulartics2DSpace } from '../../app/statistics/angulartics/dspace-provider';
 import { StatisticsModule } from '../../app/statistics/statistics.module';
 
 export const REQ_KEY = makeStateKey<string>('req');
@@ -31,7 +29,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 export function getRequest(transferState: TransferState): any {
-  return transferState.get<any>(REQ_KEY, {})
+  return transferState.get<any>(REQ_KEY, {});
 }
 
 @NgModule({
@@ -46,11 +44,12 @@ export function getRequest(transferState: TransferState): any {
     RouterModule.forRoot([], {
       // enableTracing: true,
       useHash: false,
+      scrollPositionRestoration: 'enabled',
       preloadingStrategy:
       IdlePreload
     }),
     StatisticsModule.forRoot(),
-    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics, Angulartics2DSpace]),
+    Angulartics2RouterlessModule.forRoot(),
     BrowserAnimationsModule,
     DSpaceBrowserTransferStateModule,
     TranslateModule.forRoot({

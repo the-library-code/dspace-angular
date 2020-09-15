@@ -2,6 +2,11 @@
   "extends": [
     "tslint:recommended"
   ],
+  "linterOptions": {
+    "exclude": [
+      "src/environments/environment.ts"
+    ]
+  },
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
@@ -40,7 +45,7 @@
     ],
     "no-access-missing-member": false,
     "no-arg": true,
-    "no-attribute-parameter-decorator": true,
+    "no-attribute-decorator": true,
     "no-bitwise": true,
     "no-console": [
       true,
@@ -81,9 +86,8 @@
       false
     ],
     "prefer-const": true,
-    "pipe-naming": [
+    "pipe-prefix": [
       true,
-      "camelCase",
       "ds"
     ],
     "quotemark": [
@@ -114,6 +118,13 @@
         "parameter": "nospace",
         "property-declaration": "nospace",
         "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "onespace",
+        "index-signature": "onespace",
+        "parameter": "onespace",
+        "property-declaration": "onespace",
+        "variable-declaration": "onespace"
       }
     ],
     "unified-signatures": true,
@@ -129,7 +140,6 @@
       "check-branch",
       "check-operator"
     ],
-
     "component-class-suffix": true,
     "component-selector": [
       true,
@@ -147,14 +157,14 @@
     "no-input-rename": true,
     "no-output-rename": true,
     "templates-use-public": false,
-    "use-host-property-decorator": true,
-    "use-input-property-decorator": true,
+    "no-host-metadata-property": true,
+    "no-inputs-metadata-property": true,
     "use-life-cycle-interface": false,
-    "use-output-property-decorator": true,
+    "no-outputs-metadata-property": true,
     "use-pipe-transform-interface": true
-//    "rxjs-collapse-imports": true,
-//    "rxjs-pipeable-operators-only": true,
-//    "rxjs-no-static-observable-methods": true,
-//    "rxjs-proper-imports": true
+    //    "rxjs-collapse-imports": true,
+    //    "rxjs-pipeable-operators-only": true,
+    //    "rxjs-no-static-observable-methods": true,
+    //    "rxjs-proper-imports": true
   }
 }
