@@ -1,0 +1,17 @@
+// temporary fix for bootstrap 4 beta btn color issue
+.btn-secondary {
+  background-color: var(--bs-input-bg);
+  color: var(--bs-input-color);
+}
+
+.btn-login {
+  color: #212529;
+  background-color: #ffe600;
+  border-color: #ffe600;
+}
+
+.btn-login:hover {
+  color: #212529;
+  background-color: #{darken(#ffe600, 15%)};
+  border-color: #{darken(#ffe600, 15%)};
+}

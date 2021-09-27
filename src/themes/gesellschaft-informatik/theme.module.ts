@@ -80,8 +80,10 @@ import { FooterComponent } from './app/footer/footer.component';
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
 import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
 import { AuthNavMenuComponent} from './app/shared/auth-nav-menu/auth-nav-menu.component';
+import { SearchFormComponent} from './app/shared/search-form/search-form.component';
 
 const DECLARATIONS = [
+  SearchFormComponent,
   AuthNavMenuComponent,
   HomePageComponent,
   HomeNewsComponent,
