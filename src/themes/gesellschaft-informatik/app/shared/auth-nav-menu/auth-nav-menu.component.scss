@@ -1,0 +1,33 @@
+.loginDropdownMenu, .logoutDropdownMenu {
+  min-width: 330px;
+  z-index: 1002;
+}
+
+.loginDropdownMenu {
+  min-height: 260px;
+}
+
+.dropdown-item.active, .dropdown-item:active,
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: transparent !important;
+}
+
+.dropdown-toggle {
+  color: var(--ds-header-icon-color) !important;
+
+  &:hover, &focus {
+    color: var(--ds-header-icon-color-hover);
+  }
+}
+
+.btn-login {
+  color: #212529;
+  background-color: #ffe600;
+  border-color: #ffe600;
+}
+
+.btn-login:hover {
+  color: #212529;
+  background-color: #{darken(#ffe600, 15%)};
+  border-color: #{darken(#ffe600, 15%)};
+}
