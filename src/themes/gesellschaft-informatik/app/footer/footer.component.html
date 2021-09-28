@@ -1,0 +1,147 @@
+<footer class="text-lg-start">
+    <div *ngIf="showTopFooter" class="top-footer">
+        <!-- Grid container -->
+        <div class=" container p-4">
+            <!--Grid row-->
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <h5>GI Zeitschriften</h5>
+
+                    <ul class="list-unstyled mb-0 two-col">
+                        <li>
+                            <a routerLink="./" class="">BISE</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Datenbank Spektrum</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">i-com</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Informatik Spektrum</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">it - Information Technology</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Journal of Integrative</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Bioinformatics</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Künstliche Intelligenz</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">LOGIN</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Wirtschftsinformatik & Management</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <h5>Lectures Notes in Informatics</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a routerLink="./" class="">Dissertations</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Proceedings</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Seminars</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Thematics</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                    <h5>Über uns</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a routerLink="./" class="">Was ist die Digitale Bibliothek?</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Häufige Fragen & Hilfe</a>
+                        </li>
+                        <li>
+                            <a routerLink="./" class="">Fehler melden</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="container p-2 text-white">
+        <div class="row bottom-footer">
+            <div class="col-md-auto">
+                <a class="navbar-brand my-2" routerLink="/home">
+                    <img src="assets/gesellschaft-informatik/images/GI_White_Links.png" [attr.alt]="'menu.header.image.logo' | translate" height="50"/>
+                </a>
+            </div>
+            <div class="col-md-auto">
+                <a class="text-white" href="#"
+                   (click)="showCookieSettings()" style="margin: auto;">{{ 'footer.link.cookies' | translate}}</a>
+            </div>
+            <div class="col-md-auto">
+                <a class="text-white"
+                   routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate}}</a>
+            </div>
+            <div class="col-md-auto">
+                <a class="text-white"
+                   routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate}}</a>
+            </div>
+            <div class="col-md-auto ml-auto">
+                &copy;&nbsp; <a class="text-white"
+                          href="https://gi.de/">Gesellschaft für Informatik e.V.</a>
+            </div>
+
+
+
+<!--            <div class="col-md-12">
+                <ul>
+                    <li>
+                        <a class="navbar-brand my-2" routerLink="/home">
+                            <img src="assets/gesellschaft-informatik/images/GI_White_Links.png" [attr.alt]="'menu.header.image.logo' | translate" height="50"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-white" href="#"
+                           (click)="showCookieSettings()">{{ 'footer.link.cookies' | translate}}</a>
+                    </li>
+                    <li>
+                        <a class="text-white"
+                           routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate}}</a>
+                    </li>
+                    <li>
+                        <a class="text-white"
+                           routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate}}</a>
+                    </li>
+                    <li>
+                        &copy; <a class="text-white"
+                                  href="https://gi.de/">Gesellschaft für Informatik e.V.</a>
+                    </li>
+                </ul>
+            </div>-->
+
+        </div>
+    </div>
+    <!-- Copyright -->
+</footer>
