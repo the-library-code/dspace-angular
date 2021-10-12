@@ -8,7 +8,7 @@ import { VersionedItemComponent } from '../versioned-item/versioned-item.compone
  * Component that represents a publication Item page
  */
 
-@listableObjectComponent(Item, ViewMode.StandalonePage)
+// @listableObjectComponent(Item, ViewMode.StandalonePage)
 @Component({
   selector: 'ds-untyped-item',
   styleUrls: ['./untyped-item.component.scss'],
