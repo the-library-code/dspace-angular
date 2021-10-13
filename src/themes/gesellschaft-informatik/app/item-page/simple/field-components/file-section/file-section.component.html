@@ -1,0 +1,27 @@
+<ng-container *ngVar="(bitstreams$ | async) as bitstreams">
+  <div class="file-box">
+    <ds-metadata-field-wrapper *ngIf="bitstreams?.length > 0" [label]="label | translate">
+      <div class="file-section">
+        <div *ngFor="let file of bitstreams; let last=last;" class="box-entry">
+          <b>Datei:</b>&nbsp;<span>{{file?.name}}</span>&nbsp;&nbsp;&nbsp;
+          <b>Größe:</b>&nbsp;<span>{{(file?.sizeBytes) | dsFileSize }}</span>
+          <ds-file-download-link [bitstream]="file" class="link">
+            <button class="button">Herunterladen</button>
+          </ds-file-download-link>
+        </div>
+        <!--<ds-file-download-link *ngFor="let file of bitstreams; let last=last;" [bitstream]="file">
+          <span>{{file?.name}}</span>
+          <span>({{(file?.sizeBytes) | dsFileSize }})</span>
+          <span *ngIf="!last" innerHTML="{{separator}}"></span>
+        </ds-file-download-link>-->
+        <ds-loading *ngIf="isLoading" message="{{'loading.default' | translate}}" [showMessage]="false"></ds-loading>
+        <div *ngIf="!isLastPage" class="mt-1" id="view-more">
+          <a class="bitstream-view-more btn btn-outline-secondary btn-sm" [routerLink]="" (click)="getNextPage()">{{'item.page.bitstreams.view-more' | translate}}</a>
+        </div>
+        <div *ngIf="isLastPage && currentPage != 1" class="mt-1" id="collapse">
+          <a class="bitstream-collapse btn btn-outline-secondary btn-sm" [routerLink]="" (click)="currentPage = undefined; getNextPage();">{{'item.page.bitstreams.collapse' | translate}}</a>
+        </div>
+      </div>
+    </ds-metadata-field-wrapper>
+  </div>
+</ng-container>
