@@ -14,7 +14,8 @@ import {EPerson} from '../../../../../app/core/eperson/models/eperson.model';
 import {AuthService, LOGIN_ROUTE, LOGOUT_ROUTE} from '../../../../../app/core/auth/auth.service';
 import {listableObjectComponent} from '../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import {ViewMode} from '../../../../../app/core/shared/view-mode.model';
-import { Context } from 'src/app/core/shared/context.model';
+import {Context} from '../../../../../app/core/shared/context.model';
+
 
 @Component({
   selector: 'ds-auth-nav-menu-ges-info',
