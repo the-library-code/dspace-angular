@@ -4,7 +4,7 @@
   </ds-loading>
   <ng-template #showThumbnail>
     <img *ngIf="src !== null" class="thumbnail-content img-fluid"
-         [src]="src | dsSafeUrl" [alt]="alt | translate" (error)="errorHandler()">
+         [src]="src | dsSafeUrl" [alt]="alt | translate" (error)="errorHandler()" class="w-100 h-100">
     <div *ngIf="src === null" class="thumbnail-content outer">
       <div class="inner">
         <div class="thumbnail-placeholder w-100 h-100 p-3 lead">{{ placeholder | translate }}</div>

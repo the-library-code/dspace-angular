@@ -1,1 +1,10 @@
 @import '../../../../../../../styles/variables.scss';
+
+div > a {
+  color: #30c1ff;
+  border-color: #30c1ff;
+}
+
+div > a:hover {
+  background-color: $secondary;
+}
