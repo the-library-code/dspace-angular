@@ -83,8 +83,10 @@ import { AuthNavMenuComponent} from './app/shared/auth-nav-menu/auth-nav-menu.co
 import { SearchFormComponent} from './app/shared/search-form/search-form.component';
 import { UntypedItemComponent} from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
 import { FileSectionComponent} from './app/item-page/simple/field-components/file-section/file-section.component';
+import { MetadataRepresentationListComponent} from './app/item-page/simple/metadata-representation-list/metadata-representation-list.component';
 
 const DECLARATIONS = [
+  MetadataRepresentationListComponent,
   FileSectionComponent,
   UntypedItemComponent,
   SearchFormComponent,
