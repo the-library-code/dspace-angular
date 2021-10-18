@@ -84,8 +84,10 @@ import { SearchModule } from '../../app/shared/search/search.module';
 import { ResourcePoliciesModule } from '../../app/shared/resource-policies/resource-policies.module';
 import { ComcolModule } from '../../app/shared/comcol/comcol.module';
 import { FeedbackComponent } from './app/info/feedback/feedback.component';
+import { MetadataRepresentationListComponent } from './app/item-page/simple/metadata-representation-list/metadata-representation-list.component';
 
 const DECLARATIONS = [
+  MetadataRepresentationListComponent,
   FileSectionComponent,
   HomePageComponent,
   HomeNewsComponent,

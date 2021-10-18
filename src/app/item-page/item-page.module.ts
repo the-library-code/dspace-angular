@@ -34,6 +34,7 @@ import { MiradorViewerComponent } from './mirador-viewer/mirador-viewer.componen
 import { VersionPageComponent } from './version-page/version-page/version-page.component';
 import { VersionedItemComponent } from './simple/item-types/versioned-item/versioned-item.component';
 import { ThemedFileSectionComponent } from './simple/field-components/file-section/themed-file-section.component';
+import { ThemedMetadataRepresentationListComponent } from './simple/metadata-representation-list/themed-metadata-representation-list.component';
 
 
 const ENTRY_COMPONENTS = [
@@ -43,6 +44,7 @@ const ENTRY_COMPONENTS = [
 ];
 
 const DECLARATIONS = [
+  ThemedMetadataRepresentationListComponent,
   ThemedFileSectionComponent,
   ItemPageComponent,
   ThemedItemPageComponent,
