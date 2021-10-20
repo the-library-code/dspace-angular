@@ -177,6 +177,18 @@ import { ScopeSelectorModalComponent } from './search-form/scope-selector-modal/
 import { BitstreamRequestACopyPageComponent } from './bitstream-request-a-copy-page/bitstream-request-a-copy-page.component';
 import { DsSelectComponent } from './ds-select/ds-select.component';
 import { LogInOidcComponent } from './log-in/methods/oidc/log-in-oidc.component';
+import { ObjectListMainpageComponent } from './object-list/object-list-mainpage/object-list-mainpage.component';
+import { ObjectCollectionMainpageComponent } from './object-collection/object-collection-mainpage/object-collection-mainpage.component';
+
+/**
+ * Declaration needed to make sure all decorator functions are called in time
+ */
+export const MODELS = [
+  SearchObjects,
+  FacetConfigResponse,
+  FacetValues,
+  SearchResult
+];
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -225,6 +237,8 @@ const PIPES = [
 
 const COMPONENTS = [
   // put shared components here
+  ObjectCollectionMainpageComponent,
+  ObjectListMainpageComponent,
   AlertComponent,
   AuthNavMenuComponent,
   UserMenuComponent,

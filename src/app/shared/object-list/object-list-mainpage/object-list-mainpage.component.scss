@@ -1,0 +1,25 @@
+.col-md-3 {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.col-md-3 .item {
+  background-color: var(--ds-top-footer-bg);
+  height: 10rem;
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+}
+
+.col-md-3 .item:hover {
+    box-shadow:
+            1px 1px $primary,
+            2px 2px $primary,
+            3px 3px $primary,
+            4px 4px $primary,
+            5px 5px $primary,
+            6px 6px $primary,
+            7px 7px $primary;
+    -webkit-transform: translateX(-7px);
+    transform: translateX(-7px);
+  transition: all 500ms ease;
+}

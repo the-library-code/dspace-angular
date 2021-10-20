@@ -11,7 +11,30 @@
         (sortDirectionChange)="onSortDirectionChange($event)"
         (sortFieldChange)="onSortFieldChange($event)"
         (paginationChange)="onPaginationChange($event)">
-    <ul *ngIf="objects?.hasSucceeded" class="list-unstyled" [ngClass]="{'ml-4': selectable}">
+
+    <div class="container-fluid^">
+        <div *ngIf="objects?.hasSucceeded" class="list-unstyled row" [ngClass]="{'ml-4': selectable}">
+            <div *ngFor="let object of objects?.payload?.page; let i = index; let last = last" class="col-md-3" [class.border-bottom]="hasBorder && !last">
+                <div class="item">
+                    <ds-selectable-list-item-control *ngIf="selectable" [index]="i"
+                                                     [object]="object"
+                                                     [selectionConfig]="selectionConfig"
+                                                     (deselectObject)="deselectObject.emit($event)"
+                                                     (selectObject)="selectObject.emit($event)"></ds-selectable-list-item-control>
+                    <ds-importable-list-item-control *ngIf="importable" [object]="object"
+                                                     [importConfig]="importConfig"
+                                                     (importObject)="importObject.emit($event)"></ds-importable-list-item-control>
+                    <ds-listable-object-component-loader [object]="object" [viewMode]="viewMode" [index]="i" [context]="context" [linkType]="linkType"
+                                                         [listID]="selectionConfig?.listId"
+                                                         (contentChange)="contentChange.emit()"
+                    ></ds-listable-object-component-loader>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!--    <ul *ngIf="objects?.hasSucceeded" class="list-unstyled" [ngClass]="{'ml-4': selectable}">
         <li *ngFor="let object of objects?.payload?.page; let i = index; let last = last" class="d-flex" [class.border-bottom]="hasBorder && !last">
           <ds-selectable-list-item-control *ngIf="selectable" [index]="i"
                                            [object]="object"
@@ -26,5 +49,5 @@
                                                (contentChange)="contentChange.emit()"
           ></ds-listable-object-component-loader>
         </li>
-    </ul>
+    </ul>-->
 </ds-pagination>
