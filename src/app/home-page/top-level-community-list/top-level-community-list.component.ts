@@ -54,7 +54,7 @@ export class TopLevelCommunityListComponent implements OnInit, OnDestroy {
               private paginationService: PaginationService) {
     this.config = new PaginationComponentOptions();
     this.config.id = this.pageId;
-    this.config.pageSize = 5;
+    this.config.pageSize = 14;
     this.config.currentPage = 1;
     this.sortConfig = new SortOptions('dc.title', SortDirection.ASC);
   }
