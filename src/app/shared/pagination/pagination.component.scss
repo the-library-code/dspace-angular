@@ -6,3 +6,13 @@
         padding-left: 20px;
     }
 }
+
+:host ::ng-deep ngb-pagination a {
+    color: #30C1FF;
+    border: 1px solid transparent !important;
+}
+
+:host ::ng-deep ngb-pagination li.active a {
+    background-color: transparent !important;
+    color: black !important;
+}
