@@ -7,6 +7,10 @@
     }
 }
 
+.pagination-masked {
+    margin-bottom: 2rem;
+}
+
 :host ::ng-deep ngb-pagination a {
     color: #30C1FF;
     border: 1px solid transparent !important;
