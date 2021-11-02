@@ -179,6 +179,7 @@ import { DsSelectComponent } from './ds-select/ds-select.component';
 import { LogInOidcComponent } from './log-in/methods/oidc/log-in-oidc.component';
 import { ObjectListMainpageComponent } from './object-list/object-list-mainpage/object-list-mainpage.component';
 import { ObjectCollectionMainpageComponent } from './object-collection/object-collection-mainpage/object-collection-mainpage.component';
+import { ThemedComcolPageBrowseByComponent } from './comcol-page-browse-by/themed-comcol-page-browse-by.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -237,6 +238,7 @@ const PIPES = [
 
 const COMPONENTS = [
   // put shared components here
+  ThemedComcolPageBrowseByComponent,
   ObjectCollectionMainpageComponent,
   ObjectListMainpageComponent,
   AlertComponent,

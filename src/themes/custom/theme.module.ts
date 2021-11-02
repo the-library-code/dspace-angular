@@ -85,8 +85,10 @@ import { ResourcePoliciesModule } from '../../app/shared/resource-policies/resou
 import { ComcolModule } from '../../app/shared/comcol/comcol.module';
 import { FeedbackComponent } from './app/info/feedback/feedback.component';
 import { MetadataRepresentationListComponent } from './app/item-page/simple/metadata-representation-list/metadata-representation-list.component';
+import { ComcolPageBrowseByComponent } from './app/shared/comcol-page-browse-by/comcol-page-browse-by.component';
 
 const DECLARATIONS = [
+  ComcolPageBrowseByComponent,
   MetadataRepresentationListComponent,
   FileSectionComponent,
   HomePageComponent,
