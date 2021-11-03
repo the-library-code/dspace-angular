@@ -1,0 +1,24 @@
+.comcol-browse-panel {
+  display: flex;
+  justify-content: start;
+  margin-bottom: 1rem;
+}
+
+.comcol-browse-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  border: transparent;
+  color: #30C1FF;
+}
+
+.list-group-item:first-child, .list-group-item:last-child {
+  border-radius: 0;
+}
+
+.line {
+  color: grey;
+}

@@ -84,8 +84,10 @@ import { SearchFormComponent} from './app/shared/search-form/search-form.compone
 import { UntypedItemComponent} from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
 import { FileSectionComponent} from './app/item-page/simple/field-components/file-section/file-section.component';
 import { MetadataRepresentationListComponent} from './app/item-page/simple/metadata-representation-list/metadata-representation-list.component';
+import { ComcolPageBrowseByComponent} from './app/shared/comcol-page-browse-by/comcol-page-browse-by.component';
 
 const DECLARATIONS = [
+  ComcolPageBrowseByComponent,
   MetadataRepresentationListComponent,
   FileSectionComponent,
   UntypedItemComponent,
