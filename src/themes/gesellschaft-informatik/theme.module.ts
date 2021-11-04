@@ -85,8 +85,10 @@ import { UntypedItemComponent} from './app/item-page/simple/item-types/untyped-i
 import { FileSectionComponent} from './app/item-page/simple/field-components/file-section/file-section.component';
 import { MetadataRepresentationListComponent} from './app/item-page/simple/metadata-representation-list/metadata-representation-list.component';
 import { ComcolPageBrowseByComponent} from './app/shared/comcol-page-browse-by/comcol-page-browse-by.component';
+import { ItemSearchResultListElementComponent} from './app/shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
 
 const DECLARATIONS = [
+  ItemSearchResultListElementComponent,
   ComcolPageBrowseByComponent,
   MetadataRepresentationListComponent,
   FileSectionComponent,
