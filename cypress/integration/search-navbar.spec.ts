@@ -24,7 +24,7 @@ describe('Search from Navigation Bar', () => {
         // New URL should include query param
         cy.url().should('include', 'query=' + query);
         // At least one search result should be displayed
-        cy.get('ds-item-search-result-list-element').should('be.visible');
+        cy.get('ds-themed-item-search-result-list-element').should('be.visible');
     });
 
     it('should go to search page with correct query if submitted (from search)', () => {
@@ -34,7 +34,7 @@ describe('Search from Navigation Bar', () => {
         // New URL should include query param
         cy.url().should('include', 'query=' + query);
         // At least one search result should be displayed
-        cy.get('ds-item-search-result-list-element').should('be.visible');
+        cy.get('ds-themed-item-search-result-list-element').should('be.visible');
     });
 
     it('should allow user to also submit query by clicking icon', () => {
@@ -44,6 +44,6 @@ describe('Search from Navigation Bar', () => {
         // New URL should include query param
         cy.url().should('include', 'query=' + query);
         // At least one search result should be displayed
-        cy.get('ds-item-search-result-list-element').should('be.visible');
+        cy.get('ds-themed-item-search-result-list-element').should('be.visible');
     });
 });

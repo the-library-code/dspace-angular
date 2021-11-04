@@ -75,7 +75,7 @@ describe('ItemListElementComponent', () => {
     });
 
     it(`should contain a PublicationListElementComponent`, () => {
-      const publicationListElement = fixture.debugElement.query(By.css(`ds-item-search-result-list-element`));
+      const publicationListElement = fixture.debugElement.query(By.css(`ds-themed-item-search-result-list-element`));
       expect(publicationListElement).not.toBeNull();
     });
   });
