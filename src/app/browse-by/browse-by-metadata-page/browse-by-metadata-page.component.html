@@ -1,25 +1,61 @@
 <div class="container">
     <ng-container *ngVar="(parent$ | async) as parent">
     <ng-container *ngIf="parent?.payload as parentContext">
-    <header class="comcol-header border-bottom mb-4 pb-4">
-        <!-- Parent Name -->
+
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <!-- Community logo -->
+<!--            <ds-comcol-page-logo *ngIf="logoRD$" [logo]="(logoRD$ | async)?.payload" [alternateText]="'Community Logo'">
+            </ds-comcol-page-logo>-->
+        </div>
+
+        <div class="col-xs-12 col-md-9">
+            <div class="d-flex flex-row mb-4 pb-4">
+                <header class="comcol-header mr-auto">
+                    <!-- Parent Name -->
+                    <ds-comcol-page-header [name]="parentContext.name">
+                    </ds-comcol-page-header>
+                    <!-- Handle -->
+                    <ds-comcol-page-handle
+                            [content]="parentContext.handle"
+                            [title]="parentContext.type+'.page.handle'" >
+                    </ds-comcol-page-handle>
+                    <!-- Introductory text -->
+                    <ds-comcol-page-content [content]="parentContext.introductoryText" [hasInnerHtml]="true">
+                    </ds-comcol-page-content>
+                    <!-- News -->
+                    <!--<ds-comcol-page-content [content]="communityPayload.sidebarText" [hasInnerHtml]="true"
+                                            [title]="'community.page.news'">
+                    </ds-comcol-page-content>-->
+                </header>
+            </div>
+        </div>
+    </div>
+    <!-- Browse-By Links -->
+    <ds-themed-comcol-page-browse-by [id]="parentContext.id" [contentType]="parentContext.type"></ds-themed-comcol-page-browse-by>
+    </ng-container></ng-container>
+
+
+
+<!--    <header class="comcol-header border-bottom mb-4 pb-4">
+        &lt;!&ndash; Parent Name &ndash;&gt;
         <ds-comcol-page-header [name]="parentContext.name">
         </ds-comcol-page-header>
-        <!-- Handle -->
+        &lt;!&ndash; Handle &ndash;&gt;
         <ds-comcol-page-handle
             [content]="parentContext.handle"
             [title]="parentContext.type+'.page.handle'" >
         </ds-comcol-page-handle>
-        <!-- Introductory text -->
+        &lt;!&ndash; Introductory text &ndash;&gt;
         <ds-comcol-page-content [content]="parentContext.introductoryText" [hasInnerHtml]="true">
         </ds-comcol-page-content>
-        <!-- News -->
+        &lt;!&ndash; News &ndash;&gt;
         <ds-comcol-page-content [content]="parentContext.sidebarText" [hasInnerHtml]="true" [title]="'community.page.news'">
         </ds-comcol-page-content>
       </header>
-      <!-- Browse-By Links -->
+      &lt;!&ndash; Browse-By Links &ndash;&gt;
       <ds-themed-comcol-page-browse-by [id]="parentContext.id" [contentType]="parentContext.type"></ds-themed-comcol-page-browse-by>
-      </ng-container></ng-container>
+      </ng-container></ng-container>-->
 
     <section class="comcol-page-browse-section">
     <div class="browse-by-metadata w-100">
