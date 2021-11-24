@@ -41,3 +41,25 @@ nav.navbar {
     color: var(--ds-navbar-link-color-hover);
   }
 }
+
+.navbar-nav {
+  ::ng-deep .dropdown-menu {
+    background-color: #ffe600;
+    border-color: #ffe600;
+    position: fixed;
+    opacity: 1;
+    z-index: 1000;
+    overflow: auto;
+    top: 4.75rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: none 0s ease 0s;
+  }
+
+  @media screen and (min-width: map-get($grid-breakpoints, md)) and (max-width: map-get($grid-breakpoints, lg)) {
+    ::ng-deep .dropdown-menu {
+      top: 3.75rem;
+    }
+  }
+}

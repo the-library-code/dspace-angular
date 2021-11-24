@@ -81,7 +81,9 @@ export class MenuSectionComponent implements OnInit, OnDestroy {
    * @param {Event} event The user event that triggered this method
    */
   deactivateSection(event: Event) {
-    event.preventDefault();
+    if (event != null) {
+      event.preventDefault();
+    }
     this.menuService.deactivateSection(this.menuID, this.section.id);
   }
 

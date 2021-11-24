@@ -3,7 +3,6 @@
    [attr.aria-disabled]="!hasLink"
    [title]="item.text | translate"
    [routerLink]="getRouterLink()"
-   (click)="$event.stopPropagation()"
    (keyup.space)="navigate($event)"
    (keyup.enter)="navigate($event)"
    href="javascript:void(0);"

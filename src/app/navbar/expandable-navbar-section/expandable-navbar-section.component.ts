@@ -34,6 +34,7 @@ export class ExpandableNavbarSectionComponent extends NavbarSectionComponent imp
 
   ngOnInit() {
     super.ngOnInit();
+    this.deactivateSection(event);
   }
 
   /**
@@ -45,9 +46,11 @@ export class ExpandableNavbarSectionComponent extends NavbarSectionComponent imp
     this.windowService.isXsOrSm().pipe(
       first()
     ).subscribe((isMobile) => {
-      if (!isMobile) {
+/*      if (!isMobile) {
         super.activateSection(event);
-      }
+      }*/
+      (document.querySelector('body') as HTMLElement).style.overflowY = 'hidden';
+      super.activateSection(event);
     });
   }
 
@@ -60,9 +63,11 @@ export class ExpandableNavbarSectionComponent extends NavbarSectionComponent imp
     this.windowService.isXsOrSm().pipe(
       first()
     ).subscribe((isMobile) => {
-      if (!isMobile) {
+/*      if (!isMobile) {
         super.deactivateSection(event);
-      }
+      }*/
+      (document.querySelector('body') as HTMLElement).style.overflowY = 'visible';
+      super.deactivateSection(event);
     });
   }
 
@@ -76,8 +81,17 @@ export class ExpandableNavbarSectionComponent extends NavbarSectionComponent imp
     this.windowService.isXsOrSm().pipe(
       first()
     ).subscribe((isMobile) => {
-      if (isMobile) {
+/*      if (isMobile) {
         super.toggleSection(event);
+      }*/
+      super.toggleSection(event);
+      let boolAcitve = false;
+      // tslint:disable-next-line:no-shadowed-variable
+      this.active.subscribe(event => boolAcitve = event);
+      if (boolAcitve) {
+        (document.querySelector('body') as HTMLElement).style.overflowY = 'hidden';
+      } else {
+        (document.querySelector('body') as HTMLElement).style.overflowY = 'visible';
       }
     });
   }
