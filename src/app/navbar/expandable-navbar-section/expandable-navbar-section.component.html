@@ -3,7 +3,6 @@
     (keyup.enter)="isActive ? deactivateSection($event) : activateSection($event)"
     (keyup.space)="isActive ? deactivateSection($event) : activateSection($event)"
     (keydown.space)="$event.preventDefault()"
-    (click)="deactivateSection($event)"
 >
     <a href="javascript:void(0);" class="nav-link dropdown-toggle" routerLinkActive="active"
        id="browseDropdown" (click)="toggleSection($event)"
@@ -15,7 +14,7 @@
         <ul @slide *ngIf="(active | async)" class="m-0 shadow-none border-top-0 dropdown-menu show container">
             <div class="row mx-1 mt-1">
                 <div class="col-md-12">
-                    <button type="button" class="close" aria-label="Close">
+                    <button type="button" class="close" aria-label="Close" (click)="deactivateSection($event)">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -24,14 +23,14 @@
                 <div class="col-md-12 px-5">
                     <hr>
                     <div>
-                        <ng-container *ngFor="let subSection of (subSections$ | async)" (click)="toggleSection($event)">
+                        <ng-container *ngFor="let subSection of (subSections$ | async)">
                             <div class="content-container">
                                 <div class="content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                                     </svg>
                                 </div>
-                                <div class="overlay">
+                                <div class="overlay" (click)="toggleSection($event)">
                                     <ng-container
                                             *ngComponentOutlet="(sectionMap$ | async).get(subSection.id).component; injector: (sectionMap$ | async).get(subSection.id).injector;">
                                     </ng-container>
