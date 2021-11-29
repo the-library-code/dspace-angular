@@ -6,7 +6,7 @@
           <b>Datei:</b>&nbsp;<span>{{file?.name}}</span>&nbsp;&nbsp;&nbsp;
           <b>Größe:</b>&nbsp;<span>{{(file?.sizeBytes) | dsFileSize }}</span>
           <ds-file-download-link [bitstream]="file" class="link">
-            <button class="button">Herunterladen</button>
+            <button class="btn button">Herunterladen</button>
           </ds-file-download-link>
         </div>
         <!--<ds-file-download-link *ngFor="let file of bitstreams; let last=last;" [bitstream]="file">

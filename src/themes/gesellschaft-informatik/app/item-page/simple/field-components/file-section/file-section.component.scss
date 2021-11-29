@@ -14,8 +14,16 @@
   margin-left: auto;
 }
 
+.btn {
+  border-radius: initial;
+}
+
 .button {
   background-color: #ffe600;
   border: none;
   padding: 0.5rem;
+}
+
+.button:hover {
+  background-color: #{darken(#ffe600, 15%)};
 }
