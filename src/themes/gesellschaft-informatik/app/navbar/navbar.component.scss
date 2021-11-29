@@ -59,7 +59,7 @@ nav.navbar {
 
   @media screen and (min-width: map-get($grid-breakpoints, md)) and (max-width: map-get($grid-breakpoints, lg)) {
     ::ng-deep .dropdown-menu {
-      top: 3.75rem;
+      top: 3.5rem;
     }
   }
 }
