@@ -1,0 +1,27 @@
+.nav-breadcrumb {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 100;
+}
+
+.breadcrumb {
+  border-radius: 0;
+  margin-top: calc(-1 * var(--ds-content-spacing));
+  padding-bottom: var(--ds-content-spacing / 3);
+  padding-top: var(--ds-content-spacing / 3);
+}
+
+ol.breadcrumb {
+  background-color: white;
+}
+
+li.breadcrumb-item > a {
+  color: var(--ds-breadcrumb-link-active-color) !important;
+}
+li.breadcrumb-item.active {
+  color: var(--ds-breadcrumb-link-active-color) !important;
+}
+
+.breadcrumb-item+ .breadcrumb-item::before {
+  content: quote("/") !important;
+}
