@@ -37,6 +37,7 @@ export class SearchNavbarComponent {
     this.searchExpanded = true;
     this.isExpanded = 'expanded';
     this.editSearch();
+    (document.querySelector('body') as HTMLElement).style.overflowY = 'hidden';
   }
 
   /**
@@ -46,6 +47,7 @@ export class SearchNavbarComponent {
     this.searchField.nativeElement.blur();
     this.searchExpanded = false;
     this.isExpanded = 'collapsed';
+    (document.querySelector('body') as HTMLElement).style.overflowY = 'visible';
   }
 
   /**
