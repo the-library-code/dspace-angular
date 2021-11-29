@@ -4,6 +4,14 @@
   color: var(--bs-input-color);
 }
 
+.form-control {
+  border-radius: initial;
+}
+
+.btn {
+  border-radius: initial;
+}
+
 .btn-login {
   color: #212529;
   background-color: #ffe600;
