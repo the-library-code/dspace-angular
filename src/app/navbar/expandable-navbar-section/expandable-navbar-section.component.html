@@ -4,9 +4,10 @@
     (keyup.space)="isActive ? deactivateSection($event) : activateSection($event)"
     (keydown.space)="$event.preventDefault()"
 >
-    <a href="javascript:void(0);" class="nav-link dropdown-toggle" routerLinkActive="active"
+    <a href="javascript:void(0);" class="nav-link" routerLinkActive="active"
        id="browseDropdown" (click)="toggleSection($event)"
        data-toggle="dropdown">
+        <i class="fa fa-bars pr-lg-2" ></i>
         <ng-container
                 *ngComponentOutlet="(sectionMap$ | async).get(section.id).component; injector: (sectionMap$ | async).get(section.id).injector;"></ng-container>
     </a>
