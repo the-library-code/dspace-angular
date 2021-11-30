@@ -1,9 +1,12 @@
 <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" rel="noopener noreferrer" [routerLink]="['/communities/' + object.id]" class="lead">
     <div class="limit-text">{{object.name}}</div>
+    <div *ngIf="object.shortDescription" class="text-muted abstract-text limit-text">
+        {{object.shortDescription}}
+    </div>
+    <div>
+        <i class="fa fa-arrow-right move-right"></i>
+    </div>
 </a>
-<span *ngIf="linkType == linkTypes.None" class="lead">
+<!--<span *ngIf="linkType == linkTypes.None" class="lead">
     {{object.name}}
-</span>
-<div *ngIf="object.shortDescription" class="text-muted abstract-text limit-text">
-    {{object.shortDescription}}
-</div>
+</span>-->
