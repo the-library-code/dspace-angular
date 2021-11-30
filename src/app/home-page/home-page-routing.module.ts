@@ -16,7 +16,7 @@ import { ThemedHomePageComponent } from './themed-home-page.component';
         data: {
           title: 'home.title',
           menu: {
-            public: [{
+            public: [/*{
               id: 'statistics_site',
               active: true,
               visible: true,
@@ -26,7 +26,7 @@ import { ThemedHomePageComponent } from './themed-home-page.component';
                 text: 'menu.section.statistics',
                 link: 'statistics',
               } as LinkMenuItemModel,
-            }],
+            }*/],
           },
         },
         resolve: {
