@@ -13,9 +13,8 @@ import { PaginationComponentOptions } from '../../../shared/pagination/paginatio
 import { SubmissionService } from '../../submission.service';
 import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
 import { AlertType } from '../../../shared/alert/aletr-type';
-import { DetectDuplicateService } from './detect-duplicate.service';
 import { SectionsService } from '../sections.service';
-import { WorkspaceitemSectionDetectDuplicateObject } from '../../../core/submission/models/workspaceitem-section-deduplication.model';
+import { WorkspaceitemSectionIdentifiersObject } from '../../../core/submission/models/workspaceitem-section-identifiers.model';
 import { PaginationService } from '../../../core/pagination/pagination.service';
 import { SubmissionVisibility } from '../../utils/visibility.util';
 
@@ -29,7 +28,7 @@ import { SubmissionVisibility } from '../../utils/visibility.util';
 })
 
 @renderSectionFor(SectionsType.DetectDuplicate)
-export class SubmissionSectionDetectDuplicateComponent extends SectionModelComponent {
+export class SubmissionSectionIdentifiersComponent extends SectionModelComponent {
   /**
    * The Alert categories.
    * @type {AlertType}
@@ -43,10 +42,10 @@ export class SubmissionSectionDetectDuplicateComponent extends SectionModelCompo
   public isLoading = true;
 
   /**
-   * The object containing the list of the possible duplications.
+   * The object containing data about doi, handle, other identifiers
    * @type {Observable}
    */
-  public sectionData$: Observable<WorkspaceitemSectionDetectDuplicateObject>;
+  public sectionData$: Observable<WorkspaceitemSectionIdentifiersObject>;
 
   /**
    * The list of the possible duplications.
