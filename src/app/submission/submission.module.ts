@@ -76,8 +76,7 @@ const ENTRY_COMPONENTS = [
   SubmissionSectionUploadComponent,
   SubmissionSectionformComponent,
   SubmissionSectionLicenseComponent,
-  SubmissionSectionCcLicensesComponent,
-  SubmissionSectionDetectDuplicateComponent
+  SubmissionSectionCcLicensesComponent
 ];
 
 @NgModule({
