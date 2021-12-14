@@ -1,0 +1,18 @@
+<ds-loading *ngIf="isLoading" message="Loading..."></ds-loading>
+
+<ng-container *ngIf="(getSectionStatus() | async) || !(config$ | async)">
+  <ds-alert [type]="AlertTypeEnum.Info" [content]="('submission.sections.identifiers.no-identifiers' | translate)"></ds-alert>
+</ng-container>
+
+<ng-container *ngIf="!(getSectionStatus() | async) && (config$ | async)">
+  <ds-alert [type]="AlertTypeEnum.Warning" [content]="(disclaimer | async)"></ds-alert>
+
+    <ul class="list-unstyled">
+      <li>
+        DOI: <span>{{data.doi}}</span>
+      </li>
+      <li>
+        Handle: <span>{{data.handle}}</span>
+      </li>
+    </ul>
+</ng-container>

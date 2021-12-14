@@ -27,7 +27,7 @@ import { SectionDataObject } from '../models/section-data.model';
 import { SectionsType } from '../sections-type';
 import { mockSubmissionCollectionId, mockSubmissionId } from '../../../shared/mocks/submission.mock';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
-import { SubmissionSectionDetectDuplicateComponent } from './section-detect-duplicate.component';
+import { SubmissionSectionDetectDuplicateComponent } from './section-identifiers.component';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { SectionFormOperationsService } from '../form/section-form-operations.service';

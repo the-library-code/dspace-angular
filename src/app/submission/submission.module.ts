@@ -35,6 +35,7 @@ import { SubmissionSectionCcLicensesComponent } from './sections/cc-license/subm
 import { JournalEntitiesModule } from '../entity-groups/journal-entities/journal-entities.module';
 import { ResearchEntitiesModule } from '../entity-groups/research-entities/research-entities.module';
 import { SubmissionSectionDetectDuplicateComponent } from './sections/detect-duplicate/section-detect-duplicate.component';
+import { SubmissionSectionIdentifiersComponent } from './sections/identifiers/section-identifiers.component';
 import { DuplicateMatchComponent } from './sections/detect-duplicate/duplicate-match/duplicate-match.component';
 import { DetectDuplicateService } from './sections/detect-duplicate/detect-duplicate.service';
 import { ThemedSubmissionEditComponent } from './edit/themed-submission-edit.component';
@@ -67,7 +68,8 @@ const DECLARATIONS = [
   SubmissionImportExternalPreviewComponent,
   SubmissionImportExternalCollectionComponent,
   SubmissionSectionDetectDuplicateComponent,
-  DuplicateMatchComponent
+  DuplicateMatchComponent,
+  SubmissionSectionIdentifiersComponent
 ];
 
 @NgModule({
