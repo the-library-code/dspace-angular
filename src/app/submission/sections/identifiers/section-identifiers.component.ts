@@ -43,16 +43,10 @@ export class SubmissionSectionIdentifiersComponent extends SectionModelComponent
   public isLoading = true;
 
   /**
-   * If TRUE the submission scope is the 'workflow'; 'workspace' otherwise.
-   * @type {boolean}
-   */
-  isWorkFlow = false;
-
-  /**
    * Observable identifierData subject
    * @type {Observable<WorkspaceitemSectionIdentifiersObject>}
    */
-  public identifierData$: Observable<WorkspaceitemSectionIdentifiersObject>;
+  public identifierData$: Observable<WorkspaceitemSectionIdentifiersObject> = new Observable<WorkspaceitemSectionIdentifiersObject>();
 
   /**
    * Initialize instance variables.
@@ -72,6 +66,12 @@ export class SubmissionSectionIdentifiersComponent extends SectionModelComponent
               @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
               @Inject('submissionIdProvider') public injectedSubmissionId: string) {
     super(injectedCollectionId, injectedSectionData, injectedSubmissionId);
+    this.identifierData$ = this.getIdentifierData();
+  }
+
+  ngOnInit() {
+      this.identifierData$ = {} as Observable<WorkspaceitemSectionIdentifiersObject>;
+      super.ngOnInit();
   }
 
   /**
@@ -83,7 +83,7 @@ export class SubmissionSectionIdentifiersComponent extends SectionModelComponent
   }
 
   /**
-   * Check if upload section has read-only visibility
+   * Check if identifier section has read-only visibility
    */
   isReadOnly(): boolean {
     return SubmissionVisibility.isReadOnly(
@@ -107,10 +107,7 @@ export class SubmissionSectionIdentifiersComponent extends SectionModelComponent
    *     the section status
    */
   public getSectionStatus(): Observable<boolean> {
-    if (this.identifierData$ === undefined) {
-      this.identifierData$ = this.getIdentifierData();
-    }
-    return this.identifierData$.pipe(
+    return this.getIdentifierData().pipe(
       map((identifierData: any) => {
         let output = false;
         // We have a successful identifier list from the API if all three expected keys from the object model appear

@@ -7,7 +7,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { cold } from 'jasmine-marbles';
-import { of as observableOf } from 'rxjs';
+import {Observable, of as observableOf} from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
@@ -25,7 +25,7 @@ import { FormService } from '../../../shared/form/form.service';
 import { SubmissionFormsConfigService } from '../../../core/config/submission-forms-config.service';
 import { SectionDataObject } from '../models/section-data.model';
 import { SectionsType } from '../sections-type';
-import { mockSubmissionCollectionId, mockSubmissionId } from '../../../shared/mocks/submission.mock';
+import {mockSectionsData, mockSubmissionCollectionId, mockSubmissionId} from '../../../shared/mocks/submission.mock';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { SubmissionSectionIdentifiersComponent } from './section-identifiers.component';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
@@ -177,8 +177,8 @@ describe('SubmissionSectionIdentifiersComponent test suite', () => {
         { provide: SectionsService, useClass: SectionsServiceStub },
         { provide: SubmissionService, useClass: SubmissionServiceStub },
         { provide: 'collectionIdProvider', useValue: collectionId },
-        // { provide: 'sectionDataProvider', useValue: sectionObject },
-        { provide: 'sectionDataProvider', useValue: Object.assign({}, sectionObject) },
+        { provide: 'sectionDataProvider', useValue: sectionObject },
+        // { provide: 'sectionDataProvider', useValue: Object.assign({}, sectionObject) },
         { provide: 'submissionIdProvider', useValue: submissionId },
         { provide: PaginationService, useValue: paginationService },
         ChangeDetectorRef,
@@ -196,7 +196,9 @@ describe('SubmissionSectionIdentifiersComponent test suite', () => {
 
     // synchronous beforeEach
     beforeEach(() => {
-      sectionsServiceStub.getSectionData.and.returnValue(sectionObject.data);
+      sectionsServiceStub.isSectionReadOnly.and.returnValue(observableOf(false));
+      sectionsServiceStub.getSectionErrors.and.returnValue(observableOf([]));
+      sectionsServiceStub.getSectionData.and.returnValue(observableOf(identifierData));
       const html = `<ds-submission-section-identifiers></ds-submission-section-identifiers>`;
       testFixture = createTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
       testComp = testFixture.componentInstance;
@@ -206,8 +208,8 @@ describe('SubmissionSectionIdentifiersComponent test suite', () => {
       testFixture.destroy();
     });
 
-    it('should create SubmissionSectionIdentifiersComponent', inject([SubmissionSectionIdentifiersComponent], (app: SubmissionSectionIdentifiersComponent) => {
-      expect(app).toBeDefined();
+    it('should create SubmissionSectionIdentifiersComponent', inject([SubmissionSectionIdentifiersComponent], (idComp: SubmissionSectionIdentifiersComponent) => {
+      expect(idComp).toBeDefined();
     }));
   });
 
@@ -217,8 +219,6 @@ describe('SubmissionSectionIdentifiersComponent test suite', () => {
       comp = fixture.componentInstance;
       compAsAny = comp;
       submissionServiceStub = TestBed.inject(SubmissionService);
-      // sectionsServiceStub = TestBed.inject(SectionsService);
-      sectionsServiceStub.getSectionData.and.returnValue(observableOf(sectionObject.data));
       formService = TestBed.inject(FormService);
       formBuilderService = TestBed.inject(FormBuilderService);
       formOperationsService = TestBed.inject(SectionFormOperationsService);
@@ -232,61 +232,48 @@ describe('SubmissionSectionIdentifiersComponent test suite', () => {
       compAsAny = null;
     });
 
-    it('Should init section properly - with workflow', () => {
-      collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
-      sectionsServiceStub.getSectionData.and.returnValue(observableOf(identifierData));
-      sectionsServiceStub.getSectionErrors.and.returnValue(observableOf([]));
-      sectionsServiceStub.isSectionReadOnly.and.returnValue(observableOf(false));
-      compAsAny.submissionService.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkflowItem);
-      spyOn(compAsAny, 'getSectionStatus').and.returnValue(observableOf(true));
-
-      comp.onSectionInit();
-      fixture.detectChanges();
-
-      expect(comp.isWorkFlow).toBeTruthy();
-      expect(comp.getIdentifierData()).toBeObservable(cold('(a|)', {
-        a: identifierData
-      }));
-    });
-
-    it('Should init section properly - with workspace', () => {
+    it('Should init section properly', () => {
       collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
       sectionsServiceStub.getSectionErrors.and.returnValue(observableOf([]));
       sectionsServiceStub.isSectionReadOnly.and.returnValue(observableOf(false));
       compAsAny.submissionService.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkspaceItem);
-      spyOn(compAsAny, 'getSectionStatus').and.returnValue(observableOf(true));
-
+      spyOn(comp, 'getSectionStatus').and.returnValue(observableOf(true));
+      spyOn(comp, 'getIdentifierData').and.returnValue(observableOf(identifierData));
+      expect(comp.isLoading).toBeTruthy();
       comp.onSectionInit();
       fixture.detectChanges();
-
-      expect(comp.isWorkFlow).toBeFalsy();
+      expect(comp.isLoading).toBeFalsy();
     });
 
     // The following tests look for proper logic in the getSectionStatus() implementation
     // These are very simple as we don't really have a 'false' state unless we got an error
     it('Should return TRUE if the identifier data contains expected keys', () => {
-      compAsAny.identifierData$ = observableOf({ doi: null, handle: null, otherIdentifiers: [] });
+      // compAsAny.identifierData$ = observableOf({ doi: null, handle: null, otherIdentifiers: [] });
+      spyOn(comp, 'getIdentifierData').and.returnValue(observableOf({ doi: null, handle: null, otherIdentifiers: [] }));
       expect(compAsAny.getSectionStatus()).toBeObservable(cold('(a|)', {
         a: true
       }));
     });
 
     it('Should return FALSE if the identifier data is missing handle', () => {
-      compAsAny.identifierData$ = observableOf({ doi: null, otherIdentifiers: [] });
+      // compAsAny.identifierData$ = observableOf({ doi: null, otherIdentifiers: [] });
+      spyOn(comp, 'getIdentifierData').and.returnValue(observableOf({ doi: null, otherIdentifiers: [] }));
       expect(compAsAny.getSectionStatus()).toBeObservable(cold('(a|)', {
         a: false
       }));
     });
 
     it('Should return FALSE if the identifier data is missing doi', () => {
-      compAsAny.identifierData$ = observableOf({ handle: null, otherIdentifiers: [] });
+      spyOn(comp, 'getIdentifierData').and.returnValue(observableOf({ handle: null, otherIdentifiers: [] }));
+      // compAsAny.identifierData$ = observableOf({ handle: null, otherIdentifiers: [] });
       expect(compAsAny.getSectionStatus()).toBeObservable(cold('(a|)', {
         a: false
       }));
     });
 
     it('Should return FALSE if the identifier data is missing otherIdentifiers', () => {
-      compAsAny.identifierData$ = observableOf({ handle: null, doi: null });
+      spyOn(comp, 'getIdentifierData').and.returnValue(observableOf({ doi: null, handle: null }));
+      // compAsAny.identifierData$ = observableOf({ handle: null, doi: null });
       expect(compAsAny.getSectionStatus()).toBeObservable(cold('(a|)', {
         a: false
       }));
