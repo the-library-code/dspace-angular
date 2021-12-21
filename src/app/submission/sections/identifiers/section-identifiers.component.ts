@@ -13,6 +13,7 @@ import { SectionsService } from '../sections.service';
 import { WorkspaceitemSectionIdentifiersObject } from '../../../core/submission/models/workspaceitem-section-identifiers.model';
 import { PaginationService } from '../../../core/pagination/pagination.service';
 import { SubmissionVisibility } from '../../utils/visibility.util';
+import {map} from 'rxjs/operators';
 
 /**
  * This simple component displays DOI, handle and other identifiers that are already minted for the item in
@@ -48,6 +49,12 @@ export class SubmissionSectionIdentifiersComponent extends SectionModelComponent
   isWorkFlow = false;
 
   /**
+   * Observable identifierData subject
+   * @type {Observable<WorkspaceitemSectionIdentifiersObject>}
+   */
+  public identifierData$: Observable<WorkspaceitemSectionIdentifiersObject>;
+
+  /**
    * Initialize instance variables.
    *
    * @param {PaginationService} paginationService
@@ -57,16 +64,6 @@ export class SubmissionSectionIdentifiersComponent extends SectionModelComponent
    * @param {string} injectedCollectionId
    * @param {SectionDataObject} injectedSectionData
    * @param {string} injectedSubmissionId
-   */
-  /*
-  constructor(protected paginationService: PaginationService,
-              protected translate: TranslateService,
-              protected sectionService: SectionsService,
-              protected submissionService: SubmissionService,
-              @Inject('collectionIdProvider') public injectedCollectionId: string,
-              @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
-              @Inject('submissionIdProvider') public injectedSubmissionId: string) {
-
    */
   constructor(protected translate: TranslateService,
               protected sectionService: SectionsService,
@@ -82,6 +79,7 @@ export class SubmissionSectionIdentifiersComponent extends SectionModelComponent
    */
   onSectionInit() {
     this.isLoading = false;
+    this.identifierData$ = this.getIdentifierData();
   }
 
   /**
@@ -101,9 +99,28 @@ export class SubmissionSectionIdentifiersComponent extends SectionModelComponent
     return;
   }
 
-  // TODO: better logic here instead of "always true"
-  getSectionStatus(): Observable<boolean> {
-    return true as Observable<boolean>;
+  /**
+   * Get section status. Because this simple component never requires human interaction, we'll instead just at least
+   * make sure we got a non-error response from the API, and look for our expected Object keys
+   *
+   * @return Observable<boolean>
+   *     the section status
+   */
+  public getSectionStatus(): Observable<boolean> {
+    if (this.identifierData$ === undefined) {
+      this.identifierData$ = this.getIdentifierData();
+    }
+    return this.identifierData$.pipe(
+      map((identifierData: any) => {
+        let output = false;
+        // We have a successful identifier list from the API if all three expected keys from the object model appear
+        if (identifierData.hasOwnProperty('doi') && identifierData.hasOwnProperty('handle')
+          && identifierData.hasOwnProperty('otherIdentifiers')) {
+          output = true;
+        }
+        return output;
+      })
+    );
   }
 
   /**
@@ -111,7 +128,8 @@ export class SubmissionSectionIdentifiersComponent extends SectionModelComponent
    * and as an observable so it can update in real-time.
    */
   getIdentifierData() {
-    return this.sectionService.getSectionData(this.submissionId, this.sectionData.id, this.sectionData.sectionType) as Observable<WorkspaceitemSectionIdentifiersObject>
+    return this.sectionService.getSectionData(this.submissionId, this.sectionData.id, this.sectionData.sectionType) as
+      Observable<WorkspaceitemSectionIdentifiersObject>;
   }
 
 }

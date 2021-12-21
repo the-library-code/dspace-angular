@@ -5,25 +5,29 @@ Template for the identifiers submission section component
 <!-- Main identifier data -->
 <ng-container *ngVar="(getIdentifierData() | async) as identifierData">
 <div>
-  <span>The following identifiers will be created for your item:</span>
+  <span>{{'submission.sections.identifiers.info' | translate}}</span>
   <ul>
     <!-- Handles -->
     <ng-container *ngIf="!(identifierData.handle)">
-      <li>No handles have been minted for this item.</li>
+      <li>{{'submission.sections.identifiers.no_handle' | translate}}</li>
     </ng-container>
     <ng-container *ngIf="(identifierData.handle)">
-      <li>Handle: {{identifierData.handle}}</li>
+      <li>{{'submission.sections.identifiers.handle_label' | translate}}{{identifierData.handle}}</li>
     </ng-container>
     <!-- DOIs -->
     <ng-container *ngIf="!(identifierData.doi)">
-      <li>No DOIs have been minted for this item.</li>
+      <li>{{'submission.sections.identifiers.no_doi' | translate}}</li>
     </ng-container>
     <ng-container *ngIf="(identifierData.doi)">
-      <li>DOI: {{identifierData.doi}}</li>
+      <li>{{'submission.sections.identifiers.doi_label' | translate}}
+        <a href="{{identifierData.doi}}">{{identifierData.doi}}</a>
+      </li>
     </ng-container>
     <!-- Other identifiers -->
     <ng-container *ngIf="(identifierData.otherIdentifiers.length > 0)">
-      <li>Other identifiers: {{identifierData.otherIdentifiers}}</li>
+      <li>{{'submission.sections.identifiers.otherIdentifiers_label' | translate}}
+        {{identifierData.otherIdentifiers}}
+      </li>
     </ng-container>
   </ul>
  </div>

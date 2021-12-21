@@ -27,21 +27,16 @@ import { SectionDataObject } from '../models/section-data.model';
 import { SectionsType } from '../sections-type';
 import { mockSubmissionCollectionId, mockSubmissionId } from '../../../shared/mocks/submission.mock';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
-import { SubmissionSectionDetectDuplicateComponent } from './section-identifiers.component';
+import { SubmissionSectionIdentifiersComponent } from './section-identifiers.component';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { SectionFormOperationsService } from '../form/section-form-operations.service';
-import { DetectDuplicateService } from './detect-duplicate.service';
-import { getMockDetectDuplicateService } from '../../../shared/mocks/mock-detect-duplicate-service';
 import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
 import { License } from '../../../core/shared/license.model';
 import { Collection } from '../../../core/shared/collection.model';
 import { ObjNgFor } from '../../../shared/utils/object-ngfor.pipe';
 import { VarDirective } from '../../../shared/utils/var.directive';
-import {
-  DetectDuplicateMatch,
-  WorkspaceitemSectionDetectDuplicateObject
-} from '../../../core/submission/models/workspaceitem-section-deduplication.model';
+import { WorkspaceitemSectionIdentifiersObject } from '../../../core/submission/models/workspaceitem-section-identifiers.model';
 import { Item } from '../../../core/shared/item.model';
 import { PaginationService } from '../../../core/pagination/pagination.service';
 import { PaginationServiceStub } from '../../../shared/testing/pagination-service.stub';
@@ -62,6 +57,32 @@ function getMockCollectionDataService(): CollectionDataService {
   });
 }
 
+function getMockSectionService(): SectionsService {
+  return jasmine.createSpyObj('SectionsService', {
+    checkSectionErrors: jasmine.createSpy('checkSectionErrors'),
+    dispatchRemoveSectionErrors: jasmine.createSpy('dispatchRemoveSectionErrors'),
+    dispatchSetSectionFormId: jasmine.createSpy('dispatchSetSectionFormId'),
+    getSectionData: jasmine.createSpy('getSectionData'),
+    getSectionErrors: jasmine.createSpy('getSectionErrors'),
+    getSectionState: jasmine.createSpy('getSectionState'),
+    isSectionValid: jasmine.createSpy('isSectionValid'),
+    isSectionEnabled: jasmine.createSpy('isSectionEnabled'),
+    isSectionReadOnly: jasmine.createSpy('isSectionReadOnly'),
+    isSectionAvailable: jasmine.createSpy('isSectionAvailable'),
+    isSectionTypeAvailable: jasmine.createSpy('isSectionTypeAvailable'),
+    isSectionType: jasmine.createSpy('isSectionType'),
+    addSection: jasmine.createSpy('addSection'),
+    removeSection: jasmine.createSpy('removeSection'),
+    updateSectionData: jasmine.createSpy('updateSectionData'),
+    setSectionError: jasmine.createSpy('setSectionError'),
+    setSectionStatus: jasmine.createSpy('setSectionStatus'),
+    isSectionActive: jasmine.createSpy('isSectionActive'),
+    computeSectionConfiguredMetadata: jasmine.createSpy('computeSectionConfiguredMetadata'),
+    getShownSectionErrors: jasmine.createSpy('getShownSectionErrors'),
+    getSectionServerErrors: jasmine.createSpy('getSectionServerErrors')
+  });
+}
+
 const mockItem = Object.assign(new Item(), {
   id: 'fake-match-id',
   handle: 'fake/handle',
@@ -75,51 +96,38 @@ const mockItem = Object.assign(new Item(), {
   },
 });
 
-const mockMatch: DetectDuplicateMatch = {
-  submitterDecision: null,
-  submitterNote: null,
-  submitterTime: null,
-
-  workflowDecision: null,
-  workflowNote: null,
-  workflowTime: null,
-
-  adminDecision: null,
-
-  matchObject: mockItem
+// Mock identifier data to use with tests
+const identifierData: WorkspaceitemSectionIdentifiersObject = {
+  doi: 'https://doi.org/10.33515/dspace/1',
+  handle: '123456789/999',
+  otherIdentifiers: ['123-123-123', 'ANBX-159']
 };
 
-const sectionData: WorkspaceitemSectionDetectDuplicateObject = {
-  matches: {
-    'fake-match-id': mockMatch
-  }
-};
-
+// Mock section object to use with tests
 const sectionObject: SectionDataObject = {
-  config: 'https://dspace.org/api/config/submissionforms/detect-duplicate',
+  config: 'https://dspace.org/api/config/submissionforms/identifiers',
   mandatory: true,
   opened: true,
-  data: sectionData,
+  data: identifierData,
   errorsToShow: [],
   serverValidationErrors: [],
-  header: 'submit.progressbar.detect-duplicate',
-  id: 'detect-duplicate',
-  sectionType: SectionsType.DetectDuplicate,
+  header: 'submission.sections.submit.progressbar.identifiers',
+  id: 'identifiers',
+  sectionType: SectionsType.Identifiers,
   sectionVisibility: null
 };
 
-describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
-  let comp: SubmissionSectionDetectDuplicateComponent;
+describe('SubmissionSectionIdentifiersComponent test suite', () => {
+  let comp: SubmissionSectionIdentifiersComponent;
   let compAsAny: any;
-  let fixture: ComponentFixture<SubmissionSectionDetectDuplicateComponent>;
-  let submissionServiceStub: any;
-  let sectionsServiceStub: any;
+  let fixture: ComponentFixture<SubmissionSectionIdentifiersComponent>;
+  let submissionServiceStub: any = new SubmissionServiceStub();
+  const sectionsServiceStub: any = new SectionsServiceStub();
   let formService: any;
   let formOperationsService: any;
   let formBuilderService: any;
   let collectionDataService: any;
 
-  const mockDetectDuplicateService: any = getMockDetectDuplicateService();
   const submissionId = mockSubmissionId;
   const collectionId = mockSubmissionCollectionId;
   const jsonPatchOpBuilder: any = jasmine.createSpyObj('jsonPatchOpBuilder', {
@@ -154,7 +162,7 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
         TranslateModule.forRoot(),
       ],
       declarations: [
-        SubmissionSectionDetectDuplicateComponent,
+        SubmissionSectionIdentifiersComponent,
         TestComponent,
         ObjNgFor,
         VarDirective,
@@ -169,13 +177,13 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
         { provide: SectionsService, useClass: SectionsServiceStub },
         { provide: SubmissionService, useClass: SubmissionServiceStub },
         { provide: 'collectionIdProvider', useValue: collectionId },
-        { provide: 'sectionDataProvider', useValue: sectionObject },
+        // { provide: 'sectionDataProvider', useValue: sectionObject },
+        { provide: 'sectionDataProvider', useValue: Object.assign({}, sectionObject) },
         { provide: 'submissionIdProvider', useValue: submissionId },
-        { provide: DetectDuplicateService, useValue: mockDetectDuplicateService },
         { provide: PaginationService, useValue: paginationService },
         ChangeDetectorRef,
         FormBuilderService,
-        SubmissionSectionDetectDuplicateComponent
+        SubmissionSectionIdentifiersComponent
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents().then();
@@ -188,9 +196,8 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
 
     // synchronous beforeEach
     beforeEach(() => {
-      mockDetectDuplicateService.getDuplicateMatchesByScope.and.returnValue(observableOf(sectionData));
-      const html = `
-        <ds-submission-section-detect-duplicate></ds-submission-section-detect-duplicate>`;
+      sectionsServiceStub.getSectionData.and.returnValue(sectionObject.data);
+      const html = `<ds-submission-section-identifiers></ds-submission-section-identifiers>`;
       testFixture = createTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
       testComp = testFixture.componentInstance;
     });
@@ -199,18 +206,19 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
       testFixture.destroy();
     });
 
-    it('should create SubmissionSectionDetectDuplicateComponent', inject([SubmissionSectionDetectDuplicateComponent], (app: SubmissionSectionDetectDuplicateComponent) => {
+    it('should create SubmissionSectionIdentifiersComponent', inject([SubmissionSectionIdentifiersComponent], (app: SubmissionSectionIdentifiersComponent) => {
       expect(app).toBeDefined();
     }));
   });
 
   describe('', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(SubmissionSectionDetectDuplicateComponent);
+      fixture = TestBed.createComponent(SubmissionSectionIdentifiersComponent);
       comp = fixture.componentInstance;
       compAsAny = comp;
       submissionServiceStub = TestBed.inject(SubmissionService);
-      sectionsServiceStub = TestBed.inject(SectionsService);
+      // sectionsServiceStub = TestBed.inject(SectionsService);
+      sectionsServiceStub.getSectionData.and.returnValue(observableOf(sectionObject.data));
       formService = TestBed.inject(FormService);
       formBuilderService = TestBed.inject(FormBuilderService);
       formOperationsService = TestBed.inject(SectionFormOperationsService);
@@ -226,9 +234,9 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
 
     it('Should init section properly - with workflow', () => {
       collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
+      sectionsServiceStub.getSectionData.and.returnValue(observableOf(identifierData));
       sectionsServiceStub.getSectionErrors.and.returnValue(observableOf([]));
       sectionsServiceStub.isSectionReadOnly.and.returnValue(observableOf(false));
-      mockDetectDuplicateService.getDuplicateMatchesByScope.and.returnValue(observableOf(sectionData));
       compAsAny.submissionService.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkflowItem);
       spyOn(compAsAny, 'getSectionStatus').and.returnValue(observableOf(true));
 
@@ -236,8 +244,8 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
       fixture.detectChanges();
 
       expect(comp.isWorkFlow).toBeTruthy();
-      expect(comp.sectionData$).toBeObservable(cold('(a|)', {
-        a: sectionData
+      expect(comp.getIdentifierData()).toBeObservable(cold('(a|)', {
+        a: identifierData
       }));
     });
 
@@ -245,7 +253,6 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
       collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
       sectionsServiceStub.getSectionErrors.and.returnValue(observableOf([]));
       sectionsServiceStub.isSectionReadOnly.and.returnValue(observableOf(false));
-      mockDetectDuplicateService.getDuplicateMatchesByScope.and.returnValue(observableOf(sectionData));
       compAsAny.submissionService.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkspaceItem);
       spyOn(compAsAny, 'getSectionStatus').and.returnValue(observableOf(true));
 
@@ -253,31 +260,38 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
       fixture.detectChanges();
 
       expect(comp.isWorkFlow).toBeFalsy();
-      expect(comp.sectionData$).toBeObservable(cold('(a|)', {
-        a: sectionData
-      }));
     });
 
-    it('Should return TRUE if the sectionData is empty', () => {
-      compAsAny.sectionData$ = observableOf({ matches: { } });
+    // The following tests look for proper logic in the getSectionStatus() implementation
+    // These are very simple as we don't really have a 'false' state unless we got an error
+    it('Should return TRUE if the identifier data contains expected keys', () => {
+      compAsAny.identifierData$ = observableOf({ doi: null, handle: null, otherIdentifiers: [] });
       expect(compAsAny.getSectionStatus()).toBeObservable(cold('(a|)', {
         a: true
       }));
     });
 
-    it('Should return FALSE if the sectionData is not empty', () => {
-      compAsAny.sectionData$ = observableOf(sectionData);
+    it('Should return FALSE if the identifier data is missing handle', () => {
+      compAsAny.identifierData$ = observableOf({ doi: null, otherIdentifiers: [] });
       expect(compAsAny.getSectionStatus()).toBeObservable(cold('(a|)', {
         a: false
       }));
     });
 
-    it('Should return the length of the sectionData$', () => {
-      compAsAny.sectionData$ = observableOf({ matches: [{ dummy: 1 }, { dummy: 2 }] });
-      expect(compAsAny.getTotalMatches()).toBeObservable(cold('(a|)', {
-        a: 2
+    it('Should return FALSE if the identifier data is missing doi', () => {
+      compAsAny.identifierData$ = observableOf({ handle: null, otherIdentifiers: [] });
+      expect(compAsAny.getSectionStatus()).toBeObservable(cold('(a|)', {
+        a: false
       }));
     });
+
+    it('Should return FALSE if the identifier data is missing otherIdentifiers', () => {
+      compAsAny.identifierData$ = observableOf({ handle: null, doi: null });
+      expect(compAsAny.getSectionStatus()).toBeObservable(cold('(a|)', {
+        a: false
+      }));
+    });
+
   });
 
 });
