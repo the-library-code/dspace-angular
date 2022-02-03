@@ -30,6 +30,25 @@ export class DsDynamicTypeBindRelationService {
 
   }
 
+  /**
+   * Return the string value of the type bind model
+   * TODO TLC-254 note - in DSpace-CRIS this is not a static method, changed here based on TSLint report
+   * @param bindModelValue
+   * @private
+   */
+  private static getTypeBindValue(bindModelValue: string | FormFieldMetadataValueObject): string {
+    let value;
+    if (isUndefined(bindModelValue) || typeof bindModelValue === 'string') {
+      value = bindModelValue;
+    } else if (bindModelValue.hasAuthority()) {
+      value = bindModelValue.authority;
+    } else {
+      value = bindModelValue.value;
+    }
+
+    return value;
+  }
+
   public getRelatedFormModel(model: DynamicFormControlModel): DynamicFormControlModel[] {
 
     const models: DynamicFormControlModel[] = [];
@@ -65,9 +84,9 @@ export class DsDynamicTypeBindRelationService {
         bindModelValue = bindModel.value.map((entry) => entry[bindModel.mandatoryField]);
       }
       if (Array.isArray(bindModelValue)) {
-        values = [...bindModelValue.map((entry) => this.getTypeBindValue(entry))];
+        values = [...bindModelValue.map((entry) => DsDynamicTypeBindRelationService.getTypeBindValue(entry))];
       } else {
-        values = [this.getTypeBindValue(bindModelValue)];
+        values = [DsDynamicTypeBindRelationService.getTypeBindValue(bindModelValue)];
       }
 
       let returnValue = (!(bindModel && relation.match === matcher.match));
@@ -143,23 +162,5 @@ export class DsDynamicTypeBindRelationService {
     });
 
     return subscriptions;
-  }
-
-  /**
-   * Return the string value of the type bind model
-   * @param bindModelValue
-   * @private
-   */
-  private getTypeBindValue(bindModelValue: string | FormFieldMetadataValueObject): string {
-    let value;
-    if (isUndefined(bindModelValue) || typeof bindModelValue === 'string') {
-      value = bindModelValue;
-    } else if (bindModelValue.hasAuthority()) {
-      value = bindModelValue.authority;
-    } else {
-      value = bindModelValue.value;
-    }
-
-    return value;
   }
 }
