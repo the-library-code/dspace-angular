@@ -1,5 +1,6 @@
 import {
   DynamicFormControlLayout,
+  DynamicFormControlRelation,
   DynamicInputModel,
   DynamicInputModelConfig,
   serializable
@@ -18,6 +19,7 @@ export interface DsDynamicInputModelConfig extends DynamicInputModelConfig {
   language?: string;
   place?: number;
   value?: any;
+  typeBindRelations?: DynamicFormControlRelation[];
   relationship?: RelationshipOptions;
   repeatable: boolean;
   metadataFields: string[];
@@ -33,6 +35,9 @@ export class DsDynamicInputModel extends DynamicInputModel {
   @serializable() private _languageCodes: LanguageCode[];
   @serializable() private _language: string;
   @serializable() languageUpdates: Subject<string>;
+  @serializable() place: number;
+  @serializable() typeBindRelations: DynamicFormControlRelation[];
+  @serializable() typeBindHidden = false;
   @serializable() relationship?: RelationshipOptions;
   @serializable() repeatable?: boolean;
   @serializable() metadataFields: string[];
@@ -70,6 +75,8 @@ export class DsDynamicInputModel extends DynamicInputModel {
     this.languageUpdates.subscribe((lang: string) => {
       this.language = lang;
     });
+
+    this.typeBindRelations = config.typeBindRelations ? config.typeBindRelations : [];
 
     this.vocabularyOptions = config.vocabularyOptions;
   }

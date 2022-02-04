@@ -1,7 +1,7 @@
 import { Inject, InjectionToken } from '@angular/core';
 
 import { uniqueId } from 'lodash';
-import { DynamicFormControlLayout } from '@ng-dynamic-forms/core';
+import { DynamicFormControlLayout, MATCH_VISIBLE, OR_OPERATOR } from '@ng-dynamic-forms/core';
 
 import { hasValue, isNotEmpty, isNotNull, isNotUndefined } from '../../../empty.util';
 import { FormFieldModel } from '../models/form-field.model';
@@ -67,6 +67,7 @@ export abstract class FieldParser {
         metadataFields: this.getAllFieldIds(),
         hasSelectableMetadata: isNotEmpty(this.configData.selectableMetadata),
         isDraggable,
+        typeBindRelations: isNotEmpty(this.configData.typeBind) ? this.getTypeBindRelations(this.configData.typeBind) : null,
         groupFactory: () => {
           let model;
           if ((arrayCounter === 0)) {
@@ -275,7 +276,7 @@ export abstract class FieldParser {
     // Set label
     this.setLabel(controlModel, label);
     if (hint) {
-      controlModel.hint = this.configData.hints;
+      controlModel.hint = this.configData.hints || '&nbsp;';
     }
     controlModel.placeholder = this.configData.label;
 
@@ -292,7 +293,32 @@ export abstract class FieldParser {
       (controlModel as DsDynamicInputModel).languageCodes = this.configData.languageCodes;
     }
 
+    // If typeBind is configured
+    if (isNotEmpty(this.configData.typeBind)) {
+      (controlModel as DsDynamicInputModel).typeBindRelations = this.getTypeBindRelations(this.configData.typeBind);
+    }
+
     return controlModel;
+  }
+
+  /**
+   * Get the type bind values from the REST data for a specific field
+   * @param configuredTypeBindValues
+   * @private
+   */
+  private getTypeBindRelations(configuredTypeBindValues: string[]): any[] {
+    const bindValues = [];
+    configuredTypeBindValues.forEach((value) => {
+      bindValues.push({
+        id: 'dc_type',
+        value: value
+      });
+    });
+    return [{
+      match: MATCH_VISIBLE,
+      operator: OR_OPERATOR,
+      when: bindValues
+    }];
   }
 
   protected hasRegex() {
