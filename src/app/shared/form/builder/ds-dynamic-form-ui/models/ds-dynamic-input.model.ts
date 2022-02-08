@@ -46,7 +46,6 @@ export class DsDynamicInputModel extends DynamicInputModel {
   @serializable() hasSelectableMetadata: boolean;
   @serializable() metadataValue: FormFieldMetadataValueObject;
   @serializable() isModelOfInnerForm: boolean;
-  @serializable() hiddenUpdates: Subject<boolean>;
 
 
   constructor(config: DsDynamicInputModelConfig, layout?: DynamicFormControlLayout) {
@@ -83,14 +82,6 @@ export class DsDynamicInputModel extends DynamicInputModel {
     });
 
     this.typeBindRelations = config.typeBindRelations ? config.typeBindRelations : [];
-    this.hiddenUpdates = new BehaviorSubject<boolean>(this.hidden);
-    this.hiddenUpdates.subscribe((hidden: boolean) => {
-      this.hidden = hidden;
-      const parentModel = this.getRootParent(this);
-      if (parentModel && isNotUndefined(parentModel.hidden)) {
-        parentModel.hidden = hidden;
-      }
-    });
 
     this.vocabularyOptions = config.vocabularyOptions;
   }
@@ -119,14 +110,6 @@ export class DsDynamicInputModel extends DynamicInputModel {
     this._languageCodes = languageCodes;
     if (!this.language || this.language === '') {
       this.language = this.languageCodes ? this.languageCodes[0].code : null;
-    }
-  }
-
-  private getRootParent(model: any): DynamicFormControlModel {
-    if (isEmpty(model) || isEmpty(model.parent)) {
-      return model;
-    } else {
-      return this.getRootParent(model.parent);
     }
   }
 }
