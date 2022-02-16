@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ThemedComponent } from '../../shared/theme-support/themed.component';
-import { ComcolPageBrowseByComponent } from './comcol-page-browse-by.component';
+import { ComcolPageBrowseByComponent } from '../comcol/comcol-page-browse-by/comcol-page-browse-by.component';
 
 /**
  * Themed wrapper for ComcolPageBrowseByComponent
@@ -24,10 +24,10 @@ export class ThemedComcolPageBrowseByComponent extends ThemedComponent<ComcolPag
     }
 
     protected importThemedComponent(themeName: string): Promise<any> {
-        return import(`../../../themes/${themeName}/app/shared/comcol-page-browse-by/comcol-page-browse-by.component`);
+        return import(`../../../themes/${themeName}/app/shared/comcol/comcol-page-browse-by/comcol-page-browse-by.component`);
     }
 
     protected importUnthemedComponent(): Promise<any> {
-        return import(`./comcol-page-browse-by.component`);
+        return import(`../comcol/comcol-page-browse-by/comcol-page-browse-by.component`);
     }
 }

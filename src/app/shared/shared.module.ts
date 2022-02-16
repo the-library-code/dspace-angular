@@ -181,6 +181,10 @@ import { ObjectListMainpageComponent } from './object-list/object-list-mainpage/
 import { ObjectCollectionMainpageComponent } from './object-collection/object-collection-mainpage/object-collection-mainpage.component';
 import { ThemedComcolPageBrowseByComponent } from './comcol-page-browse-by/themed-comcol-page-browse-by.component';
 import { ThemedItemSearchResultListElementComponent } from './object-list/search-result-list-element/item-search-result/item-types/item/themed-item-search-result-list-element.component';
+import {SearchObjects} from "./search/models/search-objects.model";
+import {FacetConfigResponse} from "./search/models/facet-config-response.model";
+import {FacetValues} from "./search/models/facet-values.model";
+import {SearchResult} from "./search/models/search-result.model";
 
 /**
  * Declaration needed to make sure all decorator functions are called in time

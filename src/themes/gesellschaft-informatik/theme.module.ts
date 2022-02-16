@@ -79,13 +79,17 @@ import { HeaderComponent } from './app/header/header.component';
 import { FooterComponent } from './app/footer/footer.component';
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
 import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
-import { AuthNavMenuComponent} from './app/shared/auth-nav-menu/auth-nav-menu.component';
-import { SearchFormComponent} from './app/shared/search-form/search-form.component';
-import { UntypedItemComponent} from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
-import { FileSectionComponent} from './app/item-page/simple/field-components/file-section/file-section.component';
-import { MetadataRepresentationListComponent} from './app/item-page/simple/metadata-representation-list/metadata-representation-list.component';
-import { ComcolPageBrowseByComponent} from './app/shared/comcol-page-browse-by/comcol-page-browse-by.component';
-import { ItemSearchResultListElementComponent} from './app/shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
+import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.component';
+import { SearchFormComponent } from './app/shared/search-form/search-form.component';
+import { UntypedItemComponent } from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
+import { FileSectionComponent } from './app/item-page/simple/field-components/file-section/file-section.component';
+import { MetadataRepresentationListComponent } from './app/item-page/simple/metadata-representation-list/metadata-representation-list.component';
+import { ComcolPageBrowseByComponent } from './app/shared/comcol-page-browse-by/comcol-page-browse-by.component';
+import { ItemSearchResultListElementComponent } from './app/shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
+import { SearchModule } from '../../app/shared/search/search.module';	
+import { ResourcePoliciesModule } from '../../app/shared/resource-policies/resource-policies.module';	
+import { ComcolModule } from '../../app/shared/comcol/comcol.module';	
+import { FeedbackComponent } from './app/info/feedback/feedback.component';
 
 const DECLARATIONS = [
   ItemSearchResultListElementComponent,
@@ -133,7 +137,8 @@ const DECLARATIONS = [
   HeaderComponent,
   NavbarComponent,
   HeaderNavbarWrapperComponent,
-  BreadcrumbsComponent
+  BreadcrumbsComponent,
+  FeedbackComponent
 ];
 
 @NgModule({
@@ -180,6 +185,10 @@ const DECLARATIONS = [
     SubmissionModule,
     MyDSpacePageModule,
     MyDspaceSearchModule,
+    SearchModule,	
+    FormsModule,	
+    ResourcePoliciesModule,	
+    ComcolModule
   ],
   declarations: DECLARATIONS
 })
