@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   isThemeCSSLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
-   * Whether or not the idle modal is is currently open
+   * Whether or not the idle modal is currently open
    */
   idleModalOpen: boolean;
 

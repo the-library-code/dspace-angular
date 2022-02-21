@@ -64,9 +64,9 @@
                 "bundleName": "dspace-theme"
               },
               {
-                "input": "src/themes/gesellschaft-informatik/styles/theme.scss",
+                "input": "src/themes/gi/styles/theme.scss",
                 "inject": false,
-                "bundleName": "gesellschaft-informatik-theme"
+                "bundleName": "gi-theme"
               }
             ],
             "scripts": []
