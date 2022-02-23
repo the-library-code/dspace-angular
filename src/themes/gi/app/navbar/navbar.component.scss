@@ -10,11 +10,17 @@ nav.navbar {
 .navbar ::ng-deep {
   a {
     color: black !important;
-    font-size: 1.5rem;
+    font-size: 1.12rem !important;
+    font-weight: 300 !important;
 
     &:hover, &focus {
       color: black !important;
     }
+  }
+
+  button {
+    font-size: 1.12rem !important;
+    font-weight: 300 !important;
   }
 }
 
@@ -39,7 +45,7 @@ nav.navbar {
   }
 }
 
-/* TODO remove when https://github.com/twbs/bootstrap/issues/24726 is fixed */
+/* TODO remove when https://github.com/twbs/bootstrap/issues/24726 is fixed*/
 .navbar-expand-md.navbar-container {
   @media screen and (max-width: map-get($grid-breakpoints, md)) {
     > .container {

@@ -1,9 +1,11 @@
 <nav [ngClass]="{'open': !(menuCollapsed | async)}"
      [@slideMobileNav]="!(windowService.isXsOrSm() | async) ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
-     class="navbar navbar-light navbar-expand-md p-md-0 navbar-container flex-shrink-0 px-0"
+     class="navbar navbar-light navbar-expand-md p-md-0 navbar-container flex-shrink-0 px-0 d-flex justify-content-between"
      role="navigation" [attr.aria-label]="'nav.main.description' | translate">    <!-- TODO remove navbar-container class when https://github.com/twbs/bootstrap/issues/24726 is fixed -->
-    <div class="container">
-        <div class="reset-padding-md">
+  <ds-search-navbar class="mr-3"></ds-search-navbar>
+
+  <div class="container">
+        <div>
             <div id="collapsingNav">
                 <ul class="navbar-nav mr-auto shadow-none">
                     <ng-container *ngFor="let section of (sections | async)">
@@ -14,11 +16,11 @@
             </div>
         </div>
     </div>
-  <ds-search-navbar></ds-search-navbar>
-  <ds-lang-switch></ds-lang-switch>
-  <ds-auth-nav-menu-ges-info></ds-auth-nav-menu-ges-info>
-  <ds-impersonate-navbar></ds-impersonate-navbar>
-  <div class="pl-2">
+
+  <ds-lang-switch class="mr-3"></ds-lang-switch>
+  <ds-auth-nav-menu-ges-info class="mr-3"></ds-auth-nav-menu-ges-info>
+  <ds-impersonate-navbar class="mr-3"></ds-impersonate-navbar>
+  <div>
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()"
             aria-controls="collapsingNav"
             aria-expanded="false" [attr.aria-label]="'nav.toggle' | translate">
