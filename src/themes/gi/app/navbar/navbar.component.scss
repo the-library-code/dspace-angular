@@ -2,9 +2,25 @@ nav.navbar {
   align-items: baseline;
 }
 
+.navbar-toggler .navbar-toggler-icon {
+  background-image: none !important;
+  line-height: 1.5;
+}
+
+.navbar ::ng-deep {
+  a {
+    color: black !important;
+    font-size: 1.5rem;
+
+    &:hover, &focus {
+      color: black !important;
+    }
+  }
+}
+
 /** Mobile menu styling **/
 @media screen and (max-width: map-get($grid-breakpoints, md)) {
-  .navbar {
+  .navbar ::ng-deep {
     width: 100vw;
     background-color: var(--bs-white);
     position: absolute;

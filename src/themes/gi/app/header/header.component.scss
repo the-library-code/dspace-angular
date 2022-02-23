@@ -11,19 +11,5 @@ header {
   }
 }
 
-.navbar-toggler .navbar-toggler-icon {
-  background-image: none !important;
-  line-height: 1.5;
-}
 
-.navbar ::ng-deep {
-  a {
-    color: black !important;
-    font-size: 1.5rem;
-
-    &:hover, &focus {
-      color: black !important;
-    }
-  }
-}
 
