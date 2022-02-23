@@ -1,5 +1,3 @@
-
-
 .navbar-toggler .navbar-toggler-icon {
   background-image: none !important;
   line-height: 1.5;
@@ -7,18 +5,14 @@
 
 .navbar ::ng-deep {
   a {
-    color: black !important;
+    color: rgba(0, 0, 0, 0.75) !important;
     font-size: 1.12rem !important;
     font-weight: 300 !important;
 
     &:hover, &focus {
       color: black !important;
+      text-decoration: none;
     }
-  }
-
-  button {
-    font-size: 1.12rem !important;
-    font-weight: 300 !important;
   }
 }
 

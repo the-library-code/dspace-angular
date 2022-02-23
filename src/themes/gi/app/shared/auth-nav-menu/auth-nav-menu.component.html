@@ -2,9 +2,9 @@
   <li *ngIf="!(isAuthenticated | async) && !(isXsOrSm$ | async) && (showAuth | async)" class="nav-item"
       (click)="$event.stopPropagation();">
     <div ngbDropdown #loginDrop display="dynamic" placement="bottom-right" class="d-inline-block" @fadeInOut>
-      <a href="#" class="btn btn-login dropdownLogin" [attr.aria-label]="'nav.login' |translate" (click)="$event.preventDefault()" ngbDropdownToggle>
+      <button class="btn btn-login dropdownLogin" [attr.aria-label]="'nav.login' |translate" (click)="$event.preventDefault()" ngbDropdownToggle>
         {{ 'nav.login' | translate }}
-      </a>
+      </button>
       <div class="loginDropdownMenu" [ngClass]="{'pl-3 pr-3': (loading | async)}" ngbDropdownMenu
            [attr.aria-label]="'nav.login' |translate">
         <ds-log-in
