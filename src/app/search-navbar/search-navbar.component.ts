@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SearchService } from '../core/shared/search/search.service';
-import { expandSearchInput } from '../shared/animations/slide';
+import { slide } from '../shared/animations/slide';
 
 /**
  * The search box in the header that expands on focus and collapses on focus out
@@ -11,7 +11,7 @@ import { expandSearchInput } from '../shared/animations/slide';
   selector: 'ds-search-navbar',
   templateUrl: './search-navbar.component.html',
   styleUrls: ['./search-navbar.component.scss'],
-  animations: [expandSearchInput]
+  animations: [slide]
 })
 export class SearchNavbarComponent {
 

@@ -3,7 +3,7 @@
   <span>SUCHE</span>
 </button>
 
-<div @slide [hidden]="!searchExpanded" id="layer" class="overlay container-fluid">
+<div [hidden]="!searchExpanded" id="layer" class="overlay container-fluid">
     <div class="row mx-1 mt-3">
       <div class="col-md-12">
         <button type="button" class="close" aria-label="Close" (click)="collapse()">
@@ -15,7 +15,7 @@
       <div class="col-12 search-field">
         <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" autocomplete="on">
           <div>
-            <input #searchInput [@toggleAnimation]="isExpanded" [attr.aria-label]="('nav.search' | translate)" name="query"
+            <input #searchInput [@slide]="isExpanded" [attr.aria-label]="('nav.search' | translate)" name="query"
                    formControlName="query" type="text" placeholder="{{searchExpanded ? ('nav.search' | translate) : ''}}"
                    class="bg-transparent form-control">
           </div>
