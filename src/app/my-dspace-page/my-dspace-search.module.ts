@@ -34,14 +34,17 @@ const ENTRY_COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    MyDspacePageRoutingModule,
-  ],
-  declarations: [
-    ...ENTRY_COMPONENTS
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        MyDspacePageRoutingModule,
+    ],
+    exports: [
+        ItemSearchResultDetailElementComponent
+    ],
+    declarations: [
+        ...ENTRY_COMPONENTS
+    ]
 })
 
 /**

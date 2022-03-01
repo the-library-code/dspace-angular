@@ -1,5 +1,19 @@
-<h2 class="pt-4">Neueste Sammlungen</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, commodi esse facilis fugiat ipsam minima nobis
-  nulla, perspiciatis ratione similique suscipit velit veniam, voluptas? Asperiores dignissimos id nostrum quis
-  veritatis.</p>
+<h2 class="pt-4">Sammlungen mit den neuesten Artikeln</h2>
+
+<ng-container class="mt-10" *ngVar="(communitiesRD$ | async) as communitiesRD">
+  <div *ngIf="communitiesRD?.hasSucceeded " class="top-element">
+
+    <!--  <p class="lead">{{'home.top-level-communities.help' | translate}}</p>-->
+    <ds-viewable-collection-mainpage
+      [config]="config"
+      [sortConfig]="sortConfig"
+      [objects]="communitiesRD$ | async"
+      [hideGear]="true"
+      [hidePaginationDetail]="true"
+    >
+    </ds-viewable-collection-mainpage>
+  </div>
+  <ds-error *ngIf="communitiesRD?.hasFailed " message="{{'error.top-level-communites' | translate}}"></ds-error>
+  <ds-loading *ngIf="communitiesRD?.isLoading " message="{{'loading.top-level-communities' | translate}}"></ds-loading>
+</ng-container>
 
