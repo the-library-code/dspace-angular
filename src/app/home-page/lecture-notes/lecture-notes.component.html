@@ -1,38 +1,11 @@
 <h2 class="pt-4">Lecture Notes in Informatics</h2>
 <div class="fields row">
-  <div class="field-item row m-2">
+  <div class="field-item row m-2" *ngFor="let item of cleanedLectureNotes[0]; let i = index">
     <div class="left">
       <img src="assets/images/project-placeholder.svg">
     </div>
     <div class="right col">
-      <h6>Titel</h6>
-      <p>Number of Docs</p>
-    </div>
-  </div>
-  <div class="field-item row m-2">
-    <div class="left">
-      <img src="assets/images/project-placeholder.svg">
-    </div>
-    <div class="right col">
-      <h6>Title</h6>
-      <p>Number of Docs</p>
-    </div>
-  </div>
-  <div class="field-item row m-2">
-    <div class="left">
-      <img src="assets/images/project-placeholder.svg">
-    </div>
-    <div class="right col">
-      <h6>Title</h6>
-      <p>Number of Docs</p>
-    </div>
-  </div>
-  <div class="field-item row m-2">
-    <div class="left">
-      <img src="assets/images/project-placeholder.svg">
-    </div>
-    <div class="right col">
-      <h6>Title</h6>
+      <h6>{{ item.name }}</h6>
       <p>Number of Docs</p>
     </div>
   </div>

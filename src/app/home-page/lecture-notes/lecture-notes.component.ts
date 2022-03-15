@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { GiDataService } from '../gi-data.service';
+import {Component, OnInit} from '@angular/core';
+import {GiDataService} from '../gi-data.service';
 
 @Component({
   selector: 'ds-lecture-notes',
@@ -8,15 +8,18 @@ import { GiDataService } from '../gi-data.service';
 })
 export class LectureNotesComponent implements OnInit {
 
+
   constructor(private gidata: GiDataService) {
   }
 
+  lectureNotes = [];
+  cleanedLectureNotes = [];
+
   ngOnInit(): void {
-
-
-    this.gidata.getLectureNotes().subscribe(data => {
-      console.log(data);
+    this.gidata.getLectureNotes().subscribe(async data => {
+      await this.lectureNotes.push(data);
+      await this.cleanedLectureNotes.push(this.lectureNotes[0]._embedded.collections);
+      console.log(this.cleanedLectureNotes);
     });
   }
-
 }
