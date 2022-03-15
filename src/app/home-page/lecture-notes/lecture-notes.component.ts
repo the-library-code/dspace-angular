@@ -19,7 +19,6 @@ export class LectureNotesComponent implements OnInit {
     this.gidata.getLectureNotes().subscribe(async data => {
       await this.lectureNotes.push(data);
       await this.cleanedLectureNotes.push(this.lectureNotes[0]._embedded.collections);
-      console.log(this.cleanedLectureNotes);
     });
   }
 }

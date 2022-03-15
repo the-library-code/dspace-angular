@@ -14,4 +14,8 @@ export class GiDataService {
     return this.http.get('http://localhost:8080/server/api/core/collections');
   }
 
+  getFields() {
+    return this.http.get('http://localhost:8080/server/api/core/communities');
+  }
+
 }
