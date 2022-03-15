@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GiDataService } from '../gi-data.service';
 
 @Component({
   selector: 'ds-gi-fields',
