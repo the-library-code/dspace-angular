@@ -8,10 +8,10 @@ import { GiDataService } from '../gi-data.service';
 })
 export class GiFieldsComponent implements OnInit {
 
-  fields = [];
-  cleanedFields = [];
+  // fields = [];
+  // cleanedFields = [];
 
-  constructor(private gidata: GiDataService) { }
+  constructor() {}
 
   ngOnInit(): void {
     // this.gidata.getFields().subscribe(async data => {
