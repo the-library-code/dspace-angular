@@ -23,5 +23,4 @@ export class ThemedHomeNewsComponent extends ThemedComponent<HomeNewsComponent> 
   protected importUnthemedComponent(): Promise<any> {
     return import(`./home-news.component`);
   }
-
 }
