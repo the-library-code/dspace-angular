@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GiDataService } from '../gi-data.service';
 
 @Component({
   selector: 'ds-gi-fields',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GiFieldsComponent implements OnInit {
 
+  giFields = [];
+
+  constructor (private gidata: GiDataService) {
+  }
+
   ngOnInit(): void {
+    this.gidata.getUI()
+      .subscribe(results => {
+        this.giFields.push((results as any)._embedded.layoutgroups[0]._embedded.communities);
+        console.log(this.giFields);
+      });
   }
 
 

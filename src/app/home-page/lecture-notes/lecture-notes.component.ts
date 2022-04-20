@@ -8,19 +8,18 @@ import { GiDataService } from '../gi-data.service';
 })
 export class LectureNotesComponent implements OnInit {
 
-  lectureNotes$ = [];
+  lectureNotes: any[] = [];
 
   constructor(private gidata: GiDataService) {
   }
 
   ngOnInit(): void {
-
-    this.gidata.getLectureNotes()
+    this.gidata.getUI()
       .subscribe(results => {
-        this.lectureNotes$.push((results as any));
-        console.log(this.lectureNotes$);
+        this.lectureNotes.push((results as any)._embedded.layoutgroups[2]._embedded.communities);
+        console.log(this.lectureNotes);
+        this.lectureNotes = this.lectureNotes[0];
+        console.log(this.lectureNotes);
       });
-
-
   }
 }

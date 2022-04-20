@@ -10,18 +10,7 @@ export class GiDataService {
   constructor(private http: HttpClient) {
   }
 
-  collectionsURL = 'http://localhost:8080/server/api/core/collections';
-  communitiesURL = 'http://localhost:8080/server/api/core/communities';
-  uiURL = 'http://localhost:8080/server/api/UIconfig';
-
-
-  getLectureNotes() {
-    return this.http.get(this.collectionsURL);
-  }
-
-  getFields() {
-    return this.http.get(this.communitiesURL);
-  }
+  uiURL = 'http://localhost:8080/server/api/GI/UIConfig';
 
   getUI() {
     return this.http.get(this.uiURL);

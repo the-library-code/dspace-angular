@@ -1,9 +1,9 @@
 <h2 class="pt-4">GI Fachbereiche</h2>
 
 <div class="fields row">
-  <div class="field-item col m-2">
-    <h6></h6>
-    <p class="txt-bl"></p>
+  <div class="field-item col m-2" *ngFor="let item of giFields; index as i">
+    <h6>{{ item[0][i].name }}</h6>
+    <p class="txt-bl">{{ item[0][i].name }}</p>
     <p class="txt-bl">Number of Docs</p>
   </div>
 </div>
