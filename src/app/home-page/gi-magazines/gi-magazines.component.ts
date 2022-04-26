@@ -14,11 +14,11 @@ export class GiMagazinesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.gidata.getUI()
-      .subscribe(results => {
-        this.giMagazines.push((results as any)._embedded.layoutgroups[1]._embedded.communities);
-        console.log(this.giMagazines);
-      });
+    // this.gidata.getUI()
+    //   .subscribe(results => {
+    //     this.giMagazines.push((results as any)._embedded.layoutgroups[1]._embedded.communities);
+    //     console.log(this.giMagazines);
+    //   });
   }
 
 

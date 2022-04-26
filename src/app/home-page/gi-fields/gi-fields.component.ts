@@ -14,11 +14,11 @@ export class GiFieldsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.gidata.getUI()
-      .subscribe(results => {
-        this.giFields.push((results as any)._embedded.layoutgroups[0]._embedded.communities);
-        console.log(this.giFields);
-      });
+    // this.gidata.getUI()
+    //   .subscribe(results => {
+    //     this.giFields.push((results as any)._embedded.layoutgroups[0]._embedded.communities);
+    //     console.log(this.giFields);
+    //   });
   }
 
 

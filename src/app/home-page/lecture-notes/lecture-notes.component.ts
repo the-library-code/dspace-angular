@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { GiDataService } from '../gi-data.service';
 
 @Component({
@@ -13,13 +13,41 @@ export class LectureNotesComponent implements OnInit {
   constructor(private gidata: GiDataService) {
   }
 
-  ngOnInit(): void {
-    this.gidata.getUI()
-      .subscribe(results => {
-        this.lectureNotes.push((results as any)._embedded.layoutgroups[2]._embedded.communities);
-        console.log(this.lectureNotes);
-        this.lectureNotes = this.lectureNotes[0];
-        console.log(this.lectureNotes);
-      });
+  getLectureNotes() {
+    this.gidata.getUI().subscribe(data => {
+      this.lectureNotes = data[2].layoutgroups[2]._embedded.communities;
+      console.log(data);
+      console.log(this.lectureNotes);});
   }
+
+  ngOnInit() {
+    console.log('ngOnInit called');
+    this.getLectureNotes();
+  }
+
+  ngOnChanges(change: SimpleChanges) {
+    console.log('ngOnChanges: ', change);
+  }
+
+  ngDoCheck() {
+    console.log('Do Check!');
+  }
+
+  ngAfterContentInit() {
+    console.log('AfterContent Init');
+  }
+
+  ngAfterContentChecked() {
+    console.log('AfterContent Checked');
+  }
+
+  ngAfterViewInit() {
+    console.log('After View Init');
+  }
+
+  ngAfterViewChecked() {
+    console.log('After View Checked');
+  }
+
+
 }
