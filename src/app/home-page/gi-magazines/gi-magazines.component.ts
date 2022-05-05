@@ -17,7 +17,7 @@ export class GiMagazinesComponent implements OnInit {
   ngOnInit(): void {
     this.gidata.getUI()
        .subscribe(results => {
-         this.giMagazines.push(... results.layoutgroups[1]._embedded.communities);
+         this.giMagazines.push(... results[3].layoutgroups[1]._embedded.communities);
        });
   }
 

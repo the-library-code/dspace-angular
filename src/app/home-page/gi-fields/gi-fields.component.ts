@@ -16,7 +16,7 @@ export class GiFieldsComponent implements OnInit {
   ngOnInit(): void {
     this.gidata.getUI()
        .subscribe(results => {
-         this.giFields.push( ... results.layoutgroups[0]._embedded.communities);
+         this.giFields.push( ... results[3].layoutgroups[0]._embedded.communities);
        });
   }
 

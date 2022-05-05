@@ -16,10 +16,7 @@ export class LectureNotesComponent implements OnInit {
 
   ngOnInit() {
     this.gidata.getUI().subscribe(data => {
-      this.lectureNotes = data.layoutgroups[2]._embedded.communities;
+      this.lectureNotes = data[3].layoutgroups[2]._embedded.communities;
     });
   }
-
-
-
 }
