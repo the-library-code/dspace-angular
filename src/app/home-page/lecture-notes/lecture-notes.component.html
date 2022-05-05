@@ -1,4 +1,6 @@
+<!-- <div *ngIf="(lectureNotes | async)?.length > 0"> -->
 <h2 class="pt-4">Lecture Notes in Informatics</h2>
+<h3>{{ name }}</h3>
 <div class="fields row">
   <div class="field-item row m-2" *ngFor="let item of lectureNotes">
     <div class="left">
@@ -10,7 +12,7 @@
     </div>
   </div>
 </div>
-
+<!-- </div> -->
 
 
 

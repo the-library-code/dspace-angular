@@ -21,7 +21,7 @@ export class GiDataService {
               postsArray.push({ ...responseData[key]});
             }
           }
-          return postsArray;
+          return postsArray[3];
         })
       );
   }
