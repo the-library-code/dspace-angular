@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GiDataService } from '../gi-data.service';
 
 @Component({
@@ -7,20 +7,13 @@ import { GiDataService } from '../gi-data.service';
   styleUrls: ['./gi-magazines.component.scss']
 })
 
-export class GiMagazinesComponent implements OnInit {
+export class GiMagazinesComponent {
 
-  giMagazines = [];
+  uiConfig: any;
 
   constructor(private gidata: GiDataService) {
+    this.uiConfig = gidata.uiConfig;
   }
-
-  ngOnInit(): void {
-    this.gidata.getUI()
-       .subscribe(results => {
-         this.giMagazines.push(... results[3].layoutgroups[1]._embedded.communities);
-       });
-  }
-
 
 }
 

@@ -1,17 +1,19 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {map} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Injectable(
   {providedIn: 'root'}
 )
 
-export class GiDataService {
-  constructor(private http: HttpClient) {
-  }
+export class GiDataService implements OnDestroy {
 
-  getUI() {
-    return this.http
+  req: Subscription;
+  uiConfig = [];
+
+  constructor(private http: HttpClient) {
+     this.req = this.http
       .get('http://localhost:8080/server/api/GI/UIConfig')
       .pipe(
         map(responseData => {
@@ -23,6 +25,17 @@ export class GiDataService {
           }
           return postsArray;
         })
-      );
+      ).subscribe(results => {
+
+         // simulate sluggish internet connection
+         // setTimeout( () => { this.uiConfig.push(... results); } , 10000);
+
+         this.uiConfig.push(... results);
+       });
   }
+
+  ngOnDestroy() {
+    this.req.unsubscribe();
+  }
+
 }
