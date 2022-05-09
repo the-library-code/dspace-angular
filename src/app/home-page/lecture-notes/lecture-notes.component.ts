@@ -9,14 +9,16 @@ import {GiDataService} from '../gi-data.service';
 })
 export class LectureNotesComponent implements OnInit {
 
-  uiConfig: any;
-  ready = false;
+  uiConfig = [];
 
   constructor(private gidata: GiDataService, private ref: ChangeDetectorRef) {
       }
 
   ngOnInit()  {
-    this.gidata.getConfig().subscribe(result => { this.uiConfig = result; this.ref.markForCheck(); } );
+    this.gidata.getConfig().subscribe( result => {
+      this.uiConfig.push(... ((result as any)._embedded?.layoutgroups[2]?._embedded?.communities));
+      this.ref.markForCheck();
+    } );
   }
 
 
