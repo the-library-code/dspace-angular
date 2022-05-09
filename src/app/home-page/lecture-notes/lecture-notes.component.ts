@@ -1,25 +1,20 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GiDataService} from '../gi-data.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'ds-lecture-notes',
   templateUrl: './lecture-notes.component.html',
   styleUrls: ['./lecture-notes.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LectureNotesComponent implements OnInit {
 
-  uiConfig = [];
+  req: Observable<any>;
 
-  constructor(private gidata: GiDataService, private ref: ChangeDetectorRef) {
+  constructor(private gidata: GiDataService) {
       }
 
   ngOnInit()  {
-    this.gidata.getConfig().subscribe( result => {
-      this.uiConfig.push(... ((result as any)._embedded?.layoutgroups[2]?._embedded?.communities));
-      this.ref.markForCheck();
-    } );
+    this.req = this.gidata.getConfig();
   }
-
-
 }

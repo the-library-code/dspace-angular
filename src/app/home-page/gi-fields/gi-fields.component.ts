@@ -1,25 +1,24 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { GiDataService } from '../gi-data.service';
+import {Observable} from 'rxjs';
 
 
 @Component({
   selector: 'ds-gi-fields',
   templateUrl: './gi-fields.component.html',
   styleUrls: ['./gi-fields.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
-})
+  })
 
 export class GiFieldsComponent implements OnInit {
 
-  uiConfig = [];
+  req: Observable<any>;
 
-  constructor (private gidata: GiDataService, private ref: ChangeDetectorRef) {
+  constructor(private gidata: GiDataService) {
   }
 
   ngOnInit()  {
-    this.gidata.getConfig().subscribe(result => {
-      this.uiConfig.push(... ((result as any)._embedded?.layoutgroups[0]?._embedded?.communities));
-      this.ref.detectChanges();
-    } );
+    this.req = this.gidata.getConfig();
   }
+
 }
+
