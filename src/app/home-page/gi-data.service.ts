@@ -9,13 +9,13 @@ import {Subscription} from 'rxjs';
 export class GiDataService implements OnDestroy {
 
   req: Subscription;
-  uiConfig: any;
+  uiConfig = [];
 
   constructor(private http: HttpClient) {
      this.req = this.http
       .get('http://localhost:8080/server/api/GI/UIConfig')
       .subscribe(results => {
-        this.uiConfig = results;
+        this.uiConfig.push(results);
        });
   }
 

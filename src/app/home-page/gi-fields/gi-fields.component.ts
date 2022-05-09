@@ -11,13 +11,7 @@ export class GiFieldsComponent {
   uiConfig: any;
 
   constructor (public gidata: GiDataService) {
-
-this.uiConfig = gidata.uiConfig;
+    this.uiConfig = gidata.uiConfig;
   }
 
-  onButtonClick() {
-    console.log(this.uiConfig);
-    console.log(this.gidata.uiConfig);
-
-  }
 }

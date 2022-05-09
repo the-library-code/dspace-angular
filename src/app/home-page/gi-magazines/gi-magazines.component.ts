@@ -11,7 +11,7 @@ export class GiMagazinesComponent {
 
   uiConfig: any;
 
-  constructor(private gidata: GiDataService) {
+  constructor(public gidata: GiDataService) {
     this.uiConfig = gidata.uiConfig;
   }
 
