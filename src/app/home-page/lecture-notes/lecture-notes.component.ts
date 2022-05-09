@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {GiDataService} from '../gi-data.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'ds-lecture-notes',
@@ -9,12 +8,12 @@ import {Observable} from 'rxjs';
 })
 export class LectureNotesComponent implements OnInit {
 
-  req: Observable<any>;
+  req;
 
   constructor(private gidata: GiDataService) {
       }
 
   ngOnInit()  {
-    this.req = this.gidata.getConfig();
+    this.req = this.gidata.req;
   }
 }
