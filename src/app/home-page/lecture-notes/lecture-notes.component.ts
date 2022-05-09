@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { GiDataService } from '../gi-data.service';
 
 @Component({
@@ -6,11 +6,16 @@ import { GiDataService } from '../gi-data.service';
   templateUrl: './lecture-notes.component.html',
   styleUrls: ['./lecture-notes.component.scss']
 })
-export class LectureNotesComponent {
+export class LectureNotesComponent implements OnInit {
 
   uiConfig: any;
 
-  constructor(public gidata: GiDataService) {
-    this.uiConfig = gidata.uiConfig;
+  constructor(private gidata: GiDataService) {
+      }
+
+  ngOnInit()  {
+    this.gidata.getConfig().subscribe(result => { this.uiConfig = result; } );
   }
+
+
 }
