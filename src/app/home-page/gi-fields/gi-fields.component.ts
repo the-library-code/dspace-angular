@@ -9,7 +9,15 @@ import { GiDataService } from '../gi-data.service';
 export class GiFieldsComponent {
 
   uiConfig: any;
-  constructor (private gidata: GiDataService) {
-  this.uiConfig = gidata.uiConfig;
+
+  constructor (public gidata: GiDataService) {
+
+this.uiConfig = gidata.uiConfig;
+  }
+
+  onButtonClick() {
+    console.log(this.uiConfig);
+    console.log(this.gidata.uiConfig);
+
   }
 }
