@@ -2,10 +2,10 @@
 <div class="fields row">
   <div class="field-item row m-2" *ngFor="let item of (req | async)?._embedded?.layoutgroups[1]?._embedded?.communities ">
     <div class="left">
-      <img src="assets/images/project-placeholder.svg" alt="placeholder">
+      <img src="assets/images/project-placeholder.svg" alt="{{ item.name }}">
     </div>
     <div class="right col">
-      <a href="http://localhost:4000/communities/{{item.uuid}}"><h6>{{ item.name }}</h6></a>
+      <a href="communities/{{item.uuid}}"><h6>{{ item.name }}</h6></a>
       <p class="txt-gr">Number of Docs</p>
     </div>
   </div>
