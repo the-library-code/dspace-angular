@@ -9,8 +9,15 @@ h2 {
 }
 
 h6 {
-  font-size: 15px;
+  font-size: 13px;
   color: $blue;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .txt-gr {
