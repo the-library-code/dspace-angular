@@ -1,13 +1,14 @@
-import { Component, Optional } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { hasValue } from '../../../../app/shared/empty.util';
 import { KlaroService } from '../../../../app/shared/cookies/klaro.service';
+import { GiDataService } from '../../../../app/home-page/gi-data.service';
 
 @Component({
   selector: 'ds-footer',
   styleUrls: ['footer.component.scss'],
   templateUrl: 'footer.component.html'
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   dateObj: number = Date.now();
 
   /**
@@ -15,7 +16,13 @@ export class FooterComponent {
    */
   showTopFooter = true;
 
-  constructor(@Optional() private cookies: KlaroService) {
+  req;
+
+  constructor(@Optional() private cookies: KlaroService, private gidata: GiDataService) {
+  }
+
+  ngOnInit() {
+    this.req = this.gidata.req;
   }
 
   showCookieSettings() {

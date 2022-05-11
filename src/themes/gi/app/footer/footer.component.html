@@ -10,35 +10,8 @@
                     <h5>GI Zeitschriften</h5>
 
                     <ul class="list-unstyled mb-0 two-col">
-                        <li>
-                            <a routerLink="./" class="">BISE</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">Datenbank Spektrum</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">i-com</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">Informatik Spektrum</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">it - Information Technology</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">Journal of Integrative</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">Bioinformatics</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">Künstliche Intelligenz</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">LOGIN</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">Wirtschftsinformatik & Management</a>
+                        <li *ngFor="let item of (req | async)?._embedded?.layoutgroups[1]?._embedded?.communities ">
+                            <a href="communities/{{item.uuid}}">{{ item.name }}</a>
                         </li>
                     </ul>
                 </div>
@@ -49,17 +22,8 @@
                     <h5>Lectures Notes in Informatics</h5>
 
                     <ul class="list-unstyled mb-0">
-                        <li>
-                            <a routerLink="./" class="">Dissertations</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">Proceedings</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">Seminars</a>
-                        </li>
-                        <li>
-                            <a routerLink="./" class="">Thematics</a>
+                        <li *ngFor="let item of (req | async)?._embedded?.layoutgroups[2]?._embedded?.communities ">
+                            <a href="communities/{{item.uuid}}">{{ item.name }}</a>
                         </li>
                     </ul>
                 </div>

@@ -1,11 +1,11 @@
 <h2 class="pt-4">Lecture Notes in Informatics</h2>
 <div class="fields row">
-  <div class="field-item row m-2" *ngFor="let item of (req | async)?._embedded?.layoutgroups[2]?._embedded?.communities">
+  <div class="field-item row m-2" *ngFor="let item of (req | async)?._embedded?.layoutgroups[2]?._embedded?.communities" >
     <div class="left">
       <img src="assets/images/project-placeholder.svg" alt="{{ item.name }}">
     </div>
     <div class="right col">
-      <a href="communities/{{item.uuid}}"><h6> Lecture Notes in {{ item.name }}</h6></a>
+      <a href="communities/{{item.uuid}}"><h6> Lecture Notes in Informatics - {{ item.name }}</h6></a>
       <p class="txt-gr">Dokumente</p>
     </div>
   </div>
