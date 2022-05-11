@@ -3,4 +3,14 @@
   color: $blue;
   padding: 0.75rem;
   width: 250px;
+  position: relative;
+}
+
+.box-arrow {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  img {
+    width: 25px!important;
+  }
 }

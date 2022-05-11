@@ -5,8 +5,18 @@ img {
 .field-item {
   border: 2px $gray-100 solid;
   width: 250px;
+  position: relative;
 }
 
 .right {
   padding: 0.75rem;
+}
+
+.box-arrow {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  img {
+    width: 25px!important;
+  }
 }
