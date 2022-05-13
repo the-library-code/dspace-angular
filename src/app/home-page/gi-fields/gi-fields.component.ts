@@ -9,13 +9,13 @@ import { GiDataService } from '../gi-data.service';
 
 export class GiFieldsComponent implements OnInit {
 
-  req;
+  uiConfigreq;
 
   constructor(private gidata: GiDataService) {
   }
 
   ngOnInit()  {
-    this.req = this.gidata.req;
+    this.uiConfigreq = this.gidata.uiConfigreq;
   }
 
 }

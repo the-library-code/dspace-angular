@@ -16,6 +16,7 @@ import { FrequentDownloadsComponent } from './frequent-downloads/frequent-downlo
 import { GiFieldsComponent } from './gi-fields/gi-fields.component';
 import { GiMagazinesComponent } from './gi-magazines/gi-magazines.component';
 import { LectureNotesComponent } from './lecture-notes/lecture-notes.component';
+import { LectureNoteComponent } from './lecture-notes/lecture-note/lecture-note.component';
 
 const DECLARATIONS = [
   HomePageComponent,
@@ -41,6 +42,7 @@ const DECLARATIONS = [
   ],
   declarations: [
     ...DECLARATIONS,
+    LectureNoteComponent,
   ],
   exports: [
     ...DECLARATIONS,

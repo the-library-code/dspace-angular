@@ -22,7 +22,7 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.req = this.gidata.req;
+    this.req = this.gidata.uiConfigreq;
   }
 
   showCookieSettings() {

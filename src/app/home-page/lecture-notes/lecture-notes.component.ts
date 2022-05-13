@@ -8,12 +8,14 @@ import {GiDataService} from '../gi-data.service';
 })
 export class LectureNotesComponent implements OnInit {
 
-  req;
+  uiConfigreq;
+  numberSub;
+  numberOfItems;
 
-  constructor(private gidata: GiDataService) {
+  constructor(public gidata: GiDataService) {
       }
 
   ngOnInit()  {
-    this.req = this.gidata.req;
+    this.uiConfigreq = this.gidata.uiConfigreq;
   }
 }

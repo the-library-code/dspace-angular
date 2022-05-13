@@ -1,0 +1,13 @@
+<a href="communities/{{lectureNotes.uuid}}">
+  <div class="field-item row m-2">
+    <div class="left">
+      <img src="{{thumbnailUrl}}" alt="{{ lectureNotes.name }}">
+    </div>
+    <div class="right col">
+      <h6> Lecture Notes in Informatics - {{ lectureNotes.name }}</h6>
+      <p class="txt-gr">
+        {{numberSub | async}} Dokumente</p>
+      <div class="box-arrow"><a href="communities/{{lectureNotes.uuid}}"><i class="fa fa-arrow-right move-right"></i></a></div>
+    </div>
+</div>
+</a>

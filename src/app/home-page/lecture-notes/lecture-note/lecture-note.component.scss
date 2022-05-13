@@ -1,0 +1,35 @@
+img {
+  width: 4.5rem;
+}
+
+.field-item {
+  border: 2px $gray-100 solid;
+  width: 250px;
+  position: relative;
+}
+
+.right {
+  padding: 0.75rem;
+}
+
+.box-arrow {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  img {
+    width: 25px!important;
+  }
+}
+
+//.col-md-3 .item:hover {
+//  ::ng-deep .move-right {
+//    position: absolute;
+//    right: 2.5rem;
+//    bottom: 2rem;
+//    transform: translate(1rem,0);
+//    -webkit-transform: translate(1rem,0); /** Chrome & Safari **/
+//    -o-transform: translate(1rem,0); /** Opera **/
+//    -moz-transform: translate(1rem,0); /** Firefox **/
+//    transition: all 300ms ease-in-out;
+//  }
+// }
