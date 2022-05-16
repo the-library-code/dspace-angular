@@ -1,0 +1,50 @@
+img {
+  width: 4.5rem;
+  height: 100%;
+  object-fit: cover;
+}
+
+.field-item {
+  border: 1px #eeeeee solid;
+  width: 260px;
+  height: 120px;
+  position: relative;
+}
+
+.field-item {
+  ::ng-deep a {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+  }
+}
+
+.field-item:hover {
+  ::ng-deep .move-right {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 0.75rem;
+    transform: translate(0.5rem,0);
+    -webkit-transform: translate(0.5rem,0); /** Chrome & Safari **/
+    -o-transform: translate(0.5rem,0); /** Opera **/
+    -moz-transform: translate(0.5rem,0); /** Firefox **/
+    transition: all 300ms ease-in-out;
+  }
+}
+
+.right {
+  padding: 0.75rem;
+}
+
+.field-item {
+  ::ng-deep .move-right {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 0.75rem;
+    transform: translate(0,0);
+    -webkit-transform: translate(0,0); /** Chrome & Safari **/
+    -o-transform: translate(0,0); /** Opera **/
+    -moz-transform: translate(0,0); /** Firefox **/
+    transition: all 300ms ease-in-out;
+  }
+}

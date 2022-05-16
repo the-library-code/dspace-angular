@@ -4,7 +4,7 @@ import {GiDataService} from '../../gi-data.service';
 @Component({
   selector: 'ds-lecture-note',
   templateUrl: './lecture-note.component.html',
-  styleUrls: ['./lecture-note.component.scss']
+  styleUrls: ['../../../../themes/custom/styles/homepage-box_with-thumbnail.scss']
 })
 export class LectureNoteComponent implements OnInit, OnDestroy {
 
