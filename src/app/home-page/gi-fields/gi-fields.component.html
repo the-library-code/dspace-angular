@@ -1,9 +1,8 @@
 <h2 class="pt-4">GI Fachbereiche</h2>
 
+
 <div class="fields row">
-  <div class="field-item row m-2" *ngFor="let item of (uiConfigreq | async)?._embedded?.layoutgroups[0]?._embedded?.communities">
-    <a href="communities/{{item.uuid}}"><h6>{{ item.name }}</h6></a>
-    <p class="txt-bl">Number of Docs</p>
-    <div class="box-arrow"><a href="communities/{{item.uuid}}"><img src="assets/images/arrow-right-short.svg" alt="{{ item.name }}"></a></div>
+  <div *ngFor="let item of (uiConfigreq | async)?._embedded?.layoutgroups[0]?._embedded?.communities">
+    <ds-field class="field-item row m-2" [fields]="item"></ds-field>
   </div>
 </div>

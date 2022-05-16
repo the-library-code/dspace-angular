@@ -1,14 +1,14 @@
 import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {GiDataService} from '../../gi-data.service';
+import { GiDataService } from '../../gi-data.service';
 
 @Component({
-  selector: 'ds-lecture-note',
-  templateUrl: './lecture-note.component.html',
+  selector: 'ds-magazine',
+  templateUrl: './magazine.component.html',
   styleUrls: ['../../../../themes/gi/styles/homepage-box_with-thumbnail.scss']
 })
-export class LectureNoteComponent implements OnInit, OnDestroy {
+export class MagazineComponent implements OnInit, OnDestroy {
 
-  @Input() lectureNotes: any;
+  @Input() magazines: any;
   numberOfItems;
   logoSub;
   numberSub;
@@ -19,13 +19,13 @@ export class LectureNoteComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     // the subscription to this request is done within the html file and managed by angular.
-    this.numberSub = this.gidata.getNumberofItemsReq(this.lectureNotes.uuid);
+    this.numberSub = this.gidata.getNumberofItemsReq(this.magazines.uuid);
 
     // this subscription is direct, we have to manage it ourselves.
-    this.logoSub = this.gidata.getReq(this.lectureNotes._links.logo.href).subscribe(result => {
+    this.logoSub = this.gidata.getReq(this.magazines._links.logo.href).subscribe(result => {
       this.thumbnailUrl = result._links.content.href;
       this.ref.markForCheck();});
-     }
+  }
 
   ngOnDestroy() {
     this.logoSub.unsubscribe();

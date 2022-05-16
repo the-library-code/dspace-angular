@@ -15,8 +15,10 @@ import { PopularDocsComponent } from './popular-docs/popular-docs.component';
 import { FrequentDownloadsComponent } from './frequent-downloads/frequent-downloads.component';
 import { GiFieldsComponent } from './gi-fields/gi-fields.component';
 import { GiMagazinesComponent } from './gi-magazines/gi-magazines.component';
+import { MagazineComponent } from './gi-magazines/magazine/magazine.component';
 import { LectureNotesComponent } from './lecture-notes/lecture-notes.component';
 import { LectureNoteComponent } from './lecture-notes/lecture-note/lecture-note.component';
+import { FieldComponent } from './gi-fields/field/field.component';
 
 const DECLARATIONS = [
   HomePageComponent,
@@ -43,6 +45,8 @@ const DECLARATIONS = [
   declarations: [
     ...DECLARATIONS,
     LectureNoteComponent,
+    MagazineComponent,
+    FieldComponent
   ],
   exports: [
     ...DECLARATIONS,

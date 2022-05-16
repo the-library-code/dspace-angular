@@ -1,0 +1,10 @@
+<a class="d-flex flex-row" href="communities/{{magazines.uuid}}">
+  <div class="left">
+    <img *ngIf="thumbnailUrl" src="{{thumbnailUrl}}" alt="{{ magazines.name }}">
+  </div>
+  <div class="right col">
+    <h6>{{ magazines.name }}</h6>
+    <p class="txt-gr">
+      {{numberSub | async}} Dokumente</p>
+    <a href="communities/{{magazines.uuid}}"><i class="box-arrow fa fa-arrow-right move-right"></i></a></div>
+</a>

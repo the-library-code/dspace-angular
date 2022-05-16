@@ -4,19 +4,20 @@ import { GiDataService } from '../gi-data.service';
 @Component({
   selector: 'ds-gi-fields',
   templateUrl: './gi-fields.component.html',
-  styleUrls: ['./gi-fields.component.scss'],
+  styleUrls: ['../../../themes/gi/styles/homepage-box_without-thumbnail.scss'],
   })
 
 export class GiFieldsComponent implements OnInit {
 
   uiConfigreq;
+  numberSub;
+  numberOfItems;
 
-  constructor(private gidata: GiDataService) {
+  constructor(public gidata: GiDataService) {
   }
 
   ngOnInit()  {
     this.uiConfigreq = this.gidata.uiConfigreq;
   }
-
 }
 
