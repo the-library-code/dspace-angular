@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GiDataService } from '../gi-data.service';
 
 @Component({
@@ -8,7 +8,6 @@ import { GiDataService } from '../gi-data.service';
 })
 
 export class GiMagazinesComponent implements OnInit {
-
   uiConfigreq;
   numberSub;
   numberOfItems;
@@ -19,7 +18,6 @@ export class GiMagazinesComponent implements OnInit {
   ngOnInit()  {
     this.uiConfigreq = this.gidata.uiConfigreq;
   }
-
 }
 
 
