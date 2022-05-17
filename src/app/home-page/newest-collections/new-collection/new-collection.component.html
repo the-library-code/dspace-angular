@@ -1,0 +1,11 @@
+<a class="d-flex flex-row" href="communities/{{newCollections.uuid}}">
+  <div class="left">
+    <img *ngIf="thumbnailUrl" src="{{thumbnailUrl}}" alt="{{ newCollections.name }}">
+    <img *ngIf="!thumbnailUrl" src="assets/images/replacement_document.svg">
+  </div>
+  <div class="right col">
+    <h6>{{ newCollections.name }}</h6>
+    <p class="doc-amount txt-gr">
+      {{numberSub | async}} Dokumente</p>
+    <a href="communities/{{newCollections.uuid}}"><i class="fa fa-arrow-right move-right"></i></a></div>
+</a>

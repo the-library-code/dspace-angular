@@ -4,6 +4,11 @@ img {
   object-fit: cover;
 }
 
+h6 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .doc-amount {
   position: absolute;
   bottom: -4px;

@@ -9,7 +9,6 @@ import { TopLevelCommunityListComponent } from './top-level-community-list/top-l
 import { StatisticsModule } from '../statistics/statistics.module';
 import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component';
 import { ThemedHomePageComponent } from './themed-home-page.component';
-import { NewestCollectionComponent } from './newest-collection/newest-collection.component';
 import { AuthorsWithMostDocsComponent } from './authors-with-most-docs/authors-with-most-docs.component';
 import { PopularDocsComponent } from './popular-docs/popular-docs.component';
 import { FrequentDownloadsComponent } from './frequent-downloads/frequent-downloads.component';
@@ -19,6 +18,8 @@ import { MagazineComponent } from './gi-magazines/magazine/magazine.component';
 import { LectureNotesComponent } from './lecture-notes/lecture-notes.component';
 import { LectureNoteComponent } from './lecture-notes/lecture-note/lecture-note.component';
 import { FieldComponent } from './gi-fields/field/field.component';
+import { NewestCollectionsComponent } from './newest-collections/newest-collections.component';
+import { NewCollectionComponent } from './newest-collections/new-collection/new-collection.component';
 
 const DECLARATIONS = [
   HomePageComponent,
@@ -26,7 +27,7 @@ const DECLARATIONS = [
   TopLevelCommunityListComponent,
   ThemedHomeNewsComponent,
   HomeNewsComponent,
-  NewestCollectionComponent,
+  NewestCollectionsComponent,
   AuthorsWithMostDocsComponent,
   PopularDocsComponent,
   FrequentDownloadsComponent,
@@ -46,7 +47,8 @@ const DECLARATIONS = [
     ...DECLARATIONS,
     LectureNoteComponent,
     MagazineComponent,
-    FieldComponent
+    FieldComponent,
+    NewCollectionComponent
   ],
   exports: [
     ...DECLARATIONS,
