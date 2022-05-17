@@ -10,7 +10,7 @@
                     <h5>GI Zeitschriften</h5>
 
                     <ul class="list-unstyled mb-0 two-col">
-                        <li *ngFor="let item of (req | async)?._embedded?.layoutgroups[1]?._embedded?.communities ">
+                        <li class="top-footer-list" *ngFor="let item of (req | async)?._embedded?.layoutgroups[1]?._embedded?.communities ">
                             <a href="communities/{{item.uuid}}">{{ item.name }}</a>
                         </li>
                     </ul>
