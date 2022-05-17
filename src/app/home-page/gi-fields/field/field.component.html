@@ -1,8 +1,6 @@
-<a class="d-flex flex-row" href="communities/{{fields.uuid}}">
-
-
+<a class="d-flex flex-column" href="communities/{{fields.uuid}}">
     <h6>{{ fields.name }}</h6>
-    <p class="txt-bl">
+    <p class="doc-amount txt-bl">
       {{numberSub | async}} Dokumente</p>
-    <a href="communities/{{fields.uuid}}"><i class="box-arrow fa fa-arrow-right move-right"></i></a>
+    <a href="communities/{{fields.uuid}}"><i class="fa fa-arrow-right move-right"></i></a>
 </a>

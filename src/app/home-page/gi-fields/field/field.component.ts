@@ -4,7 +4,7 @@ import { GiDataService } from '../../gi-data.service';
 @Component({
   selector: 'ds-field',
   templateUrl: './field.component.html',
-  styleUrls: ['./field.component.scss']
+  styleUrls: ['../../../../themes/gi/styles/homepage-box_without-thumbnail.scss']
 })
 export class FieldComponent implements OnInit {
 

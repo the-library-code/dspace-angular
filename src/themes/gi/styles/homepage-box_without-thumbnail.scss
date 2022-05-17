@@ -1,10 +1,15 @@
 .field-item {
-  background-color: #e7e7e7;
+  background-color: #f1f1f1;
   color: #1c89f3;
   padding: 0.75rem;
   width: 260px;
   height: 120px;
   position: relative;
+}
+
+.doc-amount {
+  position: absolute;
+  bottom: -4px;
 }
 
 .field-item {
