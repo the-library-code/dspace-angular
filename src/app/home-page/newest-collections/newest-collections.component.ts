@@ -8,7 +8,7 @@ import { GiDataService } from '../gi-data.service';
 })
 export class NewestCollectionsComponent implements OnInit {
 
-  uiConfigreq;
+  latestCollection;
   numberSub;
   numberOfItems;
 
@@ -16,7 +16,7 @@ export class NewestCollectionsComponent implements OnInit {
   }
 
   ngOnInit()  {
-    this.uiConfigreq = this.gidata.uiConfigreq;
+    this.latestCollection = this.gidata.latestCollection;
   }
 
 }

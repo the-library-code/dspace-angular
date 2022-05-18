@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {GiDataService} from '../gi-data.service';
+import { Component, OnInit } from '@angular/core';
+import { GiDataService } from '../gi-data.service';
 
 @Component({
   selector: 'ds-lecture-notes',

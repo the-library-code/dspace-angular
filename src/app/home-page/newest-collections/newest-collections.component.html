@@ -1,6 +1,6 @@
 <h2 class="pt-4">Sammlungen mit den neuesten Artikeln</h2>
 <div class="fields row">
-  <div *ngFor="let item of (uiConfigreq | async)?._embedded?.layoutgroups[1]?._embedded?.communities | slice:0:8;">
+  <div *ngFor="let item of (latestCollection | async)?._embedded.collections | slice:0:8;">
     <ds-new-collection class="field-item row m-2" [newCollections]="item"></ds-new-collection>
   </div>
 </div>
