@@ -8,7 +8,7 @@ import { MenuID } from '../../../../app/shared/menu/initial-menus-state';
  * Component representing the public navbar
  */
 @Component({
-  selector: 'ds-navbar',
+  selector: 'ds-gi-navbar',
   styleUrls: ['./navbar.component.scss'],
   // styleUrls: ['../../../../app/navbar/navbar.component.scss'],
   templateUrl: './navbar.component.html',
