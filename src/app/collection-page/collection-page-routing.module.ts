@@ -68,16 +68,21 @@ import { ThemedCollectionPageComponent } from './themed-collection-page.componen
         ],
         data: {
           menu: {
-            public: [{
+            public: [
+            {
               id: 'statistics_collection_:id',
-              active: true,
-              visible: true,
+              // to activate set both to true; deactivated for GI
+              // active: true,
+              // visible: true,
+              active: false,
+              visible: false,
               model: {
                 type: MenuItemType.LINK,
                 text: 'menu.section.statistics',
                 link: 'statistics/collections/:id/',
               } as LinkMenuItemModel,
-            }],
+            }
+            ],
           },
         },
       },

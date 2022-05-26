@@ -51,16 +51,21 @@ import { ThemedCommunityPageComponent } from './themed-community-page.component'
         ],
         data: {
           menu: {
-            public: [{
+            public: [
+             {
               id: 'statistics_community_:id',
-              active: true,
-              visible: true,
+               // to activate set both to true; deactivated for GI
+               // active: true,
+               // visible: true,
+               active: false,
+               visible: false,
               model: {
                 type: MenuItemType.LINK,
                 text: 'menu.section.statistics',
                 link: 'statistics/communities/:id/',
               } as LinkMenuItemModel,
-            }],
+            }
+            ],
           },
         },
       },

@@ -54,16 +54,21 @@ import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
         ],
         data: {
           menu: {
-            public: [{
+            public: [
+              {
               id: 'statistics_item_:id',
-              active: true,
-              visible: true,
+                // to activate set both to true; deactivated for GI
+                // active: true,
+                // visible: true,
+                active: false,
+                visible: false,
               model: {
                 type: MenuItemType.LINK,
                 text: 'menu.section.statistics',
                 link: 'statistics/items/:id/',
               } as LinkMenuItemModel,
-            }],
+            }
+            ],
           },
         },
       },
