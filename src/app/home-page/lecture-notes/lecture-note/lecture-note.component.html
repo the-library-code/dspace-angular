@@ -1,11 +1,11 @@
  <a class="d-flex flex-row" href="communities/{{lectureNotes.uuid}}">
     <div class="left">
-      <img *ngIf="thumbnailUrl" src="{{thumbnailUrl}}" alt="{{ lectureNotes.name }}">
-      <img *ngIf="!thumbnailUrl" src="assets/images/replacement_document.svg">
+      <img *ngIf="thumbnailUrl" src="{{thumbnailUrl}}" alt="">
+      <img *ngIf="!thumbnailUrl" src="assets/images/empty.svg" alt="">
     </div>
     <div class="right col">
       <h6> Lecture Notes in Informatics - {{ lectureNotes.name }}</h6>
       <p class="doc-amount txt-gr">
         {{numberSub | async}} Dokumente</p>
-      <a href="communities/{{lectureNotes.uuid}}"><i class="fa fa-arrow-right move-right"></i></a></div>
+      <i class="fa fa-arrow-right move-right"></i></div>
 </a>

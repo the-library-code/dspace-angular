@@ -35,4 +35,5 @@ export class GiDataService {
     return this.http
       .get('http://localhost:8080/server/api/GI/NumberOfItems/' + uuid);
   }
+
 }

@@ -1,11 +1,12 @@
 <a class="d-flex flex-row" href="communities/{{magazines.uuid}}">
   <div class="left">
-    <img *ngIf="thumbnailUrl" src="{{thumbnailUrl}}" alt="{{ magazines.name }}">
-    <img *ngIf="!thumbnailUrl" src="assets/images/replacement_document.svg">
-  </div>
+      <img *ngIf="thumbnailUrl" src="{{thumbnailUrl}}" alt="">
+      <img *ngIf="!thumbnailUrl" src="assets/images/empty.svg" alt="">
+   </div>
   <div class="right col">
     <h6>{{ magazines.name }}</h6>
     <p class="doc-amount txt-gr">
       {{numberSub | async}} Dokumente</p>
-    <a href="communities/{{magazines.uuid}}"><i class="box-arrow fa fa-arrow-right move-right"></i></a></div>
+    <i class="box-arrow fa fa-arrow-right move-right"></i>
+  </div>
 </a>
