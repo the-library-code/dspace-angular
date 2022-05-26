@@ -50,19 +50,7 @@ export class NavbarComponent extends MenuComponent {
    */
   createMenu() {
     const menuList: any[] = [
-      /* News */
-      {
-        id: 'browse_global',
-        active: false,
-        visible: true,
-        index: 1,
-        model: {
-          type: MenuItemType.TEXT,
-          text: 'menu.section.browse_global'
-        } as TextMenuItemModel,
-      },
-      /* Communities & Collections tree */
-      {
+     {
         id: `browse_global_communities_and_collections`,
         parentID: 'browse_global',
         active: false,
