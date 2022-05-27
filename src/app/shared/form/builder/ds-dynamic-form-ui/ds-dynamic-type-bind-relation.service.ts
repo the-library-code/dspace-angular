@@ -179,6 +179,10 @@ export class DsDynamicTypeBindRelationService {
 
     Object.values(relatedModels).forEach((relatedModel: any) => {
 
+      // This is always dc.type in practice! But this could be expanded for other uses
+      console.log("Subbing to value changes of relatedModel: " + relatedModel.id)
+      console.dir(relatedModel);
+
       if (hasValue(relatedModel)) {
         const initValue = (hasNoValue(relatedModel.value) || typeof relatedModel.value === 'string') ? relatedModel.value :
           (Array.isArray(relatedModel.value) ? relatedModel.value : relatedModel.value.value);
@@ -192,11 +196,16 @@ export class DsDynamicTypeBindRelationService {
           // Iterate each matcher
           if (hasValue(this.dynamicMatchers)) {
             this.dynamicMatchers.forEach((matcher) => {
+              //console.log("Value change detected, checking matcher " + matcher.match)
+              //console.dir(matcher);
               // Find the relation
               const relation = this.dynamicFormRelationService.findRelationByMatcher((model as any).typeBindRelations, matcher);
               // If the relation is defined, get matchesCondition result and pass it to the onChange event listener
               if (relation !== undefined) {
                 const hasMatch = this.matchesCondition(relation, matcher);
+                console.log("hasMatch result: " + hasMatch + " for matcher " + matcher.match + " on rel "
+                  + model.id + " new value of related bind model: " + relatedModel.value.value);
+                console.dir(model);
                 matcher.onChange(hasMatch, model, control, this.injector);
               }
             });
@@ -216,7 +225,7 @@ export class DsDynamicTypeBindRelationService {
     const bindValues = [];
     configuredTypeBindValues.forEach((value) => {
       bindValues.push({
-        id: 'dc.type',
+        id: this.formBuilderService.getTypeField().replace(/_/g, '.'),
         value: value
       });
     });

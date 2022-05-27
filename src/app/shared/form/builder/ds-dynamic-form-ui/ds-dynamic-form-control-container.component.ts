@@ -349,6 +349,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
       }
       if (this.model.typeBindRelations && this.model.typeBindRelations.length > 0) {
         this.subscriptions.push(...this.typeBindRelationService.subscribeRelations(this.model, this.control));
+        console.log("Number of subscriptions for " + this.model.id + ": " + this.subscriptions.length);
       }
     }
   }
