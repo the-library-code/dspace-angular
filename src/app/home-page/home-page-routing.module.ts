@@ -16,17 +16,17 @@ import { ThemedHomePageComponent } from './themed-home-page.component';
         data: {
           title: 'home.title',
           menu: {
-            public: [/*{
+            public: [{
               id: 'statistics_site',
-              active: true,
-              visible: true,
+              active: false,
+              visible: false,
               index: 2,
               model: {
                 type: MenuItemType.LINK,
                 text: 'menu.section.statistics',
                 link: 'statistics',
               } as LinkMenuItemModel,
-            }*/],
+            }],
           },
         },
         resolve: {
