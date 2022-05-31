@@ -1,6 +1,6 @@
 <a class="btn d-flex align-items-center p-0" type="button" (click)="searchExpanded ? collapse() : expand()">
   <em class="fas fa-search fa-fw"></em>
-  <span class="ml-1">SUCHE</span>
+  <span class="ml-1">{{ 'nav.search' | translate }}</span>
 </a>
 
 <div [hidden]="!searchExpanded" id="layer" class="overlay container-fluid">
