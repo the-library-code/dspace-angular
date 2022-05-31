@@ -2438,7 +2438,7 @@
 
   "menu.section.browse_community_by_title": "By Title",
 
-  "menu.section.browse_global": "Discover",
+  "menu.section.browse_global": "All of  DSpace",
 
   "menu.section.browse_global_by_author": "By Author",
 
@@ -4162,5 +4162,11 @@
 
   "idle-modal.log-out": "Log out",
 
-  "idle-modal.extend-session": "Extend session"
+  "idle-modal.extend-session": "Extend session",
+
+  // GI Overrides
+  "menu.section.browse_global": "Discover",
+
+  "nav.language": "Language"
+
 }

@@ -12,7 +12,7 @@ import { MenuID } from '../../../../app/shared/menu/initial-menus-state';
   styleUrls: ['./navbar.component.scss'],
   // styleUrls: ['../../../../app/navbar/navbar.component.scss'],
   templateUrl: './navbar.component.html',
-  //templateUrl: '../../../../app/navbar/navbar.component.html',
+  // templateUrl: '../../../../app/navbar/navbar.component.html',
   animations: [slideMobileNav]
 })
 export class NavbarComponent extends BaseComponent {
