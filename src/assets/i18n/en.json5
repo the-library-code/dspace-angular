@@ -4167,6 +4167,28 @@
   // GI Overrides
   "menu.section.browse_global": "Discover",
 
-  "nav.language": "Language"
+  "nav.language": "Language",
+
+  // "login.form.forgot-password": "Have you forgotten your password?",
+  "login.form.forgot-password": "Forgotten password?",
+
+  // "login.form.new-user": "New user? Click here to register.",
+  "login.form.new-user": "Register",
+
+
+  // GI New labels
+
+  "gi.welcome": "Welcome at the Digital Library of Gesellschaft für Informatik e.V.",
+  "gi.search.placeholder": "Search in $$ articles ...",
+  "gi.recent.collections": "Recent collections",
+  "gi.authors.most.documents": "Authors with most documents",
+  "gi.favourite.items": "Favourite Items",
+  "gi.most.downloaded.items": "Most frequent downloads",
+  "gi.fields": "GI fields",
+  "gi.magazines": "GI magazines",
+  "gi.lecturenotes": "Lecture Notes in Informatics",
+  "gi.recent.collections.in.subcommunity": "Recent collections in this subcommunity",
+  "gi.subcommunities": "Subcommunities in this community",
+  "gi.subcommunity.recent.collections": "Recent collections in this subcommunity"
 
 }

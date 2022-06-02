@@ -5139,6 +5139,29 @@
   "nav.language": "Sprache",
 
   // "nav.search": "Search",
-  "nav.search": "Suchen"
+  "nav.search": "Suchen",
+
+  // "login.form.forgot-password": "Have you forgotten your password?",
+  "login.form.forgot-password": "Passwort vergessen?",
+
+  // "login.form.new-user": "New user? Click here to register.",
+  "login.form.new-user": "Registrieren",
+
+
+
+  // GI New labels
+
+  "gi.welcome": "Willkommen bei der Digitalen Bibliothek der Gesellschaft für Informatik e.V.",
+  "gi.search.placeholder": "Suchen Sie in $$ Artikeln ...",
+  "gi.recent.collections": "Neueste Sammlungen",
+  "gi.authors.most.documents": "Autoren mit den meisten Dokumenten",
+  "gi.favourite.items": "Beliebteste Dokumente",
+  "gi.most.downloaded.items": "Häufigste Downloads",
+  "gi.fields": "GI Fachbereiche",
+  "gi.magazines": "GI Zeitschriften",
+  "gi.lecturenotes": "Lecture Notes in Informatics",
+  "gi.recent.collections.in.subcommunity": "Neueste Sammlungen im Teilbereich",
+  "gi.subcommunities": "Teilbereiche in diesem Bereich",
+  "gi.subcommunity.recent.collections": "Neueste Sammlungen im Teilbereich",
 
 }
