@@ -7,7 +7,7 @@
 
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    <h5>GI Zeitschriften</h5>
+                    <h5>{{ 'gi.magazines' | translate }}</h5>
 
                     <ul class="list-unstyled mb-0 two-col">
                         <li class="top-footer-list" *ngFor="let item of (req | async)?._embedded?.layoutgroups[1]?._embedded?.communities ">
@@ -19,7 +19,7 @@
 
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    <h5>Lectures Notes in Informatics</h5>
+                    <h5>{{ 'gi.lecturenotes' | translate }}</h5>
 
                     <ul class="list-unstyled mb-0">
                         <li *ngFor="let item of (req | async)?._embedded?.layoutgroups[2]?._embedded?.communities ">
@@ -31,17 +31,17 @@
 
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-                    <h5>Über uns</h5>
+                    <h5>{{ 'gi.about' | translate }}</h5>
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a routerLink="./" class="">Was ist die Digitale Bibliothek?</a>
+                            <a routerLink="./" class="">{{ 'gi.what' | translate }}</a>
                         </li>
                         <li>
-                            <a routerLink="./" class="">Häufige Fragen & Hilfe</a>
+                            <a routerLink="./" class="">{{ 'gi.faq' | translate }}</a>
                         </li>
                         <li>
-                            <a routerLink="./" class="">Fehler melden</a>
+                            <a routerLink="./" class="">{{ 'gi.report.error' | translate }}</a>
                         </li>
                     </ul>
                 </div>

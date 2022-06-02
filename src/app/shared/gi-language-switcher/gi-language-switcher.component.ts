@@ -59,7 +59,7 @@ export class GiLanguageSwitcherComponent implements OnInit {
    */
   useLang(lang: string) {
     this.localeService.setCurrentLanguageCode(lang);
-    this.localeService.refreshAfterChangeLanguage();
+    // this.localeService.refreshAfterChangeLanguage();
   }
 
   nextLanguageIndex() {

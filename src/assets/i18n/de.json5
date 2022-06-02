@@ -5157,14 +5157,18 @@
   "gi.search.placeholder": "Suchen Sie in $$ Artikeln ...",
 
   "gi.recent.collections": "Neueste Sammlungen",
-  "gi.authors.most.documents": "Autoren mit den meisten Dokumenten",
-  "gi.favourite.items": "Beliebteste Dokumente",
+  "gi.authors.most.documents": "Autor*innen mit den meisten Dokumenten",
+  "gi.popular.items": "Beliebteste Dokumente",
   "gi.most.downloaded.items": "Häufigste Downloads",
-  "gi.fields": "GI Fachbereiche",
+  "gi.departments": "GI Fachbereiche",
   "gi.magazines": "GI Zeitschriften",
   "gi.lecturenotes": "Lecture Notes in Informatics",
   "gi.recent.collections.in.subcommunity": "Neueste Sammlungen im Teilbereich",
   "gi.subcommunities": "Teilbereiche in diesem Bereich",
   "gi.subcommunity.recent.collections": "Neueste Sammlungen im Teilbereich",
+  "gi.about": "Über uns",
+  "gi.what": "Was ist die Digitale Bibliothek?",
+  "gi.faq": "Häufige Fragen & Hilfe",
+  "gi.report.error": "Fehler melden"
 
 }
