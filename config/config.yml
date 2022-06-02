@@ -6,3 +6,43 @@ rest:
 
 themes:
   - name: 'gi'
+
+# Languages. DSpace Angular holds a message catalog for each of the following languages.
+# When set to active, users will be able to switch to the use of this language in the user interface.
+languages:
+  - code: en
+    label: English
+    active: true
+  - code: de
+    label: Deutsch
+    active: true
+  - code: es
+    label: Español
+    active: false
+  - code: fr
+    label: Français
+    active: false
+  - code: gd
+    label: Gàidhlig
+    active: false
+  - code: lv
+    label: Latviešu
+    active: false
+  - code: hu
+    label: Magyar
+    active: false
+  - code: nl
+    label: Nederlands
+    active: false
+  - code: pt-PT
+    label: Português
+    active: false
+  - code: pt-BR
+    label: Português do Brasil
+    active: false
+  - code: fi
+    label: Suomi
+    active: false
+  - code: cs
+    label: Čeština
+    active: false
