@@ -4179,7 +4179,10 @@
   // GI New labels
 
   "gi.welcome": "Welcome at the Digital Library of Gesellschaft für Informatik e.V.",
+
+  // $$ is replaced by the item count for the whole site within the GI template home-news component.
   "gi.search.placeholder": "Search in $$ articles ...",
+
   "gi.recent.collections": "Recent collections",
   "gi.authors.most.documents": "Authors with most documents",
   "gi.favourite.items": "Favourite Items",

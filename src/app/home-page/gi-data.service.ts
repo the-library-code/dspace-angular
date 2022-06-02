@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {merge, Observable} from 'rxjs';
+import {reduce} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable(
   {providedIn: 'root'}
@@ -10,10 +12,12 @@ export class GiDataService {
 
   uiConfigreq;
   latestCollection;
+  searchPlaceholder;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private translate: TranslateService) {
     this.getUiConfig();
     this.getlatestCollections();
+    this.getSearchPlaceholder();
     }
 
     getUiConfig() {
@@ -34,6 +38,12 @@ export class GiDataService {
   getNumberofItemsReq(uuid: any): Observable<any> {
     return this.http
       .get('http://localhost:8080/server/api/GI/NumberOfItems/' + uuid);
+  }
+
+  getSearchPlaceholder() {
+    const o1: Observable<any> = this.http.get('http://localhost:8080/server/api/GI/NumberOfItemsTop');
+    const o2: Observable<any> = this.translate.get('gi.search.placeholder');
+    this.searchPlaceholder = merge(o1, o2).pipe(reduce((a, b) => a.replace('$$', b)));
   }
 
 }

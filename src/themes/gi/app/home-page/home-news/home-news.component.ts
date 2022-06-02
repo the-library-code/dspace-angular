@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { HomeNewsComponent as BaseComponent } from '../../../../../app/home-page/home-news/home-news.component';
+import {GiDataService} from '../../../../../app/home-page/gi-data.service';
 
 @Component({
   selector: 'ds-home-news',
@@ -12,5 +13,16 @@ import { HomeNewsComponent as BaseComponent } from '../../../../../app/home-page
 /**
  * Component to render the news section on the home page
  */
-export class HomeNewsComponent extends BaseComponent {}
+export class HomeNewsComponent extends BaseComponent implements OnInit {
+
+  searchPlaceholder;
+
+  constructor(public gds: GiDataService ) {
+    super();}
+
+  ngOnInit() {
+    this.searchPlaceholder = this.gds.searchPlaceholder;
+  }
+
+}
 

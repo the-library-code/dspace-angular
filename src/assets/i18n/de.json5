@@ -5152,7 +5152,10 @@
   // GI New labels
 
   "gi.welcome": "Willkommen bei der Digitalen Bibliothek der Gesellschaft für Informatik e.V.",
+
+  // $$ is replaced by the item count for the whole site within the GI template home-news component.
   "gi.search.placeholder": "Suchen Sie in $$ Artikeln ...",
+
   "gi.recent.collections": "Neueste Sammlungen",
   "gi.authors.most.documents": "Autoren mit den meisten Dokumenten",
   "gi.favourite.items": "Beliebteste Dokumente",

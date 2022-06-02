@@ -1,9 +1,13 @@
 <div class="jumbotron jumbotron-fluid p-6">
     <div class="container">
 
-        <div>Willkommen bei der Digitalen Bibliothek <br> der Gesellschaft für Informatik e.V.</div>
+        <div>{{ 'gi.welcome' | translate }}</div>
+      <!--              [searchPlaceholder]="'gi.search.placeholder' | translate | giCountItems">-->
         <div class="col-md-8 pt-5">
-            <ds-search-form-ges-info [inPlaceSearch]="false" [searchPlaceholder]="'Suchen Sie in XY Artikeln...' | translate"></ds-search-form-ges-info>
+            <ds-search-form-ges-info
+              [inPlaceSearch]="false"
+              [searchPlaceholder]="this.searchPlaceholder | async">
+            </ds-search-form-ges-info>
         </div>
 
     </div>
