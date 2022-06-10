@@ -1644,7 +1644,17 @@
   // "dso-selector.placeholder": "Search for a {{ type }}",
   "dso-selector.placeholder": "Suche nach {{ type }}",
 
+  // "dso-selector.select.collection.head": "Select a collection",
+  "dso-selector.select.collection.head": "Sammlung auswählen",
 
+  // "dso-selector.set-scope.community.head": "Select a search scope",
+  "dso-selector.set-scope.community.head": "Suchbereich festlegen",
+
+  // "dso-selector.set-scope.community.button": "Search all of DSpace",
+  "dso-selector.set-scope.community.button": "Komplettes Repositorium durchsuchen",
+
+  // "dso-selector.set-scope.community.input-header": "Search for a community or collection",
+  "dso-selector.set-scope.community.input-header": "Bereich oder Sammlung suchen",
 
   // "confirmation-modal.export-metadata.header": "Export metadata for {{ dsoName }}",
   "confirmation-modal.export-metadata.header": "Exportieren der Metadaten für {{ dsoName }}",
@@ -4244,8 +4254,6 @@
   // "search.filters.reset": "Reset filters",
   "search.filters.reset": "Filter zurücksetzen",
 
-
-
   // "search.form.search": "Search",
   "search.form.search": "Suche",
 
@@ -4255,7 +4263,8 @@
   // "search.form.search_mydspace": "Search MyDSpace",
   "search.form.search_mydspace": "Suche im persönlichen Arbeitsbereich",
 
-
+  // "search.form.scope.all": "All of DSpace",
+  "search.form.scope.all": "Komplettes Repositorium",
 
   // "search.results.head": "Search Results",
   "search.results.head": "Suchergebnisse",
@@ -4269,7 +4278,8 @@
   // "search.results.empty": "Your search returned no results.",
   "search.results.empty": "Ihre Suche führte zu keinem Ergebnis.",
 
-
+  // "default.search.results.head": "Search Results",
+  "default.search.results.head": "Suchergebnisse",
 
   // "search.sidebar.close": "Back to results",
   "search.sidebar.close": "Zurück zu den Ergebnissen",
@@ -5147,6 +5157,11 @@
   // "login.form.new-user": "New user? Click here to register.",
   "login.form.new-user": "Registrieren",
 
+  // "search.form.scope.all": "All of DSpace",
+  "search.form.scope.all": "GI Digital Library",
+
+  // "dso-selector.set-scope.community.button": "Search all of DSpace",
+  "dso-selector.set-scope.community.button": "GI Digital Library",
 
 
   // GI New labels
@@ -5169,6 +5184,7 @@
   "gi.about": "Über uns",
   "gi.what": "Was ist die Digitale Bibliothek?",
   "gi.faq": "Häufige Fragen & Hilfe",
-  "gi.report.error": "Fehler melden"
+  "gi.report.error": "Fehler melden",
 
+  "dso-selector.or": "oder"
 }

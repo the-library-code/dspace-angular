@@ -4196,5 +4196,9 @@
   "gi.about": "About Us",
   "gi.what": "What is the Digital Library?",
   "gi.faq": "Frequently asked Questions & Support",
-  "gi.report.error": "Report Error"
+  "gi.report.error": "Report Error",
+
+  "dso-selector.or": "or"
+
+
 }
