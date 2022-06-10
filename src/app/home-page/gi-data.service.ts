@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import {merge, Observable} from 'rxjs';
 import {reduce} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
+import { RESTURLCombiner } from '../core/url-combiner/rest-url-combiner';
+// import {HALEndpointService} from '../core/shared/hal-endpoint.service';
 
 @Injectable(
   {providedIn: 'root'}
@@ -13,21 +15,29 @@ export class GiDataService {
   uiConfigreq;
   latestCollection;
   searchPlaceholder;
+  private readonly restUrl;
 
-  constructor(private http: HttpClient, private translate: TranslateService) {
+  constructor(private http: HttpClient, private translate: TranslateService
+              // , private halService: HALEndpointService
+  ) {
+
+    // Get root URL of configured REST API, code copied from src/app/core/xsrf/xsrf.interceptor.ts
+    this.restUrl = new RESTURLCombiner('/').toString().toLowerCase();
+
     this.getUiConfig();
-    this.getlatestCollections();
+    this.getLatestCollections();
     this.getSearchPlaceholder();
     }
 
-    getUiConfig() {
-      this.uiConfigreq = this.http
-       .get('http://localhost:8080/server/api/GI/UIConfig');
-    }
+  getUiConfig() {
+    this.uiConfigreq =
+     //  this.halService.getEndpoint('/GI/UIConfig');
+      this.http.get(this.restUrl + '/GI/UIConfig');
+  }
 
-  getlatestCollections() {
+  getLatestCollections() {
     this.latestCollection = this.http
-      .get('http://localhost:8080/server/api/GI/latestCollections');
+      .get(this.restUrl + '/GI/latestCollections');
   }
 
   getReq(url: string): Observable<any> {
@@ -37,13 +47,14 @@ export class GiDataService {
 
   getNumberofItemsReq(uuid: any): Observable<any> {
     return this.http
-      .get('http://localhost:8080/server/api/GI/NumberOfItems/' + uuid);
+      .get(this.restUrl + '/GI/NumberOfItems/' + uuid);
   }
 
   getSearchPlaceholder() {
-    const o1: Observable<any> = this.http.get('http://localhost:8080/server/api/GI/NumberOfItemsTop');
+    const o1: Observable<any> = this.http.get(this.restUrl + '/discover/search/objects');
     const o2: Observable<any> = this.translate.get('gi.search.placeholder');
-    this.searchPlaceholder = merge(o1, o2).pipe(reduce((a, b) => a.replace('$$', b)));
+    this.searchPlaceholder = merge(o1, o2).pipe(reduce((a, b) => a.replace('$$',
+      b?._embedded.searchResult?.page.totalElements)));
   }
 
 }
