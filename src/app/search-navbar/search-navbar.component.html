@@ -3,7 +3,6 @@
   <div id="search-navbar-container">
     <div class="position-relative flex-row">
       <form
-        [hidden]="!searchExpanded"
         [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" autocomplete="on">
         <input #searchInput [@toggleAnimation]="isExpanded"  name="query"
                formControlName="query" type="text" placeholder="{{ this.searchPlaceholder | async }}"
