@@ -1,3 +1,41 @@
+.fa-lg {
+  font-size: 1em;
+}
+
+input[type="text"] {
+  // margin-top: calc(-0.5 * var(--bs-font-size-base));
+  // border: 2px;
+  box-shadow: none;
+  border-color: #ffe600;
+
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  &.collapsed {
+    opacity: 0;
+  }
+}
+
+a.submit-icon {
+  cursor: pointer;
+}
+
+@media screen and (max-width: map-get($grid-breakpoints, md)) {
+  .query:focus {
+    max-width: 250px !important;
+    width: 40vw !important;
+  }
+
+  a.submit-icon {
+    color: var(--bs-link-color);
+  }
+}
+
+
+
+
+/*
 input[type="text"] {
   width: 100% !important;
   margin-top: calc(-0.5 * var(--bs-font-size-base));
@@ -85,3 +123,4 @@ a.submit-icon:hover {
   top: 0;
   right: 0;
 }
+*/

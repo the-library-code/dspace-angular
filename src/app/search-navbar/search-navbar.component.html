@@ -1,3 +1,23 @@
+<div class="row mr-1" [title]="'nav.search' | translate" (dsClickOutside)="collapse()"
+     [attr.aria-label]="('nav.search' | translate)">
+  <div id="search-navbar-container">
+    <div class="position-relative flex-row">
+      <form
+        [hidden]="!searchExpanded"
+        [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" autocomplete="on">
+        <input #searchInput [@toggleAnimation]="isExpanded"  name="query"
+               formControlName="query" type="text" placeholder="{{ this.searchPlaceholder | async }}"
+               class="bg-transparent form-control dropdown-menu-right">
+      </form>
+    </div>
+  </div>
+  <a class="d-flex align-items-center p-0" type="button" [routerLink]="" (click)="searchExpanded ? onSubmit(searchForm.value) : expand()">
+    <em class="fas fa-search fa-fw ml-1"></em>
+    <span class="ml-1"> {{ 'nav.search' | translate }}</span>
+  </a>
+</div>
+
+<!--
 <a class="btn d-flex align-items-center p-0" type="button" (click)="searchExpanded ? collapse() : expand()">
   <em class="fas fa-search fa-fw"></em>
   <span class="ml-1">{{ 'nav.search' | translate }}</span>
@@ -30,3 +50,4 @@
       </div>
     </div>
 </div>
+-->
