@@ -53,22 +53,26 @@
     <!-- Grid container -->
 
     <!-- Copyright -->
-    <div class="container p-2 text-white">
+    <div class="container text-white">
         <div class="row bottom-footer">
-            <div class="col-md-auto">
-                <a class="navbar-brand my-2" routerLink="/home">
-                    <img src="assets/gi/images/GI_White_Links.png" [attr.alt]="'menu.header.image.logo' | translate" height="50"/>
-                </a>
-            </div>
-            <div class="col-md-auto">
-                <a class="text-white" href="#"
-                   (click)="showCookieSettings()" style="margin: auto;">{{ 'footer.link.cookies' | translate}}</a>
-            </div>
-            <div class="col-md-auto">
-                <a class="text-white"
-                   routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate}}</a>
-            </div>
-            <div class="col-md-auto">
+          <div class="col-md-auto">
+              <a class="navbar-brand my-2" routerLink="/home">
+                  <img src="assets/gi/images/GI_White_Links.png" [attr.alt]="'menu.header.image.logo' | translate" height="35"/>
+              </a>
+          </div>
+          <div class="col-md-auto">
+            <a class="text-white" href="#"
+               routerLink="info/imprint">{{ 'footer.link.imprint' | translate}}</a>
+          </div>
+          <div class="col-md-auto">
+              <a class="text-white"
+                 routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate}}</a>
+          </div>
+          <div class="col-md-auto">
+            <a class="text-white" href="#"
+               (click)="showCookieSettings()" style="margin: auto;">{{ 'footer.link.cookies' | translate}}</a>
+          </div>
+          <div class="col-md-auto">
                 <a class="text-white"
                    routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate}}</a>
             </div>

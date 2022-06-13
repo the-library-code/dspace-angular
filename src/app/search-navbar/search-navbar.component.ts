@@ -38,6 +38,7 @@ export class SearchNavbarComponent implements OnInit {
 
   /**
    * Expands search bar by angular animation, see expandSearchInput
+   * @ToDo hide input field in animation?
    */
   expand() {
     this.searchExpanded = true;

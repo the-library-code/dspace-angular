@@ -4175,6 +4175,11 @@
   // "login.form.new-user": "New user? Click here to register.",
   "login.form.new-user": "Register",
 
+  "repository.title.prefix": "GI Digital Library :: ",
+
+  "repository.title.prefixDSpace": "GI Digital Library :: ",
+
+
 
   // GI New labels
 
@@ -4198,7 +4203,7 @@
   "gi.faq": "Frequently asked Questions & Support",
   "gi.report.error": "Report Error",
 
-  "dso-selector.or": "or"
+  "dso-selector.or": "or",
 
-
+  "footer.link.imprint": "Imprint"
 }

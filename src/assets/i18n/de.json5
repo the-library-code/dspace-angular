@@ -5163,6 +5163,16 @@
   // "dso-selector.set-scope.community.button": "Search all of DSpace",
   "dso-selector.set-scope.community.button": "GI Digital Library",
 
+  // "footer.link.privacy-policy": "Privacy policy",
+  "footer.link.privacy-policy": "Datenschutz",
+
+  "repository.title.prefix": "GI Digital Library :: ",
+
+  "repository.title.prefixDSpace": "GI Digital Library :: ",
+
+  // "home.title": "DSpace Angular :: Home",
+  "home.title": "Startseite",
+
 
   // GI New labels
 
@@ -5186,5 +5196,8 @@
   "gi.faq": "Häufige Fragen & Hilfe",
   "gi.report.error": "Fehler melden",
 
-  "dso-selector.or": "oder"
+  "dso-selector.or": "oder",
+
+  "footer.link.imprint": "Impressum",
+
 }

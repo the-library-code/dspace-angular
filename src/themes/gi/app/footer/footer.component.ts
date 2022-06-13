@@ -31,4 +31,5 @@ export class FooterComponent implements OnInit {
     }
     return false;
   }
+
 }

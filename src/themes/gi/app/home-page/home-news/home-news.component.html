@@ -1,14 +1,19 @@
-<div class="jumbotron jumbotron-fluid p-6">
+<div class="jumbotron jumbotron-fluid p-5">
     <div class="container">
-
-        <div>{{ 'gi.welcome' | translate }}</div>
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-6">{{ 'gi.welcome' | translate }}</div>
+      </div>
       <!--              [searchPlaceholder]="'gi.search.placeholder' | translate | giCountItems">-->
-        <div class="col-md-8 pt-5">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-8 pt-5">
             <ds-search-form-ges-info
               [inPlaceSearch]="false"
               [searchPlaceholder]="this.searchPlaceholder | async">
             </ds-search-form-ges-info>
         </div>
+      </div>
 
     </div>
 </div>
