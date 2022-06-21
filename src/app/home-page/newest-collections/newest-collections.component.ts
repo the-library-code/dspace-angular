@@ -4,7 +4,8 @@ import { GiDataService } from '../gi-data.service';
 @Component({
   selector: 'ds-newest-collections',
   templateUrl: './newest-collections.component.html',
-  styleUrls: ['../../../themes/gi/styles/homepage-box_with-thumbnail.scss']
+  styleUrls: ['../../../themes/gi/styles/homepage-box_with-thumbnail.scss',
+              './newest-collections.component.scss']
 })
 export class NewestCollectionsComponent implements OnInit {
 

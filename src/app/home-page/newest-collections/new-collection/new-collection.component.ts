@@ -4,7 +4,8 @@ import { GiDataService } from '../../gi-data.service';
 @Component({
   selector: 'ds-new-collection',
   templateUrl: './new-collection.component.html',
-  styleUrls: ['../../../../themes/gi/styles/homepage-box_with-thumbnail.scss']
+  styleUrls: ['../../../../themes/gi/styles/homepage-box_with-thumbnail.scss',
+              './new-collection.component.scss']
 })
 export class NewCollectionComponent implements OnInit, OnDestroy {
 
