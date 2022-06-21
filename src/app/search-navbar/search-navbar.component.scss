@@ -6,7 +6,7 @@ input[type="text"] {
   // margin-top: calc(-0.5 * var(--bs-font-size-base));
   // border: 2px;
   box-shadow: none;
-  border-color: #ffe600;
+  border-color: var(--GI-yellow);
 
   &:focus {
     background-color: rgba(255, 255, 255, 1) !important;

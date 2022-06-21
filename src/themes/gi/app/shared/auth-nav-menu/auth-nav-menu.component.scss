@@ -8,6 +8,14 @@
   min-height: 260px;
 }
 
+.loginSymbol {
+  font-size: 1.25em;
+  padding: 0.27em 0.2em 0.1em 0.2em;
+  border-radius: 4px;
+  line-height: 24px;
+}
+
+
 .dropdown-item.active, .dropdown-item:active,
 .dropdown-item:hover, .dropdown-item:focus {
   background-color: transparent !important;
@@ -21,14 +29,14 @@
 
 .btn-login {
   color: #212529;
-  background-color: #ffe600;
-  border-color: #ffe600;
+  background-color: var(--GI-yellow);
+  border-color: var(--GI-yellow);
 }
 
 .btn-login:hover {
   color: #212529;
-  background-color: #{darken(#ffe600, 15%)};
-  border-color: #{darken(#ffe600, 15%)};
+  background-color: var(--GI-yellow-dark);
+  border-color: var(--GI-yellow-dark);
 }
 
 .dropdown-toggle::after {

@@ -19,10 +19,10 @@
       </div>
     </div>
   </li>
-  <li *ngIf="!(isAuthenticated | async) && (isXsOrSm$ | async)" class="nav-item">
+  <li *ngIf="!(isAuthenticated | async) && (isXsOrSm$ | async)" class="nav-item btn-login loginSymbol mr-1">
     <a routerLink="/login" routerLinkActive="active" class="loginLink">
 <!--      {{ 'nav.login' | translate }}<span class="sr-only">(current)</span>-->
-      <i class="fas fa-user-circle fa-lg fa-fw"></i>
+      <i class="fas fa-sign-in-alt fa-fw"></i>
     </a>
   </li>
   <li *ngIf="(isAuthenticated | async) && !(isXsOrSm$ | async) && (showAuth | async)" class="nav-item">

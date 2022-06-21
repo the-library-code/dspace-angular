@@ -19,11 +19,11 @@
 }
 
 .button {
-  background-color: #ffe600;
+  background-color: var(--GI-yellow);
   border: none;
   padding: 0.5rem;
 }
 
 .button:hover {
-  background-color: #{darken(#ffe600, 15%)};
+  background-color: var(--GI-yellow-dark);
 }

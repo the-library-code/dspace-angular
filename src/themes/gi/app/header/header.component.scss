@@ -18,7 +18,7 @@ header {
   background-image: none !important;
   line-height: 1.5;
   font-size: 1.25em;
-  vertical-align: unset;
+
 }
 
 .navbar-toggler {
@@ -26,6 +26,15 @@ header {
   font-size: 1rem;
   line-height: 1.5;
   background-color: transparent;
+  border-color: var(--GI-yellow);
+  color: rgba(0, 0, 0, 0.65) !important;
+  font-weight: 500 !important;
+
+  &:hover, &focus {
+    color: black !important;
+    text-decoration: none;
+    }
+
 }
 
 /*.navbar ::ng-deep {

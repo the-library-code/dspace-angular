@@ -12,4 +12,7 @@
   --ds-home-news-link-color: #{$primary};
   --ds-thumbnail-max-width: 200px;
   --ds-top-footer-bg: #F1F1F1;
+
+  --GI-yellow: #ffe600;
+  --GI-yellow-dark: #{darken(#ffe600, 15%)};
 }
