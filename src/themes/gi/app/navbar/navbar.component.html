@@ -1,7 +1,8 @@
+<!--
 <nav [ngClass]="{'open': !(menuCollapsed | async)}"
      [@slideMobileNav]="!(windowService.isXsOrSm() | async) ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
      class="navbar navbar-light navbar-expand-md p-md-0 navbar-container flex-shrink-0 px-0 d-flex justify-content-between"
-     role="navigation" [attr.aria-label]="'nav.main.description' | translate">    <!-- TODO remove navbar-container class when https://github.com/twbs/bootstrap/issues/24726 is fixed -->
+     role="navigation" [attr.aria-label]="'nav.main.description' | translate">    &lt;!&ndash; TODO remove navbar-container class when https://github.com/twbs/bootstrap/issues/24726 is fixed &ndash;&gt;
   <ds-search-navbar class="mr-3 navbar-nav"></ds-search-navbar>
 
   <div class="mr-3">
@@ -24,9 +25,40 @@
         </div>
     </div>
 
-<!--  <ds-lang-switch></ds-lang-switch>-->
+&lt;!&ndash;  <ds-lang-switch></ds-lang-switch>&ndash;&gt;
   <ds-gi-language-switcher></ds-gi-language-switcher>
   <ds-auth-nav-menu-ges-info></ds-auth-nav-menu-ges-info>
+  <ds-impersonate-navbar></ds-impersonate-navbar>
+
+</nav>
+-->
+<nav [ngClass]="{'open': !(menuCollapsed | async)}"
+     [@slideMobileNav]="!(windowService.isXsOrSm() | async) ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
+     class="navbar navbar-light navbar-expand-md p-md-0 navbar-container flex-shrink-0 px-0 d-flex justify-content-between"
+     role="navigation" [attr.aria-label]="'nav.main.description' | translate">    <!-- TODO remove navbar-container class when https://github.com/twbs/bootstrap/issues/24726 is fixed -->
+<!--  <ds-search-navbar class="mr-3 navbar-nav"></ds-search-navbar>-->
+
+  <div class="mr-3">
+    <div>
+      <a class="navbar-toggler" type="button" (click)="toggleNavbar()"
+         aria-controls="collapsingNav"
+         aria-expanded="false" [attr.aria-label]="'nav.toggle' | translate">
+        <span class="navbar-toggler-icon fas fa-bars fa-fw" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="reset-padding-md">
+      <div id="collapsingNav">
+        <ul class="navbar-nav mr-auto shadow-none">
+          <ng-container *ngFor="let section of (sections | async)">
+            <ng-container
+              *ngComponentOutlet="(sectionMap$ | async).get(section.id)?.component; injector: (sectionMap$ | async).get(section.id)?.injector;"></ng-container>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!--  <ds-lang-switch></ds-lang-switch>-->
   <ds-impersonate-navbar></ds-impersonate-navbar>
 
 </nav>

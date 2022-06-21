@@ -1,6 +1,7 @@
 .loginDropdownMenu, .logoutDropdownMenu {
   min-width: 330px;
   z-index: 1002;
+
 }
 
 .loginDropdownMenu {
@@ -12,8 +13,10 @@
   background-color: transparent !important;
 }
 
+// GI: exception on header text-transform: uppercase for the login button
 .btn {
   border-radius: initial;
+  text-transform: none;
 }
 
 .btn-login {
@@ -26,5 +29,8 @@
   color: #212529;
   background-color: #{darken(#ffe600, 15%)};
   border-color: #{darken(#ffe600, 15%)};
+}
 
+.dropdown-toggle::after {
+  content: unset;
 }

@@ -9,7 +9,7 @@ input[type="text"] {
   border-color: #ffe600;
 
   &:focus {
-    background-color: rgba(255, 255, 255, 0.5) !important;
+    background-color: rgba(255, 255, 255, 1) !important;
   }
 
   &.collapsed {
@@ -32,6 +32,21 @@ a.submit-icon {
   }
 }
 
+
+// shortening menu for GI. Code in header component not working for nav search menu. Unclear why.
+.longlabel {
+  display: inline-block;
+}
+.shortlabel {
+  display: none;
+}
+
+@media screen and (max-width: map-get($grid-breakpoints, md)) {
+  .shortlabel {display: inline-block;
+    font-size: 1.25em;
+  }
+  .longlabel {display:none}
+}
 
 
 

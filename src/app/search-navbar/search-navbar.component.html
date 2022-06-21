@@ -11,8 +11,8 @@
     </div>
   </div>
   <a class="d-flex align-items-center p-0" type="button" [routerLink]="" (click)="searchExpanded ? onSubmit(searchForm.value) : expand()">
-    <em class="fas fa-search fa-fw ml-1"></em>
-    <span class="ml-1"> {{ 'nav.search' | translate }}</span>
+    <div class="shortlabel"><i class="fas fa-search fa-fw ml-1"></i></div>
+    <div class="longlabel"><i class="fas fa-search fa-fw ml-1"></i>{{ 'nav.search' | translate }}</div>
   </a>
 </div>
 

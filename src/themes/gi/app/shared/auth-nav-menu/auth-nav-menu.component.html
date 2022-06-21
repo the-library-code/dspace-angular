@@ -8,7 +8,8 @@
         {{ 'nav.login' | translate }}
       </button>
 -->
-      <div class="btn btn-login dropdownLogin" [attr.aria-label]="'nav.login' |translate" (click)="$event.preventDefault()" ngbDropdownToggle>
+      <div class="btn btn-login dropdownLogin" [attr.aria-label]="'nav.login' |translate"
+           (click)="$event.preventDefault()" ngbDropdownToggle>
         {{ 'nav.login' | translate }}
       </div>
       <div class="loginDropdownMenu" [ngClass]="{'pl-3 pr-3': (loading | async)}" ngbDropdownMenu
@@ -20,7 +21,8 @@
   </li>
   <li *ngIf="!(isAuthenticated | async) && (isXsOrSm$ | async)" class="nav-item">
     <a routerLink="/login" routerLinkActive="active" class="loginLink">
-      {{ 'nav.login' | translate }}<span class="sr-only">(current)</span>
+<!--      {{ 'nav.login' | translate }}<span class="sr-only">(current)</span>-->
+      <i class="fas fa-user-circle fa-lg fa-fw"></i>
     </a>
   </li>
   <li *ngIf="(isAuthenticated | async) && !(isXsOrSm$ | async) && (showAuth | async)" class="nav-item">

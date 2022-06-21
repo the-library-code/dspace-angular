@@ -2,48 +2,24 @@
     *ngVar="(active | async) as isActive"
     (keyup.enter)="isActive ? deactivateSection($event) : activateSection($event)"
     (keyup.space)="isActive ? deactivateSection($event) : activateSection($event)"
-    (keydown.space)="$event.preventDefault()">
-<div>
-  <a href="javascript:void(0);" class="nav-link" routerLinkActive="active"
-     id="browseDropdown" (click)="toggleSection($event)"
-     data-toggle="dropdown">
-    <i class="fa fa-bars pr-lg-1" ></i>
-    <ng-container
-      *ngComponentOutlet="(sectionMap$ | async).get(section.id)?.component; injector: (sectionMap$ | async).get(section.id)?.injector;"></ng-container>
-  </a>
-</div>
+    (keydown.space)="$event.preventDefault()"
+    (mouseenter)="activateSection($event)"
+    (mouseleave)="deactivateSection($event)">
+    <a href="javascript:void(0);" class="nav-link" routerLinkActive="active"
+       id="browseDropdown" (click)="toggleSection($event)"
+       data-toggle="dropdown">
+       <i class="fa fa-bars pr-lg-1" ></i>
+              <ng-container
+                *ngComponentOutlet="(sectionMap$ | async).get(section.id)?.component; injector: (sectionMap$ | async).get(section.id)?.injector;">
+              </ng-container>
 
-    <div>
-        <ul @slide *ngIf="(active | async)" class="m-0 shadow-none border-top-0 dropdown-menu show container">
-            <div class="row mx-1 mt-1">
-                <div class="col-md-12">
-                    <button type="button" class="close" aria-label="Close" (click)="deactivateSection($event)">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-            <div class="row mx-5">
-                <div class="col-md-12 px-5">
-                    <hr>
-                    <div>
-                        <ng-container *ngFor="let subSection of (subSections$ | async)">
-                            <div class="content-container">
-                                <div class="content">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                                    </svg>
-                                </div>
-                                <div class="overlay" (click)="toggleSection($event)">
-                                    <ng-container
-                                            *ngComponentOutlet="(sectionMap$ | async).get(subSection.id).component; injector: (sectionMap$ | async).get(subSection.id).injector;">
-                                    </ng-container>
-                                </div>
-                            </div>
-                            <hr>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-        </ul>
-    </div>
+    </a>
+    <ul @slide *ngIf="(active | async)" (click)="deactivateSection($event)"
+        class="m-0 shadow-none border-top-0 dropdown-menu show">
+         <ng-container *ngFor="let subSection of (subSections$ | async)">
+                    <ng-container
+                                *ngComponentOutlet="(sectionMap$ | async).get(subSection.id).component; injector: (sectionMap$ | async).get(subSection.id).injector;">
+                    </ng-container>
+         </ng-container>
+    </ul>
 </div>

@@ -24,10 +24,8 @@
          [attr.aria-label]="'nav.language' |translate"
          [title]="'nav.language' | translate"
          (click)="useLang(this.activeLangs[this.nextIndex].code)">
-        <em class="fas fa-globe-asia fa-fw"></em>
-        <span>
-          {{ this.activeLangs[nextIndex].label }}
-        </span>
+        <span class="shortlabel"> <i class="fas fa-globe-asia fa-fw"></i> {{ this.activeLangs[nextIndex].code }} </span>
+        <span class="longlabel"> <i class="fas fa-globe-asia fa-fw"></i> {{ this.activeLangs[nextIndex].label }} </span>
       </a>
   </div>
 
