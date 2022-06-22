@@ -10,5 +10,21 @@
     }
 }
 
+.nav-link {
+  white-space: nowrap;}
 
+
+/** Mobile menu styling **/
+@media screen and (max-width: map-get($grid-breakpoints, md)) {
+  .dropdown-toggle {
+    &:after {
+      float: right;
+      // margin-top: calc(var(--bs-spacer) / 2);
+    }
+  }
+  .dropdown-menu {
+    border: 0;
+
+  }
+}
 

@@ -19,7 +19,9 @@ import { ThemedHomePageComponent } from './themed-home-page.component';
             public: [{
               id: 'statistics_site',
               active: false,
+              // for GI hidden
               visible: false,
+              // visible: true,
               index: 2,
               model: {
                 type: MenuItemType.LINK,

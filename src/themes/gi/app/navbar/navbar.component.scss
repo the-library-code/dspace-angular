@@ -20,24 +20,32 @@
 
 /** Mobile menu styling **/
 @media screen and (max-width: map-get($grid-breakpoints, md)) {
-  .navbar ::ng-deep {
+  .navbar {
     width: 100vw;
     background-color: var(--bs-white);
     position: absolute;
+    top: 5em;
+    left: -5em;
     overflow: hidden;
     height: 0;
+    padding: 2em;
+    align-content: baseline;
     &.open {
       height: 100vh; //doesn't matter because wrapper is sticky
+
     }
   }
 }
 
+
+/*
 @media screen and (min-width: map-get($grid-breakpoints, md)) {
   .reset-padding-md {
     margin-left: calc(var(--bs-spacer) / -2);
     margin-right: calc(var(--bs-spacer) / -2);
   }
 }
+*/
 
 /* TODO remove when https://github.com/twbs/bootstrap/issues/24726 is fixed*/
 .navbar-expand-md.navbar-container {
@@ -45,7 +53,7 @@
     > .container {
       padding: 0 var(--bs-spacer);
     }
-    padding: 0;
+    padding:  0 1em;
   }
 }
 
