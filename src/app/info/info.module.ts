@@ -12,6 +12,9 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { FeedbackFormComponent } from './feedback/feedback-form/feedback-form.component';
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import { FeedbackGuard } from '../core/feedback/feedback.guard';
+import { ImprintComponent } from './imprint/imprint.component';
+import { ImprintContentComponent } from './imprint/imprint-content/imprint-content.component';
+import { ThemedImprintComponent } from './imprint/themed-imprint.component';
 
 
 const DECLARATIONS = [
@@ -23,7 +26,10 @@ const DECLARATIONS = [
   ThemedPrivacyComponent,
   FeedbackComponent,
   FeedbackFormComponent,
-  ThemedFeedbackComponent
+  ThemedFeedbackComponent,
+  ImprintComponent,
+  ImprintContentComponent,
+  ThemedImprintComponent
 ];
 
 @NgModule({

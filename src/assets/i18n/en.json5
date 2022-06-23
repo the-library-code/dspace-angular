@@ -4205,5 +4205,11 @@
 
   "dso-selector.or": "or",
 
-  "footer.link.imprint": "Imprint"
+  "footer.link.imprint": "Imprint",
+
+  "info.imprint.breadcrumbs": "Imprint",
+
+  "info.imprint.head": "Imprint",
+
+  "info.imprint.title": "Imprint"
 }
