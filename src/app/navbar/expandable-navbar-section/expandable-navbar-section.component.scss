@@ -10,10 +10,6 @@
     }
 }
 
-.nav-link {
-  white-space: nowrap;}
-
-
 /** Mobile menu styling **/
 @media screen and (max-width: map-get($grid-breakpoints, md)) {
   .dropdown-toggle {

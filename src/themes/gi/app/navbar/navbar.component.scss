@@ -57,14 +57,6 @@
   }
 }
 
-.navbar-nav {
-  ::ng-deep a.nav-link {
-    color: var(--ds-navbar-link-color);
-  }
-  ::ng-deep a.nav-link:hover {
-    color: var(--ds-navbar-link-color-hover);
-  }
-}
 
 .navbar-nav {
   ::ng-deep .dropdown-menu {
@@ -90,11 +82,3 @@
     }
   }
 }
-
-  /*
-  @media screen and (min-width: map-get($grid-breakpoints, md)) and (max-width: map-get($grid-breakpoints, lg)) {
-    ::ng-deep .dropdown-menu {
-      top: 3.5rem;
-    }
-  }*/
-

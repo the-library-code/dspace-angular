@@ -64,20 +64,3 @@ header {
 
 
 
-// shortening menu for GI. Place into header component
-.longlabel {
-  display: inline-block;
-}
-.shortlabel {
-  display: none;
-  font-size: 1.25em;
-}
-
-@media screen and (max-width: map-get($grid-breakpoints, md)) {
-  // @media screen and (max-width: 1000px) {
-  .shortlabel {
-    display: inline-block;
-    font-size: 1.25em;
-  }
-  .longlabel {display:none}
-}
