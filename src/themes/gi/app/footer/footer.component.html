@@ -66,19 +66,21 @@
           </div>
           <div class="col-md-auto">
               <a class="text-white"
-                 routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate}}</a>
+                 target="_blank"
+                 href="https://www.gi.de/allgemein/datenschutzerklaerung.html">{{ 'footer.link.privacy-policy' | translate}}</a>
           </div>
           <div class="col-md-auto">
             <a class="text-white" href="#"
                (click)="showCookieSettings()" style="margin: auto;">{{ 'footer.link.cookies' | translate}}</a>
           </div>
-          <div class="col-md-auto">
+          <!--<div class="col-md-auto">
                 <a class="text-white"
                    routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate}}</a>
-            </div>
+            </div>-->
             <div class="col-md-auto ml-auto">
                 &copy;&nbsp; <a class="text-white"
-                          href="https://gi.de/">Gesellschaft für Informatik e.V.</a>
+                      target="_blank"
+                      href="https://gi.de/">Gesellschaft für Informatik e.V.</a>
             </div>
 
 
