@@ -11,4 +11,5 @@ RUN rm -rf /app
 
 FROM node:16-alpine
 COPY --from=build --chown=node /dist /app/dist
+RUN chown -R node /app
 USER node
