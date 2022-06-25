@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { GiDataService } from '../gi-data.service';
+import { GiDataService } from '../../shared/gi-data.service';
 
 @Component({
   selector: 'ds-lecture-notes',
   templateUrl: './lecture-notes.component.html',
-  styleUrls: ['../../../themes/gi/styles/homepage-box_with-thumbnail.scss',
-              'lecture-notes.component.scss']
+  styleUrls: ['../../../styles/homepage-box_with-thumbnail.scss',
+              './lecture-notes.component.scss']
 })
 export class LectureNotesComponent implements OnInit {
 

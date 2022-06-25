@@ -1,3 +1,5 @@
+
+
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -5,7 +7,9 @@ import { SearchService } from '../core/shared/search/search.service';
 import { expandSearchInput } from '../shared/animations/slide';
 import { PaginationService } from '../core/pagination/pagination.service';
 import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
-import {GiDataService} from '../home-page/gi-data.service';
+
+// @ToDo make GI exclusive component?
+import {GiDataService} from '../../themes/gi/app/shared/gi-data.service';
 
 /**
  * The search box in the header that expands on focus and collapses on focus out

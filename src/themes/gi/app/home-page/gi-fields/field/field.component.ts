@@ -1,19 +1,18 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { GiDataService } from '../../gi-data.service';
+import {  Component, Input, OnInit } from '@angular/core';
+import { GiDataService } from '../../../shared/gi-data.service';
 
 @Component({
   selector: 'ds-field',
   templateUrl: './field.component.html',
-  styleUrls: ['../../../../themes/gi/styles/homepage-box_without-thumbnail.scss']
+  styleUrls: ['../../../../styles/homepage-box_without-thumbnail.scss']
 })
 export class FieldComponent implements OnInit {
 
 
   @Input() fields: any;
-  numberOfItems;
   numberSub;
 
-  constructor(private gidata: GiDataService, private ref: ChangeDetectorRef) {
+  constructor(private gidata: GiDataService) {
   }
 
   ngOnInit(): void {

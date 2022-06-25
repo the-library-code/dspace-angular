@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import { GiDataService } from '../gi-data.service';
+import { GiDataService } from '../../shared/gi-data.service';
 
 @Component({
   selector: 'ds-gi-fields',
   templateUrl: './gi-fields.component.html',
-  styleUrls: ['../../../themes/gi/styles/homepage-box_without-thumbnail.scss'],
+  styleUrls: ['../../../styles/homepage-box_without-thumbnail.scss'],
   })
 
 export class GiFieldsComponent implements OnInit {

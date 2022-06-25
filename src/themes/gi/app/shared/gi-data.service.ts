@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {merge, Observable} from 'rxjs';
 import {reduce} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
-import { RESTURLCombiner } from '../core/url-combiner/rest-url-combiner';
+import { RESTURLCombiner } from '../../../../app/core/url-combiner/rest-url-combiner';
 // import {HALEndpointService} from '../core/shared/hal-endpoint.service';
 
 @Injectable(

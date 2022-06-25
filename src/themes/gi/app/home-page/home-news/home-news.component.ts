@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { HomeNewsComponent as BaseComponent } from '../../../../../app/home-page/home-news/home-news.component';
-import {GiDataService} from '../../../../../app/home-page/gi-data.service';
+import {GiDataService} from '../../shared/gi-data.service';
 
 @Component({
   selector: 'ds-home-news',

@@ -1,15 +1,16 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { GiDataService } from '../../gi-data.service';
+import { GiDataService } from '../../../shared/gi-data.service';
 
 @Component({
-  selector: 'ds-magazine',
-  templateUrl: './magazine.component.html',
-  styleUrls: ['../../../../themes/gi/styles/homepage-box_with-thumbnail.scss']
+  selector: 'ds-new-collection',
+  templateUrl: './new-collection.component.html',
+  styleUrls: ['../../../../styles/homepage-box_with-thumbnail.scss',
+              './new-collection.component.scss']
 })
-export class MagazineComponent implements OnInit, OnDestroy {
+export class NewCollectionComponent implements OnInit, OnDestroy {
 
-  @Input() magazines: any;
-  numberOfItems;
+
+  @Input() newCollections: any;
   logoSub;
   numberSub;
   thumbnailUrl;
@@ -19,10 +20,10 @@ export class MagazineComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     // the subscription to this request is done within the html file and managed by angular.
-    this.numberSub = this.gidata.getNumberofItemsReq(this.magazines.uuid);
+    this.numberSub = this.gidata.getNumberofItemsReq(this.newCollections.uuid);
 
     // this subscription is direct, we have to manage it ourselves.
-    this.logoSub = this.gidata.getReq(this.magazines._links.logo.href).subscribe(result => {
+    this.logoSub = this.gidata.getReq(this.newCollections._links.logo.href).subscribe(result => {
       this.thumbnailUrl = result._links.content.href;
       this.ref.markForCheck();});
   }
@@ -30,4 +31,5 @@ export class MagazineComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.logoSub.unsubscribe();
   }
+
 }

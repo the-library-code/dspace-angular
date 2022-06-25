@@ -1,10 +1,12 @@
 import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {GiDataService} from '../../gi-data.service';
+import {GiDataService} from '../../../shared/gi-data.service';
 
 @Component({
   selector: 'ds-lecture-note',
   templateUrl: './lecture-note.component.html',
-  styleUrls: ['../../../../themes/gi/styles/homepage-box_with-thumbnail.scss']
+  styleUrls: ['../../../../styles/homepage-box_with-thumbnail.scss',
+              './lecture-note.component.scss'
+  ]
 })
 export class LectureNoteComponent implements OnInit, OnDestroy {
 

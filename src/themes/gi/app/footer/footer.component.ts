@@ -1,7 +1,7 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { hasValue } from '../../../../app/shared/empty.util';
 import { KlaroService } from '../../../../app/shared/cookies/klaro.service';
-import { GiDataService } from '../../../../app/home-page/gi-data.service';
+import { GiDataService } from '../shared/gi-data.service';
 
 @Component({
   selector: 'ds-footer',

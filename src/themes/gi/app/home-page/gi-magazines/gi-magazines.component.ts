@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { GiDataService } from '../gi-data.service';
+import { GiDataService } from '../../shared/gi-data.service';
 
 @Component({
   selector: 'ds-gi-magazines',
   templateUrl: './gi-magazines.component.html',
-  styleUrls: ['../../../themes/gi/styles/homepage-box_with-thumbnail.scss'],
+  styleUrls: ['../../../styles/homepage-box_with-thumbnail.scss',
+              // 'gi-magazines.component.scss'
+  ],
 })
 
 export class GiMagazinesComponent implements OnInit {
