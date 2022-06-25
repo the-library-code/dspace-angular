@@ -27,13 +27,20 @@ const DECLARATIONS = [
   TopLevelCommunityListComponent,
   ThemedHomeNewsComponent,
   HomeNewsComponent,
+
+  // GI Specific:
+  LectureNoteComponent,
+  MagazineComponent,
+  FieldComponent,
+  NewCollectionComponent,
+  GiFieldsComponent,
+  GiMagazinesComponent,
+  LectureNotesComponent,
   NewestCollectionsComponent,
   AuthorsWithMostDocsComponent,
   PopularDocsComponent,
-  FrequentDownloadsComponent,
-  GiFieldsComponent,
-  GiMagazinesComponent,
-  LectureNotesComponent
+  FrequentDownloadsComponent
+
 ];
 
 @NgModule({
@@ -45,10 +52,6 @@ const DECLARATIONS = [
   ],
   declarations: [
     ...DECLARATIONS,
-    LectureNoteComponent,
-    MagazineComponent,
-    FieldComponent,
-    NewCollectionComponent
   ],
   exports: [
     ...DECLARATIONS,

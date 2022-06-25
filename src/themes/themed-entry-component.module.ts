@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { ENTRY_COMPONENTS as CUSTOM } from './custom/entry-components';
+// import { ENTRY_COMPONENTS as CUSTOM } from './custom/entry-components';
 import { ENTRY_COMPONENTS as GI} from './gi/entry-components';
 
 const ENTRY_COMPONENTS = [
-  ...CUSTOM,
+//   ...CUSTOM,
   ...GI,
 ];
 
