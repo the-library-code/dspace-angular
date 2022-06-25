@@ -185,7 +185,6 @@ import { SearchObjects } from './search/models/search-objects.model';
 import { FacetConfigResponse } from './search/models/facet-config-response.model';
 import { FacetValues } from './search/models/facet-values.model';
 import { SearchResult } from './search/models/search-result.model';
-import { GiLanguageSwitcherComponent } from './gi-language-switcher/gi-language-switcher.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -477,7 +476,6 @@ const DIRECTIVES = [
     ...SHARED_ITEM_PAGE_COMPONENTS,
     ItemVersionsSummaryModalComponent,
     ItemVersionsDeleteModalComponent,
-    GiLanguageSwitcherComponent,
   ],
   providers: [
     ...PROVIDERS
@@ -489,7 +487,6 @@ const DIRECTIVES = [
     ...SHARED_ITEM_PAGE_COMPONENTS,
     ...DIRECTIVES,
     TranslateModule,
-    GiLanguageSwitcherComponent
   ]
 })
 

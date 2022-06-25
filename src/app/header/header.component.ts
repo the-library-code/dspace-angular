@@ -27,6 +27,7 @@ export class HeaderComponent {
 
   public toggleNavbar(): void {
     this.menuService.toggleMenu(this.menuID);
+    // ToDo: move code into themes/gi folder?
     // for GI: open 'browse_global'-section if menu is opened on mobile screens (xs, sm)
     // if (this.menuService.isMenuVisible(this.menuID)) {
       this.menuService.activateSection(this.menuID, 'browse_global');

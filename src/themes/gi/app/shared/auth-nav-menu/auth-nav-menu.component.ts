@@ -16,7 +16,7 @@ import {listableObjectComponent} from '../../../../../app/shared/object-collecti
 import {ViewMode} from '../../../../../app/core/shared/view-mode.model';
 import {Context} from '../../../../../app/core/shared/context.model';
 
-
+// ToDo selector name is not consistent with class name.
 @Component({
   selector: 'ds-auth-nav-menu-ges-info',
   templateUrl: './auth-nav-menu.component.html',

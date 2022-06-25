@@ -71,6 +71,7 @@ import { ThemedCollectionPageComponent } from './themed-collection-page.componen
             public: [
             {
               id: 'statistics_collection_:id',
+              // ToDo: put code into themes/GI folder?
               // to activate set both to true; deactivated for GI
               // active: true,
               // visible: true,

@@ -13,6 +13,7 @@ import { LectureNotesComponent } from './app/home-page/lecture-notes/lecture-not
 import { LectureNoteComponent } from './app/home-page/lecture-notes/lecture-note/lecture-note.component';
 
 import { GiSearchNavbarComponent } from './app/gi-search-navbar/gi-search-navbar.component';
+import { GiLanguageSwitcherComponent } from './app/shared/gi-language-switcher/gi-language-switcher.component';
 
 export const EXCLUSIVE_COMPONENTS = [
   NewCollectionComponent,
@@ -27,4 +28,6 @@ export const EXCLUSIVE_COMPONENTS = [
   GiMagazinesComponent,
   LectureNotesComponent,
   GiSearchNavbarComponent,
+  GiLanguageSwitcherComponent,
+
 ];

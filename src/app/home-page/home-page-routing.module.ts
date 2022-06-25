@@ -19,6 +19,7 @@ import { ThemedHomePageComponent } from './themed-home-page.component';
             public: [{
               id: 'statistics_site',
               active: false,
+              // ToDo: move code into themes/gi folder?
               // for GI hidden
               visible: false,
               // visible: true,

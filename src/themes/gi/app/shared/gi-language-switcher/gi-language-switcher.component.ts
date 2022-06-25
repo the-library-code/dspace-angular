@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { LangConfig } from '../../../config/lang-config.interface';
-import { environment } from '../../../environments/environment';
-import { LocaleService } from '../../core/locale/locale.service';
+import { LangConfig } from '../../../../../config/lang-config.interface';
+import { environment } from '../../../../../environments/environment';
+import { LocaleService } from '../../../../../app/core/locale/locale.service';
 
 @Component({
   selector: 'ds-gi-language-switcher',

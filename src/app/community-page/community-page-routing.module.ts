@@ -54,6 +54,7 @@ import { ThemedCommunityPageComponent } from './themed-community-page.component'
             public: [
              {
               id: 'statistics_community_:id',
+               // // ToDo: move code into themes/gi folder?
                // to activate set both to true; deactivated for GI
                // active: true,
                // visible: true,
