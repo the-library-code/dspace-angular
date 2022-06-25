@@ -12,6 +12,8 @@ import { MagazineComponent } from './app/home-page/gi-magazines/magazine/magazin
 import { LectureNotesComponent } from './app/home-page/lecture-notes/lecture-notes.component';
 import { LectureNoteComponent } from './app/home-page/lecture-notes/lecture-note/lecture-note.component';
 
+import { GiSearchNavbarComponent } from './app/gi-search-navbar/gi-search-navbar.component';
+
 export const EXCLUSIVE_COMPONENTS = [
   NewCollectionComponent,
   NewestCollectionsComponent,
@@ -24,4 +26,5 @@ export const EXCLUSIVE_COMPONENTS = [
   GiFieldsComponent,
   GiMagazinesComponent,
   LectureNotesComponent,
+  GiSearchNavbarComponent,
 ];

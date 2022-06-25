@@ -1,23 +1,26 @@
 
 
-import {Component, ElementRef,ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SearchService } from '../core/shared/search/search.service';
-import { expandSearchInput } from '../shared/animations/slide';
-import { PaginationService } from '../core/pagination/pagination.service';
-import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
+import { SearchService } from '../../../../app/core/shared/search/search.service';
+import { expandSearchInput } from '../../../../app/shared/animations/slide';
+import { PaginationService } from '../../../../app/core/pagination/pagination.service';
+import { SearchConfigurationService } from '../../../../app/core/shared/search/search-configuration.service';
+
+// @ToDo make GI exclusive component?
+import {GiDataService} from '../shared/gi-data.service';
 
 /**
  * The search box in the header that expands on focus and collapses on focus out
  */
 @Component({
-  selector: 'ds-search-navbar',
-  templateUrl: './search-navbar.component.html',
-  styleUrls: ['./search-navbar.component.scss'],
+  selector: 'ds-gi-search-navbar',
+  templateUrl: './gi-search-navbar.component.html',
+  styleUrls: ['./gi-search-navbar.component.scss'],
   animations: [expandSearchInput]
 })
-export class SearchNavbarComponent {
+export class GiSearchNavbarComponent implements OnInit {
 
   // The search form
   searchForm;
@@ -31,7 +34,7 @@ export class SearchNavbarComponent {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private searchService: SearchService,
               private paginationService: PaginationService,
-              private searchConfig: SearchConfigurationService) {
+              private searchConfig: SearchConfigurationService, public gds: GiDataService) {
     this.searchForm = this.formBuilder.group(({
       query: '',
     }));
@@ -74,6 +77,9 @@ export class SearchNavbarComponent {
     this.paginationService.updateRouteWithUrl(this.searchConfig.paginationID, linkToNavigateTo, {page: 1}, data);
   }
 
+  ngOnInit() {
+    this.searchPlaceholder = this.gds.searchPlaceholder;
+  }
 }
 
 
