@@ -57,6 +57,10 @@ import { IdleModalComponent } from './shared/idle-modal/idle-modal.component';
 import { ThemedPageInternalServerErrorComponent } from './page-internal-server-error/themed-page-internal-server-error.component';
 import { PageInternalServerErrorComponent } from './page-internal-server-error/page-internal-server-error.component';
 
+// GI specific change for theme exclusive components
+import { ThemedExclusiveComponentModule, EXCLUSIVE_COMPONENTS as THEME_EXCLUSIVE_COMPONENTS} from '../themes/themed-exclusive-component.module';
+
+
 import { APP_CONFIG, AppConfig } from '../config/app-config.interface';
 
 export function getConfig() {
@@ -93,6 +97,7 @@ const IMPORTS = [
   StoreModule.forRoot(appReducers, storeModuleConfig),
   StoreRouterConnectingModule.forRoot(),
   ThemedEntryComponentModule.withEntryComponents(),
+  ThemedExclusiveComponentModule
 ];
 
 IMPORTS.push(
@@ -185,7 +190,8 @@ const DECLARATIONS = [
   ThemedForbiddenComponent,
   IdleModalComponent,
   ThemedPageInternalServerErrorComponent,
-  PageInternalServerErrorComponent
+  PageInternalServerErrorComponent,
+  ...THEME_EXCLUSIVE_COMPONENTS
 ];
 
 const EXPORTS = [
