@@ -13,6 +13,6 @@
   --ds-thumbnail-max-width: 200px;
   --ds-top-footer-bg: #F1F1F1;
 
-  --GI-yellow: #ffe600;
-  --GI-yellow-dark: #{darken(#ffe600, 15%)};
+  --GI-yellow: #{$gi-yellow};
+  --GI-yellow-dark: #{$gi-yellow-dark};
 }

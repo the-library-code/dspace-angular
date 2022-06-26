@@ -3,6 +3,10 @@
 // imports the base global style
 @import '../../../styles/_global-styles.scss';
 
+h1 {
+  font-size: 1.5rem;
+}
+
 h2 {
   font-size: 17px;
   color: rgba(0, 0, 0, 0.75);
@@ -46,3 +50,9 @@ a {
 .dropdown-item:hover, .dropdown-item:focus {
   background-color: transparent;
 }
+
+.content-with-optional-title {
+  a {
+    color: gray;
+    }
+ }

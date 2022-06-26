@@ -30,3 +30,6 @@
  ) !default;
 
  $link-color: map-get($theme-colors, info) !default;
+
+$gi-yellow: #ffe600;
+$gi-yellow-dark: darken(#ffe600, 15%);
