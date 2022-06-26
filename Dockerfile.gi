@@ -7,7 +7,7 @@ RUN yarn install --network-timeout 300000 \
     && yarn build
 
 FROM node:16-alpine
-RUN yarn install -g @angular/cli@11.2.15
+RUN yarn global add @angular/cli@11.2.15
 COPY --from=build --chown=node /app /app
 WORKDIR /app
 USER node
