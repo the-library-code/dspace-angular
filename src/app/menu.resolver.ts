@@ -93,6 +93,10 @@ export class MenuResolver implements Resolve<boolean> {
       /* Communities & Collections tree */
       {
         id: `browse_global_communities_and_collections`,
+
+        // for GI this section is part of browse global subsection
+        parentID: 'browse_global',
+
         active: false,
         visible: true,
         index: 0,

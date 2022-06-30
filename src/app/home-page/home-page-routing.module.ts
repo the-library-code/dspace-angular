@@ -18,8 +18,12 @@ import { MenuItemType } from '../shared/menu/menu-item-type.model';
           menu: {
             public: [{
               id: 'statistics_site',
+              /*  for GI this is set to false
               active: true,
               visible: true,
+              */
+              active: false,
+              visible: false,
               index: 2,
               model: {
                 type: MenuItemType.LINK,
