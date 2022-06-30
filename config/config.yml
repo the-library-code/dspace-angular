@@ -17,13 +17,13 @@ rest:
 
 themes:
   - name: 'gi'
-#    headTags:
+    headTags:
       # Insert <link rel="icon"  sizes="any"/> into the <head> of the page.
- #     - tagName: link
-  #      attributes:
-   #       rel: icon
-    #      href: assets/images/gi_favicon.ico
-     #     sizes: any
+      - tagName: link
+        attributes:
+          rel: icon
+          href: assets/images/gi_favicon.ico
+          sizes: any
 
 #  Default Language in which the UI will be rendered if the user's browser language is not an active language
 defaultLanguage: de
