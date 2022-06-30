@@ -1,7 +1,64 @@
-{
-  // DSpace default: "All of DSpace"
-  "menu.section.browse_global": "Browse DSpace",
+// Merge i18n after change:
+//  1. cd to scripts subdirectory
+//  2. yarn merge-i18n -s src/themes/gi/assets/i18n
 
-  // DSpace default: "DSpace Angular :: "
-  "repository.title.prefix": "DSpace :: ",
+{
+
+
+  // GI Overrides
+  "menu.section.browse_global": "Discover",
+
+  "nav.language": "Language",
+
+  // "login.form.forgot-password": "Have you forgotten your password?",
+  "login.form.forgot-password": "Forgotten password?",
+
+  // "login.form.new-user": "New user? Click here to register.",
+  "login.form.new-user": "Register",
+
+  "repository.title.prefix": "GI Digital Library :: ",
+
+  "repository.title.prefixDSpace": "GI Digital Library :: ",
+
+
+
+  // GI New labels
+
+  "gi.welcome": "Welcome at the Digital Library of Gesellschaft für Informatik e.V.",
+
+  // $$ is replaced by the item count for the whole site within the GI template home-news component.
+  "gi.search.placeholder": "Search in $$ articles ...",
+
+  "gi.recent.collections": "Recent Collections",
+  "gi.authors.most.documents": "Authors with most Documents",
+  "gi.popular.items": "Popular Items",
+  "gi.most.downloaded.items": "Most frequent Downloads",
+  "gi.departments": "GI Departments",
+  "gi.magazines": "GI Magazines",
+  "gi.lecturenotes": "Lecture Notes in Informatics",
+  "gi.recent.collections.in.subcommunity": "Recent Collections in this Subcommunity",
+  "gi.subcommunities": "Subcommunities in this Community",
+  "gi.subcommunity.recent.collections": "Recent Collections in this Subcommunity",
+  "gi.about": "About Us",
+  "gi.what": "What is the Digital Library?",
+  "gi.faq": "Frequently asked Questions & Support",
+  "gi.report.error": "Report Error",
+
+  "dso-selector.or": "or",
+
+  "footer.link.imprint": "Imprint",
+
+  "info.imprint.breadcrumbs": "Imprint",
+
+  "info.imprint.head": "Imprint",
+
+  "info.imprint.title": "Imprint",
+
+  "search.filters.filter.author.label": "Author",
+
+  "search.filters.filter.subject.label": "Subject",
+
+  "search.filters.filter.dateIssued.min.label": "from",
+
+  "search.filters.filter.dateIssued.max.label": "to"
 }

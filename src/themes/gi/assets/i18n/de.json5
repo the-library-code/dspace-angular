@@ -1,0 +1,104 @@
+// Merge i18n after change:
+//  1. cd to scripts subdirectory
+//  2. yarn merge-i18n -s src/themes/gi/assets/i18n
+
+{
+
+
+  // GI Overrides
+  // "menu.section.browse_global": "All of DSpace",
+  "menu.section.browse_global": "Entdecken",
+
+  // "nav.language": "Language switch",
+  "nav.language": "Sprache",
+
+  // "nav.search": "Search",
+  "nav.search": "Suchen",
+
+  // "login.form.forgot-password": "Have you forgotten your password?",
+  "login.form.forgot-password": "Passwort vergessen?",
+
+  // "login.form.new-user": "New user? Click here to register.",
+  "login.form.new-user": "Registrieren",
+
+  // "search.form.scope.all": "All of DSpace",
+  "search.form.scope.all": "GI Digital Library",
+
+  // "dso-selector.set-scope.community.button": "Search all of DSpace",
+  "dso-selector.set-scope.community.button": "GI Digital Library",
+
+  // "footer.link.privacy-policy": "Privacy policy",
+  "footer.link.privacy-policy": "Datenschutz",
+
+  "repository.title.prefix": "GI Digital Library :: ",
+
+  "repository.title.prefixDSpace": "GI Digital Library :: ",
+
+  // "home.title": "DSpace Angular :: Home",
+  "home.title": "Startseite",
+
+  // "browse.comcol.by.author": "By Author",
+  "browse.comcol.by.author": "Autor/in",
+
+  // "browse.comcol.by.dateissued": "By Issue Date",
+  "browse.comcol.by.dateissued": "Erscheinungsjahr",
+
+  // "browse.comcol.by.subject": "By Subject",
+  "browse.comcol.by.subject": "Schlagwort",
+
+  // "browse.comcol.by.title": "By Title",
+  "browse.comcol.by.title": "Titel",
+
+  // "browse.comcol.head": "Browse",
+  "browse.comcol.head": "Auflistung nach:",
+
+  // "community.all-lists.head": "Subcommunities and Collections",
+  "community.all-lists.head": "Teilbereichen in diesem Bereich",
+
+
+
+  // GI New labels
+
+  "gi.welcome": "Willkommen bei der Digitalen Bibliothek der Gesellschaft für Informatik e.V.",
+
+  // $$ is replaced by the item count for the whole site within the GI template home-news component.
+  "gi.search.placeholder": "Suchen Sie in $$ Artikeln ...",
+
+  "gi.recent.collections": "Neueste Sammlungen",
+  "gi.authors.most.documents": "Autor*innen mit den meisten Dokumenten",
+  "gi.popular.items": "Beliebteste Dokumente",
+  "gi.most.downloaded.items": "Häufigste Downloads",
+  "gi.departments": "GI Fachbereiche",
+  "gi.magazines": "GI Zeitschriften",
+  "gi.lecturenotes": "Lecture Notes in Informatics",
+  "gi.recent.collections.in.subcommunity": "Neueste Sammlungen im Teilbereich",
+  "gi.subcommunities": "Teilbereiche in diesem Bereich",
+  "gi.subcommunity.recent.collections": "Neueste Sammlungen im Teilbereich",
+  "gi.about": "Über uns",
+  "gi.what": "Was ist die Digitale Bibliothek?",
+  "gi.faq": "Häufige Fragen & Hilfe",
+  "gi.report.error": "Fehler melden",
+
+  "dso-selector.or": "oder",
+
+  "footer.link.imprint": "Impressum",
+
+  "info.imprint.breadcrumbs": "Impressum",
+
+  "info.imprint.head": "Impressum",
+
+  "info.imprint.title": "Impressum",
+
+  // "search.filters.filter.author.label": "Author",
+  "search.filters.filter.author.label": "Autor:in",
+
+  // "search.filters.filter.subject.label": "Subject",
+  "search.filters.filter.subject.label": "Thema",
+
+  // "search.filters.filter.dateIssued.min.label": "from",
+  "search.filters.filter.dateIssued.min.label": "von",
+
+  // "search.filters.filter.dateIssued.max.label": "to",
+  "search.filters.filter.dateIssued.max.label": "bis"
+
+}
