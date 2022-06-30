@@ -2,3 +2,57 @@
 
 // imports the base global style
 @import '../../../styles/_global-styles.scss';
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+h6 {
+  font-size: 13px;
+  color: $blue;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* number of lines to show */
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+a {
+  text-decoration: none!important;
+}
+
+.txt-gr {
+  color: gray;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.txt-bl {
+  color: $blue;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+
+// GI specific overrides
+.btn-lg, .btn-group-lg > .btn {
+  font-size: 1rem;
+}
+
+.form-control-lg {
+  font-size: 1rem;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: transparent;
+}
+
+.content-with-optional-title {
+  a {
+    color: gray;
+  }
+}
