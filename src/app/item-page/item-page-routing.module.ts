@@ -65,8 +65,12 @@ import { OrcidPageGuard } from './orcid-page/orcid-page.guard';
           menu: {
             public: [{
               id: 'statistics_item_:id',
+              /*  for GI this is set to false
               active: true,
               visible: true,
+              */
+              active: false,
+              visible: false,
               model: {
                 type: MenuItemType.LINK,
                 text: 'menu.section.statistics',
