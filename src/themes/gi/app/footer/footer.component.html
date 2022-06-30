@@ -1,0 +1,87 @@
+<footer class="text-lg-start">
+  <div *ngIf="showTopFooter" class="top-footer">
+    <!-- Grid container -->
+    <div class="container px-n1">
+      <!--Grid row-->
+      <div class="row">
+
+        <!--Grid column-->
+        <div class="col-lg-7 col-md-12 mb-4 mt-4">
+          <h5>{{ 'gi.magazines' | translate }}</h5>
+
+          <ul class="list-unstyled mb-0 two-col">
+            <li class="top-footer-list" *ngFor="let item of (req | async)?._embedded?.layoutgroups[1]?._embedded?.communities ">
+              <a href="communities/{{item.uuid}}">{{ item.name }}</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mt-4">
+          <h5>{{ 'gi.lecturenotes' | translate }}</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li *ngFor="let item of (req | async)?._embedded?.layoutgroups[2]?._embedded?.communities ">
+              <a href="communities/{{item.uuid}}">{{ item.name }}</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-2 col-md-6 mb-4 mt-4">
+          <h5>{{ 'gi.about' | translate }}</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a routerLink="./" class="">{{ 'gi.what' | translate }}</a>
+            </li>
+            <li>
+              <a routerLink="./" class="">{{ 'gi.faq' | translate }}</a>
+            </li>
+            <li>
+              <a routerLink="./" class="">{{ 'gi.report.error' | translate }}</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="container text-white">
+    <div class="row bottom-footer">
+      <div class="col-md-auto">
+        <a class="navbar-brand my-2" routerLink="/home">
+          <img src="assets/gi/images/GI_White_Links.png" [attr.alt]="'menu.header.image.logo' | translate" height="35"/>
+        </a>
+      </div>
+      <div class="col-md-auto">
+        <a class="text-white" href="#"
+           routerLink="info/imprint">{{ 'footer.link.imprint' | translate}}</a>
+      </div>
+      <div class="col-md-auto">
+        <a class="text-white"
+           target="_blank"
+           href="https://www.gi.de/allgemein/datenschutzerklaerung.html">{{ 'footer.link.privacy-policy' | translate}}</a>
+      </div>
+      <div class="col-md-auto">
+        <a class="text-white" href="#"
+           (click)="showCookieSettings()" style="margin: auto;">{{ 'footer.link.cookies' | translate}}</a>
+      </div>
+      <!--<div class="col-md-auto">
+            <a class="text-white"
+               routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate}}</a>
+        </div>-->
+      <div class="col-md-auto ml-auto">
+        &copy;&nbsp; <a class="text-white"
+                        target="_blank"
+                        href="https://gi.de/">Gesellschaft für Informatik e.V.</a>
+      </div>
+    </div>
+  </div>
+</footer>
