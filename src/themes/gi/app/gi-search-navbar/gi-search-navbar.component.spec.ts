@@ -4,11 +4,11 @@ import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationExtras, Router } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { SearchService } from '../core/shared/search/search.service';
-import { TranslateLoaderMock } from '../shared/mocks/translate-loader.mock';
+import { SearchService } from '../../../../app/core/shared/search/search.service';
+import { TranslateLoaderMock } from '../../../../app/shared/mocks/translate-loader.mock';
 
-import { GiSearchNavbarComponent } from './search-navbar.component';
-import { PaginationServiceStub } from '../shared/testing/pagination-service.stub';
+import { GiSearchNavbarComponent } from './gi-search-navbar.component';
+import { PaginationServiceStub } from '../../../../app/shared/testing/pagination-service.stub';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SearchNavbarComponent', () => {
