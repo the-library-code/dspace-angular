@@ -58,9 +58,9 @@
                 "bundleName": "custom-theme"
               },
               {
-                "input": "src/themes/dspace/styles/theme.scss",
+                "input": "src/themes/gi/styles/theme.scss",
                 "inject": false,
-                "bundleName": "dspace-theme"
+                "bundleName": "gi-theme"
               }
             ],
             "scripts": [],
@@ -112,6 +112,7 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "dspace-angular:build",
+            "host": "0.0.0.0",
             "port": 4000
           },
           "configurations": {
@@ -156,6 +157,16 @@
                 "input": "src/styles/base-theme.scss",
                 "inject": false,
                 "bundleName": "base-theme"
+              },
+              {
+                "input": "src/themes/gi/styles/theme.scss",
+                "inject": false,
+                "bundleName": "gi-theme"
+              },
+              {
+                "input": "src/themes/custom/styles/theme.scss",
+                "inject": false,
+                "bundleName": "custom-theme"
               }
             ],
             "scripts": []
