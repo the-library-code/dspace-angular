@@ -1,0 +1,141 @@
+.fa-lg {
+  font-size: 1em;
+}
+
+input[type="text"] {
+  // margin-top: calc(-0.5 * var(--bs-font-size-base));
+  // border: 2px;
+  box-shadow: none;
+  border-color: var(--GI-yellow);
+
+  &:focus {
+    background-color: rgba(255, 255, 255, 1) !important;
+  }
+
+  &.collapsed {
+    opacity: 0;
+  }
+}
+
+a.submit-icon {
+  cursor: pointer;
+}
+
+@media screen and (max-width: map-get($grid-breakpoints, md)) {
+  .query:focus {
+    max-width: 250px !important;
+    width: 40vw !important;
+  }
+
+  a.submit-icon {
+    color: var(--bs-link-color);
+  }
+}
+
+
+// shortening menu for GI. Code in header component not working for nav search menu. Unclear why.
+.longlabel {
+  display: inline-block;
+}
+.shortlabel {
+  display: none;
+}
+
+@media screen and (max-width: map-get($grid-breakpoints, md)) {
+  .shortlabel {display: inline-block;
+    font-size: 1.25em;
+  }
+  .longlabel {display:none}
+}
+
+
+
+/*
+input[type="text"] {
+  width: 100% !important;
+  margin-top: calc(-0.5 * var(--bs-font-size-base));
+  font-size: 2rem;
+  height: 3rem;
+
+  &:focus {
+    background-color: transparent;
+  }
+
+  &.collapsed {
+    opacity: 0;
+  }
+}
+
+.form-control {
+  box-shadow: none;
+  border: none;
+}
+
+.form-control:active {
+  background-color: transparent;
+}
+
+a.submit-icon:hover {
+  color: black;
+}
+
+.overlay {
+    background-color: var(--ds-top-footer-bg);
+    position: fixed;
+    opacity: 1;
+    z-index: 1000;
+    overflow: auto;
+    top: 4.75rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: none 0s ease 0s;
+
+  @media screen and (min-width: map-get($grid-breakpoints, md)) and (max-width: map-get($grid-breakpoints, lg)) {
+    top: 3.5rem;
+  }
+}
+
+.container {
+  margin-top: 4rem;
+}
+
+.close {
+  font-size: 5rem;
+  font-weight: 100;
+}
+
+.row {
+  justify-content: center;
+}
+
+@media (min-width: 576px) {
+  .search-field {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .search-field {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .search-field {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .search-field {
+    max-width: 1140px;
+  }
+}
+
+.go-search {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+*/

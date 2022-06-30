@@ -1,0 +1,29 @@
+
+  <div ngbDropdown class="navbar-nav mr-3"  *ngIf="moreThanTwoLanguages" display="dynamic" placement="bottom-right">
+    <a href="javascript:void(0);" role="button"
+       [attr.aria-label]="'nav.language' |translate"
+       [title]="'nav.language' | translate" class="px-1"
+       (click)="$event.preventDefault()" data-toggle="dropdown" ngbDropdownToggle
+       tabindex="0">
+      <span class="shortlabel"> <i class="fas fa-globe-asia fa-fw"></i></span>
+      <span class="longlabel"> <i class="fas fa-globe-asia fa-fw"></i> {{'nav.language' | translate}} </span>
+    </a>
+    <ul ngbDropdownMenu class="dropdown-menu" [attr.aria-label]="'nav.language' |translate">
+      <li class="dropdown-item" tabindex="0" #langSelect *ngFor="let lang of translate.getLangs()"
+          (keyup.enter)="useLang(lang)"
+          (click)="useLang(lang)"
+          [class.active]="lang === translate.currentLang">
+        {{ langLabel(lang) }}
+      </li>
+    </ul>
+  </div>
+  <div class="navbar-nav mr-3"  *ngIf="twoLanguages">
+      <a href="#" role="button"
+         [attr.aria-label]="'nav.language' |translate"
+         [title]="'nav.language' | translate"
+         (click)="useLang(this.activeLangs[this.nextIndex].code)">
+        <span class="shortlabel"> <i class="fas fa-globe-asia fa-fw"></i> {{ this.activeLangs[nextIndex].code }} </span>
+        <span class="longlabel"> <i class="fas fa-globe-asia fa-fw"></i> {{ this.activeLangs[nextIndex].label }} </span>
+      </a>
+  </div>
+

@@ -1,0 +1,52 @@
+<div class="row mr-1" [title]="'nav.search' | translate" (dsClickOutside)="collapse()"
+     [attr.aria-label]="('nav.search' | translate)">
+  <div id="search-navbar-container">
+    <div class="position-relative flex-row">
+      <form
+        [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" autocomplete="on">
+        <input #searchInput [@toggleAnimation]="isExpanded"  name="query"
+               formControlName="query" type="text" placeholder="{{ this.searchPlaceholder | async }}"
+               class="bg-transparent form-control dropdown-menu-right">
+      </form>
+    </div>
+  </div>
+  <a class="d-flex align-items-center p-0" type="button" [routerLink]="" (click)="searchExpanded ? onSubmit(searchForm.value) : expand()">
+    <div class="shortlabel"><i class="fas fa-search fa-fw ml-1"></i></div>
+    <div class="longlabel"><i class="fas fa-search fa-fw ml-1"></i>{{ 'nav.search' | translate }}</div>
+  </a>
+</div>
+
+<!--
+<a class="btn d-flex align-items-center p-0" type="button" (click)="searchExpanded ? collapse() : expand()">
+  <em class="fas fa-search fa-fw"></em>
+  <span class="ml-1">{{ 'nav.search' | translate }}</span>
+</a>
+
+<div [hidden]="!searchExpanded" id="layer" class="overlay container-fluid">
+    <div class="row mx-1 mt-3">
+      <div class="col-md-12">
+        <button type="button" class="close" aria-label="Close" (click)="collapse()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 search-field">
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" autocomplete="on">
+          <div>
+            <input #searchInput [@slide]="isExpanded" [attr.aria-label]="('nav.search' | translate)" name="query"
+                   formControlName="query" type="text" placeholder="{{searchExpanded ? ('nav.search' | translate) : ''}}"
+                   class="bg-transparent form-control">
+          </div>
+          <div class="go-search">
+            <a class="submit-icon" [routerLink]="" (click)="onSubmit(searchForm.value)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+-->

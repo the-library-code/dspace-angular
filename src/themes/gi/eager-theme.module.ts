@@ -13,6 +13,10 @@ import { PublicationComponent } from './app/item-page/simple/item-types/publicat
 import { ItemPageModule } from '../../app/item-page/item-page.module';
 import { FooterComponent } from './app/footer/footer.component';
 
+import { GiSearchNavbarComponent } from './app/gi-search-navbar/gi-search-navbar.component';
+import { GiLanguageSwitcherComponent } from './app/shared/gi-language-switcher/gi-language-switcher.component';
+import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.component';
+
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
  * This will ensure that decorator gets picked up when the app loads
@@ -28,6 +32,10 @@ const DECLARATIONS = [
   HeaderNavbarWrapperComponent,
   NavbarComponent,
   FooterComponent,
+
+  GiSearchNavbarComponent,
+  GiLanguageSwitcherComponent,
+  AuthNavMenuComponent,
 ];
 
 @NgModule({

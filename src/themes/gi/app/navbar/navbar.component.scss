@@ -1,0 +1,38 @@
+.navbar-toggler .navbar-toggler-icon {
+  background-image: none !important;
+  line-height: 1.5;
+}
+/*
+
+.navbar ::ng-deep {
+  a {
+    color: rgba(0, 0, 0, 0.65) !important;
+    font-weight: 500 !important;
+
+
+    &:hover, &focus {
+      color: black !important;
+      text-decoration: none;
+    }
+  }
+}
+*/
+
+/** Mobile menu styling **/
+@media screen and (max-width: map-get($grid-breakpoints, md)) {
+  .navbar {
+    width: 100vw;
+    background-color: var(--bs-white);
+    position: absolute;
+    top: 5em;
+    left: -5em;
+    overflow: hidden;
+    height: 0;
+    padding: 2em;
+    align-content: baseline;
+    &.open {
+      height: 100vh; //doesn't matter because wrapper is sticky
+
+    }
+  }
+}

@@ -1,0 +1,33 @@
+// no downward arrow
+.dropdown-toggle::after {
+  display:none;
+}
+
+/*
+@media screen and (min-width: map-get($grid-breakpoints, md)) {
+  .dropdown-toggle {
+    color: var(--ds-header-icon-color) !important;
+
+    &:hover, &focus {
+      color: var(--ds-header-icon-color-hover);
+    }
+  }
+}
+*/
+
+
+// shortening menu for GI. Place into header component
+.longlabel {
+  display: inline-block;
+}
+.shortlabel {
+  display: none;
+}
+
+@media screen and (max-width: map-get($grid-breakpoints, md)) {
+  // @media screen and (max-width: 1000px) {
+  .shortlabel {display: inline-block;
+    font-size: 1.25em;}
+  .longlabel {display:none}
+}
+
