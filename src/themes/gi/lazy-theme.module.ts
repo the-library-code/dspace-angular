@@ -87,6 +87,8 @@ import { PopularDocsComponent } from './app/home-page/popular-docs/popular-docs.
 import { FrequentDownloadsComponent } from './app/home-page/frequent-downloads/frequent-downloads.component';
 import { GiFieldsComponent } from './app/home-page/gi-fields/gi-fields.component';
 import { FieldComponent } from './app/home-page/gi-fields/field/field.component';
+import { GiMagazinesComponent } from './app/home-page/gi-magazines/gi-magazines.component';
+import { MagazineComponent } from './app/home-page/gi-magazines/magazine/magazine.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -133,6 +135,8 @@ const DECLARATIONS = [
   FrequentDownloadsComponent,
   GiFieldsComponent,
   FieldComponent,
+  GiMagazinesComponent,
+  MagazineComponent,
 
 ];
 

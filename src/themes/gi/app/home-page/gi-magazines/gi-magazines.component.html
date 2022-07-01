@@ -1,0 +1,6 @@
+<h2 class="pt-4">{{ 'gi.magazines' | translate }}</h2>
+<div class="fields row">
+  <div *ngFor="let item of (uiConfigreq | async)?._embedded?.layoutgroups[1]?._embedded?.communities">
+    <ds-magazine class="field-item row m-2" [magazines]="item"></ds-magazine>
+  </div>
+</div>
