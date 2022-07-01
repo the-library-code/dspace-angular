@@ -1,0 +1,25 @@
+// temporary fix for bootstrap 4 beta btn color issue
+.btn-secondary {
+  background-color: var(--bs-input-bg);
+  color: var(--bs-input-color);
+}
+
+.form-control {
+  border-radius: initial;
+}
+
+.btn {
+  border-radius: initial;
+}
+
+.btn-login {
+  color: #212529;
+  background-color: var(--GI-yellow);
+  border-color: var(--GI-yellow);
+}
+
+.btn-login:hover {
+  color: #212529;
+  background-color: var(--GI-yellow-dark);
+  border-color: var(--GI-yellow-dark);
+}

@@ -17,12 +17,19 @@ import { GiSearchNavbarComponent } from './app/gi-search-navbar/gi-search-navbar
 import { GiLanguageSwitcherComponent } from './app/shared/gi-language-switcher/gi-language-switcher.component';
 import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.component';
 
+import { GiSearchFormComponent } from './app/shared/gi-search-form/gi-search-form.component';
+
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
  * This will ensure that decorator gets picked up when the app loads
  */
 const ENTRY_COMPONENTS = [
   PublicationComponent,
+
+  // GI specific
+  // end GI specific
+
+
 ];
 
 const DECLARATIONS = [
@@ -33,9 +40,13 @@ const DECLARATIONS = [
   NavbarComponent,
   FooterComponent,
 
-  GiSearchNavbarComponent,
+  // GI specific
   GiLanguageSwitcherComponent,
   AuthNavMenuComponent,
+  GiSearchNavbarComponent,
+  GiSearchFormComponent,
+  // end GI specific
+
 ];
 
 @NgModule({
