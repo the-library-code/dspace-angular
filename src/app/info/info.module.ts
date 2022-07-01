@@ -13,6 +13,9 @@ import { FeedbackFormComponent } from './feedback/feedback-form/feedback-form.co
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import { FeedbackGuard } from '../core/feedback/feedback.guard';
 
+// GI Specifics
+import { ImprintComponent } from '../../themes/gi/app/info/imprint/imprint.component';
+// End GI Specifics
 
 const DECLARATIONS = [
   EndUserAgreementComponent,
@@ -23,7 +26,11 @@ const DECLARATIONS = [
   ThemedPrivacyComponent,
   FeedbackComponent,
   FeedbackFormComponent,
-  ThemedFeedbackComponent
+  ThemedFeedbackComponent,
+
+  // GI specifics
+  ImprintComponent,
+  // end GI specifics
 ];
 
 @NgModule({
