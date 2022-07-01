@@ -82,6 +82,7 @@ import { CommunityListComponent } from './app/community-list-page/community-list
 
 import { NewestCollectionsComponent} from './app/home-page/newest-collections/newest-collections.component';
 import { NewCollectionComponent } from './app/home-page/newest-collections/new-collection/new-collection.component';
+import { AuthorsWithMostDocsComponent } from './app/home-page/authors-with-most-docs/authors-with-most-docs.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -123,6 +124,7 @@ const DECLARATIONS = [
 
   NewestCollectionsComponent,
   NewCollectionComponent,
+  AuthorsWithMostDocsComponent,
 
 ];
 
