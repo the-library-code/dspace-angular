@@ -80,6 +80,9 @@ import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
 import { FeedbackComponent } from './app/info/feedback/feedback.component';
 import { CommunityListComponent } from './app/community-list-page/community-list/community-list.component';
 
+import { NewestCollectionsComponent} from './app/home-page/newest-collections/newest-collections.component';
+import { NewCollectionComponent } from './app/home-page/newest-collections/new-collection/new-collection.component';
+
 const DECLARATIONS = [
   FileSectionComponent,
   HomePageComponent,
@@ -117,6 +120,10 @@ const DECLARATIONS = [
   BreadcrumbsComponent,
   FeedbackComponent,
   CommunityListComponent,
+
+  NewestCollectionsComponent,
+  NewCollectionComponent,
+
 ];
 
 @NgModule({
