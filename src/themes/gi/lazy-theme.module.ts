@@ -89,6 +89,8 @@ import { GiFieldsComponent } from './app/home-page/gi-fields/gi-fields.component
 import { FieldComponent } from './app/home-page/gi-fields/field/field.component';
 import { GiMagazinesComponent } from './app/home-page/gi-magazines/gi-magazines.component';
 import { MagazineComponent } from './app/home-page/gi-magazines/magazine/magazine.component';
+import { LectureNotesComponent } from './app/home-page/lecture-notes/lecture-notes.component';
+import { LectureNoteComponent } from './app/home-page/lecture-notes/lecture-note/lecture-note.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -137,6 +139,8 @@ const DECLARATIONS = [
   FieldComponent,
   GiMagazinesComponent,
   MagazineComponent,
+  LectureNotesComponent,
+  LectureNoteComponent,
 
 ];
 
