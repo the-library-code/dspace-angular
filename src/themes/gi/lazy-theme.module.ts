@@ -85,6 +85,8 @@ import { NewCollectionComponent } from './app/home-page/newest-collections/new-c
 import { AuthorsWithMostDocsComponent } from './app/home-page/authors-with-most-docs/authors-with-most-docs.component';
 import { PopularDocsComponent } from './app/home-page/popular-docs/popular-docs.component';
 import { FrequentDownloadsComponent } from './app/home-page/frequent-downloads/frequent-downloads.component';
+import { GiFieldsComponent } from './app/home-page/gi-fields/gi-fields.component';
+import { FieldComponent } from './app/home-page/gi-fields/field/field.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -129,6 +131,8 @@ const DECLARATIONS = [
   AuthorsWithMostDocsComponent,
   PopularDocsComponent,
   FrequentDownloadsComponent,
+  GiFieldsComponent,
+  FieldComponent,
 
 ];
 
