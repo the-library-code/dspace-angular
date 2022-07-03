@@ -15,7 +15,7 @@ header {
 
 
 .navbar-toggler .navbar-toggler-icon {
-  background-image: none !important;
+  // background-image: none !important;
   line-height: 1.5;
   font-size: 1.25em;
 
@@ -27,35 +27,25 @@ header {
   line-height: 1.5;
   background-color: transparent;
   border-color: var(--GI-yellow);
-  color: rgba(0, 0, 0, 0.65) !important;
-  font-weight: 500 !important;
+  color: rgba(0, 0, 0, 0.65); // !important;
+  font-weight: 500; // !important;
 
   &:hover, &focus {
-    color: black !important;
+    color: black; // !important;
     text-decoration: none;
   }
 
 }
 
-/*.navbar ::ng-deep {
-  a {
-    color: var(--ds-header-icon-color);
-
-    &:hover, &focus {
-      color: var(--ds-header-icon-color-hover);
-    }
-  }
-}*/
-
 
 // GI: blacking on hover and focus
 .navbar ::ng-deep {
   a {
-    color: rgba(0, 0, 0, 0.65) !important;
-    font-weight: 500 !important;
+    color: rgba(0, 0, 0, 0.65); // !important;
+    font-weight: 500; // !important;
 
     &:hover, &focus {
-      color: black !important;
+      color: black; // !important;
       text-decoration: none;
     }
   }
