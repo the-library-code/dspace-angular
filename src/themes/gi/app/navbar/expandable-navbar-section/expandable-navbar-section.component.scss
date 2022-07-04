@@ -27,5 +27,8 @@
 
 // GI: in mobile mode, disable hover blacking on first menu section.
 @media screen and (max-width: map-get($grid-breakpoints, md)) {
-  .section-disable-hover { color: rgba(0, 0, 0, 0.65) !important; }
+  .section-disable-hover {
+    color: rgba(0, 0, 0, 0.65) !important;
+    cursor: unset;
+  }
 }

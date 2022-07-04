@@ -79,6 +79,10 @@
   "gi.faq": "Häufige Fragen & Hilfe",
   "gi.report.error": "Fehler melden",
 
+  // "gi.number.items.label":"documents",
+  "gi.number.items.label":"Dokumente",
+
+
   "dso-selector.or": "oder",
 
   "footer.link.imprint": "Impressum",
@@ -99,6 +103,10 @@
   "search.filters.filter.dateIssued.min.label": "von",
 
   // "search.filters.filter.dateIssued.max.label": "to",
-  "search.filters.filter.dateIssued.max.label": "bis"
+  "search.filters.filter.dateIssued.max.label": "bis",
+
 
 }
+// Merge i18n after change:
+//  1. cd to scripts subdirectory
+//  2. yarn merge-i18n -s src/themes/gi/assets/i18n

@@ -44,6 +44,8 @@
   "gi.faq": "Frequently asked Questions & Support",
   "gi.report.error": "Report Error",
 
+  "gi.number.items.label":"documents",
+
   "dso-selector.or": "or",
 
   "footer.link.imprint": "Imprint",
@@ -62,3 +64,7 @@
 
   "search.filters.filter.dateIssued.max.label": "to"
 }
+
+// Merge i18n after change:
+//  1. cd to scripts subdirectory
+//  2. yarn merge-i18n -s src/themes/gi/assets/i18n
