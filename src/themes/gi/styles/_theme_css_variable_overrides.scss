@@ -7,8 +7,13 @@
   //--ds-header-icon-color-hover: #{darken($link-color, 15%)};
 
 
-  --ds-navbar-link-color: #{$secondary};
+  // --ds-navbar-link-color: #{$secondary};
+  --ds-navbar-link-color: rgba(0, 0, 0, 0.65);
+  --ds-navbar-link-color-hover: black;
+
   --ds-header-icon-color: #{$secondary};
+
+
   --ds-home-news-background-color: #{$primary};
   --ds-home-news-link-color: #{$primary};
   --ds-thumbnail-max-width: 200px;
