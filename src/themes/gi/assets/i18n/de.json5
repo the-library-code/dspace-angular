@@ -106,7 +106,14 @@
   "search.filters.filter.dateIssued.max.label": "bis",
 
 
+  // to integrate in community de.json5 per pull-request?
+  "500.page-internal-server-error": "Service nicht verfügbar",
+
+  "500.help": "Der Server ist derzeit aus Wartungs- oder Kapazitätsgründen nicht in der Lage, Ihre Anfrage zu bedienen. Bitte versuchen Sie es später noch einmal.",
+
+  "500.link.home-page": "zur Homepage"
 }
+
 // Merge i18n after change:
 //  1. cd to scripts subdirectory
 //  2. yarn merge-i18n -s src/themes/gi/assets/i18n
