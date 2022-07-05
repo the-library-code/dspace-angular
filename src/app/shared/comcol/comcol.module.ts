@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComcolPageContentComponent } from './comcol-page-content/comcol-page-content.component';
 import { ComcolPageHandleComponent } from './comcol-page-handle/comcol-page-handle.component';
+// GI specifics
+import { ThemedComcolPageHandleComponent} from './comcol-page-handle/themed-comcol-page-handle.component';
+// end GI specifics
+
 import { ComcolPageHeaderComponent } from './comcol-page-header/comcol-page-header.component';
 import { ComcolPageLogoComponent } from './comcol-page-logo/comcol-page-logo.component';
 import { ComColFormComponent } from './comcol-forms/comcol-form/comcol-form.component';
@@ -26,6 +30,11 @@ const COMPONENTS = [
   ComcolPageBrowseByComponent,
   ThemedComcolPageBrowseByComponent,
   ComcolRoleComponent,
+
+ // GI specifics
+  ThemedComcolPageHandleComponent
+// end GI specifics
+
 ];
 
 @NgModule({
