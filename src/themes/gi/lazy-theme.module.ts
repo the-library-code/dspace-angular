@@ -94,6 +94,7 @@ import { LectureNoteComponent } from './app/home-page/lecture-notes/lecture-note
 
 import { ComcolPageHandleComponent } from './app/shared/comcol-page-handle/comcol-page-handle.component';
 import { ComcolPageBrowseByComponent } from './app/shared/comcol-page-browse-by/comcol-page-browse-by.component';
+import { ObjectListComponent } from './app/shared/object-list/object-list.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -147,6 +148,7 @@ const DECLARATIONS = [
 
   ComcolPageHandleComponent,
   ComcolPageBrowseByComponent,
+  ObjectListComponent,
 
 ];
 
