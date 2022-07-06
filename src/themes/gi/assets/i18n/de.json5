@@ -53,7 +53,7 @@
   "browse.comcol.head": "Auflistung nach:",
 
   // "community.all-lists.head": "Subcommunities and Collections",
-  "community.all-lists.head": "Teilbereichen in diesem Bereich",
+  "community.all-lists.head": "Teilbereichen",
 
 
 
@@ -111,7 +111,13 @@
 
   "500.help": "Der Server ist derzeit aus Wartungs- oder Kapazitätsgründen nicht in der Lage, Ihre Anfrage zu bedienen. Bitte versuchen Sie es später noch einmal.",
 
-  "500.link.home-page": "zur Homepage"
+  "500.link.home-page": "zur Homepage",
+
+  "item.truncatable-part.show-more": "mehr...",
+
+  "item.truncatable-part.show-less": "...weniger"
+
+
 }
 
 // Merge i18n after change:

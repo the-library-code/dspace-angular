@@ -12,7 +12,7 @@
 
 a {
   border: transparent;
-  color: #30C1FF;
+  color: var(--GI-content-link);
 }
 
 .list-group-item:first-child, .list-group-item:last-child {
