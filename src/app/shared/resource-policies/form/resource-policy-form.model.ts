@@ -62,6 +62,10 @@ const policyActionList: DynamicFormOptionConfig<any>[] = [
   {
     label: ActionType.DEFAULT_ITEM_READ.toString(),
     value: ActionType.DEFAULT_ITEM_READ
+  },
+  {
+    label: ActionType.HIDDEN_METADATA_READ.toString(),
+    value: ActionType.HIDDEN_METADATA_READ
   }
 ];
 

@@ -65,5 +65,11 @@ export enum ActionType {
   /**
    * Action of withdrawn reading
    */
-  WITHDRAWN_READ = 'WITHDRAWN_READ'
+  WITHDRAWN_READ = 'WITHDRAWN_READ',
+
+  /**
+   * Action of reading hidden metadata (overriding the default which hides from all non-administrators)
+   */
+  HIDDEN_METADATA_READ = 'HIDDEN_METADATA_READ'
+
 }
