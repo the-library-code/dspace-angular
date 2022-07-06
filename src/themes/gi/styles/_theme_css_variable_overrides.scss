@@ -21,4 +21,8 @@
 
   --GI-yellow: #{$gi-yellow};
   --GI-yellow-dark: #{$gi-yellow-dark};
+
+  --GI-content-link: #{lighten($primary, 15%)}
+
+
 }
