@@ -3,3 +3,8 @@ div {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
+.copyicon {
+  color: var(--ds-navbar-link-color);
+  cursor: pointer;
+}

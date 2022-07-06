@@ -27,7 +27,7 @@ export class ThemedComcolPageHandleComponent extends ThemedComponent<ComcolPageH
   }
 
   protected importThemedComponent(themeName: string): Promise<any> {
-    return import(`../../../../themes/${themeName}/app/shared/comcol/comcol-page-handle/comcol-page-handle.component`);
+    return import(`../../../../themes/${themeName}/app/shared/comcol-page-handle/comcol-page-handle.component`);
   }
 
   protected importUnthemedComponent(): Promise<any> {

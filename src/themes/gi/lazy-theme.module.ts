@@ -92,7 +92,7 @@ import { MagazineComponent } from './app/home-page/gi-magazines/magazine/magazin
 import { LectureNotesComponent } from './app/home-page/lecture-notes/lecture-notes.component';
 import { LectureNoteComponent } from './app/home-page/lecture-notes/lecture-note/lecture-note.component';
 
-import { ComcolPageHandleComponent } from './app/shared/comcol/comcol-page-handle/comcol-page-handle.component';
+import { ComcolPageHandleComponent } from './app/shared/comcol-page-handle/comcol-page-handle.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
