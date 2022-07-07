@@ -115,7 +115,11 @@
 
   "item.truncatable-part.show-more": "mehr...",
 
-  "item.truncatable-part.show-less": "...weniger"
+  "item.truncatable-part.show-less": "...weniger",
+
+  "pagination.previous.button": "zurück",
+
+  "pagination.next.button": "vor",
 
 
 }
