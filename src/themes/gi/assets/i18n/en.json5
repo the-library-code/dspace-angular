@@ -20,6 +20,10 @@
 
   "repository.title.prefixDSpace": "GI Digital Library :: ",
 
+  "pagination.showing.detail": "{{ range }} of {{ total }}",
+
+  "pagination.showing.label": "",
+
 
 
   // GI New labels
