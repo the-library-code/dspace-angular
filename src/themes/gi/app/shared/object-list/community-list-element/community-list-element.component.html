@@ -1,0 +1,15 @@
+<a *ngIf="linkType != linkTypes.None"
+   [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" rel="noopener noreferrer"
+   [routerLink]="['/communities/' + object.id]"
+   class="lead community">
+        <div class="limit-text">{{object.name}}</div>
+        <div *ngIf="object.shortDescription" class="text-muted abstract-text limit-text">
+            {{object.shortDescription}}
+        </div>
+      <p class="doc-amount txt-bl">
+        {{numberSub | async}} {{ "gi.number.items.label" | translate }}</p>
+        <i class="fa fa-arrow-right move-right"></i>
+</a>
+<!--<span *ngIf="linkType == linkTypes.None" class="lead">
+    {{object.name}}
+</span>-->

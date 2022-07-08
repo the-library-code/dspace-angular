@@ -23,7 +23,7 @@
   --GI-yellow-dark: #{$gi-yellow-dark};
 
   --GI-content-link: #{lighten($primary, 30%)};
-  --GI-content-link-active: #{$primary};
+  --GI-content-link-active: #{lighten($primary, 20%)};
 
 
 }

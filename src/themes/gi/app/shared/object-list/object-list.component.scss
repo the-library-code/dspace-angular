@@ -8,38 +8,76 @@ img {
 }
 
 .col-md-3 .item {
-  background-color: var(--ds-top-footer-bg);
-  height: 10rem;
+  // background-color: var(--ds-top-footer-bg);
   margin: 0 0 1rem 0;
 }
 
 .col-md-3 .item {
   ::ng-deep a {
     display: block;
-    height: 100%;
-    padding: 1rem;
+    // height: 100%;
+    // padding: 1rem;
+    height: 7rem;
     text-decoration: none;
   }
 }
 
-.col-md-3 .item:hover {
+.community {
+  background-color: var(--ds-top-footer-bg);
+  padding: 1rem;
+}
+
+
+
+.community:hover {
   ::ng-deep .move-right {
     position: absolute;
-    right: 2.5rem;
-    bottom: 2rem;
-    transform: translate(1rem,0);
-    -webkit-transform: translate(1rem,0); /** Chrome & Safari **/
-    -o-transform: translate(1rem,0); /** Opera **/
-    -moz-transform: translate(1rem,0); /** Firefox **/
+    right: 1.5rem;
+    bottom: 1.5rem;
+    transform: translate(0.5rem,0);
+    -webkit-transform: translate(0.5rem,0); /** Chrome & Safari **/
+    -o-transform: translate(0.5rem,0); /** Opera **/
+    -moz-transform: translate(0.5rem,0); /** Firefox **/
     transition: all 300ms ease-in-out;
   }
 }
 
-.col-md-3 .item {
+.community {
   ::ng-deep .move-right {
     position: absolute;
-    right: 2.5rem;
-    bottom: 2rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    transform: translate(0,0);
+    -webkit-transform: translate(0,0); /** Chrome & Safari **/
+    -o-transform: translate(0,0); /** Opera **/
+    -moz-transform: translate(0,0); /** Firefox **/
+    transition: all 300ms ease-in-out;
+  }
+}
+
+.collection {
+  padding: 0rem;
+  border: 1px #eeeeee solid;
+}
+
+.collection:hover {
+  ::ng-deep .move-right {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.3rem;
+    transform: translate(0.5rem,0);
+    -webkit-transform: translate(0.5rem,0); /** Chrome & Safari **/
+    -o-transform: translate(0.5rem,0); /** Opera **/
+    -moz-transform: translate(0.5rem,0); /** Firefox **/
+    transition: all 300ms ease-in-out;
+  }
+}
+
+.collection {
+  ::ng-deep .move-right {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.3rem;
     transform: translate(0,0);
     -webkit-transform: translate(0,0); /** Chrome & Safari **/
     -o-transform: translate(0,0); /** Opera **/

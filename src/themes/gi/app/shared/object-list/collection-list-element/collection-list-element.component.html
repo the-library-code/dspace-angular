@@ -1,0 +1,22 @@
+<a *ngIf="linkType != linkTypes.None"
+   [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
+   rel="noopener noreferrer"
+   [routerLink]="['/collections/' + object.id]"
+   class="lead d-flex flex-row">
+   <div class="left">
+     <img *ngIf="thumbnailUrl" src="{{thumbnailUrl}}" alt="">
+     <img *ngIf="!thumbnailUrl" src="../../../../../../assets/images/empty.svg" alt="">
+   </div>
+   <div class="right col">
+    <div class="limit-text">{{object.name}}</div>
+    <div *ngIf="object.shortDescription" class="text-muted abstract-text limit-text">
+        {{object.shortDescription}}
+    </div>
+    <p class="doc-amount txt-bl">
+      {{numberSub | async}} {{ "gi.number.items.label" | translate }}</p>
+    <i class="fa fa-arrow-right move-right"></i>
+   </div>
+</a>
+<!--<span *ngIf="linkType == linkTypes.None" class="lead">
+    {{object.name}}
+</span>-->

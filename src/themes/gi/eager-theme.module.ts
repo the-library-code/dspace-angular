@@ -20,6 +20,9 @@ import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.c
 
 import { GiSearchFormComponent } from './app/shared/gi-search-form/gi-search-form.component';
 
+import { CommunityListElementComponent } from './app/shared/object-list/community-list-element/community-list-element.component';
+import { CollectionListElementComponent} from './app/shared/object-list/collection-list-element/collection-list-element.component';
+
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
  * This will ensure that decorator gets picked up when the app loads
@@ -28,9 +31,9 @@ const ENTRY_COMPONENTS = [
   PublicationComponent,
 
   // GI specific
+  CommunityListElementComponent,
+  CollectionListElementComponent,
   // end GI specific
-
-
 ];
 
 const DECLARATIONS = [
