@@ -13,4 +13,8 @@ import { ObjectListComponent as BaseComponent} from '../../../../../app/shared/o
   // templateUrl: '../../../../../app/shared/object-list/object-list.component.html'
 })
 
-export class ObjectListComponent extends BaseComponent {}
+export class ObjectListComponent extends BaseComponent {
+  test() {
+    console.log(this.objects.payload.page[0].constructor.name);
+  }
+}
