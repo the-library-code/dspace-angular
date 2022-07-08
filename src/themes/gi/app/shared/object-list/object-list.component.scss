@@ -17,14 +17,15 @@ img {
     display: block;
     // height: 100%;
     // padding: 1rem;
-    height: 7rem;
     text-decoration: none;
+    height: 6rem;
   }
 }
 
+
 .community {
   background-color: var(--ds-top-footer-bg);
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 
@@ -85,3 +86,11 @@ img {
     transition: all 300ms ease-in-out;
   }
 }
+
+
+.txt-gr {
+  color: gray;
+  font-weight: 400;
+  font-size: 12px;
+}
+
