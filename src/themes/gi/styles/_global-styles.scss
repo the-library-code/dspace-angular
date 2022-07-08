@@ -66,3 +66,37 @@ a {
   color: grey;
   margin-bottom: 3em;
 }
+
+
+
+// Pagination Component
+.page-link {
+  font-weight: 300;
+  position: relative;
+  display: block;
+  // padding: 0.5rem 0.75rem;
+  padding: 0.2rem;
+  // margin-left: -1px;
+  margin: 0;
+  line-height: 1.25;
+  color: var(--GI-content-link);
+  background-color: #fff;
+  border: 0;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: var(--GI-content-link-active);
+  font-weight: 600;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+// a hack to trick the pagination component to the right
+.pagination.justify-content-center {
+  justify-content: right !important;
+}
+
+.pagination-masked.clearfix {
+  margin-top: -0.6em;
+}

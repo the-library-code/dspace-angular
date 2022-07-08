@@ -29,7 +29,6 @@
   <div class="comcol-browse-label mr-3">{{'browse.comcol.head' | translate}}</div>
   <nav class="comcol-browse" aria-label="Browse Community or Collection">
     <div class="d-none d-sm-block">
-
       <div class="list-group list-group-horizontal">
         <a *ngFor="let option of allOptions"
            class="list-group-item"
@@ -38,7 +37,6 @@
            routerLinkActive="active">{{ option.label | translate }}</a>
       </div>
     </div>
-
     <div class="d-block d-sm-none">
       <select name="browse-type"
               class="form-control"
@@ -51,3 +49,4 @@
     </div>
   </nav>
 </div>
+<hr class="line">

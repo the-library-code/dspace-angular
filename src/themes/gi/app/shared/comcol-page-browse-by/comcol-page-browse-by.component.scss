@@ -1,7 +1,9 @@
 .comcol-browse-panel {
   display: flex;
   justify-content: start;
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
+  font-size: 0.9em;
+
 }
 
 .comcol-browse-label {
@@ -15,10 +17,11 @@ a {
   color: var(--GI-content-link);
 }
 
+.list-group-item {
+  padding: 5px 10px;
+}
+
 .list-group-item:first-child, .list-group-item:last-child {
   border-radius: 0;
 }
 
-.line {
-  color: grey;
-}
