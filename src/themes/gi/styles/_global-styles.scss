@@ -64,10 +64,13 @@ a {
 .line {
   border-top: 1px solid;
   color: grey;
-  margin-bottom: 3em;
+  margin-top: 0.3em;
+  margin-bottom: 1.5em;
 }
 
-
+.collapseButton, .expandButton {
+  font-size: 0.8em !important;
+}
 
 // Pagination Component
 .page-link {
