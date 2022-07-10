@@ -30,7 +30,7 @@ import { isValidDate } from '../../shared/date.util';
  * A metadata definition (a.k.a. browse id) is a short term used to describe one or multiple metadata fields.
  * An example would be 'dateissued' for 'dc.date.issued'
  */
-@rendersBrowseBy(BrowseByDataType.Date)
+// @rendersBrowseBy(BrowseByDataType.Date)
 export class BrowseByDatePageComponent extends BrowseByMetadataPageComponent {
 
   /**
