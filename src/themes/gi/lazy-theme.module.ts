@@ -96,6 +96,9 @@ import { ComcolPageHandleComponent } from './app/shared/comcol-page-handle/comco
 import { ComcolPageBrowseByComponent } from './app/shared/comcol-page-browse-by/comcol-page-browse-by.component';
 import { ObjectListComponent } from './app/shared/object-list/object-list.component';
 
+import { CommunityPageSubCommunityListComponent } from './app/community-page/sub-community-list/community-page-sub-community-list.component';
+import { CommunityPageSubCollectionListComponent } from './app/community-page/sub-collection-list/community-page-sub-collection-list.component';
+
 const DECLARATIONS = [
   FileSectionComponent,
   HomePageComponent,
@@ -149,6 +152,9 @@ const DECLARATIONS = [
   ComcolPageHandleComponent,
   ComcolPageBrowseByComponent,
   ObjectListComponent,
+
+  CommunityPageSubCommunityListComponent,
+  CommunityPageSubCollectionListComponent,
 
 ];
 
