@@ -81,6 +81,8 @@ import { FeedbackComponent } from './app/info/feedback/feedback.component';
 import { CommunityListComponent } from './app/community-list-page/community-list/community-list.component';
 
 import { ComcolPageHandleComponent } from './app/shared/comcol-page-handle/comcol-page-handle.component';
+import { CommunityPageSubCollectionListComponent } from './app/community-page/sub-collection-list/community-page-sub-collection-list.component';
+import { CommunityPageSubCommunityListComponent } from './app/community-page/sub-community-list/community-page-sub-community-list.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -120,6 +122,9 @@ const DECLARATIONS = [
   FeedbackComponent,
   CommunityListComponent,
   ComcolPageHandleComponent,
+  CommunityPageSubCollectionListComponent,
+  CommunityPageSubCommunityListComponent,
+
 ];
 
 @NgModule({

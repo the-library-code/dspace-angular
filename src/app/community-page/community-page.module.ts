@@ -14,12 +14,19 @@ import { CommunityFormModule } from './community-form/community-form.module';
 import { ThemedCommunityPageComponent } from './themed-community-page.component';
 import { ComcolModule } from '../shared/comcol/comcol.module';
 
+import { ThemedCommunityPageSubCollectionListComponent } from './sub-collection-list/themed-community-page-sub-collection-list.component';
+import { ThemedCommunityPageSubCommunityListComponent } from './sub-community-list/themed-community-page-sub-community-list.component';
+
+
 const DECLARATIONS = [CommunityPageComponent,
   ThemedCommunityPageComponent,
   CommunityPageSubCollectionListComponent,
   CommunityPageSubCommunityListComponent,
   CreateCommunityPageComponent,
-  DeleteCommunityPageComponent];
+  DeleteCommunityPageComponent,
+  ThemedCommunityPageSubCollectionListComponent,
+  ThemedCommunityPageSubCommunityListComponent,
+];
 
 @NgModule({
   imports: [
