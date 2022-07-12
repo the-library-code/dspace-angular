@@ -108,17 +108,19 @@ a {
   margin-top: -0.6em;
 }
 
-.btn-secondary[title="feed.description"],
-.btn-secondary[title="pagination.options.description"]{
+ds-rss .btn-secondary,
+ds-pagination .btn-secondary {
   color: $primary;
   background-color: unset;
   border: none;
   box-shadow: none;
   padding: 0;
   margin-top: -1.5em;
-  :hover {
-    color: var(--GI-content-link);
-    background-color: transparent;
-    border: none;
-  }
+}
+
+ds-rss .btn-secondary:hover ,
+ds-pagination .btn-secondary:hover {
+  color: var(--GI-content-link);
+  background-color: transparent;
+  border: none;
 }
