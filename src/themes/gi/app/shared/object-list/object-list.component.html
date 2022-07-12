@@ -19,15 +19,14 @@
     <div *ngIf="objects?.hasSucceeded &&
       ((objects?.payload.page[0].constructor.name == 'Community') ||
       (objects?.payload.page[0].constructor.name == 'Collection'))"
-         class="container-fluid mt-1 ml-n2">
-      <div class="list-unstyled row"
+         class="container-fluid mt-1 p-2">
+      <div class="row g-1"
            [ngClass]="{'ml-4': selectable}">
         <div *ngFor="let object of objects?.payload?.page; let i = index; let last = last"
-             class="col-md-3"
-             [class.border-bottom]="hasBorder && !last">
-          <div class="item"
-               [ngClass]="{'community': objects?.payload.page[0].constructor.name == 'Community',
-                           'collection row': objects?.payload.page[0].constructor.name == 'Collection'}">
+             class="item p-1"
+             [class.border-bottom]="hasBorder && !last"
+               [ngClass]="{'community col-md-3': objects?.payload.page[0].constructor.name == 'Community',
+                           'collection col-md-6 col-lg-3': objects?.payload.page[0].constructor.name == 'Collection'}">
             <ds-selectable-list-item-control *ngIf="selectable" [index]="i"
                                              [object]="object"
                                              [selectionConfig]="selectionConfig"
@@ -40,8 +39,7 @@
                                                  [listID]="selectionConfig?.listId"
                                                  (contentChange)="contentChange.emit()"
             ></ds-listable-object-component-loader>
-          </div>
-        </div>
+         </div>
       </div>
     </div>
     <ul *ngIf="objects?.hasSucceeded &&
