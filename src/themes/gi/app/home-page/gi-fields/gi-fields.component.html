@@ -1,7 +1,7 @@
 <h2 class="pt-4">{{ 'gi.departments' | translate }}</h2>
 
 
-<div class="fields row">
+<div class="fields row ml-n2">
   <div *ngFor="let item of (uiConfigreq | async)?._embedded?.layoutgroups[0]?._embedded?.communities">
     <ds-field class="field-item row m-2" [fields]="item"></ds-field>
   </div>

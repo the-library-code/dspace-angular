@@ -1,5 +1,5 @@
 <h2 class="pt-4">{{ 'gi.lecturenotes' | translate }}</h2>
-<div class="fields row">
+<div class="fields row ml-n2">
 <div *ngFor="let item of (uiConfigreq | async)?._embedded?.layoutgroups[2]?._embedded?.communities">
     <ds-lecture-note class="field-item row m-2" [lectureNotes]="item"></ds-lecture-note>
 </div>
