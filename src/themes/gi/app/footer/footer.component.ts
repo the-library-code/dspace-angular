@@ -9,7 +9,6 @@ import { GiDataService } from '../shared/gi-data.service';
   templateUrl: 'footer.component.html'
 })
 export class FooterComponent implements OnInit {
-  dateObj: number = Date.now();
 
   /**
    * A boolean representing if to show or not the top footer container

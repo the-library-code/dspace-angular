@@ -24,7 +24,7 @@ import {Context} from '../../../../../app/core/shared/context.model';
   animations: [fadeInOut, fadeOut]
 })
 
-@listableObjectComponent('Project', ViewMode.StandalonePage, Context.Any, 'gesellschaft-informatik')
+@listableObjectComponent('Project', ViewMode.StandalonePage, Context.Any, 'gi')
 
 export class AuthNavMenuComponent implements OnInit {
   /**

@@ -110,10 +110,13 @@
 
 
   // to integrate in community de.json5 per pull-request?
+  // "500.page-internal-server-error": "Service Unavailable",
   "500.page-internal-server-error": "Service nicht verfügbar",
 
+  // "500.help": "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.",
   "500.help": "Der Server ist derzeit aus Wartungs- oder Kapazitätsgründen nicht in der Lage, Ihre Anfrage zu bedienen. Bitte versuchen Sie es später noch einmal.",
 
+  // "500.link.home-page": "Take me to the home page",
   "500.link.home-page": "zur Homepage",
 
   "item.truncatable-part.show-more": "mehr...",
@@ -123,6 +126,10 @@
   "pagination.previous.button": "zurück",
 
   "pagination.next.button": "vor",
+
+  "feed.description": "RSS Feed",
+
+  "pagination.options.description": "Paginierungseinstellungen"
 
 }
 
