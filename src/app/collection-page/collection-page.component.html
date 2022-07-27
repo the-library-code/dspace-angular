@@ -37,6 +37,36 @@
                   <ds-dso-page-edit-button *ngIf="isCollectionAdmin$ | async"  [pageRoute]="collectionPageRoute$ | async" [dso]="collection" [tooltipMsg]="'collection.page.edit'"></ds-dso-page-edit-button>
                 </div>
               </div>
+
+              <!-- ORIGINAL FROM COLLECTION ITEM MAPPER -->
+              <!--
+              <ds-search-form id="search-form"
+                              [query]="(searchOptions$ | async)?.query"
+                              [scope]="(searchOptions$ | async)?.scope"
+                              [currentUrl]="'./'"
+                              [inPlaceSearch]="true"
+                              [searchPlaceholder]="'collection.edit.item-mapper.search-form.placeholder' | translate"
+                              (submitSearch)="performedSearch = true">
+              </ds-search-form>
+              -->
+              <ds-search-form id="search-form"
+                              [query]=""
+                              [scope]="collection.uuid"
+                              [currentUrl]="'/search'"
+                              [inPlaceSearch]="false"
+                              [searchPlaceholder]="'collection.edit.item-mapper.search-form.placeholder' | translate">
+              </ds-search-form>
+
+              <!-- taken from search-sidebar.component
+
+              <ds-search-filters [currentScope]="currentScope"
+                               [currentConfiguration]="configuration"
+                               [refreshFilters]="refreshFilters"
+                               [inPlaceSearch]="inPlaceSearch"></ds-search-filters>
+            <ds-search-settings [currentSortOption]="currentSortOption" [sortOptionsList]="sortOptionsList"></ds-search-settings>
+
+              -->
+
               <section class="comcol-page-browse-section">
               <!-- Browse-By Links -->
               <ds-themed-comcol-page-browse-by

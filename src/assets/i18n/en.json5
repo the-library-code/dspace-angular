@@ -640,7 +640,7 @@
   "bitstream-request-a-copy.alert.canDownload2": "here",
 
   "bitstream-request-a-copy.header": "Request a copy of the file",
-  
+
   "bitstream-request-a-copy.intro": "Enter the following information to request a copy for the following item: ",
 
   "bitstream-request-a-copy.intro.bitstream.one": "Requesting the following file: ",
@@ -3534,6 +3534,19 @@
 
   "search.filters.filter.submitter.label": "Search submitter",
 
+  "search.filters.filter.sponsor.head": "Sponsor",
+
+  "search.filters.filter.sponsor.placeholder": "Sponsor",
+
+  "search.filters.filter.sponsor.label": "Search sponsor",
+
+  "search.filters.filter.available.head": "Date Available",
+
+  "search.filters.filter.available.placeholder": "Date Available",
+
+  "search.filters.filter.available.label": "Date Available",
+  "search.filters.filter.available.min.label": "from",
+  "search.filters.filter.available.max.label": "to",
 
 
   "search.filters.entityType.JournalIssue": "Journal Issue",

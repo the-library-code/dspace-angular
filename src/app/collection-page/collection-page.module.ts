@@ -16,17 +16,19 @@ import { StatisticsModule } from '../statistics/statistics.module';
 import { CollectionFormModule } from './collection-form/collection-form.module';
 import { ThemedCollectionPageComponent } from './themed-collection-page.component';
 import { ComcolModule } from '../shared/comcol/comcol.module';
+import {SearchModule} from '../shared/search/search.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    CollectionPageRoutingModule,
-    StatisticsModule.forRoot(),
-    EditItemPageModule,
-    CollectionFormModule,
-    ComcolModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        CollectionPageRoutingModule,
+        StatisticsModule.forRoot(),
+        EditItemPageModule,
+        CollectionFormModule,
+        ComcolModule,
+        SearchModule
+    ],
   declarations: [
     CollectionPageComponent,
     ThemedCollectionPageComponent,
