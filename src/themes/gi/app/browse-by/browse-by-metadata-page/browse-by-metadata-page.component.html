@@ -1,22 +1,26 @@
 <div class="container">
     <ng-container *ngVar="(parent$ | async) as parent">
     <ng-container *ngIf="parent?.payload as parentContext">
-    <header class="comcol-header border-bottom mb-4 pb-4">
-        <!-- Parent Name -->
-      Themed
-      <ds-comcol-page-header [name]="parentContext.name">
-        </ds-comcol-page-header>
+    <header class="comcol-header mb-4 pb-4 row">
+      <div class="col-xs-12 col-md-3">
+        <!-- Community logo -->
+        <img *ngIf="logoContentUrl" src="{{logoContentUrl}}" alt="">
+        <img *ngIf="!logoContentUrl" src="../../../../../../assets/images/empty.svg" alt="">
+      </div>
+      <div class="col-xs-12 col-md-9">
+        <ds-comcol-page-header [name]="parentContext.name"></ds-comcol-page-header>
         <!-- Handle -->
-        <ds-themed-comcol-page-handle
-            [content]="parentContext.handle"
-            [title]="parentContext.type+'.page.handle'" >
-        </ds-themed-comcol-page-handle>
-        <!-- Introductory text -->
-        <ds-comcol-page-content [content]="parentContext.introductoryText" [hasInnerHtml]="true">
-        </ds-comcol-page-content>
-        <!-- News -->
-        <ds-comcol-page-content [content]="parentContext.sidebarText" [hasInnerHtml]="true" [title]="'community.page.news'">
-        </ds-comcol-page-content>
+          <ds-themed-comcol-page-handle
+              [content]="parentContext.handle"
+              [title]="parentContext.type+'.page.handle'" >
+          </ds-themed-comcol-page-handle>
+          <!-- Introductory text -->
+          <ds-comcol-page-content [content]="parentContext.introductoryText" [hasInnerHtml]="true">
+          </ds-comcol-page-content>
+          <!-- News -->
+          <ds-comcol-page-content [content]="parentContext.sidebarText" [hasInnerHtml]="true" [title]="'community.page.news'">
+          </ds-comcol-page-content>
+      </div>
       </header>
       <!-- Browse-By Links -->
       <ds-themed-comcol-page-browse-by [id]="parentContext.id" [contentType]="parentContext.type"></ds-themed-comcol-page-browse-by>
