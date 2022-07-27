@@ -1,5 +1,5 @@
 import { combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { RemoteData } from '../../core/data/remote-data';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
@@ -29,7 +29,7 @@ import { map } from 'rxjs/operators';
  * An example would be 'author' for 'dc.contributor.*'
  */
 // @rendersBrowseBy(BrowseByDataType.Metadata)
-export class BrowseByMetadataPageComponent implements OnInit {
+export class BrowseByMetadataPageComponent implements OnInit, OnDestroy {
 
   /**
    * The list of browse-entries to display
