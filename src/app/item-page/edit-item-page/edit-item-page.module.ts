@@ -37,6 +37,9 @@ import { ItemAuthorizationsComponent } from './item-authorizations/item-authoriz
 import { ObjectValuesPipe } from '../../shared/utils/object-values-pipe';
 import { ResourcePoliciesModule } from '../../shared/resource-policies/resource-policies.module';
 import { ItemVersionsModule } from '../versions/item-versions.module';
+import {IdentifierDataService} from '../../core/data/identifier-data.service';
+import {IdentifierDataComponent} from '../../shared/object-list/identifier-data/identifier-data.component';
+import {ItemRegisterDoiComponent} from './item-register-doi/item-registerdoi.component';
 
 
 /**
@@ -81,10 +84,13 @@ import { ItemVersionsModule } from '../versions/item-versions.module';
     ItemMoveComponent,
     ItemEditBitstreamDragHandleComponent,
     VirtualMetadataComponent,
-    ItemAuthorizationsComponent
+    ItemAuthorizationsComponent,
+    IdentifierDataComponent,
+    ItemRegisterDoiComponent
   ],
   providers: [
     BundleDataService,
+    IdentifierDataService,
     ObjectValuesPipe
   ],
   exports: [
