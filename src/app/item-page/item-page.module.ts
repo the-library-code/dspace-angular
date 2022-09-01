@@ -19,6 +19,7 @@ import { ItemPageUriFieldComponent } from './simple/field-components/specific-fi
 import {
   ItemPageTitleFieldComponent
 } from './simple/field-components/specific-field/title/item-page-title-field.component';
+import { ItemPageCitationComponent } from './citations/item-page-citation.component';
 import { ItemPageFieldComponent } from './simple/field-components/specific-field/item-page-field.component';
 import { CollectionsComponent } from './field-components/collections/collections.component';
 import { FullItemPageComponent } from './full/full-item-page.component';
@@ -65,6 +66,7 @@ const DECLARATIONS = [
   ThemedFullItemPageComponent,
   MetadataUriValuesComponent,
   ItemPageAuthorFieldComponent,
+  ItemPageCitationComponent,
   ItemPageDateFieldComponent,
   ItemPageAbstractFieldComponent,
   ItemPageUriFieldComponent,
