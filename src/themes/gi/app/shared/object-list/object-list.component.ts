@@ -14,7 +14,4 @@ import { ObjectListComponent as BaseComponent} from '../../../../../app/shared/o
 })
 
 export class ObjectListComponent extends BaseComponent {
-  test() {
-    console.log(this.objects.payload.page[0].constructor.name);
-  }
-}
+ }
