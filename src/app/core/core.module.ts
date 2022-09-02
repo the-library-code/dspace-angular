@@ -178,6 +178,9 @@ import { OrcidHistoryDataService } from './orcid/orcid-history-data.service';
 import { OrcidQueue } from './orcid/model/orcid-queue.model';
 import { OrcidHistory } from './orcid/model/orcid-history.model';
 import { OrcidAuthService } from './orcid/orcid-auth.service';
+import { CitationDataService } from './data/citation-data.service';
+import { Citation } from './citation/citation.model';
+import { CitationList } from './citation/citation-list.model';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -309,6 +312,7 @@ const PROVIDERS = [
   OrcidAuthService,
   OrcidQueueService,
   OrcidHistoryDataService,
+  CitationDataService,
 ];
 
 /**
@@ -323,6 +327,8 @@ export const models =
     BitstreamFormat,
     Item,
     Site,
+    Citation,
+    CitationList,
     Collection,
     Community,
     EPerson,

@@ -1,5 +1,12 @@
 <ds-metadata-field-wrapper [label]="label | translate">
-  <div class="item-citation">
-    asdfasdf
+  <div class="item-citation-wrapper">
+    <div class="item-citation" [innerHTML]="(citation$|async)?.html"></div>
+    <select (change)="changeFormat($event)">
+      <ng-container *ngFor="let c of citationMap$|async|keyvalue">
+        <option value="{{c.key}}">
+          {{("citation.format."+c.key)|translate}}
+        </option>
+      </ng-container>
+    </select>
   </div>
 </ds-metadata-field-wrapper>

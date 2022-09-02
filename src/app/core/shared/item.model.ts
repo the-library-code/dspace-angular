@@ -23,6 +23,8 @@ import { BITSTREAM } from './bitstream.resource-type';
 import { Bitstream } from './bitstream.model';
 import { ACCESS_STATUS } from 'src/app/shared/object-list/access-status-badge/access-status.resource-type';
 import { AccessStatusObject } from 'src/app/shared/object-list/access-status-badge/access-status.model';
+import { CITATION_LIST } from '../citation/citation-list.resource-type';
+import { CitationList } from '../citation/citation-list.model';
 
 /**
  * Class representing a DSpace Item
@@ -75,6 +77,7 @@ export class Item extends DSpaceObject implements ChildHALResource {
     version: HALLink;
     thumbnail: HALLink;
     accessStatus: HALLink;
+    citations: HALLink;
     self: HALLink;
   };
 
@@ -119,6 +122,12 @@ export class Item extends DSpaceObject implements ChildHALResource {
    */
    @link(ACCESS_STATUS)
    accessStatus?: Observable<RemoteData<AccessStatusObject>>;
+
+  /**
+   * Get the citations for this item (all configured styles)
+=   */
+  @link(CITATION_LIST)
+  citations?: Observable<RemoteData<CitationList>>;
 
   /**
    * Method that returns as which type of object this object should be rendered

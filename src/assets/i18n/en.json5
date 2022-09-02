@@ -4720,4 +4720,11 @@
 
   "person.orcid.registry.auth": "ORCID Authorizations",
 
+  "item.page.citation.heading": "Citation",
+  "citation.format.apa": "APA",
+  "citation.format.apa-6th-edition": "APA (6th Edition)",
+  "citation.format.ieee": "IEEE",
+  "citation.format.iso690-author-date-de": "ISO-690",
+  "citation.format.elsevier-harvard": "Harvard"
+
 }
