@@ -1,12 +1,11 @@
 import { typedObject } from '../cache/builders/build-decorators';
 import { CITATION } from './citation.resource-type';
 import { excludeFromEquals } from '../utilities/equals.decorators';
-import { autoserialize, deserialize, deserializeAs } from 'cerialize';
+import { autoserialize, deserialize } from 'cerialize';
 import { ResourceType } from '../shared/resource-type';
-import { HALResource } from '../shared/hal-resource.model';
 import { HALLink } from '../shared/hal-link.model';
 import { CacheableObject } from '../cache/cacheable-object.model';
-import { SafeHtml, SafeStyle } from '@angular/platform-browser';
+import { SafeHtml } from '@angular/platform-browser';
 
 @typedObject
 export class Citation implements CacheableObject {
@@ -27,10 +26,10 @@ export class Citation implements CacheableObject {
   citationType: string;
 
   /**
-   * The citation format (eg. apa)
+   * The citation style (eg. apa)
    */
   @autoserialize
-  format: string;
+  style: string;
 
   /**
    * The citation text, eg. the actual HTML output from a CSL processor
