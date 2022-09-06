@@ -1,10 +1,9 @@
 <ds-metadata-field-wrapper [label]="label | translate">
   <div class="item-citation-wrapper">
-    <div class="item-citation" [innerHTML]="html"></div>
     <ng-container *ngIf="citation$|async as citation">
       <div class="item-citation" [innerHTML]="citation.html"></div>
     </ng-container>
-    <select (change)="changeCitationStyle($event)">
+    <select class="item-citation-selector" (change)="changeCitationStyle($event)">
       <ng-container *ngFor="let c of citations$|async">
         <option value="{{c.style}}">
           {{("citation.style."+c.style)|translate}}

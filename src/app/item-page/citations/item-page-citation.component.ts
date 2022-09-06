@@ -9,7 +9,6 @@ import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CitationList } from '../../core/citation/citation-list.model';
 import { hasValue } from '../../shared/empty.util';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ds-item-page-citation',
@@ -34,11 +33,9 @@ export class ItemPageCitationComponent implements OnInit {
   // List of citations
   citations$: Observable<Citation[]>;
 
-  html: SafeHtml = 'asdfasdf';
-
+  // Constructor
   constructor(private citationDataService: CitationDataService,
               private sanitizer: DomSanitizer,
-              private translateService: TranslateService,
               ) { }
 
   /**
@@ -83,12 +80,11 @@ export class ItemPageCitationComponent implements OnInit {
    * Render a citation for the given style
    * @param style
    */
-  updateCitation(style) {
+  updateCitation(style: string) {
     this.citation$ = this.citations$.pipe(
       map((citations) => {
         let newCitation = null;
         citations.forEach((citation) => {
-          console.dir(citation);
           if (citation.style === style) {
             newCitation = citation;
           }
