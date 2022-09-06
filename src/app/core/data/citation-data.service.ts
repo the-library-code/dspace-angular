@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {DataService} from './data.service';
-import { Citation } from '../citation/citation.model';
 import { RequestService } from './request.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { Store } from '@ngrx/store';
@@ -11,19 +10,18 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { VersionDataService } from './version-data.service';
 import { HttpClient } from '@angular/common/http';
 import { DefaultChangeAnalyzer } from './default-change-analyzer.service';
-import { VersionHistory } from '../shared/version-history.model';
-import { Version } from '../shared/version.model';
 import { Observable, of } from 'rxjs';
-import { followLink } from '../../shared/utils/follow-link-config.model';
-import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
-import { switchMap } from 'rxjs/operators';
 import { Item } from '../shared/item.model';
 import { RemoteData } from './remote-data';
-import { Collection } from '../shared/collection.model';
 import { dataService } from '../cache/builders/build-decorators';
 import { CITATION_LIST } from '../citation/citation-list.resource-type';
 import { CitationList } from '../citation/citation-list.model';
 
+/**
+ * Simple data service to return linked citations for an item
+ *
+ * @author Kim Shepherd
+ */
 @Injectable()
 @dataService(CITATION_LIST)
 export class CitationDataService extends DataService<CitationList> {
@@ -45,7 +43,7 @@ export class CitationDataService extends DataService<CitationList> {
 
 
   /**
-   *
+   * Get list of formatted citations for a given item
    * @param item
    */
   getCitations$(item: Item): Observable<RemoteData<CitationList>> {

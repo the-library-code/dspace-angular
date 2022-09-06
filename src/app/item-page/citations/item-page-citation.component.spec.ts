@@ -1,34 +1,28 @@
 import { ItemPageCitationComponent } from './item-page-citation.component';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Item } from '../../core/shared/item.model';
-import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { createPaginatedList } from '../../shared/testing/utils.test';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
-import { RouterTestingModule } from '@angular/router/testing';
-import { OrcidPageComponent } from '../orcid-page/orcid-page.component';
-import { ActivatedRoute } from '@angular/router';
-import { OrcidAuthService } from '../../core/orcid/orcid-auth.service';
-import { AuthService } from '../../core/auth/auth.service';
-import { ItemDataService } from '../../core/data/item-data.service';
-import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA, PLATFORM_ID, SecurityContext } from '@angular/core';
+
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { RemoteData } from '../../core/data/remote-data';
 import { CitationList } from '../../core/citation/citation-list.model';
 import { Citation } from '../../core/citation/citation.model';
-import { HALLink } from '../../core/shared/hal-link.model';
 import { CitationDataService } from '../../core/data/citation-data.service';
 import { By, DomSanitizer } from '@angular/platform-browser';
-import { PublicationComponent } from '../simple/item-types/publication/publication.component';
 import { take } from 'rxjs/operators';
-import { MockProvider } from 'ng-mocks';
-import { AdminSidebarComponent } from '../../admin/admin-sidebar/admin-sidebar.component';
 
+/**
+ * Tests for the item page component
+ * @author Kim Shepherd
+ */
 // Test description
 describe('ItemPageCitationComponent spec tests', () => {
   let comp: ItemPageCitationComponent;
   let fixture: ComponentFixture<ItemPageCitationComponent>;
-  let routeData: any;
 
   // Create mock item
   const mockItem: Item = Object.assign(new Item(), {
@@ -91,9 +85,14 @@ describe('ItemPageCitationComponent spec tests', () => {
     }
   }
 
+  // Create a mock DOM Sanitizer to ensure the HTML building succeeds
+  const mockDomSanitizer = {
+    sanitize: (ctx: any, val: string) => val,
+    bypassSecurityTrustHtml: (val: string) => val,
+  }
+
   // Before each test, set up test module and compile the component
   beforeEach(waitForAsync(() => {
-
     void TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({
@@ -101,22 +100,18 @@ describe('ItemPageCitationComponent spec tests', () => {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock
           }
-        }),
-        RouterTestingModule.withRoutes([])
+        })
       ],
       declarations: [ItemPageCitationComponent],
+      // Provide mock services
       providers: [
         { provide: CitationDataService, useValue: mockCitationDataService },
-        { provide: DomSanitizer, useValue: {
-            sanitize: (ctx: any, val: string) => val,
-            bypassSecurityTrustHtml: (val: string) => val,
-          },
-        },
+        { provide: DomSanitizer, useValue: mockDomSanitizer },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(ItemPageCitationComponent, {
       set: {
-        changeDetection: ChangeDetectionStrategy.OnPush,
+        //changeDetection: ChangeDetectionStrategy.OnPush,
       }
     }).compileComponents();
   }));

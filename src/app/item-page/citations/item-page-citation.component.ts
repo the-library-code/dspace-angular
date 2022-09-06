@@ -6,7 +6,7 @@ import { Citation } from '../../core/citation/citation.model';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { CitationList } from '../../core/citation/citation-list.model';
 import { hasValue } from '../../shared/empty.util';
 
@@ -14,7 +14,7 @@ import { hasValue } from '../../shared/empty.util';
   selector: 'ds-item-page-citation',
   styleUrls: ['./item-page-citation.component.scss'],
   templateUrl: './item-page-citation.component.html',
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInOut],
 })
 /**
