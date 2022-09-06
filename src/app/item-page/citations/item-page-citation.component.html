@@ -3,7 +3,7 @@
     <ng-container *ngIf="citation$|async as citation">
       <div class="item-citation" [innerHTML]="citation.html"></div>
     </ng-container>
-    <select class="item-citation-selector" (change)="changeCitationStyle($event)">
+    <select class="form-control item-citation-selector" (change)="changeCitationStyle($event)">
       <ng-container *ngFor="let c of citations$|async">
         <option value="{{c.style}}">
           {{("citation.style."+c.style)|translate}}
