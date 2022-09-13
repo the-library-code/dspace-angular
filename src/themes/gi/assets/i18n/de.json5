@@ -129,7 +129,11 @@
 
   "feed.description": "RSS Feed",
 
-  "pagination.options.description": "Paginierungseinstellungen"
+  "pagination.options.description": "Paginierungseinstellungen",
+
+  "item.page.internal-fulltext-uri": "Volltext URI",
+
+  "login.form.email": "Mitgliedsnummer (ohne Präfix)",
 
 }
 

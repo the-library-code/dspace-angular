@@ -68,7 +68,9 @@
 
   "search.filters.filter.dateIssued.max.label": "to",
 
-  "item.page.internal-fulltext-uri": "Fulltext URI"
+  "item.page.internal-fulltext-uri": "Fulltext URI",
+
+  "login.form.email": "Member ID (without prefix)",
 }
 
 // Merge i18n after change:
