@@ -1,5 +1,5 @@
 import { combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { RemoteData } from '../../core/data/remote-data';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
@@ -14,7 +14,6 @@ import { getFirstSucceededRemoteData } from '../../core/shared/operators';
 import { DSpaceObjectDataService } from '../../core/data/dspace-object-data.service';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { StartsWithType } from '../../shared/starts-with/starts-with-decorator';
-import { BrowseByDataType, rendersBrowseBy } from '../browse-by-switcher/browse-by-decorator';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { map } from 'rxjs/operators';
 
@@ -30,8 +29,7 @@ export const BBM_PAGINATION_ID = 'bbm';
  * A metadata definition (a.k.a. browse id) is a short term used to describe one or multiple metadata fields.
  * An example would be 'author' for 'dc.contributor.*'
  */
-@rendersBrowseBy(BrowseByDataType.Metadata)
-export class BrowseByMetadataPageComponent implements OnInit {
+export class BrowseByMetadataPageComponent implements OnInit, OnDestroy {
 
   /**
    * The list of browse-entries to display
@@ -95,7 +93,7 @@ export class BrowseByMetadataPageComponent implements OnInit {
   startsWithOptions;
 
   /**
-   * The value we're browing items for
+   * The value we're browsing items for
    * - When the value is not empty, we're browsing items
    * - When the value is empty, we're browsing browse-entries (values for the given metadata definition)
    */

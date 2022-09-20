@@ -1,4 +1,4 @@
-<ds-object-list [config]="config"
+<ds-themed-object-list [config]="config"
                 [sortConfig]="sortConfig"
                 [objects]="objects"
                 [hasBorder]="hasBorder"
@@ -23,7 +23,7 @@
                 (prev)="goPrev()"
                 (next)="goNext()"
                 *ngIf="(currentMode$ | async) === viewModeEnum.ListElement">
-</ds-object-list>
+</ds-themed-object-list>
 
 <ds-object-grid [config]="config"
                 [sortConfig]="sortConfig"
