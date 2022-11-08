@@ -8,7 +8,7 @@ import {
 } from 'rxjs';
 import { RelationshipDataService } from '../../../core/data/relationship-data.service';
 import { MetadataValue } from '../../../core/shared/metadata.models';
-import { getFirstSucceededRemoteData } from '../../../core/shared/operators';
+import { getBrowseDefinitionLinks, getFirstSucceededRemoteData } from '../../../core/shared/operators';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { Relationship } from '../../../core/shared/item-relationships/relationship.model';
@@ -17,6 +17,7 @@ import { MetadatumRepresentation } from '../../../core/shared/metadata-represent
 import { ItemMetadataRepresentation } from '../../../core/shared/metadata-representation/item/item-metadata-representation.model';
 import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { AbstractIncrementalListComponent } from '../abstract-incremental-list/abstract-incremental-list.component';
+import { BrowseService } from '../../../core/browse/browse.service';
 
 @Component({
   selector: 'ds-metadata-representation-list',
@@ -61,8 +62,9 @@ export class MetadataRepresentationListComponent extends AbstractIncrementalList
    */
   total: number;
 
-  constructor(public relationshipService: RelationshipDataService) {
+  constructor(public relationshipService: RelationshipDataService, public browseService?: BrowseService) {
     super();
+    this.browseService = browseService;
   }
 
   /**
@@ -101,11 +103,35 @@ export class MetadataRepresentationListComponent extends AbstractIncrementalList
                       return leftItem.payload;
                     }
                   }),
+                  // This will render an item (eg. a person entity) as a metadata representation on a relation page
+                  // and is mutually exlusive from browse linking
                   map((item: Item) => Object.assign(new ItemMetadataRepresentation(metadatum), item))
                 )
               ));
           } else {
+            // We can have multiple fields here, and in the browse defs... conflicts are possible but not expected
+            // - we may need to raise this at some stage since you could have mis-matched field and config lists...?
+              this.browseService.getBrowseDefinitionFor(this.metadataFields[0]).pipe(
+                map((def) => {
+                  console.dir(def);
+                  if (def !== undefined) {
+                    //return observableOf(Object.assign(new MetadatumRepresentation(this.itemType), metadatum));
+                  }
+                })
+              )
+
             return observableOf(Object.assign(new MetadatumRepresentation(this.itemType), metadatum));
+
+            /*
+            this.metadataFields.forEach((field) => {
+              this.browseService.getBrowseDefinitionFor(field).pipe(
+                map((def) => {
+                  return observableOf(Object.assign(new MetadatumRepresentation(this.itemType, def), metadatum));
+                })
+              )
+            })
+
+             */
           }
         })
     );

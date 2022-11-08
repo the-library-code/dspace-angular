@@ -7,6 +7,15 @@
     </ds-mirador-viewer>
   </div>
 </div>
+
+<!-- This works -->
+<div *ngFor="let browseDefinition of (browseDefinitions$|async)">
+  <b>HELLO?</b>
+  <p>{{browseDefinition.id}}</p>
+  <p>{{browseDefinition._links.entries.href}}</p>
+  <b>GOODBYE!</b>
+</div>
+
 <div class="d-flex flex-row">
   <ds-item-page-title-field [item]="object" class="mr-auto">
   </ds-item-page-title-field>

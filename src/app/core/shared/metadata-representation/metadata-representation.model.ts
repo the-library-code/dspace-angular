@@ -5,7 +5,8 @@ export enum MetadataRepresentationType {
   None = 'none',
   Item = 'item',
   AuthorityControlled = 'authority_controlled',
-  PlainText = 'plain_text'
+  PlainText = 'plain_text',
+  BrowseLink = 'browse_link'
 }
 
 /**
@@ -23,6 +24,11 @@ export interface MetadataRepresentation {
    * How we should render the metadata in a list
    */
   representationType: MetadataRepresentationType;
+
+  /**
+   * The browse definition (optional)
+   */
+  browseDefinitionId?: string;
 
   /**
    * Fetches the value to be displayed

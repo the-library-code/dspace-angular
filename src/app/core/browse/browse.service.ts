@@ -229,6 +229,7 @@ export class BrowseService {
    * @param linkPath
    */
   getBrowseURLFor(metadataKey: string, linkPath: string): Observable<string> {
+    console.log("Looking for " + metadataKey + " in link path " + linkPath);
     const searchKeyArray = BrowseService.toSearchKeyArray(metadataKey);
     return this.getBrowseDefinitions().pipe(
       getRemoteDataPayload(),
@@ -244,6 +245,40 @@ export class BrowseService {
           throw new Error(`A browse endpoint for ${linkPath} on ${metadataKey} isn't configured`);
         } else {
           return def._links[linkPath] || def._links[linkPath].href;
+        }
+      }),
+      startWith(undefined),
+      distinctUntilChanged()
+    );
+  }
+
+  /**
+   * Get the browse URL by providing a metadatum key and linkPath
+   * @param metadatumKey
+   * @param linkPath
+   */
+  getBrowseDefinitionFor(metadataKey: string): Observable<string> {
+    console.log("Looking for browse definition for field = " + metadataKey);
+    const searchKeyArray = BrowseService.toSearchKeyArray(metadataKey);
+    console.dir(searchKeyArray);
+    return this.getBrowseDefinitions().pipe(
+      getRemoteDataPayload(),
+      getPaginatedListPayload(),
+      map((browseDefinitions: BrowseDefinition[]) => browseDefinitions
+        .find((def: BrowseDefinition) => {
+          console.dir('weeee');
+          console.dir(def.metadataKeys);
+          const matchingKeys = def.metadataKeys.find((key: string) => searchKeyArray.indexOf(key) >= 0);
+          console.dir(matchingKeys);
+          return isNotEmpty(matchingKeys);
+        })
+      ),
+      map((def: BrowseDefinition) => {
+        console.dir(def);
+        if (isEmpty(def) || isEmpty(def.id)) {
+          throw new Error(`A browse definition for field ${metadataKey} isn't configured`);
+        } else {
+          return def.id;
         }
       }),
       startWith(undefined),

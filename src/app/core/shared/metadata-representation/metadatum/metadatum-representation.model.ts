@@ -12,9 +12,15 @@ export class MetadatumRepresentation extends MetadataValue implements MetadataRe
    */
   itemType: string;
 
-  constructor(itemType: string) {
+  /**
+   * The browse definition ID passed in with the metadatum, if any
+   */
+  browseDefinitionId?: string;
+
+  constructor(itemType: string, browseDefinitionId?: string) {
     super();
     this.itemType = itemType;
+    this.browseDefinitionId = browseDefinitionId;
   }
 
   /**
@@ -23,6 +29,8 @@ export class MetadatumRepresentation extends MetadataValue implements MetadataRe
   get representationType(): MetadataRepresentationType {
     if (hasValue(this.authority)) {
       return MetadataRepresentationType.AuthorityControlled;
+    } else if (hasValue(this.browseDefinitionId)) {
+      return MetadataRepresentationType.BrowseLink;
     } else {
       return MetadataRepresentationType.PlainText;
     }
