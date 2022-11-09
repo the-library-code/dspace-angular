@@ -9,12 +9,12 @@
 </div>
 
 <!-- This works -->
+<!--
 <div *ngFor="let browseDefinition of (browseDefinitions$|async)">
-  <b>HELLO?</b>
+  <b>Browse definition:</b>
   <p>{{browseDefinition.id}}</p>
-  <p>{{browseDefinition._links.entries.href}}</p>
-  <b>GOODBYE!</b>
 </div>
+-->
 
 <div class="d-flex flex-row">
   <ds-item-page-title-field [item]="object" class="mr-auto">
@@ -73,6 +73,13 @@
       [separator]="', '"
       [label]="'item.page.subject'">
     </ds-generic-item-page-field>
+
+    <ds-generic-item-page-field [item]="object"
+                                [fields]="['dc.subject.other']"
+                                [separator]="', '"
+                                [label]="'Subjects'">
+    </ds-generic-item-page-field>
+
     <ds-generic-item-page-field [item]="object"
       [fields]="['dc.identifier.citation']"
       [label]="'item.page.citation'">

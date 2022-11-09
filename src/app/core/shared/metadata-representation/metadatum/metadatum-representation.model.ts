@@ -1,6 +1,7 @@
 import { MetadataRepresentation, MetadataRepresentationType } from '../metadata-representation.model';
 import { hasValue } from '../../../../shared/empty.util';
 import { MetadataValue } from '../../metadata.models';
+import { BrowseDefinition } from '../../browse-definition.model';
 
 /**
  * This class defines the way the metadatum it extends should be represented
@@ -15,12 +16,13 @@ export class MetadatumRepresentation extends MetadataValue implements MetadataRe
   /**
    * The browse definition ID passed in with the metadatum, if any
    */
-  browseDefinitionId?: string;
+  browseDefinition?: BrowseDefinition;
 
-  constructor(itemType: string, browseDefinitionId?: string) {
+  constructor(itemType: string, browseDefinition?: BrowseDefinition) {
     super();
+    //console.dir("I'm new! My browse def is " + browseDefinitionId + " and my rep type is " + this.representationType + " and my value is " + this.getValue());
     this.itemType = itemType;
-    this.browseDefinitionId = browseDefinitionId;
+    this.browseDefinition = browseDefinition;
   }
 
   /**
@@ -29,7 +31,7 @@ export class MetadatumRepresentation extends MetadataValue implements MetadataRe
   get representationType(): MetadataRepresentationType {
     if (hasValue(this.authority)) {
       return MetadataRepresentationType.AuthorityControlled;
-    } else if (hasValue(this.browseDefinitionId)) {
+    } else if (hasValue(this.browseDefinition)) {
       return MetadataRepresentationType.BrowseLink;
     } else {
       return MetadataRepresentationType.PlainText;

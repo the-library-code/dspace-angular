@@ -1,3 +1,10 @@
 <div>
-  <span class="dont-break-out">{{metadataRepresentation.getValue()}}</span>
+  <!-- Because this template is used by default, we will additionally test for representation type and display accordingly -->
+  <span *ngIf="(metadataRepresentation.representationType=='plain_text')" class="dont-break-out">{{metadataRepresentation.getValue()}}</span>
+  <span *ngIf="(metadataRepresentation.representationType=='authority_controlled')" class="dont-break-out">{{metadataRepresentation.getValue()}}</span>
+  <a *ngIf="(metadataRepresentation.representationType=='browse_link')"
+     target="_blank" class="dont-break-out"
+     href="/browse/{{metadataRepresentation.browseDefinition.id}}?{{metadataRepresentation.browseDefinition.metadataBrowse?'value':'startsWith'}}={{metadataRepresentation.getValue()}}">
+    {{metadataRepresentation.getValue()}}
+  </a>
 </div>

@@ -1,6 +1,8 @@
 /**
  * An Enum defining the representation type of metadata
  */
+import { BrowseDefinition } from '../browse-definition.model';
+
 export enum MetadataRepresentationType {
   None = 'none',
   Item = 'item',
@@ -28,7 +30,7 @@ export interface MetadataRepresentation {
   /**
    * The browse definition (optional)
    */
-  browseDefinitionId?: string;
+  browseDefinition?: BrowseDefinition;
 
   /**
    * Fetches the value to be displayed

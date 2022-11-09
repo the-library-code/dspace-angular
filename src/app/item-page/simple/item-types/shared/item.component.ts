@@ -66,11 +66,12 @@ export class ItemComponent implements OnInit {
       map((data) => data.payload.page as BrowseDefinition[])
     );
 
+    /*
     this.browseService.getBrowseURLFor("dc.date.accessioned", "items").pipe(
       map((data) => {
         console.dir(data);
       })
-    )
+    )*/
 
   }
 }

@@ -111,27 +111,9 @@ export class MetadataRepresentationListComponent extends AbstractIncrementalList
           } else {
             // We can have multiple fields here, and in the browse defs... conflicts are possible but not expected
             // - we may need to raise this at some stage since you could have mis-matched field and config lists...?
-              this.browseService.getBrowseDefinitionFor(this.metadataFields[0]).pipe(
-                map((def) => {
-                  console.dir(def);
-                  if (def !== undefined) {
-                    //return observableOf(Object.assign(new MetadatumRepresentation(this.itemType), metadatum));
-                  }
-                })
-              )
-
-            return observableOf(Object.assign(new MetadatumRepresentation(this.itemType), metadatum));
-
-            /*
-            this.metadataFields.forEach((field) => {
-              this.browseService.getBrowseDefinitionFor(field).pipe(
-                map((def) => {
-                  return observableOf(Object.assign(new MetadatumRepresentation(this.itemType, def), metadatum));
-                })
-              )
-            })
-
-             */
+            return this.browseService.getBrowseDefinitionFor(this.metadataFields[0]).pipe(
+                map((def) => Object.assign(new MetadatumRepresentation(this.itemType, def), metadatum))
+            )
           }
         })
     );

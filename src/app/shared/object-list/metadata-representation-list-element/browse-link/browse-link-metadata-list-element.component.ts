@@ -2,7 +2,9 @@ import { MetadataRepresentationType } from '../../../../core/shared/metadata-rep
 import { Component } from '@angular/core';
 import { MetadataRepresentationListElementComponent } from '../metadata-representation-list-element.component';
 import { metadataRepresentationComponent } from '../../../metadata-representation/metadata-representation.decorator';
-
+//@metadataRepresentationComponent('Publication', MetadataRepresentationType.PlainText)
+// For now, authority controlled fields are rendered the same way as plain text fields
+//@metadataRepresentationComponent('Publication', MetadataRepresentationType.AuthorityControlled)
 @metadataRepresentationComponent('Publication', MetadataRepresentationType.BrowseLink)
 @Component({
   selector: 'ds-browse-link-metadata-list-element',

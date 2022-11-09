@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MetadataValue } from '../../../core/shared/metadata.models';
 import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
+import { BrowseDefinition } from '../../../core/shared/browse-definition.model';
 
 /**
  * This component renders the configured 'values' into the ds-metadata-field-wrapper component.
@@ -44,6 +45,8 @@ export class MetadataValuesComponent implements OnChanges {
    * This variable will be true if both {@link environment.markdown.enabled} and {@link enableMarkdown} are true.
    */
   renderMarkdown;
+
+  @Input() browseDefinition?: BrowseDefinition;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.renderMarkdown = !!this.appConfig.markdown.enabled && this.enableMarkdown;

@@ -257,24 +257,56 @@ export class BrowseService {
    * @param metadatumKey
    * @param linkPath
    */
-  getBrowseDefinitionFor(metadataKey: string): Observable<string> {
+  getBrowseDefinitionFor(metadataKey: string): Observable<BrowseDefinition> {
     console.log("Looking for browse definition for field = " + metadataKey);
     const searchKeyArray = BrowseService.toSearchKeyArray(metadataKey);
-    console.dir(searchKeyArray);
+    //console.dir(searchKeyArray);
     return this.getBrowseDefinitions().pipe(
       getRemoteDataPayload(),
       getPaginatedListPayload(),
       map((browseDefinitions: BrowseDefinition[]) => browseDefinitions
         .find((def: BrowseDefinition) => {
-          console.dir('weeee');
-          console.dir(def.metadataKeys);
+          //console.dir(def.metadataKeys);
           const matchingKeys = def.metadataKeys.find((key: string) => searchKeyArray.indexOf(key) >= 0);
-          console.dir(matchingKeys);
+          //console.dir(matchingKeys);
           return isNotEmpty(matchingKeys);
         })
       ),
       map((def: BrowseDefinition) => {
-        console.dir(def);
+        if (isEmpty(def) || isEmpty(def.id)) {
+          throw new Error(`A browse definition for field ${metadataKey} isn't configured`);
+        } else {
+          return def;
+        }
+      }),
+      startWith(undefined),
+      distinctUntilChanged()
+    );
+  }
+
+  /**
+   * Get the browse URL by providing a metadatum key and linkPath
+   * @param metadatumKey
+   * @param linkPath
+   */
+  getBrowseDefinitionIdFor(metadataKey: string): Observable<string> {
+    console.log("Looking for browse definition for field = " + metadataKey);
+    const searchKeyArray = BrowseService.toSearchKeyArray(metadataKey);
+    //console.dir(searchKeyArray);
+    return this.getBrowseDefinitions().pipe(
+      getRemoteDataPayload(),
+      getPaginatedListPayload(),
+      map((browseDefinitions: BrowseDefinition[]) => browseDefinitions
+        .find((def: BrowseDefinition) => {
+          //console.dir(def.metadataKeys);
+          const matchingKeys = def.metadataKeys.find((key: string) => searchKeyArray.indexOf(key) >= 0);
+          //console.dir(matchingKeys);
+          return isNotEmpty(matchingKeys);
+        })
+      ),
+      map((def: BrowseDefinition) => {
+        //console.dir("next map ")
+        //console.dir(def);
         if (isEmpty(def) || isEmpty(def.id)) {
           throw new Error(`A browse definition for field ${metadataKey} isn't configured`);
         } else {

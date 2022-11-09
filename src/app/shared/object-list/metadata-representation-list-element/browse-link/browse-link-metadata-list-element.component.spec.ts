@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
-import { BrowseLinkMetadataListElementComponent } from './plain-text-metadata-list-element.component';
+import { BrowseLinkMetadataListElementComponent } from './browse-link-metadata-list-element.component';
 import { MetadatumRepresentation } from '../../../../core/shared/metadata-representation/metadatum/metadatum-representation.model';
 
 const mockMetadataRepresentation = Object.assign(new MetadatumRepresentation('type'), {

@@ -1,5 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Item } from '../../../../core/shared/item.model';
+import { BrowseService } from '../../../../../app/core/browse/browse.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { BrowseDefinition } from '../../../../core/shared/browse-definition.model';
+
 
 /**
  * This component can be used to represent metadata on a simple item page.
@@ -11,6 +16,9 @@ import { Item } from '../../../../core/shared/item.model';
     templateUrl: './item-page-field.component.html'
 })
 export class ItemPageFieldComponent {
+
+  constructor(protected browseService: BrowseService) {
+  }
 
     /**
      * The item to display metadata for
@@ -37,5 +45,13 @@ export class ItemPageFieldComponent {
      * @type {string}
      */
     separator = '<br/>';
+
+    get browseDefinition(): Observable<BrowseDefinition> {
+      return this.browseService.getBrowseDefinitionFor(this.fields[0]).pipe(
+        map((def) => {
+          return def;
+        })
+      );
+    }
 
 }

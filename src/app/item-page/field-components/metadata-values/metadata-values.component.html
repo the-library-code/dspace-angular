@@ -12,5 +12,9 @@
 </ng-template>
 
 <ng-template #simple let-value="value">
-  <span class="dont-break-out preserve-line-breaks">{{value}}</span>
+  <span *ngIf="browseDefinition==undefined" class="dont-break-out preserve-line-breaks">{{value}}</span>
+  <a *ngIf="browseDefinition!==undefined" class="dont-break-out preserve-line-breaks"
+     target="_blank" href="/browse/{{browseDefinition.id}}?{{(browseDefinition.metadataBrowse?'value':'startsWith')}}={{value}}">
+    {{value}}
+  </a>
 </ng-template>
