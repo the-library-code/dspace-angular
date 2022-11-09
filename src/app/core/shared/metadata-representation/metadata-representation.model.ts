@@ -36,4 +36,5 @@ export interface MetadataRepresentation {
    * Fetches the value to be displayed
    */
   getValue(): string;
+
 }

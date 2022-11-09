@@ -274,7 +274,7 @@ export class BrowseService {
       ),
       map((def: BrowseDefinition) => {
         if (isEmpty(def) || isEmpty(def.id)) {
-          throw new Error(`A browse definition for field ${metadataKey} isn't configured`);
+          //throw new Error(`A browse definition for field ${metadataKey} isn't configured`);
         } else {
           return def;
         }
@@ -308,7 +308,7 @@ export class BrowseService {
         //console.dir("next map ")
         //console.dir(def);
         if (isEmpty(def) || isEmpty(def.id)) {
-          throw new Error(`A browse definition for field ${metadataKey} isn't configured`);
+          //throw new Error(`A browse definition for field ${metadataKey} isn't configured`);
         } else {
           return def.id;
         }

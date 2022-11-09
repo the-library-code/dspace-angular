@@ -69,9 +69,17 @@
     </ds-generic-item-page-field>
 
     <ds-generic-item-page-field [item]="object"
+                                [fields]="['dc.relation.requires']"
+                                [separator]="', '"
+                                [label]="'Relation'"
+                                [urlRegex]="'^https?://www.amazon.com'">
+    </ds-generic-item-page-field>
+
+    <ds-generic-item-page-field [item]="object"
       [fields]="['dc.subject']"
       [separator]="', '"
-      [label]="'item.page.subject'">
+      [label]="'item.page.subject'"
+      [urlRegex]="'/^https?:\/\//'">
     </ds-generic-item-page-field>
 
     <ds-generic-item-page-field [item]="object"

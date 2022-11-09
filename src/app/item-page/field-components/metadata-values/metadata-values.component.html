@@ -1,7 +1,8 @@
 <ds-metadata-field-wrapper [label]="label | translate">
     <ng-container *ngFor="let mdValue of mdValues; let last=last;">
-      <ng-container *ngTemplateOutlet="(renderMarkdown ? markdown : simple); context: {value: mdValue.value}">
+      <ng-container *ngTemplateOutlet="(renderMarkdown ? markdown : (hasLink(mdValue) ? link : simple)); context: {value: mdValue.value}">
       </ng-container>
+      {{hasLink(mdValue)}}
       <span class="separator" *ngIf="!last" [innerHTML]="separator"></span>
     </ng-container>
 </ds-metadata-field-wrapper>
@@ -11,10 +12,16 @@
   </span>
 </ng-template>
 
+<ng-template #link let-value="value">
+    Link: <a class="dont-break-out" target="_blank" [href]="value">
+      {{value}}
+    </a>
+</ng-template>
+
 <ng-template #simple let-value="value">
   <span *ngIf="browseDefinition==undefined" class="dont-break-out preserve-line-breaks">{{value}}</span>
   <a *ngIf="browseDefinition!==undefined" class="dont-break-out preserve-line-breaks"
-     target="_blank" href="/browse/{{browseDefinition.id}}?{{(browseDefinition.metadataBrowse?'value':'startsWith')}}={{value}}">
+     href="/browse/{{browseDefinition.id}}?{{(browseDefinition.metadataBrowse?'value':'startsWith')}}={{value}}&bbm.page=1">
     {{value}}
   </a>
 </ng-template>

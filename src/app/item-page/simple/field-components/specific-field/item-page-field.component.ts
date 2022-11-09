@@ -46,6 +46,11 @@ export class ItemPageFieldComponent {
      */
     separator = '<br/>';
 
+    /**
+     * Whether any valid HTTP(S) URL should be rendered as a link
+     */
+    urlRegex?;
+
     get browseDefinition(): Observable<BrowseDefinition> {
       return this.browseService.getBrowseDefinitionFor(this.fields[0]).pipe(
         map((def) => {

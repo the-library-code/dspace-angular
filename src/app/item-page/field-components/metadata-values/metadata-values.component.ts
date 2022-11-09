@@ -2,6 +2,7 @@ import { Component, Inject, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { MetadataValue } from '../../../core/shared/metadata.models';
 import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
 import { BrowseDefinition } from '../../../core/shared/browse-definition.model';
+import { hasValue } from '../../../shared/empty.util';
 
 /**
  * This component renders the configured 'values' into the ds-metadata-field-wrapper component.
@@ -42,6 +43,11 @@ export class MetadataValuesComponent implements OnChanges {
   @Input() enableMarkdown = false;
 
   /**
+   * Whether any valid HTTP(S) URL should be rendered as a link
+   */
+  @Input() urlRegex?;
+
+  /**
    * This variable will be true if both {@link environment.markdown.enabled} and {@link enableMarkdown} are true.
    */
   renderMarkdown;
@@ -50,5 +56,16 @@ export class MetadataValuesComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.renderMarkdown = !!this.appConfig.markdown.enabled && this.enableMarkdown;
+  }
+
+  hasLink(value): boolean {
+    if (hasValue(this.urlRegex)) {
+      const pattern: RegExp = new RegExp(this.urlRegex);
+      //console.dir(pattern.test(value.value));
+      //console.log(pattern);
+      //console.log(value);
+      return pattern.test(value.value);
+    }
+    return false;
   }
 }
