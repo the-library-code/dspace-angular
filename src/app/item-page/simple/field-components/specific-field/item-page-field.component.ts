@@ -52,7 +52,7 @@ export class ItemPageFieldComponent {
     urlRegex?;
 
     get browseDefinition(): Observable<BrowseDefinition> {
-      return this.browseService.getBrowseDefinitionFor(this.fields[0]).pipe(
+      return this.browseService.getBrowseDefinitionFor(this.fields).pipe(
         map((def) => {
           return def;
         })

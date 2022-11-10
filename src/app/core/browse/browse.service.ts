@@ -257,10 +257,12 @@ export class BrowseService {
    * @param metadatumKey
    * @param linkPath
    */
-  getBrowseDefinitionFor(metadataKey: string): Observable<BrowseDefinition> {
-    console.log("Looking for browse definition for field = " + metadataKey);
-    const searchKeyArray = BrowseService.toSearchKeyArray(metadataKey);
-    //console.dir(searchKeyArray);
+  getBrowseDefinitionFor(metadataKeys: string[]): Observable<BrowseDefinition> {
+    console.log("Looking for browse definition for field = " + metadataKeys);
+    let searchKeyArray: string[] = [];
+    metadataKeys.forEach((metadataKey) => {
+      searchKeyArray = searchKeyArray.concat(BrowseService.toSearchKeyArray(metadataKey));
+    })
     return this.getBrowseDefinitions().pipe(
       getRemoteDataPayload(),
       getPaginatedListPayload(),
@@ -277,40 +279,6 @@ export class BrowseService {
           //throw new Error(`A browse definition for field ${metadataKey} isn't configured`);
         } else {
           return def;
-        }
-      }),
-      startWith(undefined),
-      distinctUntilChanged()
-    );
-  }
-
-  /**
-   * Get the browse URL by providing a metadatum key and linkPath
-   * @param metadatumKey
-   * @param linkPath
-   */
-  getBrowseDefinitionIdFor(metadataKey: string): Observable<string> {
-    console.log("Looking for browse definition for field = " + metadataKey);
-    const searchKeyArray = BrowseService.toSearchKeyArray(metadataKey);
-    //console.dir(searchKeyArray);
-    return this.getBrowseDefinitions().pipe(
-      getRemoteDataPayload(),
-      getPaginatedListPayload(),
-      map((browseDefinitions: BrowseDefinition[]) => browseDefinitions
-        .find((def: BrowseDefinition) => {
-          //console.dir(def.metadataKeys);
-          const matchingKeys = def.metadataKeys.find((key: string) => searchKeyArray.indexOf(key) >= 0);
-          //console.dir(matchingKeys);
-          return isNotEmpty(matchingKeys);
-        })
-      ),
-      map((def: BrowseDefinition) => {
-        //console.dir("next map ")
-        //console.dir(def);
-        if (isEmpty(def) || isEmpty(def.id)) {
-          //throw new Error(`A browse definition for field ${metadataKey} isn't configured`);
-        } else {
-          return def.id;
         }
       }),
       startWith(undefined),

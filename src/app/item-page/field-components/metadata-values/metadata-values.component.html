@@ -2,7 +2,6 @@
     <ng-container *ngFor="let mdValue of mdValues; let last=last;">
       <ng-container *ngTemplateOutlet="(renderMarkdown ? markdown : (hasLink(mdValue) ? link : simple)); context: {value: mdValue.value}">
       </ng-container>
-      {{hasLink(mdValue)}}
       <span class="separator" *ngIf="!last" [innerHTML]="separator"></span>
     </ng-container>
 </ds-metadata-field-wrapper>
@@ -13,7 +12,7 @@
 </ng-template>
 
 <ng-template #link let-value="value">
-    Link: <a class="dont-break-out" target="_blank" [href]="value">
+    <a class="dont-break-out" target="_blank" [href]="value">
       {{value}}
     </a>
 </ng-template>

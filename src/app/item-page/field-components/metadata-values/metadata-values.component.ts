@@ -58,6 +58,10 @@ export class MetadataValuesComponent implements OnChanges {
     this.renderMarkdown = !!this.appConfig.markdown.enabled && this.enableMarkdown;
   }
 
+  /**
+   * Does this have a valid URL that should be rendered as a link?
+   * @param value
+   */
   hasLink(value): boolean {
     if (hasValue(this.urlRegex)) {
       const pattern: RegExp = new RegExp(this.urlRegex);
