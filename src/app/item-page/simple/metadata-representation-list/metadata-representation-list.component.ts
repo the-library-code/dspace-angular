@@ -8,7 +8,11 @@ import {
 } from 'rxjs';
 import { RelationshipDataService } from '../../../core/data/relationship-data.service';
 import { MetadataValue } from '../../../core/shared/metadata.models';
-import { getBrowseDefinitionLinks, getFirstSucceededRemoteData } from '../../../core/shared/operators';
+import {
+  getBrowseDefinitionLinks,
+  getFirstSucceededRemoteData,
+  getPaginatedListPayload
+} from '../../../core/shared/operators';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { Relationship } from '../../../core/shared/item-relationships/relationship.model';
@@ -18,6 +22,10 @@ import { ItemMetadataRepresentation } from '../../../core/shared/metadata-repres
 import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { AbstractIncrementalListComponent } from '../abstract-incremental-list/abstract-incremental-list.component';
 import { BrowseService } from '../../../core/browse/browse.service';
+import { BrowseLinkDataService } from '../../../core/browse/browse-link-data.service';
+import { PaginatedList } from '../../../core/data/paginated-list.model';
+import { BrowseDefinition } from '../../../core/shared/browse-definition.model';
+import { forEach } from 'lodash';
 
 @Component({
   selector: 'ds-metadata-representation-list',
@@ -62,9 +70,19 @@ export class MetadataRepresentationListComponent extends AbstractIncrementalList
    */
   total: number;
 
-  constructor(public relationshipService: RelationshipDataService, public browseService?: BrowseService) {
+  browseDefinitions$: Observable<BrowseDefinition[]>;
+
+  constructor(public relationshipService: RelationshipDataService,
+              private browseLinkDataService: BrowseLinkDataService, public browseService?: BrowseService) {
     super();
     this.browseService = browseService;
+  }
+
+  ngOnOnit(): void {
+    this.browseDefinitions$ = this.browseLinkDataService.getLinkedIndices().pipe(
+      map((paginatedList: PaginatedList<BrowseDefinition>) => paginatedList),
+      getPaginatedListPayload(),
+    )
   }
 
   /**
@@ -111,9 +129,33 @@ export class MetadataRepresentationListComponent extends AbstractIncrementalList
           } else {
             // TODO: We can have multiple fields here, and in the browse defs... conflicts are possible but not expected
             // - we may need to raise this at some stage since you could have mis-matched field and config lists...?
+            let searchKeyArray: string[] = [];
+            let definition: BrowseDefinition = null;
+            this.metadataFields.forEach((field: string) => {
+              searchKeyArray = searchKeyArray.concat(BrowseService.toSearchKeyArray(field));
+            });
+            if (this.browseDefinitions$ !== undefined) {
+              this.browseDefinitions$.pipe(
+                map((definitions: BrowseDefinition[]) => {
+                  return definitions.forEach((def: BrowseDefinition) => {
+                    def.metadataKeys.forEach((field: string) => {
+                      if (searchKeyArray.indexOf(field) > 0) {
+                        definition = def;
+                        //return def;
+                        //return Object.assign(new MetadatumRepresentation(this.itemType, def), metadatum);
+                      }
+                    })
+                  })
+                })
+              )
+            }
+
+
+            // OLD CODE THAT USED BROWSE SERVICE
             return this.browseService.getBrowseDefinitionFor(this.metadataFields).pipe(
                 map((def) => Object.assign(new MetadatumRepresentation(this.itemType, def), metadatum))
             )
+
           }
         })
     );

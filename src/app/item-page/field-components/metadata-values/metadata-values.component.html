@@ -18,8 +18,8 @@
 </ng-template>
 
 <ng-template #simple let-value="value">
-  <span *ngIf="browseDefinition==undefined" class="dont-break-out preserve-line-breaks">{{value}}</span>
-  <a *ngIf="browseDefinition!==undefined" class="dont-break-out preserve-line-breaks"
+  <span *ngIf="browseDefinition == undefined || browseDefinition == null" class="dont-break-out preserve-line-breaks">{{value}}</span>
+  <a *ngIf="browseDefinition !== undefined && browseDefinition !== null" class="dont-break-out preserve-line-breaks"
      href="/browse/{{browseDefinition.id}}?{{(browseDefinition.metadataBrowse?'value':'startsWith')}}={{value}}&bbm.page=1">
     {{value}}
   </a>

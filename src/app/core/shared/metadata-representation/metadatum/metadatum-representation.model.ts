@@ -20,7 +20,6 @@ export class MetadatumRepresentation extends MetadataValue implements MetadataRe
 
   constructor(itemType: string, browseDefinition?: BrowseDefinition) {
     super();
-    //console.dir("I'm new! My browse def is " + browseDefinitionId + " and my rep type is " + this.representationType + " and my value is " + this.getValue());
     this.itemType = itemType;
     this.browseDefinition = browseDefinition;
   }

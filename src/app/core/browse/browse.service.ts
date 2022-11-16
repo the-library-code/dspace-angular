@@ -35,7 +35,7 @@ export const BROWSE_LINKS_TO_FOLLOW: FollowLinkConfig<BrowseEntry | Item>[] = [
 export class BrowseService {
   protected linkPath = 'browses';
 
-  private static toSearchKeyArray(metadataKey: string): string[] {
+  public static toSearchKeyArray(metadataKey: string): string[] {
     const keyParts = metadataKey.split('.');
     const searchFor = [];
     searchFor.push('*');
@@ -258,7 +258,6 @@ export class BrowseService {
    * @param linkPath
    */
   getBrowseDefinitionFor(metadataKeys: string[]): Observable<BrowseDefinition> {
-    console.log("Looking for browse definition for field = " + metadataKeys);
     let searchKeyArray: string[] = [];
     metadataKeys.forEach((metadataKey) => {
       searchKeyArray = searchKeyArray.concat(BrowseService.toSearchKeyArray(metadataKey));
