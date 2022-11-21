@@ -8,7 +8,7 @@ const mockMetadataRepresentation = Object.assign(new MetadatumRepresentation('ty
   value: 'Test Author'
 });
 
-describe('PlainTextMetadataListElementComponent', () => {
+describe('BrowseLinkMetadataListElementComponent', () => {
   let comp: BrowseLinkMetadataListElementComponent;
   let fixture: ComponentFixture<BrowseLinkMetadataListElementComponent>;
 
@@ -29,7 +29,7 @@ describe('PlainTextMetadataListElementComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should contain the value as plain text', () => {
+  it('should contain the value as a browse link', () => {
     expect(fixture.debugElement.nativeElement.textContent).toContain(mockMetadataRepresentation.value);
   });
 
