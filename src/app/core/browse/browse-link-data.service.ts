@@ -1,27 +1,21 @@
 import { Injectable } from '@angular/core';
-import { BROWSE_DEFINITION } from '../shared/browse-definition.resource-type';
 import { BrowseDefinition } from '../shared/browse-definition.model';
 import { RequestService } from '../data/request.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
-import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { Observable } from 'rxjs';
 import { RemoteData } from '../data/remote-data';
 import { PaginatedList } from '../data/paginated-list.model';
-import { FindListOptions } from '../data/find-list-options.model';
 import { IdentifiableDataService } from '../data/base/identifiable-data.service';
-import { FindAllData, FindAllDataImpl } from '../data/base/find-all-data';
-import { dataService } from '../data/base/data-service.decorator';
+import { FindAllDataImpl } from '../data/base/find-all-data';
 import { BrowseDefinitionDataService } from './browse-definition-data.service';
-import { HrefOnlyDataService } from '../data/href-only-data.service';
 import {
-  getFirstCompletedRemoteData,
-  getFirstSucceededRemoteData,
-  getFirstSucceededRemoteDataWithNotEmptyPayload, getPaginatedListPayload,
-  getRemoteDataPayload
+  getFirstSucceededRemoteData, getPaginatedListPayload, getRemoteDataPayload
 } from '../shared/operators';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { isEmpty, isNotEmpty } from '../../shared/empty.util';
+import { BrowseService } from './browse.service';
 
 /**
  * Data service responsible for retrieving browse definitions from the REST server, IF AND ONLY IF
@@ -43,22 +37,45 @@ export class BrowseLinkDataService extends IdentifiableDataService<BrowseDefinit
   }
 
   /**
-   * Get definition for a single field if it's configured
-   * @param field
+   * Get all BrowseDefinitions
    */
-  getLinkForField(field: string):Observable<BrowseDefinition> {
-    return this.findById(field).pipe(
-      getFirstSucceededRemoteDataWithNotEmptyPayload()
+  getBrowseLinks(): Observable<RemoteData<PaginatedList<BrowseDefinition>>> {
+    return this.findAllData.findAll({ elementsPerPage: 9999 }).pipe(
+      getFirstSucceededRemoteData(),
     );
   }
 
+
   /**
-   * Get definitions for all fields that are configured as browse links
+   * Get the browse URL by providing a list of metadata keys
+   * @param metadatumKey
+   * @param linkPath
    */
-  getLinkedIndices(): Observable<PaginatedList<BrowseDefinition>> {
-    return this.findAllData.findAll().pipe(
-      getFirstSucceededRemoteDataWithNotEmptyPayload()
+  getBrowseLinkFor(metadataKeys: string[]): Observable<BrowseDefinition> {
+    let searchKeyArray: string[] = [];
+    metadataKeys.forEach((metadataKey) => {
+      searchKeyArray = searchKeyArray.concat(BrowseService.toSearchKeyArray(metadataKey));
+    })
+    return this.getBrowseLinks().pipe(
+      getRemoteDataPayload(),
+      getPaginatedListPayload(),
+      map((browseDefinitions: BrowseDefinition[]) => browseDefinitions
+        .find((def: BrowseDefinition) => {
+          const matchingKeys = def.metadataKeys.find((key: string) => searchKeyArray.indexOf(key) >= 0);
+          return isNotEmpty(matchingKeys);
+        })
+      ),
+      map((def: BrowseDefinition) => {
+        if (isEmpty(def) || isEmpty(def.id)) {
+          //throw new Error(`A browse definition for field ${metadataKey} isn't configured`);
+        } else {
+          return def;
+        }
+      }),
+      startWith(undefined),
+      distinctUntilChanged()
     );
   }
+
 }
 

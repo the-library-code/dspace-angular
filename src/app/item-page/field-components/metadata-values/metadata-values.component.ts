@@ -59,15 +59,19 @@ export class MetadataValuesComponent implements OnChanges {
   }
 
   /**
-   * Does this have a valid URL that should be rendered as a link?
+   * Does this metadata value have a configured link to a browse definition?
+   */
+  hasBrowseDefinition(): boolean {
+    return hasValue(this.browseDefinition);
+  }
+
+  /**
+   * Does this metadata value have a valid URL that should be rendered as a link?
    * @param value
    */
   hasLink(value): boolean {
     if (hasValue(this.urlRegex)) {
       const pattern: RegExp = new RegExp(this.urlRegex);
-      //console.dir(pattern.test(value.value));
-      //console.log(pattern);
-      //console.log(value);
       return pattern.test(value.value);
     }
     return false;
