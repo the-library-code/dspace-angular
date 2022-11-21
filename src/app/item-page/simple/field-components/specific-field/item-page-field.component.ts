@@ -48,7 +48,7 @@ export class ItemPageFieldComponent {
     /**
      * Whether any valid HTTP(S) URL should be rendered as a link
      */
-    urlRegex?;
+    urlRegex?: string;
 
     /**
      * Return browse definition that matches any field used in this component if it is configured as a browse

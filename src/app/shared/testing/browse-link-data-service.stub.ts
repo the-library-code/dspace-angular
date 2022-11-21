@@ -13,7 +13,7 @@ import { createSuccessfulRemoteDataObject } from '../remote-data.utils';
 import { PageInfo } from '../../core/shared/page-info.model';
 
 // This data is in post-serialized form (metadata -> metadataKeys)
-const mockData: BrowseDefinition[] = [
+export const mockData: BrowseDefinition[] = [
       Object.assign(new BrowseDefinition, {
       "id" : "dateissued",
       "metadataBrowse" : false,

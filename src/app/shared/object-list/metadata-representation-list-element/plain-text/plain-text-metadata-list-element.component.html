@@ -9,7 +9,7 @@
   </a>
   <span *ngIf="(metadataRepresentation.representationType=='authority_controlled')" class="dont-break-out">{{metadataRepresentation.getValue()}}</span>
   <a *ngIf="(metadataRepresentation.representationType=='browse_link')"
-     class="dont-break-out"
+     class="dont-break-out ds-browse-link"
      href="/browse/{{metadataRepresentation.browseDefinition.id}}?{{metadataRepresentation.browseDefinition.metadataBrowse?'value':'startsWith'}}={{metadataRepresentation.getValue()}}&bbm.page=1">
     {{metadataRepresentation.getValue()}}
   </a>
