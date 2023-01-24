@@ -65,12 +65,14 @@ export class DetectDuplicateService {
         if (isNotUndefined(item)) {
           Object.keys(item.matches)
             .filter((key) => {
+              console.dir(item.matches[key]);
               let output = false;
               if (isWorkFlow) {
-                output = isEmpty(item.matches[key].workflowDecision);
+                output = isEmpty(item.matches[key].workflowDecision) || isEmpty(item.matches[key].submitterDecision);
               } else {
                 output = isEmpty(item.matches[key].submitterDecision);
               }
+              //return true;
               return output;
             })
             .forEach((key) => {
