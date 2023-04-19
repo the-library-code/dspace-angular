@@ -41,4 +41,14 @@ export class FileService {
     const matches = /filename="([^;]+)"/ig.exec(contentDisposition) || [];
     return (matches[1] || 'untitled').trim().replace(/\.[^/.]+$/, '');
   }
+
+  /**
+   * Get download link for metadata export
+   * @param url
+   */
+  retrieveMetadataExportDownloadLink(url: string): Observable<string> {
+    return this.authService.getShortlivedToken().pipe(take(1), map((token) =>
+      hasValue(token) ? new URLCombiner(url, `?authentication-token=${token}`).toString() : url
+    ));
+  }
 }

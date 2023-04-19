@@ -127,6 +127,11 @@ export class SearchComponent implements OnInit {
   @Input() showCsvExport = false;
 
   /**
+   * A boolean representing if show metadata export button
+   */
+  @Input() showMetadataExport = false;
+
+  /**
    * A boolean representing if show search sidebar button
    */
   @Input() showSidebar = true;

@@ -53,6 +53,11 @@ export class SearchResultsComponent {
   @Input() showCsvExport = false;
 
   /**
+   * A boolean representing if show metadata export button
+   */
+  @Input() showMetadataExport = false;
+
+  /**
    * Whether to show the thumbnail preview
    */
   @Input() showThumbnails;

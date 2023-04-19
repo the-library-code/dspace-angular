@@ -79,6 +79,11 @@ export class ThemedObjectListComponent extends ThemedComponent<ObjectListCompone
   @Input() showPaginator: boolean;
 
   /**
+   * A boolean representing if show metadata export button
+   */
+  @Input() showMetadataExport = false;
+
+  /**
    * Whether to show the thumbnail preview
    */
   @Input() showThumbnails;
@@ -161,6 +166,7 @@ export class ThemedObjectListComponent extends ThemedComponent<ObjectListCompone
     'importable',
     'importConfig',
     'showPaginator',
+    'showMetadataExport',
     'showThumbnails',
     'contentChange',
     'prev',

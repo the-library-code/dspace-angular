@@ -110,6 +110,7 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
     'linkType',
     'listID',
     'showLabel',
+    'showMetadataExport',
     'showThumbnails',
     'context',
     'viewMode',

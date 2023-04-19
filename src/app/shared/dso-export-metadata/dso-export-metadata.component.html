@@ -1,0 +1,14 @@
+<div class="form-group">
+  <button
+     class="export-button btn btn-dark btn-sm dont-break-out"
+     [ngbTooltip]="tooltipMsg | translate"
+     (click)="downloadExportMetadata()"
+     [title]="tooltipMsg |translate" [attr.aria-label]="tooltipMsg |translate">
+      <i class="fas fa-file-export fa-fw"></i>
+  </button>
+  <select class="form-control" [ngModel]="format" (ngModelChange)="onFormatChange($event)">
+    <option value="csv">CSV</option>
+    <option value="ris">RIS</option>
+    <option value="bibtex">BibTeX</option>
+  </select>
+</div>
