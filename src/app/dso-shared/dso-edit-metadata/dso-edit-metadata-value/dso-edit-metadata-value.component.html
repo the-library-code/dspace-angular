@@ -1,13 +1,32 @@
 <div class="d-flex flex-row ds-value-row" *ngVar="mdValue.newValue.isVirtual as isVirtual" role="row"
      cdkDrag (cdkDragStarted)="dragging.emit(true)" (cdkDragEnded)="dragging.emit(false)"
      [ngClass]="{ 'ds-warning': mdValue.reordered || mdValue.change === DsoEditMetadataChangeTypeEnum.UPDATE, 'ds-danger': mdValue.change === DsoEditMetadataChangeTypeEnum.REMOVE, 'ds-success': mdValue.change === DsoEditMetadataChangeTypeEnum.ADD, 'h-100': isOnlyValue }">
-  <div class="flex-grow-1 ds-flex-cell ds-value-cell d-flex align-items-center" *ngVar="(mdRepresentation$ | async) as mdRepresentation" role="cell">
+  <!-- TODO: fix bootstrap classing, as flex-column works to clear out but doesnt make sense. use grid col-* instead of flex? -->
+  <div class="flex-grow-1 ds-flex-cell ds-value-cell d-flex flex-column" *ngVar="(mdRepresentation$ | async) as mdRepresentation" role="cell">
     <div class="dont-break-out preserve-line-breaks" *ngIf="!mdValue.editing && !mdRepresentation">{{ mdValue.newValue.value }}</div>
     <textarea class="form-control" rows="5" *ngIf="mdValue.editing && !mdRepresentation" [(ngModel)]="mdValue.newValue.value"
               [dsDebounce]="300" (onDebounce)="confirm.emit(false)"></textarea>
     <div class="d-flex" *ngIf="mdRepresentation">
       <a class="mr-2" target="_blank" [routerLink]="mdRepresentationItemRoute$ | async">{{ mdRepresentationName$ | async }}</a>
       <ds-themed-type-badge [object]="mdRepresentation"></ds-themed-type-badge>
+    </div>
+    <!-- Adding an authority edit field similar to lang (again, flex-column as a class doesnt make a lot
+    of sense but it works , so: TODO: fix bootstrap classing -->
+    <div class="d-flex flex-column">
+      <div class="row">
+        <!-- authority input col -->
+        <div class="col-10 m-0">
+          <input class="form-control" type="text" *ngIf="mdValue.editing"
+                 [(ngModel)]="mdValue.newValue.authority"
+                 [dsDebounce]="300" (onDebounce)="confirm.emit(false)" />
+        </div>
+        <!-- confidence input col -->
+        <div class="col-2 m-0">
+          <input class="form-control" type="text" size="3" *ngIf="mdValue.editing"
+                 [(ngModel)]="mdValue.newValue.confidence"
+                 [dsDebounce]="300" (onDebounce)="confirm.emit(false)" />
+        </div>
+      </div>
     </div>
   </div>
   <div class="ds-flex-cell ds-lang-cell" role="cell">
