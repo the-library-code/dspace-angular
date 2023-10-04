@@ -13,3 +13,7 @@
                               (dragging)="$event ? draggingMdField$.next(mdField) : draggingMdField$.next(null)">
   </ds-dso-edit-metadata-value>
 </div>
+<!-- Note that the various mdValue change detection references here
+refer to metadatavalue, not just the text value, so it already includes lang, so including authority should be easy?
+(they are all part of this model) - see dso-edit-metadata-form.ts
+-->
