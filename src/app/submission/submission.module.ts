@@ -67,6 +67,7 @@ import {
 } from './sections/sherpa-policies/metadata-information/metadata-information.component';
 import { SectionFormOperationsService } from './sections/form/section-form-operations.service';
 import {SubmissionSectionIdentifiersComponent} from './sections/identifiers/section-identifiers.component';
+import {SubmissionSectionDuplicatesComponent} from "./sections/duplicates/section-duplicates.component";
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -76,6 +77,7 @@ const ENTRY_COMPONENTS = [
   SubmissionSectionCcLicensesComponent,
   SubmissionSectionAccessesComponent,
   SubmissionSectionSherpaPoliciesComponent,
+  SubmissionSectionDuplicatesComponent,
 ];
 
 const DECLARATIONS = [
