@@ -75,12 +75,8 @@ export class DsoEditMetadataValue {
   confirmChanges(finishEditing = false) {
     this.reordered = this.originalValue.place !== this.newValue.place;
     if (hasNoValue(this.change) || this.change === DsoEditMetadataChangeType.UPDATE) {
-      // Test for changes to value, language, authority or confidence
-      if ((this.originalValue.value !== this.newValue.value
-        || this.originalValue.language !== this.newValue.language
-        || this.originalValue.authority !== this.newValue.authority
-        || this.originalValue.confidence !== this.newValue.confidence
-      )) {
+      if (this.originalValue.value !== this.newValue.value || this.originalValue.language !== this.newValue.language
+        || this.originalValue.authority !== this.newValue.authority || this.originalValue.confidence !== this.newValue.confidence) {
         this.change = DsoEditMetadataChangeType.UPDATE;
       } else {
         this.change = undefined;
@@ -408,12 +404,9 @@ export class DsoEditMetadataForm {
         .forEach((value: DsoEditMetadataValue) => {
           if (hasValue(value.change)) {
             if (value.change === DsoEditMetadataChangeType.UPDATE) {
-              // Only changes to value or language or authority are considered "replace" operations.
-              // Changes to place are considered "move", which is processed below.
-              if (value.originalValue.value !== value.newValue.value
-                || value.originalValue.language !== value.newValue.language
-                || value.originalValue.authority !== value.newValue.authority
-                || value.originalValue.confidence !== value.newValue.confidence) {
+              // Only changes to value or language are considered "replace" operations. Changes to place are considered "move", which is processed below.
+              if (value.originalValue.value !== value.newValue.value || value.originalValue.language !== value.newValue.language
+                || value.originalValue.authority !== value.newValue.authority  || value.originalValue.confidence !== value.newValue.confidence) {
                 replaceOperations.push(new MetadataPatchReplaceOperation(field, value.originalValue.place, {
                   value: value.newValue.value,
                   language: value.newValue.language,
@@ -424,7 +417,6 @@ export class DsoEditMetadataForm {
             } else if (value.change === DsoEditMetadataChangeType.REMOVE) {
               removeOperations.push(new MetadataPatchRemoveOperation(field, value.originalValue.place));
             } else if (value.change === DsoEditMetadataChangeType.ADD) {
-              // Add operation with the value, language, authority and confidence of a metadatavalue
               addOperations.push(new MetadataPatchAddOperation(field, {
                 value: value.newValue.value,
                 language: value.newValue.language,
