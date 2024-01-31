@@ -42,6 +42,9 @@ import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-boots
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { ThemedDynamicLookupRelationSearchTabComponent } from './builder/ds-dynamic-form-ui/relation-lookup-modal/search-tab/themed-dynamic-lookup-relation-search-tab.component';
 import { ThemedDynamicLookupRelationExternalSourceTabComponent } from './builder/ds-dynamic-form-ui/relation-lookup-modal/external-source-tab/themed-dynamic-lookup-relation-external-source-tab.component';
+import { GndLookupComponent } from './builder/ds-dynamic-form-ui/models/gnd-lookup/gnd-lookup.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const COMPONENTS = [
   CustomSwitchComponent,
@@ -73,6 +76,7 @@ const COMPONENTS = [
   VocabularyTreeviewComponent,
   VocabularyTreeviewModalComponent,
   ThemedExternalSourceEntryImportModalComponent,
+  GndLookupComponent
 ];
 
 const DIRECTIVES = [
@@ -96,6 +100,8 @@ const DIRECTIVES = [
     NgbDatepickerModule,
     NgbTimepickerModule,
     CdkTreeModule,
+    NgbModule,
+    ReactiveFormsModule
   ],
   exports: [
     ...COMPONENTS,
