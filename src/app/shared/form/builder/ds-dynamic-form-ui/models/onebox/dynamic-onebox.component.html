@@ -49,7 +49,7 @@
          (change)="onChange($event)"
          (input)="onInput($event)"
          (selectItem)="onSelectItem($event)">
-
+         <button class="btn btn-primary" (click)="openModal()">Search GND</button>
   <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
 </div>
 

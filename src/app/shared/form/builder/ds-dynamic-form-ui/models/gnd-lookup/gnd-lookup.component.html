@@ -1,35 +1,138 @@
 <div class="modal-content" id="gnd-modal-content">
     <div class="modal-header">
-        <button type="button" class="close" (click)="close()">
+        <button type="button" class="close" aria-labelledby="Close" (click)="cancel()">
             <span>&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <div class="container-fluid" style="padding-left: 5em; padding-right: 5em; padding-top: 2em;">
-            <div class="row">
-                <div style="text-align: center">
-                    <h1 id="search-dspace-gnd-title">Search GND Authority</h1>
-                    <p id="search-dspace-gnd-hint">Select a type of authority resource and type a search term to
-                        search GND for all authority records that match the term and type.<br>
-                        To see more details for a match or to follow a link to the official GND page, click the match on
-                        the left-hand sidebar.</p>
+        <form [formGroup]="gndSearchForm">
+            <div class="container-fluid" style="padding-left: 5em; padding-right: 5em; padding-top: 2em;">
+                <div class="row">
+                    <div style="text-align: center">
+                        <h1 id="search-dspace-gnd-title">Search GND Authority</h1>
+                        <p id="search-dspace-gnd-hint">Select a type of authority resource and type a search term to
+                            search GND for all authority records that match the term and type.<br>
+                            To see more details for a match or to follow a link to the official GND page, click the
+                            match on
+                            the left-hand sidebar.</p>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12" style="text-align: center; margin-bottom: 2em;">
+                        <input id="searchText" type="text" placeholder="Search GND authority records"
+                            [formControl]="searchText" autocomplete="off" aria-autocomplete="none"
+                            class="mr-1 search-box" />
+                        <div *ngIf="gndSearchFormControl.searchText.errors && (gndSearchFormControl.searchText.dirty || gndSearchFormControl.searchText.touched)"
+                            class="text-danger">
+                            <div *ngIf="gndSearchFormControl.searchText.errors.required">Field is required.</div>
+                            <div *ngIf="gndSearchFormControl.searchText.errors.minlength">Field must be at least 3
+                                characters long.</div>
+                        </div>
+                        <button type="submit" class="search-dspace-gnd-button btn btn-primary btn-lg mb-1 p-1 pl-3 pr-3"
+                            id="search-dspace-gnd-button" (click)="searchGNDAuthority()">
+                            <span id="search-dspace-gnd-button-label"> Search</span>
+                        </button>
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <!-- Page navigation -->
+                        <div id="navigation-container" class="text-center">
+                            <p class="page-info">Results 1 - 10 of 8940 total</p>
+                            <!-- to do - add the total number of records-->
+                            <button id="authority-previous-page" type="button"
+                                class="btn btn-primary btn-sm page-button" aria-label="Previous" style="display: none;">
+                                <span aria-hidden="true">«</span>
+                                <span id="gnd-lookup-previous">Previous </span>
+                                <span id="previous-count">10</span>
+                            </button>
+                            <button id="authority-next-page" type="button" class="btn btn-primary btn-sm page-button"
+                                aria-label="Next" style="">
+                                <span id="gnd-lookup-next">Next </span>
+                                <span id="next-count">10</span>
+                                <span aria-hidden="true">»</span>
+                            </button>
+                        </div>
+
+                        <!-- list of GND result -->
+                        <div class="list-group" id="search-results">
+                            <a href="#" class="list-group-item list-group-item-action search-result-list-item"
+                                *ngFor="let result of searchResults" [id]="'authority_' + result.id">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ result.name }}</h5>
+                                </div>
+                                <small>{{ result.gndLink }}</small>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col-md-9">
+                        <!-- selected GND record details -->
+                        <div class="p-4">
+                            <div class="row mb-2" id="gnd-main-preview-row">
+                                <div class="d-flex w-100">
+                                    <div class="align-self-center gnd-preview-head">
+                                        <h3>Becker</h3>
+                                        <span class="gnd-preview-link-wrapper">
+                                            <a class="gnd-preview-link" target="_blank"
+                                                href="https://d-nb.info/gnd/143944851">https://d-nb.info/gnd/143944851</a>
+                                        </span>
+                                        <img src="/static/icons/box-arrow-right.svg" width="16" height="16"
+                                            class="align-self-center">
+                                    </div>
+                                </div>
+                                <div class="gnd-preview-summary">
+                                    <p class="gnd-bio">Beisetzung am 05.12.1585 in Leipzig</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12" style="margin-top: 1em;">
+                                    <div class="p-2 gnd-person-preview-data col-md-12">
+                                        <div class="col-md-8">
+                                            <table class="table table-sm">
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="gnd-preview-label-cell">Variant Names</th>
+                                                        <td class="gnd-preview-value-cell">
+                                                            <span class="gnd-preview-value-variantNames">Becker,
+                                                                ...</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="gnd-preview-label-cell">Date of Death</th>
+                                                        <td class="gnd-preview-value-cell">
+                                                            <span class="gnd-preview-value-dateOfDeath">1585</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="btn-group-horizontal" role="group">
+                                        <button class="btn btn-primary mr-3" aria-labelledby="Select this record"
+                                            (click)="selectTheRecord()">Select
+                                            this record</button>
+                                        <button class="btn btn-outline-secondary"
+                                            aria-labelledby="Cancel (back to form)" (click)="cancel()">Cancel
+                                            (back to form)</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </form>
 
-
-            <div class="row">
-                <div class="col-md-12" style="text-align: center; margin-bottom: 2em;">
-                    <input id="searchText" type="text" placeholder="search GND authority records" [formControl]="searchText" 
-                    autocomplete="off" aria-autocomplete="none" />
-                    <button type="submit" class="search-dspace-gnd-button btn btn-primary btn-lg mb-1 p-1 pl-3 pr-3" id="search-dspace-gnd-button"
-                    click="searchGNDAuthority()">
-                        <span id="search-dspace-gnd-button-label"> Search</span>
-                    </button>
-
-                </div>
-            </div>
-
-        </div>
-        <button class="btn btn-primary" (click)="close()">Close</button>
     </div>
 </div>

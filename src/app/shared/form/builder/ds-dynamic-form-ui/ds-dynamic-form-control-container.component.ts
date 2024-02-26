@@ -520,6 +520,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     };
 
     const modalRef = this.modalService.open(GndLookupComponent, options);
+    modalRef.componentInstance.data = this.model;
     // You can pass data to the modal using modalRef.componentInstance
   }
 
