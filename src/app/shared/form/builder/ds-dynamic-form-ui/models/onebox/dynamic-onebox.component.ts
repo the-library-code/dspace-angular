@@ -14,7 +14,7 @@ import {
   tap
 } from 'rxjs/operators';
 import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
-import { NgbModal, NgbModalOptions, NgbModalRef, NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
 import { DynamicOneboxModel } from './dynamic-onebox.model';
@@ -32,7 +32,6 @@ import { DsDynamicVocabularyComponent } from '../dynamic-vocabulary.component';
 import { Vocabulary } from '../../../../../../core/submission/vocabularies/models/vocabulary.model';
 import { VocabularyEntryDetail } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 import { VocabularyTreeviewModalComponent } from '../../../../vocabulary-treeview-modal/vocabulary-treeview-modal.component';
-import { GndLookupComponent } from '../gnd-lookup/gnd-lookup.component';
 
 /**
  * Component representing a onebox input field.
@@ -297,16 +296,6 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
     this.subs
       .filter((sub) => hasValue(sub))
       .forEach((sub) => sub.unsubscribe());
-  }
-
-  openModal(): void {
-    const options: NgbModalOptions = {
-      size: 'xl',
-    };
-
-    const modalRef = this.modalService.open(GndLookupComponent, options);
-    modalRef.componentInstance.model = this.model;
-    // You can pass data to the modal using modalRef.componentInstance
   }
 
 }
