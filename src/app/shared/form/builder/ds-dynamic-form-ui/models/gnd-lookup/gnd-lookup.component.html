@@ -38,21 +38,28 @@
                     </div>
                 </div>
 
+
+
+
+
                 <div class="row">
                     <div class="col-md-3">
                         <!-- Page navigation -->
                         <div id="navigation-container" class="text-center">
-                            <p class="page-info">Results {{ getStartIndex() }} - {{ getEndIndex() }} of {{ totalResults }} total</p>
+                            <p class="page-info">Results 1 - 10 of 8940 total</p>
                             <!-- to do - add the total number of records-->
-                            <button id="authority-previous-page" type="button" class="btn btn-primary btn-sm page-button" aria-label="Previous" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+                            <button id="authority-previous-page" type="button"
+                                class="btn btn-primary btn-sm page-button" aria-label="Previous" style="display: none;">
                                 <span aria-hidden="true">«</span>
-                                <span id="gnd-lookup-previous">Previous</span>
-                              </button>
-                              <!-- Next button -->
-                              <button id="authority-next-page" type="button" class="btn btn-primary btn-sm page-button" aria-label="Next" (click)="goToNextPage()" [disabled]="currentPage * itemsPerPage >= totalResults">
-                                <span id="gnd-lookup-next">Next</span>
+                                <span id="gnd-lookup-previous">Previous </span>
+                                <span id="previous-count">10</span>
+                            </button>
+                            <button id="authority-next-page" type="button" class="btn btn-primary btn-sm page-button"
+                                aria-label="Next" style="">
+                                <span id="gnd-lookup-next">Next </span>
+                                <span id="next-count">10</span>
                                 <span aria-hidden="true">»</span>
-                              </button>
+                            </button>
                         </div>
 
                         <!-- list of GND result -->
@@ -61,9 +68,9 @@
                                 *ngFor="let result of searchResults" [id]="'authority_' + result.id"
                                 (click)="selectResult(result)">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">{{ result?.display }}</h5>
+                                    <h5 class="mb-1">{{ result.display }}</h5>
                                 </div>
-                                <small>{{ result?.id }}</small>
+                                <small>{{ result.id }}</small>
                             </a>
                         </div>
 
@@ -74,10 +81,10 @@
                             <div class="row mb-2" id="gnd-main-preview-row">
                                 <div class="d-flex w-100">
                                     <div class="align-self-center gnd-preview-head">
-                                        <h3>{{selectedGndRecord?.display}}</h3>
+                                        <h3>{{selectedGndRecord.display}}</h3>
                                         <span class="gnd-preview-link-wrapper">
                                             <a class="gnd-preview-link" target="_blank"
-                                                href="selectedGndRecord?.id">{{selectedGndRecord?.id}}</a>
+                                                href="selectedGndRecord.id">{{selectedGndRecord.id}}</a>
                                         </span>
                                     </div>
                                 </div>
