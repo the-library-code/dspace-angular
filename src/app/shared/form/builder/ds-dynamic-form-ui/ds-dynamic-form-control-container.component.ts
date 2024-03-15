@@ -84,7 +84,7 @@ import { combineLatest as observableCombineLatest, Observable, Subscription } fr
 import { DsDynamicTypeBindRelationService } from './ds-dynamic-type-bind-relation.service';
 import { SearchResult } from '../../../search/models/search-result.model';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
-import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { RelationshipDataService } from '../../../../core/data/relationship-data.service';
 import { SelectableListService } from '../../../object-list/selectable-list/selectable-list.service';
 import { DsDynamicDisabledComponent } from './models/disabled/dynamic-disabled.component';
@@ -120,7 +120,6 @@ import { DYNAMIC_FORM_CONTROL_TYPE_RELATION_GROUP } from './ds-dynamic-form-cons
 import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
 import { APP_CONFIG, AppConfig } from '../../../../../config/app-config.interface';
 import { itemLinksToFollow } from '../../../utils/relation-query.utils';
-import { GndLookupComponent } from './models/gnd-lookup/gnd-lookup.component';
 
 export function dsDynamicFormControlMapFn(model: DynamicFormControlModel): Type<DynamicFormControl> | null {
   switch (model.type) {
@@ -513,14 +512,4 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     this.subs.push(collection$.subscribe((collection) => this.collection = collection));
 
   }
-
-  openModal(): void {
-    const options: NgbModalOptions = {
-      size: 'xl',
-    };
-
-    const modalRef = this.modalService.open(GndLookupComponent, options);
-    // You can pass data to the modal using modalRef.componentInstance
-  }
-
 }
