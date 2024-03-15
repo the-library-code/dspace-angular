@@ -64,13 +64,12 @@
 
                         <!-- list of GND result -->
                         <div class="list-group" id="search-results">
-                            <a class="list-group-item list-group-item-action search-result-list-item"
-                                *ngFor="let result of searchResults" [id]="'authority_' + result.id"
-                                (click)="selectResult(result)">
+                            <a href="#" class="list-group-item list-group-item-action search-result-list-item"
+                                *ngFor="let result of searchResults" [id]="'authority_' + result.id">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">{{ result.display }}</h5>
+                                    <h5 class="mb-1">{{ result.name }}</h5>
                                 </div>
-                                <small>{{ result.id }}</small>
+                                <small>{{ result.gndLink }}</small>
                             </a>
                         </div>
 
@@ -81,11 +80,13 @@
                             <div class="row mb-2" id="gnd-main-preview-row">
                                 <div class="d-flex w-100">
                                     <div class="align-self-center gnd-preview-head">
-                                        <h3>{{selectedGndRecord.display}}</h3>
+                                        <h3>Becker</h3>
                                         <span class="gnd-preview-link-wrapper">
                                             <a class="gnd-preview-link" target="_blank"
-                                                href="selectedGndRecord.id">{{selectedGndRecord.id}}</a>
+                                                href="https://d-nb.info/gnd/143944851">https://d-nb.info/gnd/143944851</a>
                                         </span>
+                                        <img src="/static/icons/box-arrow-right.svg" width="16" height="16"
+                                            class="align-self-center">
                                     </div>
                                 </div>
                                 <div class="gnd-preview-summary">
@@ -101,7 +102,8 @@
                                                     <tr>
                                                         <th class="gnd-preview-label-cell">Variant Names</th>
                                                         <td class="gnd-preview-value-cell">
-                                                            <span class="gnd-preview-value-variantNames">Variant name here</span>
+                                                            <span class="gnd-preview-value-variantNames">Becker,
+                                                                ...</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
