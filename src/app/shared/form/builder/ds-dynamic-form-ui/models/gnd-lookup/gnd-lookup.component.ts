@@ -46,9 +46,15 @@ export class GndLookupComponent implements OnInit {
   gndSearchForm: FormGroup;
   externalLink: Observable<string>;
  
-  mockData: GndExternalSourceResponse
+  mockData: Observable<GndExternalSourceResponse>
   searchResults: ExternalGndSourceData[];
   selectedGndRecord: ExternalGndSourceData;
+  selectedRecord: ExternalGndSourceData;
+
+  totalItems: number = 0;
+  itemsPerPage: number = 10;
+  currentPage: number = 1;
+  totalResults: number;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -119,8 +125,32 @@ export class GndLookupComponent implements OnInit {
     }
 
   // Call the function to get the mock data
-    this.mockData = this.gndService.getMockExternalSourceData();
-    this.searchResults = this.mockData._embedded.externalSourceEntries;
+    // this.mockData = this.gndService.getMockExternalSourceData();
+    // this.searchResults = this.mockData._embedded.externalSourceEntries;
+
+    this.gndService.getMockExternalSourceData().pipe(
+      // Use the map operator to transform the emitted data
+      map((data: any) => {
+        const modifiedData = {
+          ...data, 
+        };
+        return modifiedData;
+      })
+    ).subscribe((modifiedData: any) => {
+      // Assign the modified data to this.searchResults
+      this.searchResults = modifiedData._embedded.externalSourceEntries;
+    });
+
+    this.gndService.getMockExternalSourceData().subscribe((data: any) => {
+      const gndData = {
+        ...data,
+        _embedded: {
+          externalSourceEntries: this.paginateResults(data._embedded.externalSourceEntries)
+        }
+      };
+      this.searchResults = data._embedded.externalSourceEntries;
+      this.totalResults = data.page.totalElements;
+    });
 
     this.selectResult(this.searchResults[0]);
 
@@ -160,4 +190,43 @@ export class GndLookupComponent implements OnInit {
   selectResult(result: any) {
     this.selectedGndRecord = result;
   }
+
+  paginateResults(results: any[]): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return results.slice(startIndex, endIndex);
+  }
+
+  goToPage(page: number): void {
+    if (page < 1 || page > Math.ceil(this.totalResults / this.itemsPerPage)) {
+      return; // Prevent navigating to invalid pages
+    }
+    this.currentPage = page;
+    this.searchGNDAuthority(); // Refresh data based on the current page
+  }
+
+  goToPreviousPage(): void {
+    this.goToPage(this.currentPage - 1);
+  }
+
+  goToNextPage(): void {
+    this.goToPage(this.currentPage + 1);
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.searchGNDAuthority();
+    }
+  }
+
+  getStartIndex(): number {
+    return (this.currentPage - 1) * this.itemsPerPage + 1;
+  }
+
+  // Calculate the ending index of the current page
+  getEndIndex(): number {
+    return Math.min(this.currentPage * this.itemsPerPage, this.totalResults);
+  }
+
 }

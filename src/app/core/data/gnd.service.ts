@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { PageInfo } from 'src/app/core/shared/page-info.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RemoteData } from 'src/app/core/data/remote-data';
 import { PaginatedList } from 'src/app/core/data/paginated-list.model';
 import { ExternalSourceDataService } from './external-source-data.service';
@@ -35,7 +35,7 @@ export class GndService {
 
   }
 
-  getMockExternalSourceData(): GndExternalSourceResponse {
-    return gndResponseMock;
+  getMockExternalSourceData(): Observable<GndExternalSourceResponse> {
+    return of(gndResponseMock);
   }
 }
