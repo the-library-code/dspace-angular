@@ -12,10 +12,7 @@
 
     <div *ngIf="!sendAsAttachment && hasValue(previewLink)">
       <p>{{ 'grant-request-copy.intro.link.preview' | translate }}
-<!--      <a [routerLink]="previewLinkOptions.routerLink" class="dont-break-out d-block" [queryParams]="previewLinkOptions.queryParams" [target]="'_blank'">-->
-<!--        {{ previewLink }}-->
-<!--      </a>-->
-        <a [attr.routerLink]="previewLinkOptions.routerLink" class="dont-break-out d-block" [target]="'_blank'"
+        <a [attr.routerLink]="previewLinkOptions.routerLink" class="dont-break-out d-block" [target]="'_blank'" rel="noopener noreferrer"
            [attr.queryParams]="previewLinkOptions.queryParams"
            [attr.rel]=""
         >
