@@ -1,7 +1,11 @@
 import {
   AsyncPipe,
+  NgClass,
+  NgForOf,
+  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectorRef,
   Component,
@@ -63,6 +67,7 @@ import {
   take,
   tap,
 } from 'rxjs/operators';
+import { SearchService } from 'src/app/core/shared/search/search.service';
 
 import { ObjNgFor } from '../../../../../utils/object-ngfor.pipe';
 import { AuthorityConfidenceStateDirective } from '../../../../directives/authority-confidence-state.directive';
@@ -81,11 +86,13 @@ import { DynamicOneboxModel } from './dynamic-onebox.model';
   imports: [
     AsyncPipe,
     AuthorityConfidenceStateDirective,
-    FormsModule,
-    NgbTypeaheadModule,
     NgTemplateOutlet,
     ObjNgFor,
     TranslateModule,
+    ObjNgFor,
+    NgForOf,
+    FormsModule,
+    NgClass,
   ],
 })
 export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent implements OnDestroy, OnInit {
@@ -109,6 +116,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
   inputValue: any;
   preloadLevel: number;
 
+  private suggestVocabulary: string;
   private vocabulary$: Observable<Vocabulary>;
   private isHierarchicalVocabulary$: Observable<boolean>;
   private subs: Subscription[] = [];
@@ -118,15 +126,59 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
               protected layoutService: DynamicFormLayoutService,
               protected modalService: NgbModal,
               protected validationService: DynamicFormValidationService,
+              protected http: HttpClient,
+              protected searchService: SearchService,
   ) {
     super(vocabularyService, layoutService, validationService);
   }
 
+  get jsonErrors() {
+    return JSON.stringify(this.model.errorMessages);
+  }
   /**
    * Converts an item from the result list to a `string` to display in the `<input>` field.
    */
   formatter = (x: { display: string }) => {
     return (typeof x === 'object') ? x.display : x;
+  };
+
+  isSolrSuggest() {
+    return this.model.vocabularyOptions?.type === 'suggest';
+  }
+
+
+  /**
+   * Converts a stream of text values from the `<input>` element to a stream
+   * of search terms to send to the Solr suggest request handler for lookup
+   * of values in metadata or a flat file dictionary
+  */
+  searchSuggest = (text$: Observable<string>) => {
+    return text$.pipe(
+      merge(this.click$),
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap(() => this.changeSearchingStatus(true)),
+      switchMap((term) => {
+        if (term === '' || term.length < this.model.minChars || this.model.vocabularyOptions.type !== 'suggest') {
+          return observableOf({ list: [] });
+        } else {
+          return this.searchService.getSuggestionsFor(term, this.model.vocabularyOptions.name).pipe(
+            getFirstSucceededRemoteDataPayload(),
+            tap(() => this.searchFailed = false),
+
+            catchError(() => {
+              this.searchFailed = true;
+              return observableOf(buildPaginatedList(new PageInfo(), []));
+            }),
+            map((data: any) => {
+              return data.suggest[this.model.vocabularyOptions.name][term].suggestions;
+            }),
+          );
+        }
+      }),
+      tap(() => this.changeSearchingStatus(false)),
+      merge(this.hideSearchingWhenUnsubscribed$),
+    );
   };
 
   /**
@@ -169,24 +221,28 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
    * Initialize the component, setting up the init form value
    */
   ngOnInit() {
-    if (this.model.value) {
-      this.setCurrentValue(this.model.value, true);
+
+    if (this.model.vocabularyOptions?.type !== 'suggest') {
+      if (this.model.value) {
+        this.setCurrentValue(this.model.value, true);
+      }
+      this.vocabulary$ = this.vocabularyService.findVocabularyById(this.model.vocabularyOptions.name).pipe(
+        getFirstSucceededRemoteDataPayload(),
+        distinctUntilChanged(),
+      );
+      this.isHierarchicalVocabulary$ = this.vocabulary$.pipe(
+        map((result: Vocabulary) => result.hierarchical),
+      );
+    } else {
+      this.setCurrentValue(this.model.value, false);
     }
-
-    this.vocabulary$ = this.vocabularyService.findVocabularyById(this.model.vocabularyOptions.name).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      distinctUntilChanged(),
-    );
-
-    this.isHierarchicalVocabulary$ = this.vocabulary$.pipe(
-      map((result: Vocabulary) => result.hierarchical),
-    );
 
     this.subs.push(this.group.get(this.model.id).valueChanges.pipe(
       filter((value) => this.currentValue !== value))
       .subscribe((value) => {
         this.setCurrentValue(this.model.value);
       }));
+
   }
 
   /**
@@ -249,6 +305,11 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
         this.inputValue = null;
       }
     }
+
+    if (this.model.vocabularyOptions.type === 'suggest') {
+      this.dispatchUpdate(this.currentValue);
+    }
+
   }
 
   /**
@@ -272,6 +333,17 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
     this.dispatchUpdate(event.item);
   }
 
+  onSelectSuggestedTerm(event: NgbTypeaheadSelectItemEvent) {
+    const sanitizedTerm = (event.item.term + '').replace('<b>', '').replace('</b>', '');
+    const ve: VocabularyEntryDetail = Object.assign({
+      display: sanitizedTerm,
+      value: sanitizedTerm,
+      selectable: true,
+    });
+    this.inputValue = ve;
+    this.setCurrentValue(ve);
+    this.dispatchUpdate(ve);
+  }
   /**
    * Open modal to show tree for hierarchical vocabulary
    * @param event The click event fired
@@ -335,7 +407,6 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
       this.currentValue = result;
       this.cdr.detectChanges();
     }
-
   }
 
   ngOnDestroy(): void {

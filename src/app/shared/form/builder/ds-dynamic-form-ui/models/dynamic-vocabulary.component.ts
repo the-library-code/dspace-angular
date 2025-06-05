@@ -130,6 +130,7 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
   dispatchUpdate(updateValue: any) {
     this.model.value = updateValue;
     this.change.emit(updateValue);
+    console.dir(updateValue);
   }
 
   /**
