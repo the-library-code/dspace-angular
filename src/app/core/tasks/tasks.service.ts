@@ -163,6 +163,7 @@ export abstract class TasksService<T extends CacheableObject> extends Identifiab
       getFirstCompletedRemoteData(),
       map((response: RemoteData<any>) => {
         if (response.hasFailed) {
+          console.dir(response);
           return new ProcessTaskResponse(false, response.statusCode, response.errorMessage);
         } else {
           return new ProcessTaskResponse(true, response.statusCode);

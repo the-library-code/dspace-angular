@@ -78,6 +78,7 @@ export abstract class MyDSpaceReloadableActionsComponent<T extends DSpaceObject,
     return this.actionExecution().pipe(
       take(1),
       switchMap((res: ProcessTaskResponse) => {
+        console.dir(res);
         if (res.hasSucceeded) {
           return this._reloadObject().pipe(
             tap(
@@ -118,6 +119,9 @@ export abstract class MyDSpaceReloadableActionsComponent<T extends DSpaceObject,
       this.notificationsService.error(null,
         this.translate.get('submission.workflow.tasks.generic.error'),
         new NotificationOptions(20000, true));
+      this.notificationsService.error(null,
+      'uhhh, didnt work pall',
+      new NotificationOptions(2000, true));
     }
   }
 
