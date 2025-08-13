@@ -1,8 +1,5 @@
 import {
   AsyncPipe,
-  NgClass,
-  NgForOf,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -48,7 +45,6 @@ import {
   DynamicFormLayoutService,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
-import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
   of,
@@ -61,7 +57,6 @@ import {
   distinctUntilChanged,
   filter,
   map,
-  merge,
   switchMap,
   take,
   tap,
@@ -85,14 +80,12 @@ import { DynamicOneboxModel } from './dynamic-onebox.model';
   imports: [
     AsyncPipe,
     AuthorityConfidenceStateDirective,
+    FormsModule,
+    NgbTypeaheadModule,
     NgTemplateOutlet,
     ObjNgFor,
-    TranslateModule,
     ObjNgFor,
-    NgForOf,
     FormsModule,
-    NgClass,
-    NgIf,
     NgbTypeaheadModule,
   ],
 })
