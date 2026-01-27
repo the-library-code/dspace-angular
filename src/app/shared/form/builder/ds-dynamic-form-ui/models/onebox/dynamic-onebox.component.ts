@@ -16,16 +16,12 @@ import {
   FormsModule,
   UntypedFormGroup,
 } from '@angular/forms';
-import {
-  buildPaginatedList,
-  PaginatedList,
-} from '@dspace/core/data/paginated-list.model';
+import { buildPaginatedList } from '@dspace/core/data/paginated-list.model';
 import { ConfidenceType } from '@dspace/core/shared/confidence-type';
 import { FormFieldMetadataValueObject } from '@dspace/core/shared/form/models/form-field-metadata-value.model';
 import { getFirstSucceededRemoteDataPayload } from '@dspace/core/shared/operators';
 import { PageInfo } from '@dspace/core/shared/page-info.model';
 import { Vocabulary } from '@dspace/core/submission/vocabularies/models/vocabulary.model';
-import { VocabularyEntry } from '@dspace/core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyEntryDetail } from '@dspace/core/submission/vocabularies/models/vocabulary-entry-detail.model';
 import { VocabularyService } from '@dspace/core/submission/vocabularies/vocabulary.service';
 import {
@@ -45,6 +41,7 @@ import {
   DynamicFormLayoutService,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   Observable,
   of,
@@ -57,11 +54,12 @@ import {
   distinctUntilChanged,
   filter,
   map,
+  mergeWith,
   switchMap,
   take,
   tap,
 } from 'rxjs/operators';
-import { SearchService } from 'src/app/core/shared/search/search.service';
+import { SearchService } from 'src/app/shared/search/search.service';
 
 import { ObjNgFor } from '../../../../../utils/object-ngfor.pipe';
 import { AuthorityConfidenceStateDirective } from '../../../../directives/authority-confidence-state.directive';
@@ -81,12 +79,13 @@ import { DynamicOneboxModel } from './dynamic-onebox.model';
     AsyncPipe,
     AuthorityConfidenceStateDirective,
     FormsModule,
+    FormsModule,
+    NgbTypeaheadModule,
     NgbTypeaheadModule,
     NgTemplateOutlet,
     ObjNgFor,
     ObjNgFor,
-    FormsModule,
-    NgbTypeaheadModule,
+    TranslateModule,
   ],
 })
 export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent implements OnDestroy, OnInit {
@@ -110,7 +109,6 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
   inputValue: any;
   preloadLevel: number;
 
-  private suggestVocabulary: string;
   private vocabulary$: Observable<Vocabulary>;
   private isHierarchicalVocabulary$: Observable<boolean>;
   private subs: Subscription[] = [];
@@ -135,8 +133,12 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
     return (typeof x === 'object') ? x.display : x;
   };
 
-  isSolrSuggest() {
+  get isSolrSuggest() {
     return this.model.vocabularyOptions?.type === 'suggest';
+  }
+
+  get vocabularyName() {
+    return this.model.vocabularyOptions?.name;
   }
 
 
@@ -145,70 +147,34 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
    * of search terms to send to the Solr suggest request handler for lookup
    * of values in metadata or a flat file dictionary
   */
-  searchSuggest = (text$: Observable<string>) => {
-    return text$.pipe(
-      merge(this.click$),
-      debounceTime(300),
-      distinctUntilChanged(),
-      tap(() => this.changeSearchingStatus(true)),
-      switchMap((term) => {
-        if (term === '' || term.length < this.model.minChars || this.model.vocabularyOptions.type !== 'suggest') {
-          return of({ list: [] });
-        } else {
-          return this.searchService.getSuggestionsFor(term, this.model.vocabularyOptions.name).pipe(
-            getFirstSucceededRemoteDataPayload(),
-            tap(() => this.searchFailed = false),
+  search = (text$: Observable<string>) => text$.pipe(
+    mergeWith(this.click$),
+    debounceTime(300),
+    distinctUntilChanged(),
+    tap(() => this.changeSearchingStatus(true)),
+    switchMap((term: string) => {
+      if (term === '' || term.length < this.model.minChars) {
+        return of([]);
+      }
 
-            catchError(() => {
-              this.searchFailed = true;
-              return of(buildPaginatedList(new PageInfo(), []));
-            }),
-            map((data: any) => {
-              return data.suggest[this.model.vocabularyOptions.name][term].suggestions;
-            }),
-          );
-        }
-      }),
-      tap(() => this.changeSearchingStatus(false)),
-      merge(this.hideSearchingWhenUnsubscribed$),
-    );
-  };
+      if (this.isSolrSuggest) {
+        return this.searchService.getSuggestionsFor(term, this.vocabularyName);
+      }
 
-  /**
-   * Converts a stream of text values from the `<input>` element to the stream of the array of items
-   * to display in the onebox popup.
-   */
-  search = (text$: Observable<string>) => {
-    return text$.pipe(
-      merge(this.click$),
-      debounceTime(300),
-      distinctUntilChanged(),
-      tap(() => this.changeSearchingStatus(true)),
-      switchMap((term) => {
-        if (term === '' || term.length < this.model.minChars) {
-          return of({ list: [] });
-        } else {
-          return this.vocabularyService.getVocabularyEntriesByValue(
-            term,
-            false,
-            this.model.vocabularyOptions,
-            this.pageInfo).pipe(
-            getFirstSucceededRemoteDataPayload(),
-            tap(() => this.searchFailed = false),
-            catchError(() => {
-              this.searchFailed = true;
-              return of(buildPaginatedList(
-                new PageInfo(),
-                [],
-              ));
-            }));
-        }
-      }),
-      map((list: PaginatedList<VocabularyEntry>) => list.page),
-      tap(() => this.changeSearchingStatus(false)),
-      merge(this.hideSearchingWhenUnsubscribed$),
-    );
-  };
+      return this.vocabularyService.getVocabularyEntriesByValue(
+        term,
+        false,
+        this.model.vocabularyOptions,
+        this.pageInfo).pipe(getFirstSucceededRemoteDataPayload());
+    }),
+    tap(() => this.searchFailed = false),
+    catchError(() => {
+      this.searchFailed = true;
+      return of(buildPaginatedList(
+        new PageInfo(),
+        [],
+      ));
+    }));
 
   /**
    * Initialize the component, setting up the init form value
@@ -341,7 +307,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
    * Open modal to show tree for hierarchical vocabulary
    * @param event The click event fired
    */
-  openTree(event) {
+  openTree(event: Event) {
     if (this.model.readOnly) {
       return;
     }
@@ -369,7 +335,7 @@ export class DsDynamicOneboxComponent extends DsDynamicVocabularyComponent imple
   /**
    * Callback functions for whenClickOnConfidenceNotAccepted event
    */
-  public whenClickOnConfidenceNotAccepted(confidence: ConfidenceType) {
+  public whenClickOnConfidenceNotAccepted(_confidence: ConfidenceType) {
     if (!this.model.readOnly) {
       this.click$.next(this.formatter(this.currentValue));
     }

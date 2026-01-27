@@ -20,6 +20,7 @@ import { HALEndpointService } from '@dspace/core/shared/hal-endpoint.service';
 import { ListableObject } from '@dspace/core/shared/object-collection/listable-object.model';
 import {
   getFirstCompletedRemoteData,
+  getFirstSucceededRemoteDataPayload,
   getRemoteDataPayload,
 } from '@dspace/core/shared/operators';
 import { AppliedFilter } from '@dspace/core/shared/search/models/applied-filter.model';
@@ -43,6 +44,7 @@ import {
 } from 'rxjs';
 import {
   distinctUntilChanged,
+  filter,
   map,
   skipWhile,
   switchMap,
@@ -144,7 +146,8 @@ export class SearchService {
   }
 
   getSuggestEndpoint(searchOptions?: PaginatedSearchOptions): Observable<string> {
-    return this.halService.getEndpoint('discover/suggest').pipe(
+    // TODO: HAL link to 'suggest' endpoint does not exist yet, need to fix this
+    return this.halService.getEndpoint('discover').pipe(
       map((url: string) => {
         if (hasValue(searchOptions)) {
           return (searchOptions as PaginatedSearchOptions).toRestUrl(url);
@@ -352,20 +355,29 @@ export class SearchService {
    * @param {string} query the search query
    * @param {string} dictionary the configured dictionary in solrconfig.xml
    * @returns serialised JSON of Solr term suggestions
+   *
+   * TODO: Make a model for return type, or handle unpacking the
+   * suggestions from the solr object, or having the backend do that.
    */
-  getSuggestionsFor(query: string, dictionary: string): Observable<RemoteData<string[]>> {
-    const requestId = this.requestService.generateRequestId();
+  getSuggestionsFor(query: string, dictionary: string): Observable<RemoteData<any>> {
     return this.getSuggestEndpoint().pipe(
       take(1),
       switchMap((baseUrl: string) => {
-        const href = new URLCombiner(baseUrl, dictionary, query).toString();
-        const request = new this.request(requestId, href);
-        this.requestService.send(request, true);
-        return this.rdb.buildFromHref(href).pipe(
-          map((data: RemoteData<string[]>) => data),
-        );
-      }),
-    );
+        const href = new URLCombiner(baseUrl, 'suggest').toString();
+        const request = new this.request(
+          this.requestService.generateRequestId(),
+          href, null,
+          {
+            params: {
+              dict: dictionary,
+              q: query,
+            },
+          });
+        this.requestService.send(request, false);
+        return this.rdb.buildFromRequestUUID(request.uuid).pipe(
+          getFirstSucceededRemoteDataPayload(),
+          map((data: any) => data.suggest[dictionary][query].suggestions));
+      }));
   }
 
   /**
